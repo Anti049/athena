@@ -1,0 +1,31 @@
+package_rename_config:
+    android:
+        app_name: Athena
+        package_name: dev.nploetz049.athena
+        override_old_package: com.example.athena
+        lang: kotlin
+
+    ios:
+        app_name: Athena
+        bundle_name: athena
+        package_name: dev.nploetz049.athena
+
+    web:
+        app_name: Athena
+        description: Fanfiction download/reading application.
+
+    linux:
+        app_name: Athena
+        package_name: dev.nploetz049.athena
+        exe_name: athena-linux-x64
+
+    windows:
+        app_name: Athena
+        organization: nploetz049
+        copyright_notice: Copyright ©️ 2024 nploetz049. All rights reserved.
+        exe_name: athena-win32
+
+    macos:
+        app_name: Athena
+        package_name: dev.nploetz049.athena
+        copyright_notice: Copyright ©️ 2024 nploetz049. All rights reserved.

@@ -1,0 +1,66 @@
+{
+	"@@locale": "en",
+	"app_title": "Architecture Test",
+	"@app_title": {
+		"description": "DO NOT TRANSLATE"
+	},
+	"greeting": "Hello World!",
+	"@greeting": {
+		"description": "Greeting message"
+	},
+	"light_mode": "Light mode",
+	"@light_mode": {
+		"description": "Light mode"
+	},
+	"dark_mode": "Dark mode",
+	"@dark_mode": {
+		"description": "Dark mode"
+	},
+	"system_mode": "System mode",
+	"@system_mode": {
+		"description": "System mode"
+	},
+	"label_library": "Library",
+	"@label_library": {
+		"description": "Label for the 'Library' tab"
+	},
+	"label_updates": "Updates",
+	"@label_updates": {
+		"description": "Label for the 'Updates' tab"
+	},
+	"label_history": "History",
+	"@label_history": {
+		"description": "Label for the 'History' tab"
+	},
+	"label_browse": "Browse",
+	"@label_browse": {
+		"description": "Label for the 'Browse' tab"
+	},
+	"label_more": "More",
+	"@label_more": {
+		"description": "Label for the 'More' tab"
+	},
+	"label_downloaded_only": "Downloaded Only",
+	"downloaded_only_summary": "Only show downloaded content",
+	"@label_downloaded_only": {
+		"description": "Label for the 'Downloaded Only' switch"
+	},
+	"label_incognito_mode": "Incognito Mode",
+	"incognito_mode_summary": "Disable history tracking",
+	"preference_category_appearance": "Appearance",
+	"appearance_summary": "Theme, date & time format",
+	"theme_default": "Default",
+	"theme_dynamic": "Dynamic",
+	"theme_green_apple": "Green Apple",
+	"theme_lavender": "Lavender",
+	"theme_midnight_dusk": "Midnight Dusk",
+	"theme_nord": "Nord",
+	"theme_strawberry": "Strawberry",
+	"theme_tako": "Tako",
+	"theme_teal_turquoise": "Teal & Turquoise",
+	"theme_tidal_wave": "Tidal Wave",
+	"theme_yin_yang": "Yin & Yang",
+	"theme_yotsuba": "Yotsuba",
+	"theme_silver_wolf": "Silver Wolf",
+	"theme_dracula": "Dracula PRO"
+}

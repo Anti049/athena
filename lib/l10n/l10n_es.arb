@@ -1,0 +1,57 @@
+{
+	"@@locale": "es",
+	"app_title": "Architecture Test",
+	"@app_title": {
+		"description": "DO NOT TRANSLATE"
+	},
+	"greeting": "¡Hola Mundo!",
+	"@greeting": {
+		"description": "Mensaje de saludo"
+	},
+	"light_mode": "Modo claro",
+	"@light_mode": {
+		"description": "Modo claro"
+	},
+	"dark_mode": "Modo oscuro",
+	"@dark_mode": {
+		"description": "Modo oscuro"
+	},
+	"system_mode": "Modo del sistema",
+	"@system_mode": {
+		"description": "Modo del sistema"
+	},
+	"label_library": "Biblioteca",
+	"@label_library": {
+		"description": "Etiqueta para la pestaña 'Biblioteca'"
+	},
+	"label_updates": "Actualizaciones",
+	"@label_updates": {
+		"description": "Etiqueta para la pestaña 'Actualizaciones'"
+	},
+	"label_history": "Historial",
+	"@label_history": {
+		"description": "Etiqueta para la pestaña 'Historial'"
+	},
+	"label_browse": "Explorar",
+	"@label_browse": {
+		"description": "Etiqueta para la pestaña 'Explorar'"
+	},
+	"label_more": "Más",
+	"@label_more": {
+		"description": "Etiqueta para la pestaña 'Más'"
+	},
+	"theme_default": "Predeterminado",
+	"theme_dynamic": "Dinámico",
+	"theme_green_apple": "Manzana verde",
+	"theme_lavender": "Lavanda",
+	"theme_midnight_dusk": "Anochecer de medianoche",
+	"theme_nord": "Nord",
+	"theme_strawberry": "Fresa",
+	"theme_tako": "Tako",
+	"theme_teal_turquoise": "Turquesa y verde azulado",
+	"theme_tidal_wave": "Ola de marea",
+	"theme_yin_yang": "Yin y Yang",
+	"theme_yotsuba": "Yotsuba",
+	"theme_silver_wolf": "Silver Wolf",
+	"theme_dracula": "Drácula PRO"
+}
