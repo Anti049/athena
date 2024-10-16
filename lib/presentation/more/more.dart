@@ -1,13 +1,14 @@
+import 'package:athena/core/navigation/routing.dart';
 import 'package:athena/core/preference/preferences_provider.dart';
 import 'package:athena/l10n/l10n.dart';
 import 'package:athena/presentation/more/components/logo_header.dart';
-import 'package:athena/presentation/more/settings/components/preference_segmented_button.dart';
 import 'package:athena/presentation/more/settings/components/preference_switch.dart';
 import 'package:athena/presentation/more/settings/components/preference_text.dart';
 import 'package:athena/presentation/more/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class MoreTab extends ConsumerWidget {
@@ -22,22 +23,9 @@ class MoreTab extends ConsumerWidget {
       body: ListView(
         children: [
           const LogoHeader(),
-          PreferenceSegmentedButton(
-            value: preferences.themeMode,
-            options: const [
-              PreferenceSegment(value: ThemeMode.system, label: 'System'),
-              PreferenceSegment(value: ThemeMode.light, label: 'Light'),
-              PreferenceSegment(value: ThemeMode.dark, label: 'Dark'),
-            ],
-            onChanged: (newThemeMode) {
-              ref
-                  .read(preferencesProvider.notifier)
-                  .updateThemeMode(newThemeMode as ThemeMode);
-            },
-          ),
           PreferenceSwitch(
-            title: context.locale.label_downloaded_only,
-            subtitle: context.locale.downloaded_only_summary,
+            title: context.locale.preference_downloaded_only.title,
+            subtitle: context.locale.preference_downloaded_only.summary,
             icon: Symbols.cloud_off,
             checked: preferences.downloadedOnly,
             onCheckedChanged: (checked) {
@@ -45,8 +33,8 @@ class MoreTab extends ConsumerWidget {
             },
           ),
           PreferenceSwitch(
-            title: context.locale.label_incognito_mode,
-            subtitle: context.locale.incognito_mode_summary,
+            title: context.locale.preference_incognito_mode.title,
+            subtitle: context.locale.preference_incognito_mode.summary,
             icon: CupertinoIcons.eyeglasses,
             checked: preferences.incognitoMode,
             onCheckedChanged: (checked) {
@@ -55,47 +43,42 @@ class MoreTab extends ConsumerWidget {
           ),
           const Divider(),
           PreferenceText(
-            title: 'Download Queue',
+            title: context.locale.label_download_queue.title,
+            subtitle:
+                context.locale.label_download_queue.downloading('Paused', 69),
             icon: Symbols.download,
             onPreferenceClick: () {},
           ),
           PreferenceText(
-            title: 'Categories',
+            title: context.locale.label_categories,
             icon: Symbols.label,
             onPreferenceClick: () {},
           ),
           PreferenceText(
-            title: 'Statistics',
+            title: context.locale.label_statistics,
             icon: Symbols.query_stats,
             onPreferenceClick: () {},
           ),
           PreferenceText(
-            title: 'Data and Storage',
+            title: context.locale.label_storage,
             icon: Symbols.storage,
             onPreferenceClick: () {},
           ),
           const Divider(),
           PreferenceText(
-            title: 'Settings',
+            title: context.locale.label_settings,
             icon: Symbols.settings,
             onPreferenceClick: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SettingsScreen();
-                  },
-                ),
-              );
+              context.push('/settings');
             },
           ),
           PreferenceText(
-            title: 'About',
+            title: context.locale.label_about,
             icon: Symbols.info,
             onPreferenceClick: () {},
           ),
           PreferenceText(
-            title: 'Help',
+            title: context.locale.label_help,
             icon: Symbols.help,
             onPreferenceClick: () {},
           ),

@@ -24,9 +24,9 @@
 	"@label_library": {
 		"description": "Etiqueta para la pestaña 'Biblioteca'"
 	},
-	"label_updates": "Actualizaciones",
+	"label_updates": "Nueva",
 	"@label_updates": {
-		"description": "Etiqueta para la pestaña 'Actualizaciones'"
+		"description": "Etiqueta para la pestaña 'Nueva'"
 	},
 	"label_history": "Historial",
 	"@label_history": {

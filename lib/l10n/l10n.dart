@@ -1,6 +1,7 @@
+import 'package:athena/i69n/translations.dart';
+import 'package:athena/i69n/translations.i69n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension LocaleExtension on BuildContext {
-  AppLocalizations get locale => AppLocalizations.of(this);
+  Translations get locale => AthenaLocalization.of(this);
 }

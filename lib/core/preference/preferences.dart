@@ -30,7 +30,7 @@ class PreferencesContainer with _$PreferencesContainer {
   static const String incognitoModeKey = 'incognitoMode';
 
   factory PreferencesContainer.initial() => const PreferencesContainer(
-        locale: Locale('en', 'US'),
+        locale: Locale('en'),
         themeMode: ThemeMode.system,
         themeName: 'default',
         pureBlack: false,
@@ -40,9 +40,9 @@ class PreferencesContainer with _$PreferencesContainer {
       );
 
   factory PreferencesContainer.fromBox(Box box) {
-    final locale = box.get(localeKey, defaultValue: 'en_US').split('_');
+    final locale = box.get(localeKey, defaultValue: 'en');
     return PreferencesContainer(
-      locale: Locale(locale[0], locale[1]),
+      locale: Locale(locale),
       themeMode: ThemeMode.values[box.get(
         themeModeKey,
         defaultValue: ThemeMode.system.index,

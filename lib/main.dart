@@ -1,5 +1,8 @@
+import 'package:athena/core/navigation/routing.dart';
+import 'package:athena/core/notifications/notification_provider.dart';
 import 'package:athena/core/preference/preferences_provider.dart';
-import 'package:athena/presentation/home/home.dart';
+import 'package:athena/i69n/translations.dart';
+import 'package:athena/presentation/common_components/header_layout.dart';
 import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:athena/presentation/theme/prebuilt_themes.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
@@ -7,12 +10,30 @@ import 'package:athena/presentation/theme/theme_pair.dart';
 import 'package:athena/utils/brightness.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse response) {
+  // Handle notification tap
+  if (kDebugMode) {
+    print('Background otification tapped: ${response.payload}');
+  }
+}
+
+void notificationTap(NotificationResponse response) {
+  // Handle notification tap
+  if (kDebugMode) {
+    print('Notification tapped: ${response.payload}');
+  }
+}
 
 void main() async {
   // Ensure plugin services are initialized
@@ -21,6 +42,9 @@ void main() async {
   await Hive.initFlutter();
   // Open the preferences box
   await Hive.openBox('preferences');
+  // Initialize localization
+  await EasyLocalization.ensureInitialized();
+
   // Run the app
   runApp(
     const ProviderScope(
@@ -38,6 +62,9 @@ class AthenaApp extends ConsumerWidget {
     // Get the preferences
     // final preferencesNotifier = ref.watch(preferencesProvider.notifier);
     final preferences = ref.watch(preferencesProvider);
+    final notifications = ref.watch(notificationCountProvider);
+
+    notifications.initialize();
 
     // Handle theming
     return DynamicColorBuilder(
@@ -108,7 +135,8 @@ class AthenaApp extends ConsumerWidget {
       Color trueTransparent = Colors.transparent.withOpacity(0.002);
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
-          statusBarColor: trueTransparent,
+          statusBarColor:
+              trueTransparent, // Manually set opacity just above 0 to get true transparency
           statusBarIconBrightness: iconBrightness,
           systemNavigationBarColor:
               trueTransparent, // Manually set opacity just above 0 to get true transparency
@@ -117,7 +145,7 @@ class AthenaApp extends ConsumerWidget {
       );
 
       // Return the app
-      return MaterialApp(
+      return MaterialApp.router(
         // General settings
         title: 'Athena',
         debugShowCheckedModeBanner: false,
@@ -127,12 +155,17 @@ class AthenaApp extends ConsumerWidget {
         darkTheme: activeTheme.dark,
         // Locale settings
         locale: preferences.locale,
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AthenaLocalization.supportedLocales,
+        localizationsDelegates: const [
+          AthenaLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         // Responsive layout builder
         builder: (context, child) {
           return ResponsiveBreakpoints.builder(
-            child: child!,
+            child: HeaderLayout(child: child!),
             breakpoints: [
               const Breakpoint(start: 0, end: 600, name: COMPACT),
               const Breakpoint(start: 600, end: 839, name: MEDIUM),
@@ -144,7 +177,7 @@ class AthenaApp extends ConsumerWidget {
           );
         },
         // Routing settings
-        home: const HomeScreen(),
+        routerConfig: goRouter,
       );
     });
   }

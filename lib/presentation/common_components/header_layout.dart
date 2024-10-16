@@ -62,34 +62,36 @@ class HeaderLayout extends ConsumerWidget {
 
     final mainHeader = downloadedOnly
         ? HeaderBar(
-            label: context.locale.label_downloaded_only,
+            label: context.locale.preference_downloaded_only.title,
             color: context.scheme.tertiary,
             textColor: context.scheme.onTertiary,
           )
         : incognitoMode
             ? HeaderBar(
-                label: context.locale.label_incognito_mode,
+                label: context.locale.preference_incognito_mode.title,
                 color: context.scheme.secondary,
                 textColor: context.scheme.onSecondary,
               )
             : null;
     final subHeader = downloadedOnly && incognitoMode
         ? HeaderBar(
-            label: context.locale.label_incognito_mode,
+            label: context.locale.preference_incognito_mode.title,
             color: context.scheme.secondary,
             textColor: context.scheme.onSecondary,
           )
         : null;
 
-    // SystemChrome.setSystemUIOverlayStyle(
-    //   SystemUiOverlayStyle(
-    //     statusBarColor: showingHeader ? mainHeader?.color : Colors.transparent,
-    //     statusBarIconBrightness:
-    //         showingHeader ? headerBrightness : statusBarBrightness,
-    //     // systemNavigationBarColor: context.scheme.surface,
-    //     // systemNavigationBarIconBrightness: statusBarBrightness,
-    //   ),
-    // );
+    Color trueTransparent = Colors.transparent.withOpacity(0.002);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: showingHeader ? mainHeader?.color : trueTransparent,
+        statusBarIconBrightness:
+            showingHeader ? headerBrightness : statusBarBrightness,
+        systemNavigationBarColor:
+            trueTransparent, // Manually set opacity just above 0 to get true transparency
+        systemNavigationBarIconBrightness: statusBarBrightness,
+      ),
+    );
 
     // Show top section for header bar, then child below (usually a scaffold)
     return Column(

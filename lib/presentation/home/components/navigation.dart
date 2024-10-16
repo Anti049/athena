@@ -2,9 +2,11 @@ import 'package:athena/core/navigation/navigation_provider.dart';
 import 'package:athena/core/notifications/notification_provider.dart';
 import 'package:athena/presentation/common_components/badged_icon.dart';
 import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/platform.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class NavigationSkeleton extends ConsumerStatefulWidget {
   const NavigationSkeleton({
@@ -60,7 +62,8 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
           final notificationCount = widget.badgeCounts?[index] is int
               ? widget.badgeCounts![index]
               : ref
-                  .watch(notificationCountProvider)[widget.badgeCounts?[index]];
+                  .watch(notificationCountProvider)
+                  .get(widget.badgeCounts?[index]);
           // Return the navigation destination
           return NavigationDestination(
             icon: BadgedIcon(
@@ -85,9 +88,35 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
   /// Builds the navigation rail for the
   /// **'Medium'**
   /// layout
+  bool showRailLabels = true;
   Widget _buildMediumRail(int index) {
     return NavigationRail(
+      groupAlignment: 0.0,
+      labelType: NavigationRailLabelType.all,
       backgroundColor: context.scheme.surfaceContainer,
+      // leading: IconButton(
+      //   icon: const Icon(Symbols.menu),
+      //   onPressed: () {
+      //     setState(() {
+      //       showRailLabels = !showRailLabels;
+      //     });
+      //   },
+      // ),
+      // trailing: Expanded(
+      //   child: Align(
+      //     alignment: Alignment.bottomCenter,
+      //     child: Padding(
+      //       padding: const EdgeInsets.only(bottom: 16.0),
+      //       child: FloatingActionButton(
+      //         onPressed: () {},
+      //         child: const Icon(
+      //           Symbols.auto_stories,
+      //           fill: 1.0,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       destinations: List.generate(
         widget.tabs.length,
         (index) {
@@ -95,7 +124,8 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
           final notificationCount = widget.badgeCounts?[index] is int
               ? widget.badgeCounts![index]
               : ref
-                  .watch(notificationCountProvider)[widget.badgeCounts?[index]];
+                  .watch(notificationCountProvider)
+                  .get(widget.badgeCounts?[index]);
           // Return the navigation destination
           return NavigationRailDestination(
             icon: BadgedIcon(
@@ -143,9 +173,9 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
               // Get notification count
               final notificationCount = widget.badgeCounts?[i] is int
                   ? widget.badgeCounts![i] ?? 0
-                  : ref.watch(
-                          notificationCountProvider)[widget.badgeCounts?[i]] ??
-                      0;
+                  : ref
+                      .watch(notificationCountProvider)
+                      .get(widget.badgeCounts?[index]);
               // Return the navigation destination
               return NavigationDrawerDestination(
                 icon: Icon(widget.icons[i], fill: 0.0),
@@ -184,6 +214,13 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
     // Get the current index from the navigation provider
     final index = ref.watch(navigationProvider);
 
+    // Calculate responsive navigation
+    final showBottomBar = context.isCompact;
+    final showRail = context.atLeastMedium && !context.atLeastExpanded;
+    final showDrawer = context.atLeastExpanded &&
+        (context.isWeb || context.isDesktop) &&
+        !context.isLarge;
+
     // Return the scaffold
     return Scaffold(
       appBar: widget.appBar,
@@ -191,10 +228,12 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
         top: false,
         child: Row(
           children: [
-            if (context.isMedium) _buildMediumRail(index),
-            if (context.atLeastExpanded) ...[
+            if (context.atLeastExpanded &&
+                (context.isWeb || context.isDesktop)) ...[
               _buildExpandedDrawer(index),
             ],
+            if (context.atLeastMedium && !context.atLeastExpanded)
+              _buildMediumRail(index),
             Expanded(
               child: widget.tabs[index],
             ),
@@ -202,6 +241,15 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
         ),
       ),
       bottomNavigationBar: context.isCompact ? _buildCompactBar(index) : null,
+      floatingActionButton: showBottomBar
+          ? FloatingActionButton(
+              onPressed: () {},
+              child: const Icon(
+                Symbols.auto_stories,
+                fill: 1.0,
+              ),
+            )
+          : null,
     );
   }
 }

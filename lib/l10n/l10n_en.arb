@@ -40,12 +40,12 @@
 	"@label_more": {
 		"description": "Label for the 'More' tab"
 	},
-	"label_downloaded_only": "Downloaded Only",
+	"preference_downloaded_only": "Downloaded Only",
 	"downloaded_only_summary": "Only show downloaded content",
-	"@label_downloaded_only": {
+	"@preference_downloaded_only": {
 		"description": "Label for the 'Downloaded Only' switch"
 	},
-	"label_incognito_mode": "Incognito Mode",
+	"preference_incognito_mode": "Incognito Mode",
 	"incognito_mode_summary": "Disable history tracking",
 	"preference_category_appearance": "Appearance",
 	"appearance_summary": "Theme, date & time format",

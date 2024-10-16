@@ -1,0 +1,10 @@
+{
+  "es": [
+    "preference_downloaded_only",
+    "downloaded_only_summary",
+    "preference_incognito_mode",
+    "incognito_mode_summary",
+    "preference_category_appearance",
+    "appearance_summary"
+  ]
+}
