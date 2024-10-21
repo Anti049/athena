@@ -1,4 +1,3 @@
-import 'package:athena/l10n/l10n.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/default_theme.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/dracula_theme.dart';
@@ -13,6 +12,7 @@ import 'package:athena/presentation/theme/prebuilt_themes/teal_turquoise_theme.d
 import 'package:athena/presentation/theme/prebuilt_themes/tidal_wave_theme.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/yin_yang_theme.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/yotsuba_theme.dart';
+import 'package:athena/utils/locale.dart';
 import 'package:flutter/material.dart';
 
 final Map<String, BaseTheme?> prebuiltThemes = {
@@ -34,19 +34,19 @@ final Map<String, BaseTheme?> prebuiltThemes = {
 
 String getThemeName(BuildContext context, String themeID) {
   return switch (themeID) {
-    'dynamic' => context.locale.theme_dynamic,
-    'green_apple' => context.locale.theme_green_apple,
-    'lavender' => context.locale.theme_lavender,
-    'midnight_dusk' => context.locale.theme_midnight_dusk,
-    'nord' => context.locale.theme_nord,
-    'strawberry' => context.locale.theme_strawberry,
-    'tako' => context.locale.theme_tako,
-    'teal_turquoise' => context.locale.theme_teal_turquoise,
-    'tidal_wave' => context.locale.theme_tidal_wave,
-    'yin_yang' => context.locale.theme_yin_yang,
-    'yotsuba' => context.locale.theme_yotsuba,
-    'silver_wolf' => context.locale.theme_silver_wolf,
-    'dracula_pro' => context.locale.theme_dracula,
-    _ => context.locale.theme_default,
+    'dynamic' => context.locale.preferenceTheme.dynamic,
+    'green_apple' => context.locale.preferenceTheme.greenApple,
+    'lavender' => context.locale.preferenceTheme.lavender,
+    'midnight_dusk' => context.locale.preferenceTheme.midnightDusk,
+    'nord' => context.locale.preferenceTheme.nord,
+    'strawberry' => context.locale.preferenceTheme.strawberry,
+    'tako' => context.locale.preferenceTheme.tako,
+    'teal_and_turquoise' => context.locale.preferenceTheme.tealTurquoise,
+    'tidal_wave' => context.locale.preferenceTheme.tidalWave,
+    'yin_yang' => context.locale.preferenceTheme.yinYang,
+    'yotsuba' => context.locale.preferenceTheme.yotsuba,
+    'silver_wolf' => context.locale.preferenceTheme.silverWolf,
+    'dracula_pro' => context.locale.preferenceTheme.dracula,
+    _ => context.locale.preferenceTheme.base,
   };
 }

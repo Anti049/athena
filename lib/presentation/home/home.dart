@@ -1,5 +1,4 @@
 import 'package:athena/core/notifications/notifications.dart';
-import 'package:athena/l10n/l10n.dart';
 import 'package:athena/presentation/browse/browse.dart';
 import 'package:athena/presentation/history/history.dart';
 import 'package:athena/presentation/home/components/navigation.dart';
@@ -7,6 +6,7 @@ import 'package:athena/presentation/home/components/navigation.dart';
 import 'package:athena/presentation/library/library.dart';
 import 'package:athena/presentation/more/more.dart';
 import 'package:athena/presentation/updates/updates.dart';
+import 'package:athena/utils/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,11 +63,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Symbols.more_horiz,
             ],
             labels: [
-              context.locale.label_library,
-              context.locale.label_updates,
-              context.locale.label_history,
-              context.locale.label_browse,
-              context.locale.label_more,
+              context.locale.labelLibrary,
+              context.locale.labelUpdates,
+              context.locale.labelHistory,
+              context.locale.labelBrowse,
+              context.locale.labelMore,
             ],
             badgeCounts: const [
               NotificationSource.library,

@@ -14,11 +14,13 @@ class PreferenceSegment {
 class PreferenceSegmentedButton extends StatelessWidget {
   const PreferenceSegmentedButton({
     super.key,
+    this.title,
     required this.value,
     required this.options,
     required this.onChanged,
   });
 
+  final String? title;
   final dynamic value;
   final List<PreferenceSegment> options;
   final ValueChanged<dynamic> onChanged;
@@ -26,9 +28,10 @@ class PreferenceSegmentedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePreferenceWidget(
+      title: title,
       subcomponent: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 16.0, // TODO: prefsHorizontalPadding
+          horizontal: 0.0, // TODO: prefsHorizontalPadding
         ),
         child: SegmentedButton(
           segments: options.map(

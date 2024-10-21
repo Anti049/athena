@@ -16,7 +16,28 @@ class PreferenceItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     switch (item) {
       case d.TextPreference():
-      // TODO: Handle this case.
+        final dItem = item as d.TextPreference;
+        return ListTile(
+          title: Text(dItem.title),
+          subtitle: dItem.subtitle != null ? Text(dItem.subtitle!) : null,
+          onTap: dItem.onClick,
+        );
+      case d.SwitchPreference():
+        final dItem = item as d.SwitchPreference;
+        return ListTile(
+          title: Text(dItem.title),
+          subtitle: dItem.subtitle != null ? Text(dItem.subtitle!) : null,
+          trailing: Switch(
+            value: false,
+            onChanged: dItem.onValueChanged,
+          ),
+        );
+      case d.SegmentPreference():
+        final dItem = item as d.SegmentPreference;
+        return ListTile(
+          title: Text(dItem.title),
+          subtitle: dItem.subtitle != null ? Text(dItem.subtitle!) : null,
+        );
       case d.SliderPreference():
       // TODO: Handle this case.
       case d.InfoPreference():

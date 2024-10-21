@@ -1,3 +1,4 @@
+import 'package:athena/features/settings/application/preference.dart' as base;
 import 'package:flutter/material.dart';
 
 sealed class Preference {
@@ -41,20 +42,20 @@ class TextPreference extends PreferenceItem<String> {
 }
 
 /// A [PreferenceItem] that provides a two-state toggleable option.
-// class SwitchPreference extends PreferenceItem<bool> {
-//   SwitchPreference({
-//     required super.title,
-//     super.enabled = true,
-//     super.subtitle,
-//     super.icon,
-//     super.onValueChanged = _defaultOnValueChanged,
-//     required this.pref,
-//   });
+class SwitchPreference extends PreferenceItem<bool> {
+  SwitchPreference({
+    required super.title,
+    super.enabled = true,
+    super.subtitle,
+    super.icon,
+    super.onValueChanged = _defaultOnValueChanged,
+    required this.pref,
+  });
 
-//   final pref_data.Preference<bool> pref;
+  final base.Preference<bool> pref;
 
-//   static Future<bool> _defaultOnValueChanged(_) async => true;
-// }
+  static Future<bool> _defaultOnValueChanged(_) async => true;
+}
 
 /// A [PreferenceItem] that provides a slider to select an integer number.
 class SliderPreference extends PreferenceItem<int> {
@@ -72,6 +73,24 @@ class SliderPreference extends PreferenceItem<int> {
   final int value;
   final int min;
   final int max;
+
+  static Future<bool> _defaultOnValueChanged(_) async => true;
+}
+
+/// A [PreferenceItem] that provides a segmented button to select an option.
+class SegmentPreference extends PreferenceItem<String> {
+  SegmentPreference({
+    required super.title,
+    super.enabled = true,
+    super.subtitle,
+    super.icon,
+    super.onValueChanged = _defaultOnValueChanged,
+    required this.value,
+    required this.options,
+  });
+
+  final dynamic value;
+  final List<dynamic> options;
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
 }

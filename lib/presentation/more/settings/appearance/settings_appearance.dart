@@ -1,5 +1,5 @@
 import 'package:athena/core/preference/preferences_provider.dart';
-import 'package:athena/l10n/l10n.dart';
+import 'package:athena/localization/translations.dart';
 import 'package:athena/presentation/more/settings/components/preference_scaffold.dart';
 import 'package:athena/presentation/more/settings/components/preference_segmented_button.dart';
 import 'package:athena/presentation/more/settings/components/searchable_settings.dart';
@@ -10,6 +10,7 @@ import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsAppearanceScreen extends ConsumerWidget {
   const SettingsAppearanceScreen({super.key});
@@ -18,6 +19,7 @@ class SettingsAppearanceScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final preferenceNotifier = ref.watch(preferencesProvider.notifier);
     final preferences = ref.watch(preferencesProvider);
+    final themeName = getThemeName(context, preferences.themeName);
     final themes = prebuiltThemes;
     final columns = context.isCompact
         ? 3
@@ -32,7 +34,7 @@ class SettingsAppearanceScreen extends ConsumerWidget {
     // Appearance items
     final items = [
       PreferenceGroup(
-        title: 'Theme',
+        title: context.locale.preferenceHeaderTheme,
         preferenceItems: [
           CustomPreference(
             title: 'Mode',
@@ -53,21 +55,18 @@ class SettingsAppearanceScreen extends ConsumerWidget {
               ],
             ),
           ),
-          CustomPreference(
-            title: 'Theme',
-            content: SizedBox(
-              height: 350, // Adjust height as needed
-              child: PageView.builder(
-                controller: PageController(viewportFraction: 1 / columns),
-                itemCount: themes.length,
-                itemBuilder: (context, index) {
-                  final themeKey = themes.keys.elementAt(index);
-                  final theme = themes[themeKey] as BaseTheme;
-                  return ThemePreview(theme: theme);
-                },
-              ),
-            ),
+          TextPreference(
+            title: context.locale.preferenceTheme.header,
+            subtitle: context.locale.preferenceTheme.subheader(themeName),
+            onClick: () => context.push('/theme-selection'),
           ),
+          // SwitchPreference(
+          //   title: context.locale.preferenceAmoledDark.title,
+          //   subtitle: context.locale.preferenceAmoledDark.summary,
+          //   onValueChanged: (checked) {
+          //     preferenceNotifier.updatePureBlack(checked);
+          //   },
+          // ),
         ],
       ),
     ];

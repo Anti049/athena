@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #66577E
 /// Neutral #21212E
 final takoTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'tako',
     lightColorScheme: const ColorScheme.light(

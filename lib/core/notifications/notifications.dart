@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'notifications.freezed.dart';
+part 'notifications.g.dart';
 
 enum NotificationSource {
   library,
@@ -20,6 +21,9 @@ class AppNotification with _$AppNotification {
     required String description,
     NotificationSource? source,
   }) = _AppNotification;
+
+  factory AppNotification.fromJson(Map<String, dynamic> json) =>
+      _$AppNotificationFromJson(json);
 
   factory AppNotification.library(String title, String description) =>
       AppNotification(
@@ -47,6 +51,7 @@ class Notifications with _$Notifications {
     required String channelDescription,
     required FlutterLocalNotificationsPlugin plugin,
     required Map<NotificationSource, int> notificationCount,
+    required int notificationIDCount,
   }) = _Notifications;
 
   factory Notifications.initial() => Notifications(
@@ -57,6 +62,7 @@ class Notifications with _$Notifications {
         notificationCount: {
           for (var source in NotificationSource.values) source: 0,
         },
+        notificationIDCount: 0,
       );
 
   static void notificationTapBackground(NotificationResponse response) {
@@ -76,7 +82,7 @@ class Notifications with _$Notifications {
   void initialize() async {
     // Initialize notifications
     const initSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/notification_icon');
     const initSettings = InitializationSettings(
       android: initSettingsAndroid,
     );
@@ -87,10 +93,12 @@ class Notifications with _$Notifications {
     );
   }
 
-  void showNotification(AppNotification notification) {
+  int showNotification(AppNotification notification) {
+    return 0;
+    final id = notificationIDCount;
     // Show notification
     plugin.show(
-      0,
+      id,
       notification.title,
       notification.description,
       NotificationDetails(
@@ -101,13 +109,21 @@ class Notifications with _$Notifications {
           importance: Importance.max,
           priority: Priority.high,
           ticker: 'ticker',
+          groupKey: 'athena',
+          chronometerCountDown: true,
+          showProgress: true,
+          maxProgress: 100,
+          progress: 50,
         ),
       ),
+      payload: notification.toJson().toString(),
     );
     // Increment the notification count
     if (notification.source != null) {
       increment(notification.source!);
     }
+    // Return the notification ID
+    return id;
   }
 
   void increment(NotificationSource source) {

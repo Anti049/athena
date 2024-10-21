@@ -1,0 +1,35 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="960dp"
+            android:height="960dp"
+            android:viewportWidth="960"
+            android:viewportHeight="960">
+            <path
+                android:name="body"
+                android:pathData="M 320 640 L 800 640 L 800 160 L 720 160 L 720 440 L 620 380 L 520 440 L 520 160 L 320 160 L 320 640 Z M 320 720 Q 287 720 263.5 696.5 Q 240 673 240 640 L 240 160 Q 240 127 263.5 103.5 Q 287 80 320 80 L 800 80 Q 833 80 856.5 103.5 Q 880 127 880 160 L 880 640 Q 880 673 856.5 696.5 Q 833 720 800 720 L 320 720 Z"
+                android:fillColor="#000000"
+                android:strokeColor="#000000"
+                android:strokeWidth="1"/>
+            <path
+                android:name="background"
+                android:pathData="M 160 880 Q 127 880 103.5 856.5 Q 80 833 80 800 L 80 240 L 160 240 L 160 800 L 720 800 L 720 880 L 160 880 Z"
+                android:fillColor="#000"
+                android:strokeWidth="1"/>
+        </vector>
+    </aapt:attr>
+    <target android:name="body">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="pathData"
+                android:duration="300"
+                android:valueFrom="M 320 720 Q 287 720 263.5 696.5 Q 240 673 240 640 L 240 160 Q 240 127 263.5 103.5 Q 287 80 320 80 L 800 80 Q 833 80 856.5 103.5 Q 880 127 880 160 L 880 640 Q 880 673 856.5 696.5 Q 833 720 800 720 L 320 720 Z M 320 640 L 560 640 L 800 640 L 800 160 L 720 160 L 720 440 L 620 380 L 520 440 L 520 160 L 320 160 L 320 640 Z"
+                android:valueTo="M 320 720 Q 287 720 263.5 696.5 Q 240 673 240 640 L 240 160 Q 240 127 263.5 103.5 Q 287 80 320 80 L 800 80 Q 833 80 856.5 103.5 Q 880 127 880 160 L 880 640 Q 880 673 856.5 696.5 Q 833 720 800 720 L 320 720 Z M 520 440 L 620 380 L 720 440 L 720 160 L 686.667 160 L 653.333 160 L 620 160 L 586.667 160 L 553.333 160 L 520 160 L 520 440 Z"
+                android:valueType="pathType"
+                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        </aapt:attr>
+    </target>
+</animated-vector>

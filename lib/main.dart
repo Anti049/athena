@@ -1,12 +1,12 @@
-import 'package:athena/core/navigation/routing.dart';
 import 'package:athena/core/notifications/notification_provider.dart';
-import 'package:athena/core/preference/preferences_provider.dart';
-import 'package:athena/i69n/translations.dart';
-import 'package:athena/presentation/common_components/header_layout.dart';
+import 'package:athena/features/settings/application/appearance_preferences.dart';
+import 'package:athena/features/settings/application/common_preference_store.dart';
+import 'package:athena/localization/translations.dart';
 import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:athena/presentation/theme/prebuilt_themes.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
 import 'package:athena/presentation/theme/theme_pair.dart';
+import 'package:athena/routing/application/router.dart';
 import 'package:athena/utils/brightness.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -24,7 +24,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 void notificationTapBackground(NotificationResponse response) {
   // Handle notification tap
   if (kDebugMode) {
-    print('Background otification tapped: ${response.payload}');
+    print('Background notification tapped: ${response.payload}');
   }
 }
 
@@ -47,7 +47,7 @@ void main() async {
 
   // Run the app
   runApp(
-    const ProviderScope(
+    ProviderScope(
       // App
       child: AthenaApp(),
     ),
@@ -55,13 +55,15 @@ void main() async {
 }
 
 class AthenaApp extends ConsumerWidget {
-  const AthenaApp({super.key});
+  AthenaApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Get the preferences
     // final preferencesNotifier = ref.watch(preferencesProvider.notifier);
-    final preferences = ref.watch(preferencesProvider);
+    final preferences = ref.watch(appearancePreferencesProvider);
     final notifications = ref.watch(notificationCountProvider);
 
     notifications.initialize();
@@ -70,7 +72,7 @@ class AthenaApp extends ConsumerWidget {
     return DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
       // Theme name
-      String themeName = preferences.themeName;
+      String themeName = preferences.themeName().get();
 
       // Custom colors
       CustomColors extendedLightColors = const CustomColors(
@@ -114,20 +116,21 @@ class AthenaApp extends ConsumerWidget {
             ? lightDynamic
             : prebuiltThemes[themeName]!.getColorScheme(
                 Brightness.light,
-                contrast: preferences.contrastLevel,
+                contrast: preferences.contrastLevel().get(),
               ),
         useDynamicTheme
             ? darkDynamic
             : prebuiltThemes[themeName]!.getColorScheme(
                 Brightness.dark,
-                contrast: preferences.contrastLevel,
+                contrast: preferences.contrastLevel().get(),
               ),
         extendedLight: extendedLightColors,
         extendedDark: extendedDarkColors,
-        amoled: preferences.pureBlack,
+        amoled: preferences.pureBlack().get(),
       );
 
-      final appBrightness = calculateBrightness(context, preferences.themeMode);
+      final appBrightness =
+          calculateBrightness(context, preferences.themeMode().get());
       final iconBrightness = getInverseBrightness(appBrightness);
       SystemChrome.setEnabledSystemUIMode(
         SystemUiMode.edgeToEdge,
@@ -150,11 +153,11 @@ class AthenaApp extends ConsumerWidget {
         title: 'Athena',
         debugShowCheckedModeBanner: false,
         // Theme settings
-        themeMode: preferences.themeMode,
+        themeMode: preferences.themeMode().get(),
         theme: activeTheme.light,
         darkTheme: activeTheme.dark,
         // Locale settings
-        locale: preferences.locale,
+        locale: const Locale('en'),
         supportedLocales: AthenaLocalization.supportedLocales,
         localizationsDelegates: const [
           AthenaLocalization.delegate,
@@ -165,7 +168,7 @@ class AthenaApp extends ConsumerWidget {
         // Responsive layout builder
         builder: (context, child) {
           return ResponsiveBreakpoints.builder(
-            child: HeaderLayout(child: child!),
+            child: child!,
             breakpoints: [
               const Breakpoint(start: 0, end: 600, name: COMPACT),
               const Breakpoint(start: 600, end: 839, name: MEDIUM),
@@ -177,7 +180,7 @@ class AthenaApp extends ConsumerWidget {
           );
         },
         // Routing settings
-        routerConfig: goRouter,
+        routerConfig: _appRouter.config(),
       );
     });
   }

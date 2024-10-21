@@ -1,7 +1,7 @@
 import 'package:athena/core/preference/preferences_provider.dart';
-import 'package:athena/l10n/l10n.dart';
 import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:athena/utils/brightness.dart';
+import 'package:athena/utils/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,20 +62,20 @@ class HeaderLayout extends ConsumerWidget {
 
     final mainHeader = downloadedOnly
         ? HeaderBar(
-            label: context.locale.preference_downloaded_only.title,
+            label: context.locale.preferenceDownloadedOnly.title,
             color: context.scheme.tertiary,
             textColor: context.scheme.onTertiary,
           )
         : incognitoMode
             ? HeaderBar(
-                label: context.locale.preference_incognito_mode.title,
+                label: context.locale.preferenceIncognitoMode.title,
                 color: context.scheme.secondary,
                 textColor: context.scheme.onSecondary,
               )
             : null;
     final subHeader = downloadedOnly && incognitoMode
         ? HeaderBar(
-            label: context.locale.preference_incognito_mode.title,
+            label: context.locale.preferenceIncognitoMode.title,
             color: context.scheme.secondary,
             textColor: context.scheme.onSecondary,
           )

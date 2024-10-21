@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #92f7bc
 /// Neutral #16151D
 final tidalWaveTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'tidal_wave',
     lightColorScheme: const ColorScheme.light(

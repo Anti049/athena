@@ -12,6 +12,7 @@ class PreferenceText extends StatelessWidget {
     this.iconTint,
     this.widget,
     this.onPreferenceClick,
+    this.enabled = true,
   });
 
   final String? title;
@@ -20,6 +21,7 @@ class PreferenceText extends StatelessWidget {
   final Color? iconTint;
   final Widget? widget;
   final VoidCallback? onPreferenceClick;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,9 @@ class PreferenceText extends StatelessWidget {
       title: title,
       subcomponent: subtitle.isNotNullOrBlank
           ? Opacity(
-              opacity:
-                  0.78, // TODO: Handle material constants (reference flutteryomi)
+              opacity: enabled
+                  ? 0.78
+                  : 0.5, // TODO: Handle material constants (reference flutteryomi)
               child: Text(
                 subtitle!,
                 style: context.textTheme.bodySmall,
@@ -39,11 +42,14 @@ class PreferenceText extends StatelessWidget {
       icon: icon != null
           ? Icon(
               icon,
-              color: iconTint ?? context.scheme.primary,
+              color: enabled
+                  ? iconTint ?? context.scheme.primary
+                  : context.scheme.onSurfaceVariant,
             )
           : null,
       onClick: onPreferenceClick,
       widget: widget,
+      enabled: enabled,
     );
   }
 }

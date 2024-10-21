@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #775930
 /// Neutral #655C5C
 final strawberryTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'strawberry',
     lightColorScheme: const ColorScheme.light(

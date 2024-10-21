@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #5E25E1
 /// Neutral #111129
 final lavenderTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'lavender',
     lightColorScheme: const ColorScheme.light(

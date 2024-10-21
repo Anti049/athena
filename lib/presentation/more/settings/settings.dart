@@ -1,8 +1,8 @@
-import 'package:athena/l10n/l10n.dart';
 import 'package:athena/presentation/common_components/header_scaffold.dart';
 import 'package:athena/presentation/more/settings/appearance/settings_appearance.dart';
 import 'package:athena/presentation/more/settings/components/preference_text.dart';
 import 'package:athena/presentation/more/settings/models/settings_screen_item.dart';
+import 'package:athena/utils/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -16,8 +16,8 @@ class SettingsScreen extends ConsumerWidget {
     // Settings items
     final items = [
       SettingsScreenItem(
-        title: context.locale.preference_category_appearance.title,
-        subtitle: context.locale.preference_category_appearance.summary,
+        title: context.locale.preferenceCategoryAppearance.title,
+        subtitle: context.locale.preferenceCategoryAppearance.summary,
         icon: Symbols.palette,
         screen: const SettingsAppearanceScreen(),
       ),

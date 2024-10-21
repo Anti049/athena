@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 /// Tertiary 0xFF6B5E2F
 /// Neutral 0xFF655C5A
 final yotsubaTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'yotsuba',
     lightColorScheme: const ColorScheme.light(

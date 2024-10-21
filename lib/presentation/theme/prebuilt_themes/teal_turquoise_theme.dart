@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// Colors for Teal Turquoise theme
 final tealTurquoiseTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'teal_and_turquoise',
     lightColorScheme: const ColorScheme.light(

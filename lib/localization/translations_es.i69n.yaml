@@ -1,0 +1,167 @@
+appTitle: Athena
+appDescription: Athena es una aplicación todo en uno para descargar, leer y escuchar fanfiction.
+appChannel: Pre-Alpha
+appVersion: 0.1.0
+
+test: ¡Hola, mundo!
+
+# Navegación de Inicio
+labelLibrary: Biblioteca
+labelUpdates: Nueva
+labelHistory: Historial
+labelBrowse: Explorar
+labelMore: Más
+
+# Biblioteca
+librarySearchHint: Buscar...
+libraryCategoryDefault: Predeterminado
+libraryOptionsFilter:
+    header: Filtrar
+    downloaded: Descargado
+    unread: No leído
+    started: Empezado
+    completed: Completado
+    bookmarked: Marcado
+    updated: Actualizado
+libraryOptionsSort:
+    header: Ordenar
+    alphabetically: Alfabéticamente
+    totalChapters: Capítulos Totales
+    lastRead: Última Lectura
+    lastUpdated: Última Actualización
+    unreadChapters: Capítulos No Leídos
+    latestChapter: Último Capítulo
+    fetchedDate: Fecha de Descarga
+    addedDate: Fecha de Añadido
+libraryOptionsDisplay:
+    header: Mostrar
+    displayMode:
+        subheader: Modo de Visualización
+        compactGrid: Cuadrícula Compacta
+        comfortableGrid: Cuadrícula Cómoda
+        coverOnlyGrid: Cuadrícula Solo Portadas
+        list: Lista
+        gridSize(int size): "${_plural(size, zero: 'Predeterminado', other: '$size por fila')}"
+    overlay:
+        subheader: Superposición
+        downloadedChapters: Capítulos Descargados
+        unreadChapters: Capítulos No Leídos
+        language: Idioma
+        continueReading: Botón de Continuar Leyendo
+    tabs:
+        subheader: Pestañas
+        category: Mostrar Pestañas de Categoría
+        number: Mostrar Número de Trabajos
+libraryOptionsCategory:
+    header: Categoría
+    all: Todos
+libraryMenu:
+    updateLibrary: Actualizar Biblioteca
+    updateCategory: Actualizar Categoría
+    randomWork: Abrir Relato Aleatorio
+
+# Nueva
+
+# Historial
+
+# Explorar
+
+# Más
+preferenceDownloadedOnly:
+    title: Solo Descargados
+    summary: Mostrar solo trabajos descargados
+preferenceIncognitoMode:
+    title: Modo Incógnito
+    summary: No guardar historial ni consultas de búsqueda
+labelDownloadQueue:
+    title: Cola de Descarga
+    downloading(String status, int count): '$status: $count restantes'
+labelCategories: Categorías
+labelStatistics: Estadísticas
+labelStorage: Datos y Almacenamiento
+labelSettings: Ajustes
+labelAbout: Acerca de
+labelHelp: Ayuda
+
+# Ajustes
+# - Apariencia
+preferenceCategoryAppearance:
+    title: Apariencia
+    summary: Tema, formato de fecha y hora
+preferenceHeaderTheme: Tema
+preferenceMode:
+    system: Sistema
+    dark: Oscuro
+    light: Claro
+preferenceTheme:
+    base: Predeterminado
+    custom: Personalizado
+    dynamic: Dinámico
+    greenApple: Manzana Verde
+    lavender: Lavanda
+    midnightDusk: Anochecer Medianoche
+    nord: Nórdico
+    strawberry: Fresa
+    tako: Tako
+    tealTurquoise: Turquesa y Verde Azulado
+    tidalWave: Ola de Marea
+    yinYang: Yin y Yang
+    yotsuba: Yotsuba
+    silverWolf: Lobo Plateado
+    dracula: Drácula PRO
+preferenceAmoledDark:
+    title: Oscuro AMOLED
+    summary: Utilice fondos negros auténticos
+preferenceHeaderDisplay: Mostrar
+preferenceLanguage:
+    title: Idioma de la aplicación
+    summary: Seleccionar el idioma de la aplicación
+# - Biblioteca
+preferenceCategoryLibrary:
+    title: Biblioteca
+    summary: Categorías, actualización global, deslizamiento de capítulo
+preferenceSectionCategories: Categorías
+preferenceCategories:
+    title: Editar categorías
+    summary(int num): "_plural(num, zero: '', one: '$num categoría', other: '$num categorías')"
+# - Lector
+preferenceCategoryReader:
+    title: Lector
+    summary: Modo de lectura, visualización, navegación
+# - Descargas
+preferenceCategoryDownloads:
+    title: Descargas
+    summary: Descarga automática, descarga anticipada
+# - Seguimiento
+preferenceCategoryTracking:
+    title: Seguimiento
+    summary: Sincronización de progreso, sincronización mejorada
+# - Explorar
+preferenceCategoryBrowse:
+    title: Explorar
+    summary: Fuentes, extensiones, búsqueda global
+# - Notificaciones
+preferenceCategoryNotifications:
+    title: Notificaciones
+    summary: Descarga completa, actualización disponible
+# - Datos y almacenamiento
+preferenceCategoryDataStorage:
+    title: Datos y almacenamiento
+    summary: Copias de seguridad, espacio de almacenamiento
+# - Seguridad y privacidad
+preferenceCategorySecurityPrivacy:
+    title: Seguridad y privacidad
+    summary: Bloqueo de aplicaciones, pantalla segura
+# - Avanzado
+preferenceCategoryAdvanced:
+    title: Avanzado
+    summary: Opciones para desarrolladores, funciones experimentales
+# - Acerca de
+preferenceCategoryAbout:
+    title: Acerca de
+    summary: '${_parent.appTitle} ${_parent.appChannel} v${_parent.appVersion}'
+
+# Error
+errorGeneric: Se ha producido un error
+errorTryAgain: Inténtalo de nuevo
+errorRouteNotFound: Ruta no encontrada

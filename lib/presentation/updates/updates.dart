@@ -11,6 +11,6 @@ class UpdatesTab extends ConsumerStatefulWidget {
 class _UpdatesTabState extends ConsumerState<UpdatesTab> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Center();
   }
 }

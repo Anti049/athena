@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 /// Red: #FF9580
 /// White: #F8F8F2
 final draculaTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.custom,
   BasePrebuiltTheme(
     'dracula_pro',
     lightColorScheme: const ColorScheme.light(

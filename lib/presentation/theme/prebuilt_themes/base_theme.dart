@@ -76,7 +76,7 @@ class BaseTheme with _$BaseTheme {
       {ThemeCategory category = ThemeCategory.base}) {
     return BaseTheme(
       name: prebuilt.name,
-      category: ThemeCategory.tachiyomi,
+      category: category,
       lightScheme: prebuilt.lightColorScheme,
       darkScheme: prebuilt.darkColorScheme,
     );

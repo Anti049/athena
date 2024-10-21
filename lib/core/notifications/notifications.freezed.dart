@@ -14,11 +14,18 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+AppNotification _$AppNotificationFromJson(Map<String, dynamic> json) {
+  return _AppNotification.fromJson(json);
+}
+
 /// @nodoc
 mixin _$AppNotification {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   NotificationSource? get source => throw _privateConstructorUsedError;
+
+  /// Serializes this AppNotification to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of AppNotification
   /// with the given fields replaced by the non-null parameter values.
@@ -118,12 +125,15 @@ class __$$AppNotificationImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$AppNotificationImpl
     with DiagnosticableTreeMixin
     implements _AppNotification {
   const _$AppNotificationImpl(
       {required this.title, required this.description, this.source});
+
+  factory _$AppNotificationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AppNotificationImplFromJson(json);
 
   @override
   final String title;
@@ -158,6 +168,7 @@ class _$AppNotificationImpl
             (identical(other.source, source) || other.source == source));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, title, description, source);
 
@@ -169,6 +180,13 @@ class _$AppNotificationImpl
   _$$AppNotificationImplCopyWith<_$AppNotificationImpl> get copyWith =>
       __$$AppNotificationImplCopyWithImpl<_$AppNotificationImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AppNotificationImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _AppNotification implements AppNotification {
@@ -176,6 +194,9 @@ abstract class _AppNotification implements AppNotification {
       {required final String title,
       required final String description,
       final NotificationSource? source}) = _$AppNotificationImpl;
+
+  factory _AppNotification.fromJson(Map<String, dynamic> json) =
+      _$AppNotificationImpl.fromJson;
 
   @override
   String get title;
@@ -201,6 +222,7 @@ mixin _$Notifications {
       throw _privateConstructorUsedError;
   Map<NotificationSource, int> get notificationCount =>
       throw _privateConstructorUsedError;
+  int get notificationIDCount => throw _privateConstructorUsedError;
 
   /// Create a copy of Notifications
   /// with the given fields replaced by the non-null parameter values.
@@ -220,7 +242,8 @@ abstract class $NotificationsCopyWith<$Res> {
       String channelName,
       String channelDescription,
       FlutterLocalNotificationsPlugin plugin,
-      Map<NotificationSource, int> notificationCount});
+      Map<NotificationSource, int> notificationCount,
+      int notificationIDCount});
 }
 
 /// @nodoc
@@ -243,6 +266,7 @@ class _$NotificationsCopyWithImpl<$Res, $Val extends Notifications>
     Object? channelDescription = null,
     Object? plugin = null,
     Object? notificationCount = null,
+    Object? notificationIDCount = null,
   }) {
     return _then(_value.copyWith(
       channelID: null == channelID
@@ -265,6 +289,10 @@ class _$NotificationsCopyWithImpl<$Res, $Val extends Notifications>
           ? _value.notificationCount
           : notificationCount // ignore: cast_nullable_to_non_nullable
               as Map<NotificationSource, int>,
+      notificationIDCount: null == notificationIDCount
+          ? _value.notificationIDCount
+          : notificationIDCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -282,7 +310,8 @@ abstract class _$$NotificationsImplCopyWith<$Res>
       String channelName,
       String channelDescription,
       FlutterLocalNotificationsPlugin plugin,
-      Map<NotificationSource, int> notificationCount});
+      Map<NotificationSource, int> notificationCount,
+      int notificationIDCount});
 }
 
 /// @nodoc
@@ -303,6 +332,7 @@ class __$$NotificationsImplCopyWithImpl<$Res>
     Object? channelDescription = null,
     Object? plugin = null,
     Object? notificationCount = null,
+    Object? notificationIDCount = null,
   }) {
     return _then(_$NotificationsImpl(
       channelID: null == channelID
@@ -325,6 +355,10 @@ class __$$NotificationsImplCopyWithImpl<$Res>
           ? _value.notificationCount
           : notificationCount // ignore: cast_nullable_to_non_nullable
               as Map<NotificationSource, int>,
+      notificationIDCount: null == notificationIDCount
+          ? _value.notificationIDCount
+          : notificationIDCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -337,7 +371,8 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
       required this.channelName,
       required this.channelDescription,
       required this.plugin,
-      required this.notificationCount})
+      required this.notificationCount,
+      required this.notificationIDCount})
       : super._();
 
   @override
@@ -350,10 +385,12 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
   final FlutterLocalNotificationsPlugin plugin;
   @override
   final Map<NotificationSource, int> notificationCount;
+  @override
+  final int notificationIDCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Notifications(channelID: $channelID, channelName: $channelName, channelDescription: $channelDescription, plugin: $plugin, notificationCount: $notificationCount)';
+    return 'Notifications(channelID: $channelID, channelName: $channelName, channelDescription: $channelDescription, plugin: $plugin, notificationCount: $notificationCount, notificationIDCount: $notificationIDCount)';
   }
 
   @override
@@ -365,7 +402,8 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('channelName', channelName))
       ..add(DiagnosticsProperty('channelDescription', channelDescription))
       ..add(DiagnosticsProperty('plugin', plugin))
-      ..add(DiagnosticsProperty('notificationCount', notificationCount));
+      ..add(DiagnosticsProperty('notificationCount', notificationCount))
+      ..add(DiagnosticsProperty('notificationIDCount', notificationIDCount));
   }
 
   @override
@@ -381,7 +419,9 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
                 other.channelDescription == channelDescription) &&
             (identical(other.plugin, plugin) || other.plugin == plugin) &&
             const DeepCollectionEquality()
-                .equals(other.notificationCount, notificationCount));
+                .equals(other.notificationCount, notificationCount) &&
+            (identical(other.notificationIDCount, notificationIDCount) ||
+                other.notificationIDCount == notificationIDCount));
   }
 
   @override
@@ -391,7 +431,8 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
       channelName,
       channelDescription,
       plugin,
-      const DeepCollectionEquality().hash(notificationCount));
+      const DeepCollectionEquality().hash(notificationCount),
+      notificationIDCount);
 
   /// Create a copy of Notifications
   /// with the given fields replaced by the non-null parameter values.
@@ -404,12 +445,12 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
 
 abstract class _Notifications extends Notifications {
   factory _Notifications(
-          {required final String channelID,
-          required final String channelName,
-          required final String channelDescription,
-          required final FlutterLocalNotificationsPlugin plugin,
-          required final Map<NotificationSource, int> notificationCount}) =
-      _$NotificationsImpl;
+      {required final String channelID,
+      required final String channelName,
+      required final String channelDescription,
+      required final FlutterLocalNotificationsPlugin plugin,
+      required final Map<NotificationSource, int> notificationCount,
+      required final int notificationIDCount}) = _$NotificationsImpl;
   _Notifications._() : super._();
 
   @override
@@ -422,6 +463,8 @@ abstract class _Notifications extends Notifications {
   FlutterLocalNotificationsPlugin get plugin;
   @override
   Map<NotificationSource, int> get notificationCount;
+  @override
+  int get notificationIDCount;
 
   /// Create a copy of Notifications
   /// with the given fields replaced by the non-null parameter values.

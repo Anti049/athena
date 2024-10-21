@@ -1,0 +1,172 @@
+appTitle: Athena
+appDescription: Athena is an all-in-one application for downloading, reading, and listening to fanfiction.
+appChannel: Pre-Alpha
+appVersion: 0.1.0
+
+test: Hello, World!
+
+# Home Navigation
+labelLibrary: Library
+labelUpdates: Updates
+labelHistory: History
+labelBrowse: Browse
+labelMore: More
+
+# Library
+librarySearchHint: Search...
+libraryCategoryDefault: Default
+libraryOptionsFilter:
+    header: Filter
+    downloaded: Downloaded
+    unread: Unread
+    started: Started
+    completed: Completed
+    bookmarked: Bookmarked
+    updated: Updated
+libraryOptionsSort:
+    header: Sort
+    alphabetically: Alphabetically
+    totalChapters: Total Chapters
+    lastRead: Last Read
+    lastUpdated: Last Updated
+    unreadChapters: Unread Chapters
+    latestChapter: Latest Chapter
+    fetchedDate: Fetched Date
+    addedDate: Added Date
+libraryOptionsDisplay:
+    header: Display
+    displayMode:
+        subheader: Display Mode
+        compactGrid: Compact Grid
+        comfortableGrid: Comfortable Grid
+        coverOnlyGrid: Cover-Only Grid
+        list: List
+        gridSize(int size): "${_plural(size, zero: 'Default', other: '$size per row')}"
+    overlay:
+        subheader: Overlay
+        downloadedChapters: Downloaded Chapters
+        unreadChapters: Unread Chapters
+        language: Language
+        continueReading: Continue Reading Button
+    tabs:
+        subheader: Tabs
+        category: Show Category Tabs
+        number: Show Number of Works
+libraryOptionsCategory:
+    header: Category
+    all: All
+libraryMenu:
+    updateLibrary: Update Library
+    updateCategory: Update Category
+    randomWork: Open Random Work
+
+# Updates
+
+# History
+
+# Browse
+
+# More
+preferenceDownloadedOnly:
+    title: Downloaded Only
+    summary: Only show downloaded works
+    disabledWeb: This feature is disabled when using the web reader
+preferenceIncognitoMode:
+    title: Incognito Mode
+    summary: Don't save history or search queries
+labelDownloadQueue:
+    title: Download Queue
+    downloading(String status, int count): '$status: $count remaining'
+labelCategories: Categories
+labelStatistics: Statistics
+labelStorage: Data and Storage
+labelSettings: Settings
+labelAbout: About
+labelHelp: Help
+
+# More -> Settings
+# - Appearance
+preferenceCategoryAppearance:
+    title: Appearance
+    summary: Theme, date and time format
+preferenceHeaderTheme: Theming
+preferenceMode:
+    header: Mode
+    system: System
+    dark: Dark
+    light: Light
+preferenceTheme:
+    header: Theme
+    subheader(String themeName): 'Active Theme: $themeName'
+    count(int count): "${_plural(count, zero: 'No themes', one: '1 theme', other: '$count themes')}"
+    base: Default
+    custom: Custom
+    dynamic: Dynamic
+    greenApple: Green Apple
+    lavender: Lavender
+    midnightDusk: Midnight Dusk
+    nord: Nord
+    strawberry: Strawberry
+    tako: Tako
+    tealTurquoise: Teal & Turquoise
+    tidalWave: Tidal Wave
+    yinYang: Yin & Yang
+    yotsuba: Yotsuba
+    silverWolf: Silver Wolf
+    dracula: Dracula PRO
+preferenceAmoledDark:
+    title: AMOLED Dark
+    summary: Use true black backgrounds
+preferenceHeaderDisplay: Display
+preferenceLanguage:
+    title: Application Language
+    summary: Select the application language
+# - Library
+preferenceCategoryLibrary:
+    title: Library
+    summary: Categories, global update, chapter swipe
+preferenceSectionCategories: Categories
+preferenceCategories:
+    title: Edit Categories
+    summary(int num): "${_plural(num, zero: '', one: '$num category', other: '$num categories')}"
+# - Reader
+preferenceCategoryReader:
+    title: Reader
+    summary: Reading mode, display, navigation
+# - Downloads
+preferenceCategoryDownloads:
+    title: Downloads
+    summary: Automatic download, download ahead
+# - Tracking
+preferenceCategoryTracking:
+    title: Tracking
+    summary: Progress sync, enhanced sync
+# - Browse
+preferenceCategoryBrowse:
+    title: Browse
+    summary: Sources, extensions, global search
+# - Notifications
+preferenceCategoryNotifications:
+    title: Notifications
+    summary: Download complete, update available
+# - Data & Storage
+preferenceCategoryDataStorage:
+    title: Data & Storage
+    summary: Backups, storage space
+# - Security & Privacy
+preferenceCategorySecurityPrivacy:
+    title: Security & Privacy
+    summary: App lock, secure screen
+# - Advanced
+preferenceCategoryAdvanced:
+    title: Advanced
+    summary: Developer options, experimental features
+# - About
+preferenceCategoryAbout:
+    title: About
+    summary: '${_parent.appTitle} ${_parent.appChannel} v${_parent.appVersion}'
+
+# Error
+errorGeneric: An error occurred
+errorTryAgain: Try Again
+errorRouteNotFound: Route not found

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 /// https://www.nordtheme.com/docs/colors-and-palettes
 /// For the light theme, the primary color is switched with the tertiary for better contrast in some case
 final nordTheme = BaseTheme.fromPrebuilt(
+  category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
     'nord',
     lightColorScheme: const ColorScheme.light(

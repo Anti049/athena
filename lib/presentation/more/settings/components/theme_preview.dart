@@ -1,4 +1,5 @@
 import 'package:athena/core/preference/preferences_provider.dart';
+import 'package:athena/features/settings/application/appearance_preferences.dart';
 import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:athena/presentation/theme/prebuilt_themes.dart';
 import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
@@ -209,9 +210,10 @@ class ThemePreview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preferences = ref.watch(preferencesProvider);
-    final brightness = calculateBrightness(context, preferences.themeMode);
-    final isSelected = preferences.themeName == theme.name;
+    final preferences = ref.watch(appearancePreferencesProvider);
+    final brightness =
+        calculateBrightness(context, preferences.themeMode().get());
+    final isSelected = preferences.themeName().get() == theme.name;
     ColorScheme scheme = theme.getColorScheme(brightness);
     final themeName = getThemeName(context, theme.name);
 
@@ -222,9 +224,7 @@ class ThemePreview extends ConsumerWidget {
         children: [
           GestureDetector(
             onTap: () {
-              ref
-                  .read(preferencesProvider.notifier)
-                  .updateThemeName(theme.name);
+              preferences.themeName().set(theme.name);
             },
             child: AspectRatio(
               aspectRatio: 3 / 5,

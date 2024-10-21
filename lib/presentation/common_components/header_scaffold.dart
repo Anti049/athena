@@ -25,6 +25,7 @@ class HeaderScaffold extends ConsumerWidget {
         leading: appBar?.leading,
         actions: appBar?.actions,
         primary: !showingHeader,
+        elevation: appBar?.elevation,
       ),
       body: body,
     );
@@ -37,12 +38,14 @@ extension on AppBar? {
     Widget? leading,
     List<Widget>? actions,
     required bool primary,
+    double? elevation,
   }) {
     return AppBar(
       title: title,
       leading: leading,
       actions: actions,
       primary: primary,
+      elevation: elevation,
     );
   }
 }

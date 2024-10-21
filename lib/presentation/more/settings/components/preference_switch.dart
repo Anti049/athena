@@ -11,6 +11,7 @@ class PreferenceSwitch extends StatelessWidget {
     this.icon,
     required this.checked,
     required this.onCheckedChanged,
+    this.enabled = true,
   });
 
   final String title;
@@ -18,6 +19,7 @@ class PreferenceSwitch extends StatelessWidget {
   final IconData? icon;
   final bool checked;
   final ValueChanged<bool> onCheckedChanged;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,9 @@ class PreferenceSwitch extends StatelessWidget {
           value: checked,
           onChanged: null,
           activeTrackColor: context.scheme.primary,
-          inactiveTrackColor: context.scheme.surfaceContainerHighest,
+          inactiveTrackColor: enabled
+              ? context.scheme.surfaceContainerHighest
+              : context.scheme.surfaceContainerLow,
           thumbColor: WidgetStateProperty.resolveWith(
             (states) {
               // Selected
@@ -47,6 +51,7 @@ class PreferenceSwitch extends StatelessWidget {
         ),
       ),
       onPreferenceClick: () => onCheckedChanged(!checked),
+      enabled: enabled,
     );
   }
 }
