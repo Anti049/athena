@@ -1,10 +1,14 @@
 // Primary imports
+import 'package:animations/animations.dart';
 import 'package:athena/features/theme/presentation/theme_selection_screen.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 // Utilities
 import 'package:athena/features/error/error_screen.dart';
+
+// Navigation keys
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page|Tab,Route')
 class AppRouter extends RootStackRouter {
@@ -20,31 +24,84 @@ class AppRouter extends RootStackRouter {
           page: HomeRoute.page,
           children: [
             RedirectRoute(path: '', redirectTo: 'library'),
-            AutoRoute(
+            CustomRoute(
               path: 'library',
               page: LibraryRoute.page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
             ),
-            AutoRoute(
+            CustomRoute(
               path: 'updates',
               page: UpdatesRoute.page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
             ),
-            AutoRoute(
+            CustomRoute(
               path: 'history',
               page: HistoryRoute.page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
             ),
-            AutoRoute(
+            CustomRoute(
               path: 'browse',
               page: BrowseRoute.page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
             ),
-            AutoRoute(
+            CustomRoute(
               path: 'more',
               page: MoreRoute.page,
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
             ),
           ],
         ),
-        AutoRoute(
+        CustomRoute(
           path: '/settings',
           page: SettingsRoute.page,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SharedAxisTransition(
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: SharedAxisTransitionType.horizontal,
+              child: child,
+            );
+          },
         ),
         AutoRoute(
           path: '/appearance',

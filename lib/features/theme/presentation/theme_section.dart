@@ -1,7 +1,7 @@
+import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:athena/presentation/more/settings/components/theme_preview.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
-import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
 import 'package:athena/utils/responsive_layout.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';

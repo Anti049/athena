@@ -25,14 +25,16 @@ libraryOptionsFilter:
     updated: Updated
 libraryOptionsSort:
     header: Sort
-    alphabetically: Alphabetically
+    title: Title
+    author: Author
     totalChapters: Total Chapters
     lastRead: Last Read
+    lastChecked: Last Checked
     lastUpdated: Last Updated
     unreadChapters: Unread Chapters
     latestChapter: Latest Chapter
-    fetchedDate: Fetched Date
-    addedDate: Added Date
+    dateFetched: Fetched Date
+    dateAdded: Added Date
 libraryOptionsDisplay:
     header: Display
     displayMode:
@@ -59,6 +61,12 @@ libraryMenu:
     updateLibrary: Update Library
     updateCategory: Update Category
     randomWork: Open Random Work
+librarySelectionMenu:
+    categorizeSelected: Categorize Selected
+    markAsRead: Mark as Read
+    markAsUnread: Mark as Unread
+    downloadAll: Download All Chapters
+    delete: Remove Work
 
 # Updates
 

@@ -34,7 +34,7 @@ abstract class PreferenceStore {
         (T e) => e.name,
         (String s) {
           try {
-            return values.firstWhere((v) => v == s);
+            return values.firstWhere((v) => v.name == s);
           } catch (e) {
             return defaultValue;
           }

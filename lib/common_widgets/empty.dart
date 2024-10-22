@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:athena/common_widgets/action_button.dart';
+import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 const List<String> _errorFaces = [
@@ -28,7 +29,7 @@ class EmptyAction {
   final VoidCallback onPressed;
 }
 
-class Empty extends StatelessWidget {
+class Empty extends StatefulWidget {
   const Empty({
     super.key,
     required this.message,
@@ -37,6 +38,20 @@ class Empty extends StatelessWidget {
 
   final String message;
   final List<EmptyAction>? actions;
+
+  @override
+  State<Empty> createState() => _EmptyState();
+}
+
+class _EmptyState extends State<Empty> {
+  late final int _errorIndex;
+
+  @override
+  void initState() {
+    _errorIndex = Random().nextInt(_errorFaces.length);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,28 +65,28 @@ class Empty extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              _errorFaces[Random().nextInt(_errorFaces.length)],
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+              _errorFaces[_errorIndex],
+              style: context.textTheme.displayMedium?.copyWith(
+                color: context.scheme.secondary,
+              ),
             ),
             Baseline(
               baseline: 24.0,
               baselineType: TextBaseline.alphabetic,
               child: Text(
-                message,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                widget.message,
+                style: context.textTheme.titleLarge?.copyWith(
+                  color: context.scheme.secondary,
+                ),
               ),
             ),
-            if (actions?.isNotEmpty ?? false)
+            if (widget.actions?.isNotEmpty ?? false)
               Padding(
                 padding: const EdgeInsets.only(top: 24.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (final action in actions!)
+                    for (final action in widget.actions!)
                       ActionButton(
                         text: action.text,
                         icon: action.icon,

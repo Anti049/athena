@@ -138,6 +138,8 @@ class ObjectPrimitive<T> extends CommonPreference<T> {
   }
 
   @override
-  Future<void> write(String key, T value) =>
-      preferences.put(key, serializer(value));
+  Future<void> write(String key, T value) {
+    final pref = serializer(value);
+    return preferences.put(key, pref);
+  }
 }

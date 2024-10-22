@@ -126,9 +126,7 @@ class __$$AppNotificationImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AppNotificationImpl
-    with DiagnosticableTreeMixin
-    implements _AppNotification {
+class _$AppNotificationImpl implements _AppNotification {
   const _$AppNotificationImpl(
       {required this.title, required this.description, this.source});
 
@@ -143,18 +141,8 @@ class _$AppNotificationImpl
   final NotificationSource? source;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'AppNotification(title: $title, description: $description, source: $source)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'AppNotification'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('source', source));
   }
 
   @override
@@ -218,8 +206,6 @@ mixin _$Notifications {
   String get channelID => throw _privateConstructorUsedError;
   String get channelName => throw _privateConstructorUsedError;
   String get channelDescription => throw _privateConstructorUsedError;
-  FlutterLocalNotificationsPlugin get plugin =>
-      throw _privateConstructorUsedError;
   Map<NotificationSource, int> get notificationCount =>
       throw _privateConstructorUsedError;
   int get notificationIDCount => throw _privateConstructorUsedError;
@@ -241,7 +227,6 @@ abstract class $NotificationsCopyWith<$Res> {
       {String channelID,
       String channelName,
       String channelDescription,
-      FlutterLocalNotificationsPlugin plugin,
       Map<NotificationSource, int> notificationCount,
       int notificationIDCount});
 }
@@ -264,7 +249,6 @@ class _$NotificationsCopyWithImpl<$Res, $Val extends Notifications>
     Object? channelID = null,
     Object? channelName = null,
     Object? channelDescription = null,
-    Object? plugin = null,
     Object? notificationCount = null,
     Object? notificationIDCount = null,
   }) {
@@ -281,10 +265,6 @@ class _$NotificationsCopyWithImpl<$Res, $Val extends Notifications>
           ? _value.channelDescription
           : channelDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      plugin: null == plugin
-          ? _value.plugin
-          : plugin // ignore: cast_nullable_to_non_nullable
-              as FlutterLocalNotificationsPlugin,
       notificationCount: null == notificationCount
           ? _value.notificationCount
           : notificationCount // ignore: cast_nullable_to_non_nullable
@@ -309,7 +289,6 @@ abstract class _$$NotificationsImplCopyWith<$Res>
       {String channelID,
       String channelName,
       String channelDescription,
-      FlutterLocalNotificationsPlugin plugin,
       Map<NotificationSource, int> notificationCount,
       int notificationIDCount});
 }
@@ -330,7 +309,6 @@ class __$$NotificationsImplCopyWithImpl<$Res>
     Object? channelID = null,
     Object? channelName = null,
     Object? channelDescription = null,
-    Object? plugin = null,
     Object? notificationCount = null,
     Object? notificationIDCount = null,
   }) {
@@ -347,10 +325,6 @@ class __$$NotificationsImplCopyWithImpl<$Res>
           ? _value.channelDescription
           : channelDescription // ignore: cast_nullable_to_non_nullable
               as String,
-      plugin: null == plugin
-          ? _value.plugin
-          : plugin // ignore: cast_nullable_to_non_nullable
-              as FlutterLocalNotificationsPlugin,
       notificationCount: null == notificationCount
           ? _value.notificationCount
           : notificationCount // ignore: cast_nullable_to_non_nullable
@@ -365,12 +339,11 @@ class __$$NotificationsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
+class _$NotificationsImpl extends _Notifications {
   _$NotificationsImpl(
       {required this.channelID,
       required this.channelName,
       required this.channelDescription,
-      required this.plugin,
       required this.notificationCount,
       required this.notificationIDCount})
       : super._();
@@ -382,28 +355,13 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
   @override
   final String channelDescription;
   @override
-  final FlutterLocalNotificationsPlugin plugin;
-  @override
   final Map<NotificationSource, int> notificationCount;
   @override
   final int notificationIDCount;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Notifications(channelID: $channelID, channelName: $channelName, channelDescription: $channelDescription, plugin: $plugin, notificationCount: $notificationCount, notificationIDCount: $notificationIDCount)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Notifications'))
-      ..add(DiagnosticsProperty('channelID', channelID))
-      ..add(DiagnosticsProperty('channelName', channelName))
-      ..add(DiagnosticsProperty('channelDescription', channelDescription))
-      ..add(DiagnosticsProperty('plugin', plugin))
-      ..add(DiagnosticsProperty('notificationCount', notificationCount))
-      ..add(DiagnosticsProperty('notificationIDCount', notificationIDCount));
+  String toString() {
+    return 'Notifications(channelID: $channelID, channelName: $channelName, channelDescription: $channelDescription, notificationCount: $notificationCount, notificationIDCount: $notificationIDCount)';
   }
 
   @override
@@ -417,7 +375,6 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
                 other.channelName == channelName) &&
             (identical(other.channelDescription, channelDescription) ||
                 other.channelDescription == channelDescription) &&
-            (identical(other.plugin, plugin) || other.plugin == plugin) &&
             const DeepCollectionEquality()
                 .equals(other.notificationCount, notificationCount) &&
             (identical(other.notificationIDCount, notificationIDCount) ||
@@ -430,7 +387,6 @@ class _$NotificationsImpl extends _Notifications with DiagnosticableTreeMixin {
       channelID,
       channelName,
       channelDescription,
-      plugin,
       const DeepCollectionEquality().hash(notificationCount),
       notificationIDCount);
 
@@ -448,7 +404,6 @@ abstract class _Notifications extends Notifications {
       {required final String channelID,
       required final String channelName,
       required final String channelDescription,
-      required final FlutterLocalNotificationsPlugin plugin,
       required final Map<NotificationSource, int> notificationCount,
       required final int notificationIDCount}) = _$NotificationsImpl;
   _Notifications._() : super._();
@@ -459,8 +414,6 @@ abstract class _Notifications extends Notifications {
   String get channelName;
   @override
   String get channelDescription;
-  @override
-  FlutterLocalNotificationsPlugin get plugin;
   @override
   Map<NotificationSource, int> get notificationCount;
   @override

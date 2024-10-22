@@ -1,6 +1,8 @@
 import 'package:animated_visibility/animated_visibility.dart';
 import 'package:athena/core/banner/banner_provider.dart';
 import 'package:athena/core/preference/preferences_provider.dart';
+import 'package:athena/features/settings/application/appearance_preferences.dart';
+import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:athena/utils/brightness.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +24,15 @@ class AppStateBanners extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Get preferences
-    final preferences = ref.watch(preferencesProvider);
-    final themeMode = preferences.themeMode;
+    final preferences = ref.watch(basePreferencesProvider);
+    final themeMode =
+        ref.watch(appearancePreferencesProvider).themeMode().get();
     final warningBanner = ref.watch(bannerProvider('warning'));
     _warning = warningBanner.first;
     _warningMessage = warningBanner.second;
     _indexing = ref.watch(bannerProvider('indexing')).first;
-    _downloadedOnly = preferences.downloadedOnly;
-    _incognitoMode = preferences.incognitoMode;
+    _downloadedOnly = preferences.downloadedOnly().get();
+    _incognitoMode = preferences.incognitoMode().get();
 
     // Calculate icon brightness
     final bannerActive = _indexing || _downloadedOnly || _incognitoMode;

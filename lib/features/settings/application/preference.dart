@@ -44,11 +44,10 @@ extension Toggle on Preference<bool> {
   }
 }
 
-extension Cycle on Preference<ThemeMode> {
-  ThemeMode cycle() {
+extension CycleEnum<T> on Preference<T> {
+  T cycle(List<T> values) {
     final current = get();
-    final next =
-        ThemeMode.values[(current.index + 1) % ThemeMode.values.length];
+    final next = values[(values.indexOf(current) + 1) % values.length];
     set(next);
     return get();
   }

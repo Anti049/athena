@@ -1,3 +1,4 @@
+import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,14 +7,24 @@ class BannerScaffold extends ConsumerWidget {
     super.key,
     this.appBar,
     this.body,
+    this.bottomNavigationBar,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
   });
 
   final AppBar? appBar;
   final Widget? body;
+  final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool showingBanner = false;
+    // Load preferences
+    final preferences = ref.watch(basePreferencesProvider);
+    final downloadedOnly = preferences.downloadedOnly().get();
+    final incognitoMode = preferences.incognitoMode().get();
+    bool showingBanner = downloadedOnly || incognitoMode;
 
     return Scaffold(
       primary: !showingBanner,
@@ -25,6 +36,9 @@ class BannerScaffold extends ConsumerWidget {
         elevation: appBar?.elevation,
       ),
       body: body,
+      bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
     );
   }
 }

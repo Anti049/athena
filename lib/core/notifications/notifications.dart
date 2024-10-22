@@ -1,6 +1,7 @@
+import 'package:athena/features/notifications/application/notification_controller.dart';
 import 'package:dartx/dartx.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'notifications.freezed.dart';
@@ -49,7 +50,6 @@ class Notifications with _$Notifications {
     required String channelID,
     required String channelName,
     required String channelDescription,
-    required FlutterLocalNotificationsPlugin plugin,
     required Map<NotificationSource, int> notificationCount,
     required int notificationIDCount,
   }) = _Notifications;
@@ -58,72 +58,39 @@ class Notifications with _$Notifications {
         channelID: 'channelID',
         channelName: 'channelName',
         channelDescription: 'channelDescription',
-        plugin: FlutterLocalNotificationsPlugin(),
         notificationCount: {
           for (var source in NotificationSource.values) source: 0,
         },
         notificationIDCount: 0,
       );
 
-  static void notificationTapBackground(NotificationResponse response) {
-    // Handle notification tap
-    if (kDebugMode) {
-      print('Background otification tapped: ${response.payload}');
-    }
-  }
-
-  static void notificationTap(NotificationResponse response) {
-    // Handle notification tap
-    if (kDebugMode) {
-      print('Notification tapped: ${response.payload}');
-    }
-  }
-
   void initialize() async {
     // Initialize notifications
-    const initSettingsAndroid =
-        AndroidInitializationSettings('@drawable/notification_icon');
-    const initSettings = InitializationSettings(
-      android: initSettingsAndroid,
+    AwesomeNotifications().initialize(
+      // set the icon to null if you want to use the default app icon
+      'resource://drawable/notification_icon',
+      [
+        NotificationChannel(
+            channelGroupKey: 'basic_channel_group',
+            channelKey: 'basic_channel',
+            channelName: 'Basic notifications',
+            channelDescription: 'Notification channel for basic tests',
+            defaultColor: const Color(0xFF9D50DD),
+            ledColor: Colors.white)
+      ],
+      // Channel groups are only visual and are not required
+      channelGroups: [
+        NotificationChannelGroup(
+            channelGroupKey: 'basic_channel_group',
+            channelGroupName: 'Basic group')
+      ],
+      debug: true,
     );
-    await plugin.initialize(
-      initSettings,
-      onDidReceiveNotificationResponse: notificationTap,
-      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
-    );
+    NotificationController.initialize();
   }
 
   int showNotification(AppNotification notification) {
     return 0;
-    final id = notificationIDCount;
-    // Show notification
-    plugin.show(
-      id,
-      notification.title,
-      notification.description,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channelID,
-          channelName,
-          channelDescription: channelDescription,
-          importance: Importance.max,
-          priority: Priority.high,
-          ticker: 'ticker',
-          groupKey: 'athena',
-          chronometerCountDown: true,
-          showProgress: true,
-          maxProgress: 100,
-          progress: 50,
-        ),
-      ),
-      payload: notification.toJson().toString(),
-    );
-    // Increment the notification count
-    if (notification.source != null) {
-      increment(notification.source!);
-    }
-    // Return the notification ID
-    return id;
   }
 
   void increment(NotificationSource source) {

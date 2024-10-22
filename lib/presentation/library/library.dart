@@ -195,13 +195,7 @@ class _LibraryTabState extends ConsumerState<LibraryTab> {
                   rowSizes: List.filled(rows, auto),
                   columnGap: 0.0,
                   rowGap: 0.0,
-                  children: [
-                    for (final theme in filteredThemes)
-                      if (theme is BaseTheme)
-                        ThemePreview(
-                          theme: theme,
-                        ),
-                  ],
+                  children: const [],
                 ),
               ),
             ],

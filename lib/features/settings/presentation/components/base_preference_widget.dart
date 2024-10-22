@@ -10,6 +10,9 @@ class BasePreferenceWidget extends StatelessWidget {
     this.onClick,
     this.enabled = true,
     this.widget,
+    this.widgetLeading = false,
+    this.style,
+    this.dense = false,
   });
 
   final String? title;
@@ -18,25 +21,30 @@ class BasePreferenceWidget extends StatelessWidget {
   final VoidCallback? onClick;
   final bool enabled;
   final Widget? widget;
+  final bool widgetLeading;
+  final TextStyle? style;
+  final bool dense;
 
   @override
   Widget build(BuildContext context) {
     // TODO: Highlight animation (ported from flutteryomi)
     return ListTile(
-      leading: icon,
+      leading: widgetLeading ? widget : icon,
       tileColor: Colors.transparent,
       title: title.isNotNullOrBlank
           ? Text(
               title!,
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
+              style: style,
             )
           : null,
       subtitle: subcomponent,
-      trailing: widget,
+      trailing: widgetLeading ? icon : widget,
       onTap: onClick,
-      horizontalTitleGap: 24.0,
+      horizontalTitleGap: widgetLeading ? 16.0 : 24.0,
       enabled: enabled,
+      dense: dense,
     );
   }
 }

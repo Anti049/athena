@@ -57,6 +57,8 @@ class Translations implements i69n.I69nMessageBundle {
   LibraryOptionsCategoryTranslations get libraryOptionsCategory =>
       LibraryOptionsCategoryTranslations(this);
   LibraryMenuTranslations get libraryMenu => LibraryMenuTranslations(this);
+  LibrarySelectionMenuTranslations get librarySelectionMenu =>
+      LibrarySelectionMenuTranslations(this);
   PreferenceDownloadedOnlyTranslations get preferenceDownloadedOnly =>
       PreferenceDownloadedOnlyTranslations(this);
   PreferenceIncognitoModeTranslations get preferenceIncognitoMode =>
@@ -150,6 +152,8 @@ class Translations implements i69n.I69nMessageBundle {
         return libraryOptionsCategory;
       case 'libraryMenu':
         return libraryMenu;
+      case 'librarySelectionMenu':
+        return librarySelectionMenu;
       case 'preferenceDownloadedOnly':
         return preferenceDownloadedOnly;
       case 'preferenceIncognitoMode':
@@ -259,14 +263,16 @@ class LibraryOptionsSortTranslations implements i69n.I69nMessageBundle {
   final Translations _parent;
   const LibraryOptionsSortTranslations(this._parent);
   String get header => "Sort";
-  String get alphabetically => "Alphabetically";
+  String get title => "Title";
+  String get author => "Author";
   String get totalChapters => "Total Chapters";
   String get lastRead => "Last Read";
+  String get lastChecked => "Last Checked";
   String get lastUpdated => "Last Updated";
   String get unreadChapters => "Unread Chapters";
   String get latestChapter => "Latest Chapter";
-  String get fetchedDate => "Fetched Date";
-  String get addedDate => "Added Date";
+  String get dateFetched => "Fetched Date";
+  String get dateAdded => "Added Date";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -276,22 +282,26 @@ class LibraryOptionsSortTranslations implements i69n.I69nMessageBundle {
     switch (key) {
       case 'header':
         return header;
-      case 'alphabetically':
-        return alphabetically;
+      case 'title':
+        return title;
+      case 'author':
+        return author;
       case 'totalChapters':
         return totalChapters;
       case 'lastRead':
         return lastRead;
+      case 'lastChecked':
+        return lastChecked;
       case 'lastUpdated':
         return lastUpdated;
       case 'unreadChapters':
         return unreadChapters;
       case 'latestChapter':
         return latestChapter;
-      case 'fetchedDate':
-        return fetchedDate;
-      case 'addedDate':
-        return addedDate;
+      case 'dateFetched':
+        return dateFetched;
+      case 'dateAdded':
+        return dateAdded;
       default:
         return key;
     }
@@ -463,6 +473,37 @@ class LibraryMenuTranslations implements i69n.I69nMessageBundle {
         return updateCategory;
       case 'randomWork':
         return randomWork;
+      default:
+        return key;
+    }
+  }
+}
+
+class LibrarySelectionMenuTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const LibrarySelectionMenuTranslations(this._parent);
+  String get categorizeSelected => "Categorize Selected";
+  String get markAsRead => "Mark as Read";
+  String get markAsUnread => "Mark as Unread";
+  String get downloadAll => "Download All Chapters";
+  String get delete => "Remove Work";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'categorizeSelected':
+        return categorizeSelected;
+      case 'markAsRead':
+        return markAsRead;
+      case 'markAsUnread':
+        return markAsUnread;
+      case 'downloadAll':
+        return downloadAll;
+      case 'delete':
+        return delete;
       default:
         return key;
     }

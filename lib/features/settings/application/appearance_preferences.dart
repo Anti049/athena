@@ -1,11 +1,11 @@
 import 'package:athena/features/settings/application/common_preference_store.dart';
 import 'package:athena/features/settings/application/preference.dart';
 import 'package:athena/features/settings/application/preference_store.dart';
-import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
+import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part '../../appearance/application/appearance_preferences.g.dart';
+part 'appearance_preferences.g.dart';
 
 class AppearancePreferences {
   AppearancePreferences(this.preferenceStore);

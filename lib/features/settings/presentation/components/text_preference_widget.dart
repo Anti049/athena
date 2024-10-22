@@ -13,6 +13,10 @@ class TextPreferenceWidget extends StatelessWidget {
     this.widget,
     this.onPreferenceClick,
     this.enabled = true,
+    this.widgetLeading = false,
+    this.forceIcon = false,
+    this.style,
+    this.dense = false,
   });
 
   final String? title;
@@ -22,6 +26,10 @@ class TextPreferenceWidget extends StatelessWidget {
   final Widget? widget;
   final VoidCallback? onPreferenceClick;
   final bool enabled;
+  final bool widgetLeading;
+  final bool forceIcon;
+  final TextStyle? style;
+  final bool dense;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,7 @@ class TextPreferenceWidget extends StatelessWidget {
               ),
             )
           : null,
-      icon: icon != null
+      icon: icon != null || forceIcon
           ? Icon(
               icon,
               color: enabled
@@ -50,6 +58,9 @@ class TextPreferenceWidget extends StatelessWidget {
       onClick: onPreferenceClick,
       widget: widget,
       enabled: enabled,
+      widgetLeading: widgetLeading,
+      style: style,
+      dense: dense,
     );
   }
 }

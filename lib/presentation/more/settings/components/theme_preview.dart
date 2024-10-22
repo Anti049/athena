@@ -1,10 +1,9 @@
 import 'package:athena/core/preference/preferences_provider.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
-import 'package:athena/presentation/theme/prebuilt_themes.dart';
-import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
-import 'package:athena/utils/brightness.dart';
+import 'package:athena/features/theme/data/prebuilt_themes.dart';
+import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:athena/utils/responsive_layout.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:change_case/change_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -283,7 +282,7 @@ class ThemePreview extends ConsumerWidget {
           Text(
             themeName,
             textAlign: TextAlign.center,
-            style: context.textTheme.bodyLarge?.copyWith(
+            style: context.text.bodyLarge?.copyWith(
               color: isSelected ? scheme.primary : scheme.onSurface,
             ),
           ),
