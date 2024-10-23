@@ -17,49 +17,60 @@ class AppRouter extends RootStackRouter {
         // Routes
         AutoRoute(
           initial: true,
+          path: '/',
           page: HomeRoute.page,
           children: [
             AutoRoute(
               title: (context, data) => context.locale.labelLibrary,
+              path: 'library',
               page: LibraryRoute.page,
             ),
             AutoRoute(
               title: (context, data) => context.locale.labelUpdates,
+              path: 'updates',
               page: UpdatesRoute.page,
             ),
             AutoRoute(
               title: (context, data) => context.locale.labelHistory,
+              path: 'history',
               page: HistoryRoute.page,
             ),
             AutoRoute(
               title: (context, data) => context.locale.labelBrowse,
+              path: 'browse',
               page: BrowseRoute.page,
             ),
             AutoRoute(
               title: (context, data) => context.locale.labelMore,
+              path: 'more',
               page: MoreRoute.page,
             ),
           ],
         ),
         AutoRoute(
           title: (context, data) => context.locale.labelSettings,
+          path: '/settings',
           page: SettingsRoute.page,
         ),
         AutoRoute(
           title: (context, data) =>
               context.locale.preferenceCategoryAppearance.header,
+          path: '/settings/appearance',
           page: SettingsAppearanceRoute.page,
         ),
         AutoRoute(
           title: (context, data) => context.locale.preferenceTheme.header,
+          path: '/settings/appearance/theme',
           page: ThemeSelectionRoute.page,
         ),
         AutoRoute(
           title: (context, data) => context.locale.preferenceLanguage.header,
+          path: '/settings/appearance/language',
           page: LanguageSelectionRoute.page,
         ),
         AutoRoute(
           title: (context, data) => context.locale.preferenceCategoryAbout,
+          path: '/about',
           page: AboutRoute.page,
         ),
       ];

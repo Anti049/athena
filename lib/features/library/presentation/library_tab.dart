@@ -1,17 +1,20 @@
 import 'package:athena/common_widgets/empty.dart';
+import 'package:athena/common_widgets/loading_screen.dart';
+import 'package:athena/features/banners/application/banner_provider.dart';
 import 'package:athena/features/library/application/library_preferences.dart';
+import 'package:athena/features/library/domain/library_tab_model.dart';
+import 'package:athena/features/library/presentation/components/library_options_sheet.dart';
 import 'package:athena/features/library/presentation/components/selection_bar.dart';
-import 'package:athena/features/library/presentation/shrink_wrapping_tab_bar_view.dart';
-import 'package:athena/features/settings/application/base_preferences.dart';
-import 'package:athena/features/settings/presentation/components/checkbox_preference_widget.dart';
-import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
+
+final indicator = GlobalKey<RefreshIndicatorState>();
 
 @RoutePage()
 class LibraryTab extends ConsumerStatefulWidget {
@@ -24,231 +27,29 @@ class LibraryTab extends ConsumerStatefulWidget {
 }
 
 class _LibraryTabState extends ConsumerState<LibraryTab>
-    with TickerProviderStateMixin {
-  final TextEditingController _searchController = SearchController();
-  final MenuController _menuController = MenuController();
-  bool _searchActive = false;
-  String _searchFilter = '';
-  late final TabController _tabController;
-  bool _selectionActive = false;
-
+    with AutomaticKeepAliveClientMixin<LibraryTab> {
   @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-      length: 3,
-      vsync: this,
-    );
-  }
+  bool get wantKeepAlive => true;
 
-  Widget _buildFilterTab(BuildContext context) {
-    final preferences = ref.watch(libraryPreferencesProvider);
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      children: [
-        CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.downloaded,
-          preference: preferences.filterDownloaded(),
-          widgetLeading: true,
-        ),
-        CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.unread,
-          preference: preferences.filterUnread(),
-          widgetLeading: true,
-        ),
-        CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.started,
-          preference: preferences.filterStarted(),
-          widgetLeading: true,
-        ),
-        CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.completed,
-          preference: preferences.filterCompleted(),
-          widgetLeading: true,
-        ),
-        CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.bookmarked,
-          preference: preferences.filterBookmarked(),
-          widgetLeading: true,
-        ),
-        CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.updated,
-          preference: preferences.filterUpdated(),
-          widgetLeading: true,
-        ),
-      ],
-    );
-  }
+  final TextEditingController _searchController = SearchController();
+  bool _searchActive = false;
+  final MenuController _menuController = MenuController();
+  final bool _selectionActive = false;
 
-  Widget _buildSortTab(BuildContext context) {
-    final preferences = ref.watch(libraryPreferencesProvider);
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      children: SortBy.values
-          .map(
-            (s) => TextPreferenceWidget(
-              title: context.locale.libraryOptionsSort[s.name].toString(),
-              icon: preferences.sortBy().get() == s
-                  ? preferences.sortDirection().get()
-                      ? Icons.arrow_downward
-                      : Icons.arrow_upward
-                  : null,
-              onPreferenceClick: () {
-                if (preferences.sortBy().get() == s) {
-                  preferences
-                      .sortDirection()
-                      .set(!preferences.sortDirection().get());
-                } else {
-                  preferences.sortBy().set(s);
-                }
-              },
-              forceIcon: true,
-              dense: true,
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _buildDisplayTab(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      children: [
-        ListTile(
-          title: Text(context.locale.libraryOptionsFilter.downloaded),
-          onTap: () {},
-          leading: Checkbox(
-            tristate: true,
-            value: false,
-            onChanged: (value) {},
-          ),
-        ),
-        ListTile(
-          title: Text(context.locale.libraryOptionsFilter.unread),
-          onTap: () {},
-          leading: Checkbox(
-            tristate: true,
-            value: false,
-            onChanged: (value) {},
-          ),
-        ),
-        ListTile(
-          title: Text(context.locale.libraryOptionsFilter.started),
-          onTap: () {},
-          leading: Checkbox(
-            tristate: true,
-            value: false,
-            onChanged: (value) {},
-          ),
-        ),
-        ListTile(
-          title: Text(context.locale.libraryOptionsFilter.completed),
-          onTap: () {},
-          leading: Checkbox(
-            tristate: true,
-            value: false,
-            onChanged: (value) {},
-          ),
-        ),
-        ListTile(
-          title: Text(context.locale.libraryOptionsFilter.bookmarked),
-          onTap: () {},
-          leading: Checkbox(
-            tristate: true,
-            value: false,
-            onChanged: (value) {},
-          ),
-        ),
-        ListTile(
-          title: Text(context.locale.libraryOptionsFilter.updated),
-          onTap: () {},
-          leading: Checkbox(
-            tristate: true,
-            value: false,
-            onChanged: (value) {},
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomSheet(BuildContext context) {
-    final tabHeaders = [
-      context.locale.libraryOptionsFilter.header,
-      context.locale.libraryOptionsSort.header,
-      context.locale.libraryOptionsDisplay.header,
-    ];
-    final tabBodies = [
-      _buildFilterTab(context),
-      _buildSortTab(context),
-      _buildDisplayTab(context),
-    ];
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        TabBar(
-          controller: _tabController,
-          onTap: (value) =>
-              ref.read(libraryPreferencesProvider).activeTab = value,
-          tabs: tabHeaders.map((tabHeader) => Tab(text: tabHeader)).toList(),
-        ),
-        ShrinkWrappingTabBarView(
-          tabController: _tabController,
-          children: tabBodies,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSelectionBar(BuildContext context) {
-    return BottomAppBar(
-      color: context.scheme.surfaceContainerLow,
-      height: 56.0,
-      padding: const EdgeInsets.all(0.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(
-            icon: const Icon(Symbols.label),
-            tooltip: context.locale.librarySelectionMenu.categorizeSelected,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Symbols.done_all),
-            tooltip: context.locale.librarySelectionMenu.markAsRead,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Symbols.remove_done),
-            tooltip: context.locale.librarySelectionMenu.markAsUnread,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Symbols.download),
-            tooltip: context.locale.librarySelectionMenu.downloadAll,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Symbols.delete),
-            tooltip: context.locale.librarySelectionMenu.delete,
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
+  bool _onRefresh() {
+    final model = ref.watch(libraryTabModelProvider.notifier);
+    model.refresh();
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     // Get preferences
     final preferences = ref.watch(libraryPreferencesProvider);
-    final basePreferences = ref.watch(basePreferencesProvider);
-    final downloadedOnly = basePreferences.downloadedOnly().get();
-    final incognitoMode = basePreferences.incognitoMode().get();
-    final showingBanner = downloadedOnly || incognitoMode;
+    final state = ref.watch(libraryTabModelProvider);
+    final model = ref.watch(libraryTabModelProvider.notifier);
+    final bannerData = ref.watch(bannerDataProvider);
 
     return PopScope(
       canPop: !_searchActive,
@@ -261,9 +62,9 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
       },
       child: Scaffold(
         extendBody: !_searchActive,
-        primary: !showingBanner,
+        primary: !bannerData.active,
         appBar: AppBar(
-          primary: !showingBanner,
+          primary: !bannerData.active,
           automaticallyImplyLeading: !kIsWeb,
           leading: _searchActive
               ? IconButton(
@@ -291,10 +92,7 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                     color: context.scheme.onSurface,
                   ),
                   onChanged: (value) {
-                    // Filter the themes by search value
-                    setState(() {
-                      _searchFilter = value;
-                    });
+                    model.search(value);
                   },
                 )
               : Text(context.locale.labelLibrary),
@@ -320,8 +118,9 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                 showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
+                  clipBehavior: Clip.antiAlias,
                   builder: (context) {
-                    return _buildBottomSheet(context);
+                    return const LibraryOptionsSheet();
                   },
                 );
               },
@@ -330,7 +129,9 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
               controller: _menuController,
               menuChildren: [
                 MenuItemButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _onRefresh();
+                  },
                   child: const Text('Update Library'),
                 ),
                 MenuItemButton(
@@ -354,39 +155,35 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
             const SizedBox(width: 8.0),
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: () async {
-            await Future.delayed(const Duration(seconds: 1));
+        body: state.when(
+          loading: () {
+            return const LoadingScreen();
           },
-          child: ListView(
-            children: [
-              Center(
-                child: Empty(
-                  message: 'Library Not Yet Implemented',
-                  actions: [
-                    EmptyAction(
-                      text: 'Send a test notification',
-                      icon: const Icon(
-                        Symbols.notifications,
-                        fill: 1.0,
-                      ),
-                      onPressed: () {
-                        // AwesomeNotifications().createNotification(
-                        //   content: NotificationContent(
-                        //     id: 10,
-                        //     channelKey: 'basic_channel',
-                        //     title: 'Test Notification',
-                        //     body: 'This is a test notification',
-                        //   ),
-                        // );
-                        setState(() => _selectionActive = !_selectionActive);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          error: (error, stackTrace) {
+            debugPrintStack(
+              label: error.toString(),
+              stackTrace: stackTrace,
+            );
+            bannerData.setWarning(
+              true,
+              error.toString(),
+            );
+            return const Empty(
+              message: 'An error has occurred!',
+            );
+          },
+          data: (data) {
+            if (data.searchQuery.isNullOrEmpty &&
+                !data.hasActiveFilters &&
+                data.library.isEmpty) {
+              return const Empty(
+                message: 'No Works Found',
+              );
+            }
+            return const Empty(
+              message: 'Library Not Yet Implemented',
+            );
+          },
         ),
         bottomNavigationBar: SelectionBar(
           visible: _selectionActive,

@@ -1,6 +1,7 @@
+import 'package:athena/features/banners/application/banner_provider.dart'
+    show bannerDataProvider;
 import 'package:athena/features/banners/presentation/banner.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
@@ -37,50 +38,50 @@ class BannerScaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Get preferences
-    final preferences = ref.watch(basePreferencesProvider);
-    final downloadedOnly = preferences.downloadedOnly().get();
-    final incognitoMode = preferences.incognitoMode().get();
-    const warning = false;
-    const indexing = false;
+    final data = ref.watch(bannerDataProvider);
 
     final banners = [
       BannerData(
-          label: 'WARNING', // TODO: Figure this out
-          backgroundColor: context.scheme.error,
-          textColor: context.scheme.onError,
-          visible: warning,
-          height: 64.0,
-          textStyle: context.text.titleMedium,
-          leftWidget: Icon(
-            Symbols.warning,
-            color: context.scheme.onError,
-          ),
-          rightWidget: Icon(
-            Symbols.warning,
-            color: context.scheme.onError,
-          ),
-          bottomWidget: FractionallySizedBox(
-            widthFactor: 0.5, // TODO: Make this responsive
-            child: Container(
-              constraints: const BoxConstraints(
-                minHeight: 48.0,
-              ),
-              child: Center(
-                child: Text(
-                  'Lorem ipsum odor amet, consectetuer adipiscing elit. Sodales sagittis nibh netus inceptos ullamcorper diam pharetra. Ridiculus sem iaculis ornare per dui nostra maecenas nascetur. Scelerisque pulvinar augue porta luctus egestas dapibus; massa pretium.',
-                  textAlign: TextAlign.center,
-                  style: context.text.bodyMedium?.copyWith(
-                    color: context.scheme.onError,
-                  ),
+        label: 'WARNING', // TODO: Figure this out
+        backgroundColor: context.scheme.error,
+        textColor: context.scheme.onError,
+        visible: data.warning,
+        height: 64.0,
+        textStyle: context.text.titleMedium,
+        leftWidget: Icon(
+          Symbols.warning,
+          color: context.scheme.onError,
+        ),
+        rightWidget: Icon(
+          Symbols.warning,
+          color: context.scheme.onError,
+        ),
+        bottomWidget: FractionallySizedBox(
+          widthFactor: 0.5, // TODO: Make this responsive
+          child: Container(
+            constraints: const BoxConstraints(
+              minHeight: 48.0,
+            ),
+            child: Center(
+              child: Text(
+                data.warningLabel ?? '',
+                textAlign: TextAlign.center,
+                style: context.text.bodyMedium?.copyWith(
+                  color: context.scheme.onError,
                 ),
               ),
             ),
-          )),
+          ),
+        ),
+        dismiss: () {
+          data.setWarning(false, null);
+        },
+      ),
       BannerData(
         label: 'Indexing', // TODO: Figure this out
         backgroundColor: context.scheme.secondary,
         textColor: context.scheme.onSecondary,
-        visible: indexing,
+        visible: data.indexing,
         topWidget: Column(
           children: [
             SizedBox(
@@ -98,13 +99,13 @@ class BannerScaffold extends ConsumerWidget {
         label: context.locale.preferenceDownloadedOnly.title,
         backgroundColor: context.scheme.tertiary,
         textColor: context.scheme.onTertiary,
-        visible: downloadedOnly,
+        visible: data.downloadedOnly,
       ),
       BannerData(
         label: context.locale.preferenceIncognitoMode.title,
         backgroundColor: context.scheme.primary,
         textColor: context.scheme.onPrimary,
-        visible: incognitoMode,
+        visible: data.incognitoMode,
       ),
     ];
 

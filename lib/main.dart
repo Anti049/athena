@@ -1,4 +1,3 @@
-import 'package:athena/core/notifications/notification_provider.dart';
 import 'package:athena/features/banners/presentation/banner_scaffold.dart';
 import 'package:athena/features/notifications/application/notification_controller.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
@@ -35,7 +34,11 @@ void main() async {
   final supported = defaultTargetPlatform.supportsAccentColor;
   if (supported) {
     SystemTheme.fallbackColor = Colors.deepPurple;
-    await SystemTheme.accentColor.load();
+    try {
+      await SystemTheme.accentColor.load();
+    } catch (e) {
+      debugPrint('Failed to load system accent color: $e');
+    }
   }
 
   // Run the app
@@ -77,9 +80,9 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
     // Get the preferences
     // final preferencesNotifier = ref.watch(preferencesProvider.notifier);
     final appearance = ref.watch(appearancePreferencesProvider);
-    final notifications = ref.watch(notificationCountProvider);
+    // final notifications = ref.watch(notificationCountProvider);
 
-    notifications.initialize();
+    // notifications.initialize();
 
     // Handle theming with system accent color
     return SystemThemeBuilder(

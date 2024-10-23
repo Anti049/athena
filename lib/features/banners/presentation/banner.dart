@@ -23,6 +23,7 @@ class BannerData {
   final Widget? bottomWidget;
   final Widget? leftWidget;
   final Widget? rightWidget;
+  final void Function()? dismiss;
 
   BannerData({
     required this.label,
@@ -35,6 +36,7 @@ class BannerData {
     this.bottomWidget,
     this.leftWidget,
     this.rightWidget,
+    this.dismiss,
   });
 
   BannerWidget toWidget({
@@ -52,6 +54,7 @@ class BannerData {
       bottomWidget: bottomWidget,
       leftWidget: leftWidget,
       rightWidget: rightWidget,
+      dismiss: dismiss,
     );
   }
 }
@@ -70,6 +73,7 @@ class BannerWidget extends StatelessWidget {
     this.bottomWidget,
     this.leftWidget,
     this.rightWidget,
+    this.dismiss,
   });
 
   final String label;
@@ -83,6 +87,7 @@ class BannerWidget extends StatelessWidget {
   final Widget? bottomWidget;
   final Widget? leftWidget;
   final Widget? rightWidget;
+  final void Function()? dismiss;
 
   @override
   Widget build(BuildContext context) {
@@ -90,63 +95,66 @@ class BannerWidget extends StatelessWidget {
     final statusBarHeight = MediaQuery.of(context).viewPadding.top;
     final labelStyle = textStyle ?? context.textTheme.labelMedium;
     // Banner widget
-    return AnimatedVisibility(
-      visible: visible,
-      enter: expandVertically(),
-      enterDuration: const Duration(milliseconds: 200),
-      exit: shrinkVertically(),
-      exitDuration: const Duration(milliseconds: 200),
-      child: Container(
-        width: double.infinity,
-        color: backgroundColor,
-        child: Column(
-          children: [
-            AnimatedVisibility(
-              visible: top,
-              enter: expandVertically(),
-              enterDuration: const Duration(milliseconds: 200),
-              exit: shrinkVertically(),
-              exitDuration: const Duration(milliseconds: 200),
-              child: SizedBox(
-                height: statusBarHeight,
-              ),
-            ),
-            Container(
-              constraints: BoxConstraints(
-                minHeight: height,
-              ),
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    if (topWidget != null) topWidget!,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (leftWidget != null) ...[
-                          leftWidget!,
-                          16.width,
-                        ],
-                        Text(
-                          label,
-                          style: labelStyle?.copyWith(
-                            color: textColor,
-                          ),
-                        ),
-                        if (rightWidget != null) ...[
-                          16.width,
-                          rightWidget!,
-                        ],
-                      ],
-                    ),
-                    if (bottomWidget != null) bottomWidget!,
-                  ],
+    return GestureDetector(
+      onTap: dismiss,
+      child: AnimatedVisibility(
+        visible: visible,
+        enter: expandVertically(),
+        enterDuration: const Duration(milliseconds: 200),
+        exit: shrinkVertically(),
+        exitDuration: const Duration(milliseconds: 200),
+        child: Container(
+          width: double.infinity,
+          color: backgroundColor,
+          child: Column(
+            children: [
+              AnimatedVisibility(
+                visible: top,
+                enter: expandVertically(),
+                enterDuration: const Duration(milliseconds: 200),
+                exit: shrinkVertically(),
+                exitDuration: const Duration(milliseconds: 200),
+                child: SizedBox(
+                  height: statusBarHeight,
                 ),
               ),
-            ),
-          ],
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: height,
+                ),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      if (topWidget != null) topWidget!,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (leftWidget != null) ...[
+                            leftWidget!,
+                            16.width,
+                          ],
+                          Text(
+                            label,
+                            style: labelStyle?.copyWith(
+                              color: textColor,
+                            ),
+                          ),
+                          if (rightWidget != null) ...[
+                            16.width,
+                            rightWidget!,
+                          ],
+                        ],
+                      ),
+                      if (bottomWidget != null) bottomWidget!,
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

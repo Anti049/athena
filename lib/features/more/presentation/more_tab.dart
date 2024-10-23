@@ -1,10 +1,6 @@
 import 'package:athena/common_widgets/banner_scaffold.dart';
-import 'package:athena/common_widgets/empty.dart';
 import 'package:athena/common_widgets/logo_header.dart';
 import 'package:athena/features/settings/application/base_preferences.dart';
-import 'package:athena/features/settings/application/common_preference_store.dart';
-import 'package:athena/features/settings/domain/preference.dart';
-import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
 import 'package:athena/localization/translations.dart';

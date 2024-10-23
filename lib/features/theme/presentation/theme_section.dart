@@ -1,5 +1,5 @@
 import 'package:athena/features/theme/domain/base_theme.dart';
-import 'package:athena/presentation/more/settings/components/theme_preview.dart';
+import 'package:athena/features/theme/presentation/components/theme_preview.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:dartx/dartx.dart';

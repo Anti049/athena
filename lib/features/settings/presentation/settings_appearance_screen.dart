@@ -1,9 +1,9 @@
 import 'package:athena/features/settings/application/appearance_preferences.dart';
 import 'package:athena/features/settings/domain/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
+import 'package:athena/features/settings/presentation/components/segmented_button_preference_widget.dart';
 import 'package:athena/features/theme/data/prebuilt_themes.dart';
 import 'package:athena/localization/translations.dart';
-import 'package:athena/presentation/more/settings/components/preference_segmented_button.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
@@ -32,8 +32,8 @@ class SettingsAppearanceScreen extends ConsumerWidget {
             title: 'Mode',
             content: Column(
               children: [
-                PreferenceSegmentedButton(
-                  value: preferences.themeMode().get(),
+                SegmentedButtonPreferenceWidget(
+                  pref: preferences.themeMode(),
                   options: [
                     PreferenceSegment(
                       value: ThemeMode.system,

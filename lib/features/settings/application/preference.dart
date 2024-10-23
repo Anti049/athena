@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 abstract class Preference<T> {
   String key();
   T get();
