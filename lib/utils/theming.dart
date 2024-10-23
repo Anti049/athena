@@ -1,4 +1,4 @@
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/features/theme/domain/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 // Custom colors
@@ -9,7 +9,7 @@ extension CustomColorExtension on ThemeData {
 // Theme data utilities
 extension ThemeDataExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
-  CustomColors get extended => CustomColorExtension(theme).extended;
+  CustomColors get extended => theme.extended;
   ColorScheme get scheme => theme.colorScheme;
   TextTheme get text => theme.textTheme;
 }

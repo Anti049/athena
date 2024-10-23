@@ -12,6 +12,16 @@ labelHistory: History
 labelBrowse: Browse
 labelMore: More
 
+# Actions
+actionOpen: Open
+actionClose: Close
+actionCancel: Cancel
+actionSave: Save
+actionDelete: Delete
+actionRemove: Remove
+actionEdit: Edit
+actionSearch: Search
+
 # Library
 librarySearchHint: Search...
 libraryCategoryDefault: Default
@@ -95,7 +105,7 @@ labelHelp: Help
 # More -> Settings
 # - Appearance
 preferenceCategoryAppearance:
-    title: Appearance
+    header: Appearance
     summary: Theme, date and time format
 preferenceHeaderTheme: Theming
 preferenceMode:
@@ -122,57 +132,69 @@ preferenceTheme:
     yotsuba: Yotsuba
     silverWolf: Silver Wolf
     dracula: Dracula PRO
+    gaziter: Gaziter
 preferenceAmoledDark:
-    title: AMOLED Dark
+    header: AMOLED Dark
     summary: Use true black backgrounds
 preferenceHeaderDisplay: Display
 preferenceLanguage:
-    title: Application Language
+    header: Application Language
     summary: Select the application language
+preferenceDateFormat:
+    header: Date Format
+    summary(String format, String date): '$format ($date)'
+preferenceRelativeTimestamps:
+    header: Relative Timestamps
+    summary(String date): '\"Today\" instead of \"$date\"'
 # - Library
 preferenceCategoryLibrary:
-    title: Library
+    header: Library
     summary: Categories, global update, chapter swipe
 preferenceSectionCategories: Categories
 preferenceCategories:
-    title: Edit Categories
+    header: Edit Categories
     summary(int num): "${_plural(num, zero: '', one: '$num category', other: '$num categories')}"
 # - Reader
 preferenceCategoryReader:
-    title: Reader
+    header: Reader
     summary: Reading mode, display, navigation
 # - Downloads
 preferenceCategoryDownloads:
-    title: Downloads
+    header: Downloads
     summary: Automatic download, download ahead
 # - Tracking
 preferenceCategoryTracking:
-    title: Tracking
+    header: Tracking
     summary: Progress sync, enhanced sync
 # - Browse
 preferenceCategoryBrowse:
-    title: Browse
+    header: Browse
     summary: Sources, extensions, global search
 # - Notifications
 preferenceCategoryNotifications:
-    title: Notifications
+    header: Notifications
     summary: Download complete, update available
 # - Data & Storage
 preferenceCategoryDataStorage:
-    title: Data & Storage
+    header: Data & Storage
     summary: Backups, storage space
 # - Security & Privacy
 preferenceCategorySecurityPrivacy:
-    title: Security & Privacy
+    header: Security & Privacy
     summary: App lock, secure screen
 # - Advanced
 preferenceCategoryAdvanced:
-    title: Advanced
+    header: Advanced
     summary: Developer options, experimental features
 # - About
-preferenceCategoryAbout:
-    title: About
-    summary: '${_parent.appTitle} ${_parent.appChannel} v${_parent.appVersion}'
+preferenceCategoryAbout: About
+preferenceVersion:
+    header: Version
+    summary(String channel, String version, String date): '$channel v$version ($date)'
+preferenceCheckForUpdates: Check for Updates
+preferenceWhatsNew: What's New
+preferenceLicenses: Open-Source Licenses
+preferencePrivacyPolicy: Privacy Policy
 
 # Error
 errorGeneric: An error occurred

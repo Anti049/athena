@@ -1,7 +1,4 @@
-import 'package:animations/animations.dart';
-import 'package:athena/common_widgets/empty.dart';
 import 'package:athena/localization/translations.dart';
-import 'package:athena/presentation/common_components/app_state_banners.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -83,12 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
         BrowseRoute(),
         MoreRoute(),
       ],
-      // transitionBuilder: (context, child, animation) {
-      //   return FadeTransition(
-      //     opacity: animation,
-      //     child: child,
-      //   );
-      // },
       bottomNavigationBuilder: (context, tabsRouter) {
         return NavigationBar(
           selectedIndex: tabsRouter.activeIndex,

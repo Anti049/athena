@@ -1,4 +1,4 @@
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

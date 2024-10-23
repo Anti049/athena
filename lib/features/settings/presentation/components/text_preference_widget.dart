@@ -1,5 +1,5 @@
 import 'package:athena/features/settings/presentation/components/base_preference_widget.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +42,7 @@ class TextPreferenceWidget extends StatelessWidget {
                   : 0.5, // TODO: Handle material constants (reference flutteryomi)
               child: Text(
                 subtitle!,
-                style: context.textTheme.bodySmall,
+                style: context.text.bodySmall,
                 maxLines: 10,
               ),
             )

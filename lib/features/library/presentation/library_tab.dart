@@ -1,4 +1,3 @@
-import 'package:animated_visibility/animated_visibility.dart';
 import 'package:athena/common_widgets/empty.dart';
 import 'package:athena/features/library/application/library_preferences.dart';
 import 'package:athena/features/library/presentation/components/selection_bar.dart';
@@ -7,7 +6,7 @@ import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:athena/features/settings/presentation/components/checkbox_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
 import 'package:athena/localization/translations.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -284,11 +283,11 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                   decoration: InputDecoration(
                     hintText: context.locale.librarySearchHint,
                     border: InputBorder.none,
-                    hintStyle: context.textTheme.bodyLarge?.copyWith(
+                    hintStyle: context.text.bodyLarge?.copyWith(
                       color: context.scheme.onSurfaceVariant,
                     ),
                   ),
-                  style: context.textTheme.bodyLarge?.copyWith(
+                  style: context.text.bodyLarge?.copyWith(
                     color: context.scheme.onSurface,
                   ),
                   onChanged: (value) {
@@ -314,7 +313,7 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
               icon: Icon(
                 Symbols.filter_list,
                 color: preferences.anyFiltersActive()
-                    ? context.theme.extended.warning
+                    ? context.extended.warning
                     : null,
               ),
               onPressed: () {
@@ -355,28 +354,39 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
             const SizedBox(width: 8.0),
           ],
         ),
-        body: Empty(
-          message: 'Library Not Yet Implemented',
-          actions: [
-            EmptyAction(
-              text: 'Send a test notification',
-              icon: const Icon(
-                Symbols.notifications,
-                fill: 1.0,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1));
+          },
+          child: ListView(
+            children: [
+              Center(
+                child: Empty(
+                  message: 'Library Not Yet Implemented',
+                  actions: [
+                    EmptyAction(
+                      text: 'Send a test notification',
+                      icon: const Icon(
+                        Symbols.notifications,
+                        fill: 1.0,
+                      ),
+                      onPressed: () {
+                        // AwesomeNotifications().createNotification(
+                        //   content: NotificationContent(
+                        //     id: 10,
+                        //     channelKey: 'basic_channel',
+                        //     title: 'Test Notification',
+                        //     body: 'This is a test notification',
+                        //   ),
+                        // );
+                        setState(() => _selectionActive = !_selectionActive);
+                      },
+                    ),
+                  ],
+                ),
               ),
-              onPressed: () {
-                // AwesomeNotifications().createNotification(
-                //   content: NotificationContent(
-                //     id: 10,
-                //     channelKey: 'basic_channel',
-                //     title: 'Test Notification',
-                //     body: 'This is a test notification',
-                //   ),
-                // );
-                setState(() => _selectionActive = !_selectionActive);
-              },
-            ),
-          ],
+            ],
+          ),
         ),
         bottomNavigationBar: SelectionBar(
           visible: _selectionActive,

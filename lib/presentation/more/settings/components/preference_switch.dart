@@ -1,6 +1,6 @@
 import 'package:athena/presentation/more/settings/components/base_preference_widget.dart';
 import 'package:athena/presentation/more/settings/components/preference_text.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 
 class PreferenceSwitch extends StatelessWidget {

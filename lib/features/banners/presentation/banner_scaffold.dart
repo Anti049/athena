@@ -1,14 +1,12 @@
-import 'package:animated_visibility/animated_visibility.dart';
 import 'package:athena/features/banners/presentation/banner.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
 import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:athena/localization/translations.dart';
-import 'package:athena/presentation/common_components/app_state_banners.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
-import 'package:athena/utils/brightness.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class BannerScaffold extends ConsumerWidget {
   const BannerScaffold({
@@ -42,15 +40,65 @@ class BannerScaffold extends ConsumerWidget {
     final preferences = ref.watch(basePreferencesProvider);
     final downloadedOnly = preferences.downloadedOnly().get();
     final incognitoMode = preferences.incognitoMode().get();
+    const warning = false;
+    const indexing = false;
 
     final banners = [
       BannerData(
+          label: 'WARNING', // TODO: Figure this out
+          backgroundColor: context.scheme.error,
+          textColor: context.scheme.onError,
+          visible: warning,
+          height: 64.0,
+          textStyle: context.text.titleMedium,
+          leftWidget: Icon(
+            Symbols.warning,
+            color: context.scheme.onError,
+          ),
+          rightWidget: Icon(
+            Symbols.warning,
+            color: context.scheme.onError,
+          ),
+          bottomWidget: FractionallySizedBox(
+            widthFactor: 0.5, // TODO: Make this responsive
+            child: Container(
+              constraints: const BoxConstraints(
+                minHeight: 48.0,
+              ),
+              child: Center(
+                child: Text(
+                  'Lorem ipsum odor amet, consectetuer adipiscing elit. Sodales sagittis nibh netus inceptos ullamcorper diam pharetra. Ridiculus sem iaculis ornare per dui nostra maecenas nascetur. Scelerisque pulvinar augue porta luctus egestas dapibus; massa pretium.',
+                  textAlign: TextAlign.center,
+                  style: context.text.bodyMedium?.copyWith(
+                    color: context.scheme.onError,
+                  ),
+                ),
+              ),
+            ),
+          )),
+      BannerData(
+        label: 'Indexing', // TODO: Figure this out
+        backgroundColor: context.scheme.secondary,
+        textColor: context.scheme.onSecondary,
+        visible: indexing,
+        topWidget: Column(
+          children: [
+            SizedBox(
+              height: 24.0,
+              width: 24.0,
+              child: CircularProgressIndicator(
+                color: context.scheme.onSecondary,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+          ],
+        ),
+      ),
+      BannerData(
         label: context.locale.preferenceDownloadedOnly.title,
-        backgroundColor: context.scheme.error,
-        textColor: context.scheme.onError,
+        backgroundColor: context.scheme.tertiary,
+        textColor: context.scheme.onTertiary,
         visible: downloadedOnly,
-        height: 48.0,
-        textStyle: context.textTheme.bodyMedium,
       ),
       BannerData(
         label: context.locale.preferenceIncognitoMode.title,
@@ -64,7 +112,7 @@ class BannerScaffold extends ConsumerWidget {
     final bannerActive = anyBannerVisible(banners);
     final appBrightness = calculateBrightness(
         context, ref.watch(appearancePreferencesProvider).themeMode().get());
-    final iconBrightness = getInverseBrightness(appBrightness);
+    final iconBrightness = appBrightness.invert;
 
     Color trueTransparent = Colors.transparent.withOpacity(0.002);
     SystemChrome.setSystemUIOverlayStyle(

@@ -5,14 +5,14 @@ appVersion: 0.1.0
 
 test: ¡Hola, mundo!
 
-# Navegación de Inicio
+# Home Navigation
 labelLibrary: Biblioteca
 labelUpdates: Nueva
 labelHistory: Historial
 labelBrowse: Explorar
 labelMore: Más
 
-# Biblioteca
+# Library
 librarySearchHint: Buscar...
 libraryCategoryDefault: Predeterminado
 libraryOptionsFilter:
@@ -60,13 +60,13 @@ libraryMenu:
     updateCategory: Actualizar Categoría
     randomWork: Abrir Relato Aleatorio
 
-# Nueva
+# Updates
 
-# Historial
+# History
 
-# Explorar
+# Browse
 
-# Más
+# More
 preferenceDownloadedOnly:
     title: Solo Descargados
     summary: Mostrar solo trabajos descargados
@@ -83,10 +83,10 @@ labelSettings: Ajustes
 labelAbout: Acerca de
 labelHelp: Ayuda
 
-# Ajustes
-# - Apariencia
+# More -> Settings
+# - Appearance
 preferenceCategoryAppearance:
-    title: Apariencia
+    header: Apariencia
     summary: Tema, formato de fecha y hora
 preferenceHeaderTheme: Tema
 preferenceMode:
@@ -109,59 +109,64 @@ preferenceTheme:
     yotsuba: Yotsuba
     silverWolf: Lobo Plateado
     dracula: Drácula PRO
+    gaziter: Gaziter
 preferenceAmoledDark:
-    title: Oscuro AMOLED
+    header: Oscuro AMOLED
     summary: Utilice fondos negros auténticos
 preferenceHeaderDisplay: Mostrar
 preferenceLanguage:
-    title: Idioma de la aplicación
+    header: Idioma de la aplicación
     summary: Seleccionar el idioma de la aplicación
+preferenceDateFormat:
+    header: Formato de fecha
+    summary(String format, String date): '$format ($date)'
+preferenceRelativeTimestamps:
+    header: Marcas de tiempo relativas
+    summary(String date): '\"Hoy\" en lugar de \"$date\"'
 # - Biblioteca
 preferenceCategoryLibrary:
-    title: Biblioteca
+    header: Biblioteca
     summary: Categorías, actualización global, deslizamiento de capítulo
 preferenceSectionCategories: Categorías
 preferenceCategories:
-    title: Editar categorías
-    summary(int num): "_plural(num, zero: '', one: '$num categoría', other: '$num categorías')"
+    header: Editar categorías
+    summary(int num): "${_plural(num, zero: '', one: '$num category', other: '$num category')}"
 # - Lector
 preferenceCategoryReader:
-    title: Lector
+    header: Lector
     summary: Modo de lectura, visualización, navegación
 # - Descargas
 preferenceCategoryDownloads:
-    title: Descargas
+    header: Descargas
     summary: Descarga automática, descarga anticipada
 # - Seguimiento
 preferenceCategoryTracking:
-    title: Seguimiento
-    summary: Sincronización de progreso, sincronización mejorada
+    header: Seguimiento
+    summary: Progreso sincronización, sincronización mejorada
 # - Explorar
 preferenceCategoryBrowse:
-    title: Explorar
+    header: Explorar
     summary: Fuentes, extensiones, búsqueda global
 # - Notificaciones
 preferenceCategoryNotifications:
-    title: Notificaciones
+    header: Notificaciones
     summary: Descarga completa, actualización disponible
 # - Datos y almacenamiento
 preferenceCategoryDataStorage:
-    title: Datos y almacenamiento
+    header: Datos y almacenamiento
     summary: Copias de seguridad, espacio de almacenamiento
 # - Seguridad y privacidad
 preferenceCategorySecurityPrivacy:
-    title: Seguridad y privacidad
+    header: Seguridad y privacidad
     summary: Bloqueo de aplicaciones, pantalla segura
 # - Avanzado
 preferenceCategoryAdvanced:
-    title: Avanzado
+    header: Avanzado
     summary: Opciones para desarrolladores, funciones experimentales
 # - Acerca de
-preferenceCategoryAbout:
-    title: Acerca de
-    summary: '${_parent.appTitle} ${_parent.appChannel} v${_parent.appVersion}'
+preferenceCategoryAbout: Acerca de
 
 # Error
-errorGeneric: Se ha producido un error
+errorGeneric: Ocurrió un error
 errorTryAgain: Inténtalo de nuevo
-errorRouteNotFound: Ruta no encontrada
+errorRouteNotFound: No se encontró la ruta

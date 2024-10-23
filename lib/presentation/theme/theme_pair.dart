@@ -1,8 +1,8 @@
+import 'package:athena/features/theme/domain/custom_colors.dart';
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
 
 part 'theme_pair.freezed.dart';
 

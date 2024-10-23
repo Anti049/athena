@@ -83,7 +83,9 @@ class MoreTab extends ConsumerWidget {
           TextPreferenceWidget(
             title: context.locale.labelAbout,
             icon: Symbols.info,
-            onPreferenceClick: () {},
+            onPreferenceClick: () {
+              router.push(const AboutRoute());
+            },
           ),
           TextPreferenceWidget(
             title: context.locale.labelHelp,

@@ -7,6 +7,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'appearance_preferences.g.dart';
 
+enum DateFormats {
+  base('MM/dd/yy'),
+  ddMMyy('dd/MM/yy'),
+  yyyyMMdd('yyyy-MM-dd'),
+  ddMMMyyyy('dd/MMM/yyyy'),
+  MMMddyyyy('MMM dd, yyyy');
+
+  const DateFormats(this.format);
+
+  final String format;
+}
+
 class AppearancePreferences {
   AppearancePreferences(this.preferenceStore);
   final PreferenceStore preferenceStore;
@@ -31,6 +43,24 @@ class AppearancePreferences {
         Preference.appStateKey("contrastLevel"),
         ContrastLevel.normal,
         ContrastLevel.values,
+      );
+
+  Preference<Locale> appLanguage() => preferenceStore.getObject(
+        Preference.appStateKey("appLanguage"),
+        const Locale('en'),
+        (locale) => locale.languageCode,
+        (code) => Locale(code),
+      );
+
+  Preference<DateFormats> dateFormat() => preferenceStore.getEnum(
+        Preference.appStateKey("dateFormat"),
+        DateFormats.base,
+        DateFormats.values,
+      );
+
+  Preference<bool> relativeTimestamps() => preferenceStore.getBool(
+        Preference.appStateKey("relativeTimestamps"),
+        true,
       );
 }
 

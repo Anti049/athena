@@ -5,6 +5,13 @@ import 'package:nb_utils/nb_utils.dart';
 // ignore: constant_identifier_names
 const BANNER_HEIGHT = 24.0;
 
+enum WidgetLocation {
+  top,
+  bottom,
+  left,
+  right,
+}
+
 class BannerData {
   final String label;
   final Color backgroundColor;
@@ -12,6 +19,10 @@ class BannerData {
   final TextStyle? textStyle;
   final bool visible;
   final double height;
+  final Widget? topWidget;
+  final Widget? bottomWidget;
+  final Widget? leftWidget;
+  final Widget? rightWidget;
 
   BannerData({
     required this.label,
@@ -20,6 +31,10 @@ class BannerData {
     this.textStyle,
     required this.visible,
     this.height = BANNER_HEIGHT,
+    this.topWidget,
+    this.bottomWidget,
+    this.leftWidget,
+    this.rightWidget,
   });
 
   BannerWidget toWidget({
@@ -33,6 +48,10 @@ class BannerData {
       top: top,
       height: height,
       visible: visible,
+      topWidget: topWidget,
+      bottomWidget: bottomWidget,
+      leftWidget: leftWidget,
+      rightWidget: rightWidget,
     );
   }
 }
@@ -47,6 +66,10 @@ class BannerWidget extends StatelessWidget {
     this.top = false,
     this.height = BANNER_HEIGHT,
     this.visible = false,
+    this.topWidget,
+    this.bottomWidget,
+    this.leftWidget,
+    this.rightWidget,
   });
 
   final String label;
@@ -56,6 +79,10 @@ class BannerWidget extends StatelessWidget {
   final bool top;
   final double height;
   final bool visible;
+  final Widget? topWidget;
+  final Widget? bottomWidget;
+  final Widget? leftWidget;
+  final Widget? rightWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -88,15 +115,34 @@ class BannerWidget extends StatelessWidget {
               constraints: BoxConstraints(
                 minHeight: height,
               ),
-              height: height,
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text(
-                  label,
-                  style: labelStyle?.copyWith(
-                    color: textColor,
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    if (topWidget != null) topWidget!,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (leftWidget != null) ...[
+                          leftWidget!,
+                          16.width,
+                        ],
+                        Text(
+                          label,
+                          style: labelStyle?.copyWith(
+                            color: textColor,
+                          ),
+                        ),
+                        if (rightWidget != null) ...[
+                          16.width,
+                          rightWidget!,
+                        ],
+                      ],
+                    ),
+                    if (bottomWidget != null) bottomWidget!,
+                  ],
                 ),
               ),
             ),

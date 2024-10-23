@@ -11,12 +11,12 @@ import 'package:athena/routing/application/router.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -76,7 +76,7 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
   Widget build(BuildContext context) {
     // Get the preferences
     // final preferencesNotifier = ref.watch(preferencesProvider.notifier);
-    final preferences = ref.watch(appearancePreferencesProvider);
+    final appearance = ref.watch(appearancePreferencesProvider);
     final notifications = ref.watch(notificationCountProvider);
 
     notifications.initialize();
@@ -85,7 +85,7 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
     return SystemThemeBuilder(
       builder: (context, accent) {
         // Theme name
-        String themeName = preferences.themeName().get();
+        String themeName = appearance.themeName().get();
 
         // Custom colors
         CustomColors extendedLightColors = const CustomColors(
@@ -109,12 +109,8 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
           dynamicColor,
         );
 
-        // Check if using dynamic theme
-        bool hasDynamicTheme = themeName == 'dynamic';
-
         // If not using dynamic, verify theme exists
         if (themeName != 'dynamic' && !prebuiltThemes.containsKey(themeName)) {
-          // preferencesNotifier.updateThemeName('default');
           themeName = 'default';
         }
         if (themeName == 'dynamic' && prebuiltThemes['dynamic'] == null) {
@@ -126,20 +122,20 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
           themeName,
           prebuiltThemes[themeName]!.getColorScheme(
             Brightness.light,
-            contrast: preferences.contrastLevel().get(),
+            contrast: appearance.contrastLevel().get(),
           ),
           prebuiltThemes[themeName]!.getColorScheme(
             Brightness.dark,
-            contrast: preferences.contrastLevel().get(),
+            contrast: appearance.contrastLevel().get(),
           ),
           extendedLight: extendedLightColors,
           extendedDark: extendedDarkColors,
-          amoled: preferences.pureBlack().get(),
+          amoled: appearance.pureBlack().get(),
         );
 
         // Handle brightness for system icons
         final appBrightness =
-            calculateBrightness(context, preferences.themeMode().get());
+            calculateBrightness(context, appearance.themeMode().get());
         final iconBrightness = appBrightness.invert;
         SystemChrome.setEnabledSystemUIMode(
           SystemUiMode.edgeToEdge,
@@ -162,13 +158,14 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
           title: 'Athena',
           debugShowCheckedModeBanner: false,
           // Theme settings
-          themeMode: preferences.themeMode().get(),
+          themeMode: appearance.themeMode().get(),
           theme: activeTheme.light,
           darkTheme: activeTheme.dark,
           // Locale settings
-          locale: const Locale('en'),
+          locale: appearance.appLanguage().get(),
           supportedLocales: AthenaLocalization.supportedLocales,
           localizationsDelegates: const [
+            LocaleNamesLocalizationsDelegate(),
             AthenaLocalization.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

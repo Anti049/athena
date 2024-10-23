@@ -2,13 +2,11 @@ import 'package:athena/core/banner/banner_provider.dart';
 import 'package:athena/core/notifications/notification_provider.dart';
 import 'package:athena/core/notifications/notifications.dart';
 import 'package:athena/core/preference/preferences_provider.dart';
+import 'package:athena/features/theme/data/prebuilt_themes.dart';
 import 'package:athena/presentation/more/settings/components/preference_segmented_button.dart';
-import 'package:athena/presentation/more/settings/components/theme_preview.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
-import 'package:athena/presentation/theme/prebuilt_themes.dart';
-import 'package:athena/presentation/theme/prebuilt_themes/base_theme.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:athena/utils/responsive_layout.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
@@ -92,11 +90,11 @@ class _LibraryTabState extends ConsumerState<LibraryTab> {
                   decoration: InputDecoration(
                     hintText: context.locale.librarySearchHint,
                     border: InputBorder.none,
-                    hintStyle: context.textTheme.bodyLarge?.copyWith(
+                    hintStyle: context.text.bodyLarge?.copyWith(
                       color: context.scheme.onSurfaceVariant,
                     ),
                   ),
-                  style: context.textTheme.bodyLarge?.copyWith(
+                  style: context.text.bodyLarge?.copyWith(
                     color: context.scheme.onSurface,
                   ),
                   onChanged: (value) {

@@ -1,7 +1,6 @@
 import 'package:athena/core/preference/preferences_provider.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
-import 'package:athena/utils/brightness.dart';
 import 'package:athena/utils/locale.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -118,7 +117,7 @@ class HeaderLayout extends ConsumerWidget {
                         padding: const EdgeInsets.only(bottom: 4.0),
                         child: Text(
                           mainHeader.label,
-                          style: context.textTheme.bodySmall?.copyWith(
+                          style: context.text.bodySmall?.copyWith(
                             color: mainHeader.textColor,
                             fontWeight: FontWeight.w600,
                           ),
@@ -135,7 +134,7 @@ class HeaderLayout extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         subHeader.label,
-                        style: context.textTheme.bodySmall?.copyWith(
+                        style: context.text.bodySmall?.copyWith(
                           color: subHeader.textColor,
                           fontWeight: FontWeight.w600,
                         ),

@@ -3,8 +3,7 @@ import 'package:athena/core/banner/banner_provider.dart';
 import 'package:athena/core/preference/preferences_provider.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
 import 'package:athena/features/settings/application/base_preferences.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
-import 'package:athena/utils/brightness.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +36,7 @@ class AppStateBanners extends ConsumerWidget {
     // Calculate icon brightness
     final bannerActive = _indexing || _downloadedOnly || _incognitoMode;
     final appBrightness = calculateBrightness(context, themeMode);
-    final iconBrightness = getInverseBrightness(appBrightness);
+    final iconBrightness = appBrightness.invert;
 
     // Set system navigation icon brightness
     Color trueTransparent = Colors.transparent.withOpacity(0.002);
@@ -153,7 +152,7 @@ class WarningBanner extends StatelessWidget {
       height: height,
       padding: 16.0,
       top: top == 0,
-      textStyle: context.textTheme.bodyMedium?.copyWith(
+      textStyle: context.text.bodyMedium?.copyWith(
         color: warningTextColor,
       ),
     );
@@ -176,7 +175,7 @@ class IndexingDownloadBanner extends StatelessWidget {
     final indexingBackgroundColor = context.scheme.secondary;
     final indexingTextColor = context.scheme.onSecondary;
 
-    final progressSize = context.textTheme.labelLarge?.fontSize;
+    final progressSize = context.text.labelLarge?.fontSize;
 
     final height = BANNER_HEIGHT +
         (top == 0 ? MediaQuery.of(context).viewPadding.top : 0.0) +
@@ -290,7 +289,7 @@ class BaseBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labelStyle = textStyle ??
-        context.textTheme.labelMedium?.copyWith(
+        context.text.labelMedium?.copyWith(
           color: textColor,
         );
     return Container(

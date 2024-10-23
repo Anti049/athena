@@ -13,6 +13,7 @@ class BasePreferenceWidget extends StatelessWidget {
     this.widgetLeading = false,
     this.style,
     this.dense = false,
+    this.trailing,
   });
 
   final String? title;
@@ -24,6 +25,7 @@ class BasePreferenceWidget extends StatelessWidget {
   final bool widgetLeading;
   final TextStyle? style;
   final bool dense;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {

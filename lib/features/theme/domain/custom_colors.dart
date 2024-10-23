@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
-extension ThemeDataExtension on BuildContext {
-  ThemeData get theme => Theme.of(this);
-  ColorScheme get scheme => theme.colorScheme;
-  TextTheme get textTheme => theme.textTheme;
-}
-
 @immutable
 class CustomColors extends ThemeExtension<CustomColors> {
   const CustomColors({

@@ -3,8 +3,8 @@
 import 'package:i69n/i69n.dart' as i69n;
 import 'translations.i69n.dart';
 
-String get _languageCode => 'es';
-String get _localeName => 'es';
+String get _languageCode => 'fr';
+String get _localeName => 'fr';
 
 String _plural(int count,
         {String? zero,
@@ -34,89 +34,91 @@ String _cardinal(int count,
     i69n.cardinal(count, _languageCode,
         zero: zero, one: one, two: two, few: few, many: many, other: other);
 
-class Translations_es extends Translations {
-  const Translations_es();
+class Translations_fr extends Translations {
+  const Translations_fr();
   String get appTitle => "Athena";
   String get appDescription =>
-      "Athena es una aplicación todo en uno para descargar, leer y escuchar fanfiction.";
+      "Athena est une application tout-en-un pour télécharger, lire et écouter des fanfictions.";
   String get appChannel => "Pre-Alpha";
   String get appVersion => "0.1.0";
-  String get test => "¡Hola, mundo!";
-  String get labelLibrary => "Biblioteca";
-  String get labelUpdates => "Nueva";
-  String get labelHistory => "Historial";
-  String get labelBrowse => "Explorar";
-  String get labelMore => "Más";
-  String get librarySearchHint => "Buscar...";
-  String get libraryCategoryDefault => "Predeterminado";
-  LibraryOptionsFilterTranslations_es get libraryOptionsFilter =>
-      LibraryOptionsFilterTranslations_es(this);
-  LibraryOptionsSortTranslations_es get libraryOptionsSort =>
-      LibraryOptionsSortTranslations_es(this);
-  LibraryOptionsDisplayTranslations_es get libraryOptionsDisplay =>
-      LibraryOptionsDisplayTranslations_es(this);
-  LibraryOptionsCategoryTranslations_es get libraryOptionsCategory =>
-      LibraryOptionsCategoryTranslations_es(this);
-  LibraryMenuTranslations_es get libraryMenu =>
-      LibraryMenuTranslations_es(this);
-  PreferenceDownloadedOnlyTranslations_es get preferenceDownloadedOnly =>
-      PreferenceDownloadedOnlyTranslations_es(this);
-  PreferenceIncognitoModeTranslations_es get preferenceIncognitoMode =>
-      PreferenceIncognitoModeTranslations_es(this);
-  LabelDownloadQueueTranslations_es get labelDownloadQueue =>
-      LabelDownloadQueueTranslations_es(this);
-  String get labelCategories => "Categorías";
-  String get labelStatistics => "Estadísticas";
-  String get labelStorage => "Datos y Almacenamiento";
-  String get labelSettings => "Ajustes";
-  String get labelAbout => "Acerca de";
-  String get labelHelp => "Ayuda";
-  PreferenceCategoryAppearanceTranslations_es
+  String get test => "Bonjour, le monde!";
+  String get labelLibrary => "Bibliothèque";
+  String get labelUpdates => "Mises à jour";
+  String get labelHistory => "Historique";
+  String get labelBrowse => "Parcourir";
+  String get labelMore => "Plus";
+  String get librarySearchHint => "Rechercher...";
+  String get libraryCategoryDefault => "Défaut";
+  LibraryOptionsFilterTranslations_fr get libraryOptionsFilter =>
+      LibraryOptionsFilterTranslations_fr(this);
+  LibraryOptionsSortTranslations_fr get libraryOptionsSort =>
+      LibraryOptionsSortTranslations_fr(this);
+  LibraryOptionsDisplayTranslations_fr get libraryOptionsDisplay =>
+      LibraryOptionsDisplayTranslations_fr(this);
+  LibraryOptionsCategoryTranslations_fr get libraryOptionsCategory =>
+      LibraryOptionsCategoryTranslations_fr(this);
+  LibraryMenuTranslations_fr get libraryMenu =>
+      LibraryMenuTranslations_fr(this);
+  LibrarySelectionMenuTranslations_fr get librarySelectionMenu =>
+      LibrarySelectionMenuTranslations_fr(this);
+  PreferenceDownloadedOnlyTranslations_fr get preferenceDownloadedOnly =>
+      PreferenceDownloadedOnlyTranslations_fr(this);
+  PreferenceIncognitoModeTranslations_fr get preferenceIncognitoMode =>
+      PreferenceIncognitoModeTranslations_fr(this);
+  LabelDownloadQueueTranslations_fr get labelDownloadQueue =>
+      LabelDownloadQueueTranslations_fr(this);
+  String get labelCategories => "Catégories";
+  String get labelStatistics => "Statistiques";
+  String get labelStorage => "Données et stockage";
+  String get labelSettings => "Paramètres";
+  String get labelAbout => "À propos";
+  String get labelHelp => "Aide";
+  PreferenceCategoryAppearanceTranslations_fr
       get preferenceCategoryAppearance =>
-          PreferenceCategoryAppearanceTranslations_es(this);
-  String get preferenceHeaderTheme => "Tema";
-  PreferenceModeTranslations_es get preferenceMode =>
-      PreferenceModeTranslations_es(this);
-  PreferenceThemeTranslations_es get preferenceTheme =>
-      PreferenceThemeTranslations_es(this);
-  PreferenceAmoledDarkTranslations_es get preferenceAmoledDark =>
-      PreferenceAmoledDarkTranslations_es(this);
-  String get preferenceHeaderDisplay => "Mostrar";
-  PreferenceLanguageTranslations_es get preferenceLanguage =>
-      PreferenceLanguageTranslations_es(this);
-  PreferenceDateFormatTranslations_es get preferenceDateFormat =>
-      PreferenceDateFormatTranslations_es(this);
-  PreferenceRelativeTimestampsTranslations_es
+          PreferenceCategoryAppearanceTranslations_fr(this);
+  String get preferenceHeaderTheme => "Thème";
+  PreferenceModeTranslations_fr get preferenceMode =>
+      PreferenceModeTranslations_fr(this);
+  PreferenceThemeTranslations_fr get preferenceTheme =>
+      PreferenceThemeTranslations_fr(this);
+  PreferenceAmoledDarkTranslations_fr get preferenceAmoledDark =>
+      PreferenceAmoledDarkTranslations_fr(this);
+  String get preferenceHeaderDisplay => "Affichage";
+  PreferenceLanguageTranslations_fr get preferenceLanguage =>
+      PreferenceLanguageTranslations_fr(this);
+  PreferenceDateFormatTranslations_fr get preferenceDateFormat =>
+      PreferenceDateFormatTranslations_fr(this);
+  PreferenceRelativeTimestampsTranslations_fr
       get preferenceRelativeTimestamps =>
-          PreferenceRelativeTimestampsTranslations_es(this);
-  PreferenceCategoryLibraryTranslations_es get preferenceCategoryLibrary =>
-      PreferenceCategoryLibraryTranslations_es(this);
-  String get preferenceSectionCategories => "Categorías";
-  PreferenceCategoriesTranslations_es get preferenceCategories =>
-      PreferenceCategoriesTranslations_es(this);
-  PreferenceCategoryReaderTranslations_es get preferenceCategoryReader =>
-      PreferenceCategoryReaderTranslations_es(this);
-  PreferenceCategoryDownloadsTranslations_es get preferenceCategoryDownloads =>
-      PreferenceCategoryDownloadsTranslations_es(this);
-  PreferenceCategoryTrackingTranslations_es get preferenceCategoryTracking =>
-      PreferenceCategoryTrackingTranslations_es(this);
-  PreferenceCategoryBrowseTranslations_es get preferenceCategoryBrowse =>
-      PreferenceCategoryBrowseTranslations_es(this);
-  PreferenceCategoryNotificationsTranslations_es
+          PreferenceRelativeTimestampsTranslations_fr(this);
+  PreferenceCategoryLibraryTranslations_fr get preferenceCategoryLibrary =>
+      PreferenceCategoryLibraryTranslations_fr(this);
+  String get preferenceSectionCategories => "Catégories";
+  PreferenceCategoriesTranslations_fr get preferenceCategories =>
+      PreferenceCategoriesTranslations_fr(this);
+  PreferenceCategoryReaderTranslations_fr get preferenceCategoryReader =>
+      PreferenceCategoryReaderTranslations_fr(this);
+  PreferenceCategoryDownloadsTranslations_fr get preferenceCategoryDownloads =>
+      PreferenceCategoryDownloadsTranslations_fr(this);
+  PreferenceCategoryTrackingTranslations_fr get preferenceCategoryTracking =>
+      PreferenceCategoryTrackingTranslations_fr(this);
+  PreferenceCategoryBrowseTranslations_fr get preferenceCategoryBrowse =>
+      PreferenceCategoryBrowseTranslations_fr(this);
+  PreferenceCategoryNotificationsTranslations_fr
       get preferenceCategoryNotifications =>
-          PreferenceCategoryNotificationsTranslations_es(this);
-  PreferenceCategoryDataStorageTranslations_es
+          PreferenceCategoryNotificationsTranslations_fr(this);
+  PreferenceCategoryDataStorageTranslations_fr
       get preferenceCategoryDataStorage =>
-          PreferenceCategoryDataStorageTranslations_es(this);
-  PreferenceCategorySecurityPrivacyTranslations_es
+          PreferenceCategoryDataStorageTranslations_fr(this);
+  PreferenceCategorySecurityPrivacyTranslations_fr
       get preferenceCategorySecurityPrivacy =>
-          PreferenceCategorySecurityPrivacyTranslations_es(this);
-  PreferenceCategoryAdvancedTranslations_es get preferenceCategoryAdvanced =>
-      PreferenceCategoryAdvancedTranslations_es(this);
-  String get preferenceCategoryAbout => "Acerca de";
-  String get errorGeneric => "Ocurrió un error";
-  String get errorTryAgain => "Inténtalo de nuevo";
-  String get errorRouteNotFound => "No se encontró la ruta";
+          PreferenceCategorySecurityPrivacyTranslations_fr(this);
+  PreferenceCategoryAdvancedTranslations_fr get preferenceCategoryAdvanced =>
+      PreferenceCategoryAdvancedTranslations_fr(this);
+  String get preferenceCategoryAbout => "À propos";
+  String get errorGeneric => "Une erreur s'est produite";
+  String get errorTryAgain => "Réessayer";
+  String get errorRouteNotFound => "Route introuvable";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -158,6 +160,8 @@ class Translations_es extends Translations {
         return libraryOptionsCategory;
       case 'libraryMenu':
         return libraryMenu;
+      case 'librarySelectionMenu':
+        return librarySelectionMenu;
       case 'preferenceDownloadedOnly':
         return preferenceDownloadedOnly;
       case 'preferenceIncognitoMode':
@@ -230,17 +234,17 @@ class Translations_es extends Translations {
   }
 }
 
-class LibraryOptionsFilterTranslations_es
+class LibraryOptionsFilterTranslations_fr
     extends LibraryOptionsFilterTranslations {
-  final Translations_es _parent;
-  const LibraryOptionsFilterTranslations_es(this._parent) : super(_parent);
-  String get header => "Filtrar";
-  String get downloaded => "Descargado";
-  String get unread => "No leído";
-  String get started => "Empezado";
-  String get completed => "Completado";
-  String get bookmarked => "Marcado";
-  String get updated => "Actualizado";
+  final Translations_fr _parent;
+  const LibraryOptionsFilterTranslations_fr(this._parent) : super(_parent);
+  String get header => "Filtre";
+  String get downloaded => "Téléchargé";
+  String get unread => "Non lu";
+  String get started => "Commencé";
+  String get completed => "Terminé";
+  String get bookmarked => "Marqué";
+  String get updated => "Mis à jour";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -268,18 +272,20 @@ class LibraryOptionsFilterTranslations_es
   }
 }
 
-class LibraryOptionsSortTranslations_es extends LibraryOptionsSortTranslations {
-  final Translations_es _parent;
-  const LibraryOptionsSortTranslations_es(this._parent) : super(_parent);
-  String get header => "Ordenar";
-  String get alphabetically => "Alfabéticamente";
-  String get totalChapters => "Capítulos Totales";
-  String get lastRead => "Última Lectura";
-  String get lastUpdated => "Última Actualización";
-  String get unreadChapters => "Capítulos No Leídos";
-  String get latestChapter => "Último Capítulo";
-  String get fetchedDate => "Fecha de Descarga";
-  String get addedDate => "Fecha de Añadido";
+class LibraryOptionsSortTranslations_fr extends LibraryOptionsSortTranslations {
+  final Translations_fr _parent;
+  const LibraryOptionsSortTranslations_fr(this._parent) : super(_parent);
+  String get header => "Trier";
+  String get title => "Titre";
+  String get author => "Auteur";
+  String get totalChapters => "Chapitres totaux";
+  String get lastRead => "Dernière lecture";
+  String get lastChecked => "Dernière vérification";
+  String get lastUpdated => "Dernière mise à jour";
+  String get unreadChapters => "Chapitres non lus";
+  String get latestChapter => "Dernier chapitre";
+  String get dateFetched => "Date de récupération";
+  String get dateAdded => "Date d'ajout";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -289,39 +295,43 @@ class LibraryOptionsSortTranslations_es extends LibraryOptionsSortTranslations {
     switch (key) {
       case 'header':
         return header;
-      case 'alphabetically':
-        return alphabetically;
+      case 'title':
+        return title;
+      case 'author':
+        return author;
       case 'totalChapters':
         return totalChapters;
       case 'lastRead':
         return lastRead;
+      case 'lastChecked':
+        return lastChecked;
       case 'lastUpdated':
         return lastUpdated;
       case 'unreadChapters':
         return unreadChapters;
       case 'latestChapter':
         return latestChapter;
-      case 'fetchedDate':
-        return fetchedDate;
-      case 'addedDate':
-        return addedDate;
+      case 'dateFetched':
+        return dateFetched;
+      case 'dateAdded':
+        return dateAdded;
       default:
         return super[key];
     }
   }
 }
 
-class LibraryOptionsDisplayTranslations_es
+class LibraryOptionsDisplayTranslations_fr
     extends LibraryOptionsDisplayTranslations {
-  final Translations_es _parent;
-  const LibraryOptionsDisplayTranslations_es(this._parent) : super(_parent);
-  String get header => "Mostrar";
-  DisplayModeLibraryOptionsDisplayTranslations_es get displayMode =>
-      DisplayModeLibraryOptionsDisplayTranslations_es(this);
-  OverlayLibraryOptionsDisplayTranslations_es get overlay =>
-      OverlayLibraryOptionsDisplayTranslations_es(this);
-  TabsLibraryOptionsDisplayTranslations_es get tabs =>
-      TabsLibraryOptionsDisplayTranslations_es(this);
+  final Translations_fr _parent;
+  const LibraryOptionsDisplayTranslations_fr(this._parent) : super(_parent);
+  String get header => "Affichage";
+  DisplayModeLibraryOptionsDisplayTranslations_fr get displayMode =>
+      DisplayModeLibraryOptionsDisplayTranslations_fr(this);
+  OverlayLibraryOptionsDisplayTranslations_fr get overlay =>
+      OverlayLibraryOptionsDisplayTranslations_fr(this);
+  TabsLibraryOptionsDisplayTranslations_fr get tabs =>
+      TabsLibraryOptionsDisplayTranslations_fr(this);
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -343,18 +353,18 @@ class LibraryOptionsDisplayTranslations_es
   }
 }
 
-class DisplayModeLibraryOptionsDisplayTranslations_es
+class DisplayModeLibraryOptionsDisplayTranslations_fr
     extends DisplayModeLibraryOptionsDisplayTranslations {
-  final LibraryOptionsDisplayTranslations_es _parent;
-  const DisplayModeLibraryOptionsDisplayTranslations_es(this._parent)
+  final LibraryOptionsDisplayTranslations_fr _parent;
+  const DisplayModeLibraryOptionsDisplayTranslations_fr(this._parent)
       : super(_parent);
-  String get subheader => "Modo de Visualización";
-  String get compactGrid => "Cuadrícula Compacta";
-  String get comfortableGrid => "Cuadrícula Cómoda";
-  String get coverOnlyGrid => "Cuadrícula Solo Portadas";
-  String get list => "Lista";
+  String get subheader => "Mode d'affichage";
+  String get compactGrid => "Grille compacte";
+  String get comfortableGrid => "Grille confortable";
+  String get coverOnlyGrid => "Grille de couverture uniquement";
+  String get list => "Liste";
   String gridSize(int size) =>
-      "${_plural(size, zero: 'Predeterminado', other: '$size por fila')}";
+      "${_plural(size, zero: 'Défaut', other: '$size par rangée')}";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -380,16 +390,16 @@ class DisplayModeLibraryOptionsDisplayTranslations_es
   }
 }
 
-class OverlayLibraryOptionsDisplayTranslations_es
+class OverlayLibraryOptionsDisplayTranslations_fr
     extends OverlayLibraryOptionsDisplayTranslations {
-  final LibraryOptionsDisplayTranslations_es _parent;
-  const OverlayLibraryOptionsDisplayTranslations_es(this._parent)
+  final LibraryOptionsDisplayTranslations_fr _parent;
+  const OverlayLibraryOptionsDisplayTranslations_fr(this._parent)
       : super(_parent);
-  String get subheader => "Superposición";
-  String get downloadedChapters => "Capítulos Descargados";
-  String get unreadChapters => "Capítulos No Leídos";
-  String get language => "Idioma";
-  String get continueReading => "Botón de Continuar Leyendo";
+  String get subheader => "Superposition";
+  String get downloadedChapters => "Chapitres téléchargés";
+  String get unreadChapters => "Chapitres non lus";
+  String get language => "Langue";
+  String get continueReading => "Bouton Continuer la lecture";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -413,13 +423,13 @@ class OverlayLibraryOptionsDisplayTranslations_es
   }
 }
 
-class TabsLibraryOptionsDisplayTranslations_es
+class TabsLibraryOptionsDisplayTranslations_fr
     extends TabsLibraryOptionsDisplayTranslations {
-  final LibraryOptionsDisplayTranslations_es _parent;
-  const TabsLibraryOptionsDisplayTranslations_es(this._parent) : super(_parent);
-  String get subheader => "Pestañas";
-  String get category => "Mostrar Pestañas de Categoría";
-  String get number => "Mostrar Número de Trabajos";
+  final LibraryOptionsDisplayTranslations_fr _parent;
+  const TabsLibraryOptionsDisplayTranslations_fr(this._parent) : super(_parent);
+  String get subheader => "Onglets";
+  String get category => "Afficher les onglets de catégorie";
+  String get number => "Afficher le nombre d'œuvres";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -439,12 +449,12 @@ class TabsLibraryOptionsDisplayTranslations_es
   }
 }
 
-class LibraryOptionsCategoryTranslations_es
+class LibraryOptionsCategoryTranslations_fr
     extends LibraryOptionsCategoryTranslations {
-  final Translations_es _parent;
-  const LibraryOptionsCategoryTranslations_es(this._parent) : super(_parent);
-  String get header => "Categoría";
-  String get all => "Todos";
+  final Translations_fr _parent;
+  const LibraryOptionsCategoryTranslations_fr(this._parent) : super(_parent);
+  String get header => "Catégorie";
+  String get all => "Tout";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -462,12 +472,12 @@ class LibraryOptionsCategoryTranslations_es
   }
 }
 
-class LibraryMenuTranslations_es extends LibraryMenuTranslations {
-  final Translations_es _parent;
-  const LibraryMenuTranslations_es(this._parent) : super(_parent);
-  String get updateLibrary => "Actualizar Biblioteca";
-  String get updateCategory => "Actualizar Categoría";
-  String get randomWork => "Abrir Relato Aleatorio";
+class LibraryMenuTranslations_fr extends LibraryMenuTranslations {
+  final Translations_fr _parent;
+  const LibraryMenuTranslations_fr(this._parent) : super(_parent);
+  String get updateLibrary => "Mettre à jour la bibliothèque";
+  String get updateCategory => "Mettre à jour la catégorie";
+  String get randomWork => "Ouvrir une œuvre aléatoire";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -487,12 +497,46 @@ class LibraryMenuTranslations_es extends LibraryMenuTranslations {
   }
 }
 
-class PreferenceDownloadedOnlyTranslations_es
+class LibrarySelectionMenuTranslations_fr
+    extends LibrarySelectionMenuTranslations {
+  final Translations_fr _parent;
+  const LibrarySelectionMenuTranslations_fr(this._parent) : super(_parent);
+  String get categorizeSelected => "Catégoriser la sélection";
+  String get markAsRead => "Marquer comme lu";
+  String get markAsUnread => "Marquer comme non lu";
+  String get downloadAll => "Télécharger tous les chapitres";
+  String get delete => "Supprimer l'œuvre";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'categorizeSelected':
+        return categorizeSelected;
+      case 'markAsRead':
+        return markAsRead;
+      case 'markAsUnread':
+        return markAsUnread;
+      case 'downloadAll':
+        return downloadAll;
+      case 'delete':
+        return delete;
+      default:
+        return super[key];
+    }
+  }
+}
+
+class PreferenceDownloadedOnlyTranslations_fr
     extends PreferenceDownloadedOnlyTranslations {
-  final Translations_es _parent;
-  const PreferenceDownloadedOnlyTranslations_es(this._parent) : super(_parent);
-  String get title => "Solo Descargados";
-  String get summary => "Mostrar solo trabajos descargados";
+  final Translations_fr _parent;
+  const PreferenceDownloadedOnlyTranslations_fr(this._parent) : super(_parent);
+  String get title => "Téléchargé uniquement";
+  String get summary => "Afficher uniquement les œuvres téléchargées";
+  String get disabledWeb =>
+      "Cette fonctionnalité est désactivée lors de l'utilisation du lecteur Web";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -504,18 +548,21 @@ class PreferenceDownloadedOnlyTranslations_es
         return title;
       case 'summary':
         return summary;
+      case 'disabledWeb':
+        return disabledWeb;
       default:
         return super[key];
     }
   }
 }
 
-class PreferenceIncognitoModeTranslations_es
+class PreferenceIncognitoModeTranslations_fr
     extends PreferenceIncognitoModeTranslations {
-  final Translations_es _parent;
-  const PreferenceIncognitoModeTranslations_es(this._parent) : super(_parent);
-  String get title => "Modo Incógnito";
-  String get summary => "No guardar historial ni consultas de búsqueda";
+  final Translations_fr _parent;
+  const PreferenceIncognitoModeTranslations_fr(this._parent) : super(_parent);
+  String get title => "Mode Incognito";
+  String get summary =>
+      "Ne pas enregistrer l'historique ni les requêtes de recherche";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -533,11 +580,11 @@ class PreferenceIncognitoModeTranslations_es
   }
 }
 
-class LabelDownloadQueueTranslations_es extends LabelDownloadQueueTranslations {
-  final Translations_es _parent;
-  const LabelDownloadQueueTranslations_es(this._parent) : super(_parent);
-  String get title => "Cola de Descarga";
-  String downloading(String status, int count) => "$status: $count restantes";
+class LabelDownloadQueueTranslations_fr extends LabelDownloadQueueTranslations {
+  final Translations_fr _parent;
+  const LabelDownloadQueueTranslations_fr(this._parent) : super(_parent);
+  String get title => "File d'attente de téléchargement";
+  String downloading(String status, int count) => "$status: $count restant";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -555,13 +602,13 @@ class LabelDownloadQueueTranslations_es extends LabelDownloadQueueTranslations {
   }
 }
 
-class PreferenceCategoryAppearanceTranslations_es
+class PreferenceCategoryAppearanceTranslations_fr
     extends PreferenceCategoryAppearanceTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryAppearanceTranslations_es(this._parent)
+  final Translations_fr _parent;
+  const PreferenceCategoryAppearanceTranslations_fr(this._parent)
       : super(_parent);
-  String get header => "Apariencia";
-  String get summary => "Tema, formato de fecha y hora";
+  String get header => "Apparence";
+  String get summary => "Thème, format de date et d'heure";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -579,12 +626,13 @@ class PreferenceCategoryAppearanceTranslations_es
   }
 }
 
-class PreferenceModeTranslations_es extends PreferenceModeTranslations {
-  final Translations_es _parent;
-  const PreferenceModeTranslations_es(this._parent) : super(_parent);
-  String get system => "Sistema";
-  String get dark => "Oscuro";
-  String get light => "Claro";
+class PreferenceModeTranslations_fr extends PreferenceModeTranslations {
+  final Translations_fr _parent;
+  const PreferenceModeTranslations_fr(this._parent) : super(_parent);
+  String get header => "Mode";
+  String get system => "Système";
+  String get dark => "Sombre";
+  String get light => "Clair";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -592,6 +640,8 @@ class PreferenceModeTranslations_es extends PreferenceModeTranslations {
           as i69n.I69nMessageBundle)[key.substring(index + 1)];
     }
     switch (key) {
+      case 'header':
+        return header;
       case 'system':
         return system;
       case 'dark':
@@ -604,24 +654,28 @@ class PreferenceModeTranslations_es extends PreferenceModeTranslations {
   }
 }
 
-class PreferenceThemeTranslations_es extends PreferenceThemeTranslations {
-  final Translations_es _parent;
-  const PreferenceThemeTranslations_es(this._parent) : super(_parent);
-  String get base => "Predeterminado";
-  String get custom => "Personalizado";
-  String get dynamic => "Dinámico";
-  String get greenApple => "Manzana Verde";
-  String get lavender => "Lavanda";
-  String get midnightDusk => "Anochecer Medianoche";
-  String get nord => "Nórdico";
-  String get strawberry => "Fresa";
+class PreferenceThemeTranslations_fr extends PreferenceThemeTranslations {
+  final Translations_fr _parent;
+  const PreferenceThemeTranslations_fr(this._parent) : super(_parent);
+  String get header => "Thème";
+  String subheader(String themeName) => "Thème actif: $themeName";
+  String count(int count) =>
+      "${_plural(count, zero: 'Aucun thème', one: '1 thème', other: '$count thèmes')}";
+  String get base => "Par défaut";
+  String get custom => "Personnalisé";
+  String get dynamic => "Dynamique";
+  String get greenApple => "Pomme verte";
+  String get lavender => "Lavande";
+  String get midnightDusk => "Crépuscule de minuit";
+  String get nord => "Nord";
+  String get strawberry => "Fraise";
   String get tako => "Tako";
-  String get tealTurquoise => "Turquesa y Verde Azulado";
-  String get tidalWave => "Ola de Marea";
-  String get yinYang => "Yin y Yang";
+  String get tealTurquoise => "Sarcelle et turquoise";
+  String get tidalWave => "Vague de marée";
+  String get yinYang => "Yin et Yang";
   String get yotsuba => "Yotsuba";
-  String get silverWolf => "Lobo Plateado";
-  String get dracula => "Drácula PRO";
+  String get silverWolf => "Loup argenté";
+  String get dracula => "Dracula PRO";
   String get gaziter => "Gaziter";
   Object operator [](String key) {
     var index = key.indexOf('.');
@@ -630,6 +684,12 @@ class PreferenceThemeTranslations_es extends PreferenceThemeTranslations {
           as i69n.I69nMessageBundle)[key.substring(index + 1)];
     }
     switch (key) {
+      case 'header':
+        return header;
+      case 'subheader':
+        return subheader;
+      case 'count':
+        return count;
       case 'base':
         return base;
       case 'custom':
@@ -668,12 +728,12 @@ class PreferenceThemeTranslations_es extends PreferenceThemeTranslations {
   }
 }
 
-class PreferenceAmoledDarkTranslations_es
+class PreferenceAmoledDarkTranslations_fr
     extends PreferenceAmoledDarkTranslations {
-  final Translations_es _parent;
-  const PreferenceAmoledDarkTranslations_es(this._parent) : super(_parent);
-  String get header => "Oscuro AMOLED";
-  String get summary => "Utilice fondos negros auténticos";
+  final Translations_fr _parent;
+  const PreferenceAmoledDarkTranslations_fr(this._parent) : super(_parent);
+  String get header => "AMOLED Dark";
+  String get summary => "Utiliser de vrais arrière-plans noirs";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -691,11 +751,11 @@ class PreferenceAmoledDarkTranslations_es
   }
 }
 
-class PreferenceLanguageTranslations_es extends PreferenceLanguageTranslations {
-  final Translations_es _parent;
-  const PreferenceLanguageTranslations_es(this._parent) : super(_parent);
-  String get header => "Idioma de la aplicación";
-  String get summary => "Seleccionar el idioma de la aplicación";
+class PreferenceLanguageTranslations_fr extends PreferenceLanguageTranslations {
+  final Translations_fr _parent;
+  const PreferenceLanguageTranslations_fr(this._parent) : super(_parent);
+  String get header => "Langue de l'application";
+  String get summary => "Sélectionner la langue de l'application";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -713,11 +773,11 @@ class PreferenceLanguageTranslations_es extends PreferenceLanguageTranslations {
   }
 }
 
-class PreferenceDateFormatTranslations_es
+class PreferenceDateFormatTranslations_fr
     extends PreferenceDateFormatTranslations {
-  final Translations_es _parent;
-  const PreferenceDateFormatTranslations_es(this._parent) : super(_parent);
-  String get header => "Formato de fecha";
+  final Translations_fr _parent;
+  const PreferenceDateFormatTranslations_fr(this._parent) : super(_parent);
+  String get header => "Format de date";
   String summary(String format, String date) => "$format ($date)";
   Object operator [](String key) {
     var index = key.indexOf('.');
@@ -736,13 +796,13 @@ class PreferenceDateFormatTranslations_es
   }
 }
 
-class PreferenceRelativeTimestampsTranslations_es
+class PreferenceRelativeTimestampsTranslations_fr
     extends PreferenceRelativeTimestampsTranslations {
-  final Translations_es _parent;
-  const PreferenceRelativeTimestampsTranslations_es(this._parent)
+  final Translations_fr _parent;
+  const PreferenceRelativeTimestampsTranslations_fr(this._parent)
       : super(_parent);
-  String get header => "Marcas de tiempo relativas";
-  String summary(String date) => "\"Hoy\" en lugar de \"$date\"";
+  String get header => "Horodatages relatifs";
+  String summary(String date) => "\"Aujourd`hui\" au lieu de \"$date\"";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -760,13 +820,12 @@ class PreferenceRelativeTimestampsTranslations_es
   }
 }
 
-class PreferenceCategoryLibraryTranslations_es
+class PreferenceCategoryLibraryTranslations_fr
     extends PreferenceCategoryLibraryTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryLibraryTranslations_es(this._parent) : super(_parent);
-  String get header => "Biblioteca";
-  String get summary =>
-      "Categorías, actualización global, deslizamiento de capítulo";
+  final Translations_fr _parent;
+  const PreferenceCategoryLibraryTranslations_fr(this._parent) : super(_parent);
+  String get header => "Bibliothèque";
+  String get summary => "Catégories, mise à jour globale, balayage de chapitre";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -784,13 +843,13 @@ class PreferenceCategoryLibraryTranslations_es
   }
 }
 
-class PreferenceCategoriesTranslations_es
+class PreferenceCategoriesTranslations_fr
     extends PreferenceCategoriesTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoriesTranslations_es(this._parent) : super(_parent);
-  String get header => "Editar categorías";
+  final Translations_fr _parent;
+  const PreferenceCategoriesTranslations_fr(this._parent) : super(_parent);
+  String get header => "Modifier les catégories";
   String summary(int num) =>
-      "${_plural(num, zero: '', one: '$num category', other: '$num category')}";
+      "${_plural(num, zero: '', one: '$num category', other: '$num categorys')}";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -808,12 +867,12 @@ class PreferenceCategoriesTranslations_es
   }
 }
 
-class PreferenceCategoryReaderTranslations_es
+class PreferenceCategoryReaderTranslations_fr
     extends PreferenceCategoryReaderTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryReaderTranslations_es(this._parent) : super(_parent);
-  String get header => "Lector";
-  String get summary => "Modo de lectura, visualización, navegación";
+  final Translations_fr _parent;
+  const PreferenceCategoryReaderTranslations_fr(this._parent) : super(_parent);
+  String get header => "Lecteur";
+  String get summary => "Personnalisation de la lecture";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -831,13 +890,13 @@ class PreferenceCategoryReaderTranslations_es
   }
 }
 
-class PreferenceCategoryDownloadsTranslations_es
+class PreferenceCategoryDownloadsTranslations_fr
     extends PreferenceCategoryDownloadsTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryDownloadsTranslations_es(this._parent)
+  final Translations_fr _parent;
+  const PreferenceCategoryDownloadsTranslations_fr(this._parent)
       : super(_parent);
-  String get header => "Descargas";
-  String get summary => "Descarga automática, descarga anticipada";
+  String get header => "Téléchargements";
+  String get summary => "Téléchargements, notifications, etc.";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -855,133 +914,134 @@ class PreferenceCategoryDownloadsTranslations_es
   }
 }
 
-class PreferenceCategoryTrackingTranslations_es
+class PreferenceCategoryTrackingTranslations_fr
     extends PreferenceCategoryTrackingTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryTrackingTranslations_es(this._parent)
+  final Translations_fr _parent;
+  const PreferenceCategoryTrackingTranslations_fr(this._parent)
       : super(_parent);
-  String get header => "Seguimiento";
-  String get summary => "Progreso sincronización, sincronización mejorada";
-  Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'header':
-        return header;
-      case 'summary':
-        return summary;
-      default:
-        return super[key];
-    }
-  }
-}
-
-class PreferenceCategoryBrowseTranslations_es
-    extends PreferenceCategoryBrowseTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryBrowseTranslations_es(this._parent) : super(_parent);
-  String get header => "Explorar";
-  String get summary => "Fuentes, extensiones, búsqueda global";
-  Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'header':
-        return header;
-      case 'summary':
-        return summary;
-      default:
-        return super[key];
-    }
-  }
-}
-
-class PreferenceCategoryNotificationsTranslations_es
-    extends PreferenceCategoryNotificationsTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryNotificationsTranslations_es(this._parent)
-      : super(_parent);
-  String get header => "Notificaciones";
-  String get summary => "Descarga completa, actualización disponible";
-  Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'header':
-        return header;
-      case 'summary':
-        return summary;
-      default:
-        return super[key];
-    }
-  }
-}
-
-class PreferenceCategoryDataStorageTranslations_es
-    extends PreferenceCategoryDataStorageTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryDataStorageTranslations_es(this._parent)
-      : super(_parent);
-  String get header => "Datos y almacenamiento";
-  String get summary => "Copias de seguridad, espacio de almacenamiento";
-  Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'header':
-        return header;
-      case 'summary':
-        return summary;
-      default:
-        return super[key];
-    }
-  }
-}
-
-class PreferenceCategorySecurityPrivacyTranslations_es
-    extends PreferenceCategorySecurityPrivacyTranslations {
-  final Translations_es _parent;
-  const PreferenceCategorySecurityPrivacyTranslations_es(this._parent)
-      : super(_parent);
-  String get header => "Seguridad y privacidad";
-  String get summary => "Bloqueo de aplicaciones, pantalla segura";
-  Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'header':
-        return header;
-      case 'summary':
-        return summary;
-      default:
-        return super[key];
-    }
-  }
-}
-
-class PreferenceCategoryAdvancedTranslations_es
-    extends PreferenceCategoryAdvancedTranslations {
-  final Translations_es _parent;
-  const PreferenceCategoryAdvancedTranslations_es(this._parent)
-      : super(_parent);
-  String get header => "Avanzado";
+  String get header => "Suivi";
   String get summary =>
-      "Opciones para desarrolladores, funciones experimentales";
+      "Synchronisation de la progression, synchronisation améliorée";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return super[key];
+    }
+  }
+}
+
+class PreferenceCategoryBrowseTranslations_fr
+    extends PreferenceCategoryBrowseTranslations {
+  final Translations_fr _parent;
+  const PreferenceCategoryBrowseTranslations_fr(this._parent) : super(_parent);
+  String get header => "Parcourir";
+  String get summary => "Sources, extensions, recherche globale";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return super[key];
+    }
+  }
+}
+
+class PreferenceCategoryNotificationsTranslations_fr
+    extends PreferenceCategoryNotificationsTranslations {
+  final Translations_fr _parent;
+  const PreferenceCategoryNotificationsTranslations_fr(this._parent)
+      : super(_parent);
+  String get header => "Notifications";
+  String get summary => "Téléchargement terminé, mise à jour disponible";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return super[key];
+    }
+  }
+}
+
+class PreferenceCategoryDataStorageTranslations_fr
+    extends PreferenceCategoryDataStorageTranslations {
+  final Translations_fr _parent;
+  const PreferenceCategoryDataStorageTranslations_fr(this._parent)
+      : super(_parent);
+  String get header => "Données et stockage";
+  String get summary => "Sauvegardes, espace de stockage";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return super[key];
+    }
+  }
+}
+
+class PreferenceCategorySecurityPrivacyTranslations_fr
+    extends PreferenceCategorySecurityPrivacyTranslations {
+  final Translations_fr _parent;
+  const PreferenceCategorySecurityPrivacyTranslations_fr(this._parent)
+      : super(_parent);
+  String get header => "Sécurité et confidentialité";
+  String get summary => "Verrouillage d'application, écran sécurisé";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return super[key];
+    }
+  }
+}
+
+class PreferenceCategoryAdvancedTranslations_fr
+    extends PreferenceCategoryAdvancedTranslations {
+  final Translations_fr _parent;
+  const PreferenceCategoryAdvancedTranslations_fr(this._parent)
+      : super(_parent);
+  String get header => "Avancé";
+  String get summary =>
+      "Options du développeur, fonctionnalités expérimentales";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {

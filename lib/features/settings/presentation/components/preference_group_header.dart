@@ -1,4 +1,4 @@
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 
 class PreferenceGroupHeader extends StatelessWidget {
@@ -20,7 +20,7 @@ class PreferenceGroupHeader extends StatelessWidget {
         ),
         child: Text(
           title,
-          style: context.textTheme.bodyMedium?.copyWith(
+          style: context.text.bodyMedium?.copyWith(
             color: context.scheme.secondary,
             fontWeight: FontWeight.w600,
           ),

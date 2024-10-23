@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:athena/common_widgets/action_button.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 
 const List<String> _errorFaces = [
@@ -14,7 +14,8 @@ const List<String> _errorFaces = [
   "(╯︵╰,)",
   "૮(˶ㅠ︿ㅠ)ა",
   "(っ◞‸◟ c)",
-  "｡°(°.◜ᯅ◝°)°｡"
+  "｡°(°.◜ᯅ◝°)°｡",
+  "(≥o≤)"
 ];
 
 class EmptyAction {
@@ -66,7 +67,7 @@ class _EmptyState extends State<Empty> {
           children: [
             Text(
               _errorFaces[_errorIndex],
-              style: context.textTheme.displayMedium?.copyWith(
+              style: context.text.displayMedium?.copyWith(
                 color: context.scheme.secondary,
               ),
             ),
@@ -75,7 +76,7 @@ class _EmptyState extends State<Empty> {
               baselineType: TextBaseline.alphabetic,
               child: Text(
                 widget.message,
-                style: context.textTheme.titleLarge?.copyWith(
+                style: context.text.titleLarge?.copyWith(
                   color: context.scheme.secondary,
                 ),
               ),

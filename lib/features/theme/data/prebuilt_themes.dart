@@ -1,5 +1,6 @@
 import 'package:athena/features/theme/data/theme_default.dart';
 import 'package:athena/features/theme/data/theme_dracula.dart';
+import 'package:athena/features/theme/data/theme_gaziter.dart';
 import 'package:athena/features/theme/data/theme_green_apple.dart';
 import 'package:athena/features/theme/data/theme_lavender.dart';
 import 'package:athena/features/theme/data/theme_midnight_dusk.dart';
@@ -30,6 +31,7 @@ final Map<String, BaseTheme?> prebuiltThemes = {
   yotsubaTheme.name: yotsubaTheme,
   silverWolfTheme.name: silverWolfTheme,
   draculaTheme.name: draculaTheme,
+  gaziterTheme.name: gaziterTheme,
 };
 
 String getThemeName(BuildContext context, String themeID) {
@@ -47,6 +49,7 @@ String getThemeName(BuildContext context, String themeID) {
     'yotsuba' => context.locale.preferenceTheme.yotsuba,
     'silver_wolf' => context.locale.preferenceTheme.silverWolf,
     'dracula_pro' => context.locale.preferenceTheme.dracula,
+    'gaziter' => context.locale.preferenceTheme.gaziter,
     _ => context.locale.preferenceTheme.base,
   };
 }

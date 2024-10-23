@@ -2,7 +2,6 @@ import 'package:athena/features/settings/application/preference.dart';
 import 'package:athena/features/settings/application/tri_state.dart';
 import 'package:athena/features/settings/presentation/components/base_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CheckboxPreferenceWidget extends StatelessWidget {

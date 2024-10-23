@@ -35,9 +35,11 @@ class TextPreference extends PreferenceItem<String> {
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
     this.onClick,
+    this.trailing,
   });
 
   final VoidCallback? onClick;
+  final Widget? trailing;
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
 }

@@ -24,6 +24,7 @@ class PreferenceItem extends ConsumerWidget {
           subtitle: dItem.subtitle,
           icon: dItem.icon,
           onPreferenceClick: dItem.onClick,
+          widget: dItem.trailing,
         );
       case d.SwitchPreference():
         final dItem = item as d.SwitchPreference;

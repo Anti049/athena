@@ -1,9 +1,9 @@
 import 'package:athena/core/navigation/navigation_provider.dart';
 import 'package:athena/core/notifications/notification_provider.dart';
 import 'package:athena/presentation/common_components/badged_icon.dart';
-import 'package:athena/presentation/theme/custom_colors.dart';
 import 'package:athena/utils/platform.dart';
 import 'package:athena/utils/responsive_layout.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -164,7 +164,7 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
             padding: const EdgeInsets.fromLTRB(28.0, 16, 28.0, 16),
             child: Text(
               'Navigation',
-              style: context.textTheme.titleSmall,
+              style: context.text.titleSmall,
             ),
           ),
           ...List.generate(
@@ -191,7 +191,7 @@ class _NavigationSkeletonState extends ConsumerState<NavigationSkeleton> {
                         Text(
                           '$notificationCount',
                           textAlign: TextAlign.end,
-                          style: context.textTheme.labelLarge?.copyWith(
+                          style: context.text.labelLarge?.copyWith(
                             color: context.scheme.onSurfaceVariant,
                           ),
                         ),

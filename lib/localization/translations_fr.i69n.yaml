@@ -1,0 +1,185 @@
+appTitle: Athena
+appDescription: Athena est une application tout-en-un pour télécharger, lire et écouter des fanfictions.
+appChannel: Pre-Alpha
+appVersion: 0.1.0
+
+test: Bonjour, le monde!
+
+# Home Navigation
+labelLibrary: Bibliothèque
+labelUpdates: Mises à jour
+labelHistory: Historique
+labelBrowse: Parcourir
+labelMore: Plus
+
+# Library
+librarySearchHint: Rechercher...
+libraryCategoryDefault: Défaut
+libraryOptionsFilter:
+    header: Filtre
+    downloaded: Téléchargé
+    unread: Non lu
+    started: Commencé
+    completed: Terminé
+    bookmarked: Marqué
+    updated: Mis à jour
+libraryOptionsSort:
+    header: Trier
+    title: Titre
+    author: Auteur
+    totalChapters: Chapitres totaux
+    lastRead: Dernière lecture
+    lastChecked: Dernière vérification
+    lastUpdated: Dernière mise à jour
+    unreadChapters: Chapitres non lus
+    latestChapter: Dernier chapitre
+    dateFetched: Date de récupération
+    dateAdded: Date d'ajout
+libraryOptionsDisplay:
+    header: Affichage
+    displayMode:
+        subheader: Mode d'affichage
+        compactGrid: Grille compacte
+        comfortableGrid: Grille confortable
+        coverOnlyGrid: Grille de couverture uniquement
+        list: Liste
+        gridSize(int size): "${_plural(size, zero: 'Défaut', other: '$size par rangée')}"
+    overlay:
+        subheader: Superposition
+        downloadedChapters: Chapitres téléchargés
+        unreadChapters: Chapitres non lus
+        language: Langue
+        continueReading: Bouton Continuer la lecture
+    tabs:
+        subheader: Onglets
+        category: Afficher les onglets de catégorie
+        number: Afficher le nombre d'œuvres
+libraryOptionsCategory:
+    header: Catégorie
+    all: Tout
+libraryMenu:
+    updateLibrary: Mettre à jour la bibliothèque
+    updateCategory: Mettre à jour la catégorie
+    randomWork: Ouvrir une œuvre aléatoire
+librarySelectionMenu:
+    categorizeSelected: Catégoriser la sélection
+    markAsRead: Marquer comme lu
+    markAsUnread: Marquer comme non lu
+    downloadAll: Télécharger tous les chapitres
+    delete: Supprimer l'œuvre
+
+# Updates
+
+# History
+
+# Browse
+
+# More
+preferenceDownloadedOnly:
+    title: Téléchargé uniquement
+    summary: Afficher uniquement les œuvres téléchargées
+    disabledWeb: Cette fonctionnalité est désactivée lors de l'utilisation du lecteur Web
+preferenceIncognitoMode:
+    title: Mode Incognito
+    summary: Ne pas enregistrer l'historique ni les requêtes de recherche
+labelDownloadQueue:
+    title: File d'attente de téléchargement
+    downloading(String status, int count): '$status: $count restant'
+labelCategories: Catégories
+labelStatistics: Statistiques
+labelStorage: Données et stockage
+labelSettings: Paramètres
+labelAbout: À propos
+labelHelp: Aide
+
+# More -> Settings
+# - Appearance
+preferenceCategoryAppearance:
+    header: Apparence
+    summary: Thème, format de date et d'heure
+preferenceHeaderTheme: Thème
+preferenceMode:
+    header: Mode
+    system: Système
+    dark: Sombre
+    light: Clair
+preferenceTheme:
+    header: Thème
+    subheader(String themeName): 'Thème actif: $themeName'
+    count(int count): "${_plural(count, zero: 'Aucun thème', one: '1 thème', other: '$count thèmes')}"
+    base: Par défaut
+    custom: Personnalisé
+    dynamic: Dynamique
+    greenApple: Pomme verte
+    lavender: Lavande
+    midnightDusk: Crépuscule de minuit
+    nord: Nord
+    strawberry: Fraise
+    tako: Tako
+    tealTurquoise: Sarcelle et turquoise
+    tidalWave: Vague de marée
+    yinYang: Yin et Yang
+    yotsuba: Yotsuba
+    silverWolf: Loup argenté
+    dracula: Dracula PRO
+    gaziter: Gaziter
+preferenceAmoledDark:
+    header: AMOLED Dark
+    summary: Utiliser de vrais arrière-plans noirs
+preferenceHeaderDisplay: Affichage
+preferenceLanguage:
+    header: Langue de l'application
+    summary: Sélectionner la langue de l'application
+preferenceDateFormat:
+    header: Format de date
+    summary(String format, String date): '$format ($date)'
+preferenceRelativeTimestamps:
+    header: Horodatages relatifs
+    summary(String date): '\"Aujourd`hui\" au lieu de \"$date\"'
+# - Library
+preferenceCategoryLibrary:
+    header: Bibliothèque
+    summary: Catégories, mise à jour globale, balayage de chapitre
+preferenceSectionCategories: Catégories
+preferenceCategories:
+    header: Modifier les catégories
+    summary(int num): "${_plural(num, zero: '', one: '$num category', other: '$num categorys')}"
+# - Reader
+preferenceCategoryReader:
+    header: Lecteur
+    summary: Personnalisation de la lecture
+# - Downloads
+preferenceCategoryDownloads:
+    header: Téléchargements
+    summary: Téléchargements, notifications, etc.
+# - Suivi
+preferenceCategoryTracking:
+    header: Suivi
+    summary: Synchronisation de la progression, synchronisation améliorée
+# - Parcourir
+preferenceCategoryBrowse:
+    header: Parcourir
+    summary: Sources, extensions, recherche globale
+# - Notifications
+preferenceCategoryNotifications:
+    header: Notifications
+    summary: Téléchargement terminé, mise à jour disponible
+# - Données et stockage
+preferenceCategoryDataStorage:
+    header: Données et stockage
+    summary: Sauvegardes, espace de stockage
+# - Sécurité et confidentialité
+preferenceCategorySecurityPrivacy:
+    header: Sécurité et confidentialité
+    summary: Verrouillage d'application, écran sécurisé
+# - Avancé
+preferenceCategoryAdvanced:
+    header: Avancé
+    summary: Options du développeur, fonctionnalités expérimentales
+# - À propos
+preferenceCategoryAbout: À propos
+
+# Error
+errorGeneric: Une erreur s'est produite
+errorTryAgain: Réessayer
+errorRouteNotFound: Route introuvable

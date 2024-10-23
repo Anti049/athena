@@ -16,7 +16,7 @@ class SettingsScreen extends ConsumerWidget {
     // Settings items
     final items = [
       SettingsScreenItem(
-        title: context.locale.preferenceCategoryAppearance.title,
+        title: context.locale.preferenceCategoryAppearance.header,
         subtitle: context.locale.preferenceCategoryAppearance.summary,
         icon: Symbols.palette,
         screen: const SettingsAppearanceScreen(),

@@ -43,27 +43,43 @@ class SelectionBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              icon: const Icon(Symbols.label),
+              icon: Icon(
+                Symbols.label,
+                color: context.scheme.onSurface,
+              ),
+              hoverColor: context.scheme.surfaceContainer,
               tooltip: context.locale.librarySelectionMenu.categorizeSelected,
               onPressed: onCategorizeSelected,
             ),
             IconButton(
-              icon: const Icon(Symbols.done_all),
+              icon: Icon(
+                Symbols.done_all,
+                color: context.scheme.onSurface,
+              ),
               tooltip: context.locale.librarySelectionMenu.markAsRead,
               onPressed: onMarkAsRead,
             ),
             IconButton(
-              icon: const Icon(Symbols.remove_done),
+              icon: Icon(
+                Symbols.remove_done,
+                color: context.scheme.onSurface,
+              ),
               tooltip: context.locale.librarySelectionMenu.markAsUnread,
               onPressed: onMarkAsUnread,
             ),
             IconButton(
-              icon: const Icon(Symbols.download),
+              icon: Icon(
+                Symbols.download,
+                color: context.scheme.onSurface,
+              ),
               tooltip: context.locale.librarySelectionMenu.downloadAll,
               onPressed: onDownloadAll,
             ),
             IconButton(
-              icon: const Icon(Symbols.delete),
+              icon: Icon(
+                Symbols.delete,
+                color: context.scheme.onSurface,
+              ),
               tooltip: context.locale.librarySelectionMenu.delete,
               onPressed: onDelete,
             ),

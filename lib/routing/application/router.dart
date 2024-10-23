@@ -1,11 +1,8 @@
 // Primary imports
-import 'package:animations/animations.dart';
-import 'package:athena/features/theme/presentation/theme_selection_screen.dart';
+import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-// Utilities
-import 'package:athena/features/error/error_screen.dart';
 
 // Navigation keys
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -20,96 +17,50 @@ class AppRouter extends RootStackRouter {
         // Routes
         AutoRoute(
           initial: true,
-          path: '/',
           page: HomeRoute.page,
           children: [
-            RedirectRoute(path: '', redirectTo: 'library'),
-            CustomRoute(
-              path: 'library',
+            AutoRoute(
+              title: (context, data) => context.locale.labelLibrary,
               page: LibraryRoute.page,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
             ),
-            CustomRoute(
-              path: 'updates',
+            AutoRoute(
+              title: (context, data) => context.locale.labelUpdates,
               page: UpdatesRoute.page,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
             ),
-            CustomRoute(
-              path: 'history',
+            AutoRoute(
+              title: (context, data) => context.locale.labelHistory,
               page: HistoryRoute.page,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
             ),
-            CustomRoute(
-              path: 'browse',
+            AutoRoute(
+              title: (context, data) => context.locale.labelBrowse,
               page: BrowseRoute.page,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
             ),
-            CustomRoute(
-              path: 'more',
+            AutoRoute(
+              title: (context, data) => context.locale.labelMore,
               page: MoreRoute.page,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                );
-              },
             ),
           ],
         ),
-        CustomRoute(
-          path: '/settings',
+        AutoRoute(
+          title: (context, data) => context.locale.labelSettings,
           page: SettingsRoute.page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return SharedAxisTransition(
-              animation: animation,
-              secondaryAnimation: secondaryAnimation,
-              transitionType: SharedAxisTransitionType.horizontal,
-              child: child,
-            );
-          },
         ),
         AutoRoute(
-          path: '/appearance',
+          title: (context, data) =>
+              context.locale.preferenceCategoryAppearance.header,
           page: SettingsAppearanceRoute.page,
         ),
         AutoRoute(
-          path: '/theme-selection',
+          title: (context, data) => context.locale.preferenceTheme.header,
           page: ThemeSelectionRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.preferenceLanguage.header,
+          page: LanguageSelectionRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.preferenceCategoryAbout,
+          page: AboutRoute.page,
         ),
       ];
 }
