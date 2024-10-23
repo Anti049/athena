@@ -223,6 +223,34 @@ class ThemePreview extends ConsumerWidget {
             onTap: () {
               preferences.themeName().set(theme.name);
             },
+            onLongPress: () {
+              // Open dialog with theme info
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(themeName),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Primary: ${scheme.primary}'),
+                        Text('Secondary: ${scheme.secondary}'),
+                        Text('Tertiary: ${scheme.tertiary}'),
+                        Text('Surface: ${scheme.surface}'),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             child: AspectRatio(
               aspectRatio: 3 / 5,
               child: Container(

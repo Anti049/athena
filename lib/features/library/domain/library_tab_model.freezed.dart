@@ -301,3 +301,360 @@ abstract class _LibraryTabState implements LibraryTabState {
   _$$LibraryTabStateImplCopyWith<_$LibraryTabStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$ItemPreferences {
+  bool get downloadBadge => throw _privateConstructorUsedError;
+  bool get localBadge => throw _privateConstructorUsedError;
+  bool get languageBadge => throw _privateConstructorUsedError;
+  bool get skipOutsideReleasePeriod => throw _privateConstructorUsedError;
+  bool get globalFilterDownloaded => throw _privateConstructorUsedError;
+  bool? get filterDownloaded => throw _privateConstructorUsedError;
+  bool? get filterUnread => throw _privateConstructorUsedError;
+  bool? get filterStarted => throw _privateConstructorUsedError;
+  bool? get filterBookmarked => throw _privateConstructorUsedError;
+  bool? get filterCompleted => throw _privateConstructorUsedError;
+  bool? get filterIntervalCustom => throw _privateConstructorUsedError;
+
+  /// Create a copy of _ItemPreferences
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$ItemPreferencesCopyWith<_ItemPreferences> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ItemPreferencesCopyWith<$Res> {
+  factory _$ItemPreferencesCopyWith(
+          _ItemPreferences value, $Res Function(_ItemPreferences) then) =
+      __$ItemPreferencesCopyWithImpl<$Res, _ItemPreferences>;
+  @useResult
+  $Res call(
+      {bool downloadBadge,
+      bool localBadge,
+      bool languageBadge,
+      bool skipOutsideReleasePeriod,
+      bool globalFilterDownloaded,
+      bool? filterDownloaded,
+      bool? filterUnread,
+      bool? filterStarted,
+      bool? filterBookmarked,
+      bool? filterCompleted,
+      bool? filterIntervalCustom});
+}
+
+/// @nodoc
+class __$ItemPreferencesCopyWithImpl<$Res, $Val extends _ItemPreferences>
+    implements _$ItemPreferencesCopyWith<$Res> {
+  __$ItemPreferencesCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of _ItemPreferences
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? downloadBadge = null,
+    Object? localBadge = null,
+    Object? languageBadge = null,
+    Object? skipOutsideReleasePeriod = null,
+    Object? globalFilterDownloaded = null,
+    Object? filterDownloaded = freezed,
+    Object? filterUnread = freezed,
+    Object? filterStarted = freezed,
+    Object? filterBookmarked = freezed,
+    Object? filterCompleted = freezed,
+    Object? filterIntervalCustom = freezed,
+  }) {
+    return _then(_value.copyWith(
+      downloadBadge: null == downloadBadge
+          ? _value.downloadBadge
+          : downloadBadge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      localBadge: null == localBadge
+          ? _value.localBadge
+          : localBadge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageBadge: null == languageBadge
+          ? _value.languageBadge
+          : languageBadge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      skipOutsideReleasePeriod: null == skipOutsideReleasePeriod
+          ? _value.skipOutsideReleasePeriod
+          : skipOutsideReleasePeriod // ignore: cast_nullable_to_non_nullable
+              as bool,
+      globalFilterDownloaded: null == globalFilterDownloaded
+          ? _value.globalFilterDownloaded
+          : globalFilterDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      filterDownloaded: freezed == filterDownloaded
+          ? _value.filterDownloaded
+          : filterDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterUnread: freezed == filterUnread
+          ? _value.filterUnread
+          : filterUnread // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterStarted: freezed == filterStarted
+          ? _value.filterStarted
+          : filterStarted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterBookmarked: freezed == filterBookmarked
+          ? _value.filterBookmarked
+          : filterBookmarked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterCompleted: freezed == filterCompleted
+          ? _value.filterCompleted
+          : filterCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterIntervalCustom: freezed == filterIntervalCustom
+          ? _value.filterIntervalCustom
+          : filterIntervalCustom // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ItemPreferencesImplCopyWith<$Res>
+    implements _$ItemPreferencesCopyWith<$Res> {
+  factory _$$_ItemPreferencesImplCopyWith(_$_ItemPreferencesImpl value,
+          $Res Function(_$_ItemPreferencesImpl) then) =
+      __$$_ItemPreferencesImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool downloadBadge,
+      bool localBadge,
+      bool languageBadge,
+      bool skipOutsideReleasePeriod,
+      bool globalFilterDownloaded,
+      bool? filterDownloaded,
+      bool? filterUnread,
+      bool? filterStarted,
+      bool? filterBookmarked,
+      bool? filterCompleted,
+      bool? filterIntervalCustom});
+}
+
+/// @nodoc
+class __$$_ItemPreferencesImplCopyWithImpl<$Res>
+    extends __$ItemPreferencesCopyWithImpl<$Res, _$_ItemPreferencesImpl>
+    implements _$$_ItemPreferencesImplCopyWith<$Res> {
+  __$$_ItemPreferencesImplCopyWithImpl(_$_ItemPreferencesImpl _value,
+      $Res Function(_$_ItemPreferencesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of _ItemPreferences
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? downloadBadge = null,
+    Object? localBadge = null,
+    Object? languageBadge = null,
+    Object? skipOutsideReleasePeriod = null,
+    Object? globalFilterDownloaded = null,
+    Object? filterDownloaded = freezed,
+    Object? filterUnread = freezed,
+    Object? filterStarted = freezed,
+    Object? filterBookmarked = freezed,
+    Object? filterCompleted = freezed,
+    Object? filterIntervalCustom = freezed,
+  }) {
+    return _then(_$_ItemPreferencesImpl(
+      downloadBadge: null == downloadBadge
+          ? _value.downloadBadge
+          : downloadBadge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      localBadge: null == localBadge
+          ? _value.localBadge
+          : localBadge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      languageBadge: null == languageBadge
+          ? _value.languageBadge
+          : languageBadge // ignore: cast_nullable_to_non_nullable
+              as bool,
+      skipOutsideReleasePeriod: null == skipOutsideReleasePeriod
+          ? _value.skipOutsideReleasePeriod
+          : skipOutsideReleasePeriod // ignore: cast_nullable_to_non_nullable
+              as bool,
+      globalFilterDownloaded: null == globalFilterDownloaded
+          ? _value.globalFilterDownloaded
+          : globalFilterDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      filterDownloaded: freezed == filterDownloaded
+          ? _value.filterDownloaded
+          : filterDownloaded // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterUnread: freezed == filterUnread
+          ? _value.filterUnread
+          : filterUnread // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterStarted: freezed == filterStarted
+          ? _value.filterStarted
+          : filterStarted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterBookmarked: freezed == filterBookmarked
+          ? _value.filterBookmarked
+          : filterBookmarked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterCompleted: freezed == filterCompleted
+          ? _value.filterCompleted
+          : filterCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      filterIntervalCustom: freezed == filterIntervalCustom
+          ? _value.filterIntervalCustom
+          : filterIntervalCustom // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ItemPreferencesImpl implements __ItemPreferences {
+  const _$_ItemPreferencesImpl(
+      {required this.downloadBadge,
+      required this.localBadge,
+      required this.languageBadge,
+      required this.skipOutsideReleasePeriod,
+      required this.globalFilterDownloaded,
+      required this.filterDownloaded,
+      required this.filterUnread,
+      required this.filterStarted,
+      required this.filterBookmarked,
+      required this.filterCompleted,
+      required this.filterIntervalCustom});
+
+  @override
+  final bool downloadBadge;
+  @override
+  final bool localBadge;
+  @override
+  final bool languageBadge;
+  @override
+  final bool skipOutsideReleasePeriod;
+  @override
+  final bool globalFilterDownloaded;
+  @override
+  final bool? filterDownloaded;
+  @override
+  final bool? filterUnread;
+  @override
+  final bool? filterStarted;
+  @override
+  final bool? filterBookmarked;
+  @override
+  final bool? filterCompleted;
+  @override
+  final bool? filterIntervalCustom;
+
+  @override
+  String toString() {
+    return '_ItemPreferences(downloadBadge: $downloadBadge, localBadge: $localBadge, languageBadge: $languageBadge, skipOutsideReleasePeriod: $skipOutsideReleasePeriod, globalFilterDownloaded: $globalFilterDownloaded, filterDownloaded: $filterDownloaded, filterUnread: $filterUnread, filterStarted: $filterStarted, filterBookmarked: $filterBookmarked, filterCompleted: $filterCompleted, filterIntervalCustom: $filterIntervalCustom)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ItemPreferencesImpl &&
+            (identical(other.downloadBadge, downloadBadge) ||
+                other.downloadBadge == downloadBadge) &&
+            (identical(other.localBadge, localBadge) ||
+                other.localBadge == localBadge) &&
+            (identical(other.languageBadge, languageBadge) ||
+                other.languageBadge == languageBadge) &&
+            (identical(
+                    other.skipOutsideReleasePeriod, skipOutsideReleasePeriod) ||
+                other.skipOutsideReleasePeriod == skipOutsideReleasePeriod) &&
+            (identical(other.globalFilterDownloaded, globalFilterDownloaded) ||
+                other.globalFilterDownloaded == globalFilterDownloaded) &&
+            (identical(other.filterDownloaded, filterDownloaded) ||
+                other.filterDownloaded == filterDownloaded) &&
+            (identical(other.filterUnread, filterUnread) ||
+                other.filterUnread == filterUnread) &&
+            (identical(other.filterStarted, filterStarted) ||
+                other.filterStarted == filterStarted) &&
+            (identical(other.filterBookmarked, filterBookmarked) ||
+                other.filterBookmarked == filterBookmarked) &&
+            (identical(other.filterCompleted, filterCompleted) ||
+                other.filterCompleted == filterCompleted) &&
+            (identical(other.filterIntervalCustom, filterIntervalCustom) ||
+                other.filterIntervalCustom == filterIntervalCustom));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      downloadBadge,
+      localBadge,
+      languageBadge,
+      skipOutsideReleasePeriod,
+      globalFilterDownloaded,
+      filterDownloaded,
+      filterUnread,
+      filterStarted,
+      filterBookmarked,
+      filterCompleted,
+      filterIntervalCustom);
+
+  /// Create a copy of _ItemPreferences
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ItemPreferencesImplCopyWith<_$_ItemPreferencesImpl> get copyWith =>
+      __$$_ItemPreferencesImplCopyWithImpl<_$_ItemPreferencesImpl>(
+          this, _$identity);
+}
+
+abstract class __ItemPreferences implements _ItemPreferences {
+  const factory __ItemPreferences(
+      {required final bool downloadBadge,
+      required final bool localBadge,
+      required final bool languageBadge,
+      required final bool skipOutsideReleasePeriod,
+      required final bool globalFilterDownloaded,
+      required final bool? filterDownloaded,
+      required final bool? filterUnread,
+      required final bool? filterStarted,
+      required final bool? filterBookmarked,
+      required final bool? filterCompleted,
+      required final bool? filterIntervalCustom}) = _$_ItemPreferencesImpl;
+
+  @override
+  bool get downloadBadge;
+  @override
+  bool get localBadge;
+  @override
+  bool get languageBadge;
+  @override
+  bool get skipOutsideReleasePeriod;
+  @override
+  bool get globalFilterDownloaded;
+  @override
+  bool? get filterDownloaded;
+  @override
+  bool? get filterUnread;
+  @override
+  bool? get filterStarted;
+  @override
+  bool? get filterBookmarked;
+  @override
+  bool? get filterCompleted;
+  @override
+  bool? get filterIntervalCustom;
+
+  /// Create a copy of _ItemPreferences
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$_ItemPreferencesImplCopyWith<_$_ItemPreferencesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

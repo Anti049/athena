@@ -39,6 +39,20 @@ enum ThemeCategory {
   const ThemeCategory(this.name);
 }
 
+class ThemeInfo {
+  final String title;
+  final String author;
+  final Map<String, String> seedColors;
+  final String link;
+
+  ThemeInfo({
+    required this.title,
+    required this.author,
+    required this.seedColors,
+    required this.link,
+  });
+}
+
 class BasePrebuiltTheme {
   final String name;
   final ColorScheme lightColorScheme;
@@ -70,10 +84,13 @@ class BaseTheme with _$BaseTheme {
     ColorScheme? darkLowContrastScheme,
     ColorScheme? darkMediumContrastScheme,
     ColorScheme? darkHighContrastScheme,
+    ThemeInfo? info,
   }) = _BaseTheme;
 
-  factory BaseTheme.fromPrebuilt(BasePrebuiltTheme prebuilt,
-      {ThemeCategory category = ThemeCategory.base}) {
+  factory BaseTheme.fromPrebuilt(
+    BasePrebuiltTheme prebuilt, {
+    ThemeCategory category = ThemeCategory.base,
+  }) {
     return BaseTheme(
       name: prebuilt.name,
       category: category,
@@ -102,6 +119,7 @@ class BaseTheme with _$BaseTheme {
     Color? tertiary,
     Color? neutral,
     FlexSchemeVariant variant = FlexSchemeVariant.material,
+    ThemeInfo? info,
   }) {
     // Light
     // - Low Contrast

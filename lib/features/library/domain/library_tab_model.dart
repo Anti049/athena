@@ -1,6 +1,7 @@
 import 'package:athena/features/category/domain/category.dart';
 import 'package:athena/features/library/application/library_preferences.dart';
 import 'package:athena/features/library/domain/library_item.dart';
+import 'package:athena/features/works/application/get_library_works.dart';
 import 'package:dartx/dartx.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -48,8 +49,43 @@ class LibraryTabModel extends _$LibraryTabModel {
   }
 
   Stream<LibraryMap> _getLibraryStream() {
-    // Return stream with one default LibraryItem
-    return Stream.value({});
+    final getLibraryWorks = ref.watch(getLibraryWorksProvider);
+
+    final libraryWorksStream = Rx.combineLatestList([
+      getLibraryWorks.subscribe(),
+    ]).asyncMap((e) async {
+      final libraryWorkList = e.first;
+      final prefs = e.second as _ItemPreferences;
+      final libraryItems = <LibraryItem>[];
+
+      for (final libraryWork in libraryWorkList) {
+        libraryItems.add(
+          LibraryItem(
+            work: libraryWork,
+            downloadCount: prefs.downloadBadge ? -1 : 0,
+            unreadCount: libraryWork.unreadCount,
+            // isLocal: prefs.localBadge ? libraryWork.work.isLocal() : false,
+            source: '',
+            ref: ref,
+          ),
+        );
+      }
+      return libraryItems.groupBy((it) => it.work.category);
+    });
+
+    return Rx.combineLatest2(
+      const Stream.empty(),
+      libraryWorksStream,
+      (categories, libraryWorks) {
+        final displayCategories =
+            libraryWorks.isNotEmpty && !libraryWorks.containsKey(0)
+                ? categories.whereNot((it) => it.isSystemCategory)
+                : categories;
+
+        return displayCategories
+            .associateWith((it) => libraryWorks[it.id] ?? const []);
+      },
+    );
   }
 
   void search(String? query) async {
@@ -77,4 +113,21 @@ class LibraryTabState with _$LibraryTabState {
     @Default(false) bool showWorkCount,
     @Default(false) bool showWorkContinueButton,
   }) = _LibraryTabState;
+}
+
+@freezed
+class _ItemPreferences with _$ItemPreferences {
+  const factory _ItemPreferences({
+    required bool downloadBadge,
+    required bool localBadge,
+    required bool languageBadge,
+    required bool skipOutsideReleasePeriod,
+    required bool globalFilterDownloaded,
+    required bool? filterDownloaded,
+    required bool? filterUnread,
+    required bool? filterStarted,
+    required bool? filterBookmarked,
+    required bool? filterCompleted,
+    required bool? filterIntervalCustom,
+  }) = __ItemPreferences;
 }

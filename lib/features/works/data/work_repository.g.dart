@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'library_tab_model.dart';
+part of 'work_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$libraryTabModelHash() => r'7cd29f55519ae1541fda0b4b789af52a59921276';
+String _$workRepositoryHash() => r'7076b63b2ecc69f658df8b27c5d0d8836c501caf';
 
-/// See also [LibraryTabModel].
-@ProviderFor(LibraryTabModel)
-final libraryTabModelProvider = AutoDisposeStreamNotifierProvider<
-    LibraryTabModel, LibraryTabState>.internal(
-  LibraryTabModel.new,
-  name: r'libraryTabModelProvider',
+/// See also [workRepository].
+@ProviderFor(workRepository)
+final workRepositoryProvider = AutoDisposeProvider<WorkRepository>.internal(
+  workRepository,
+  name: r'workRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$libraryTabModelHash,
+      : _$workRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$LibraryTabModel = AutoDisposeStreamNotifier<LibraryTabState>;
+typedef WorkRepositoryRef = AutoDisposeProviderRef<WorkRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   dynamic_color
   file_selector_windows
   nb_utils
+  sqlite3_flutter_libs
   system_theme
   url_launcher_windows
 )

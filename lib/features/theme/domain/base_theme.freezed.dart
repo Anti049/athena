@@ -29,6 +29,7 @@ mixin _$BaseTheme {
   ColorScheme? get darkMediumContrastScheme =>
       throw _privateConstructorUsedError;
   ColorScheme? get darkHighContrastScheme => throw _privateConstructorUsedError;
+  ThemeInfo? get info => throw _privateConstructorUsedError;
 
   /// Create a copy of BaseTheme
   /// with the given fields replaced by the non-null parameter values.
@@ -52,7 +53,8 @@ abstract class $BaseThemeCopyWith<$Res> {
       ColorScheme darkScheme,
       ColorScheme? darkLowContrastScheme,
       ColorScheme? darkMediumContrastScheme,
-      ColorScheme? darkHighContrastScheme});
+      ColorScheme? darkHighContrastScheme,
+      ThemeInfo? info});
 }
 
 /// @nodoc
@@ -80,6 +82,7 @@ class _$BaseThemeCopyWithImpl<$Res, $Val extends BaseTheme>
     Object? darkLowContrastScheme = freezed,
     Object? darkMediumContrastScheme = freezed,
     Object? darkHighContrastScheme = freezed,
+    Object? info = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -122,6 +125,10 @@ class _$BaseThemeCopyWithImpl<$Res, $Val extends BaseTheme>
           ? _value.darkHighContrastScheme
           : darkHighContrastScheme // ignore: cast_nullable_to_non_nullable
               as ColorScheme?,
+      info: freezed == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as ThemeInfo?,
     ) as $Val);
   }
 }
@@ -144,7 +151,8 @@ abstract class _$$BaseThemeImplCopyWith<$Res>
       ColorScheme darkScheme,
       ColorScheme? darkLowContrastScheme,
       ColorScheme? darkMediumContrastScheme,
-      ColorScheme? darkHighContrastScheme});
+      ColorScheme? darkHighContrastScheme,
+      ThemeInfo? info});
 }
 
 /// @nodoc
@@ -170,6 +178,7 @@ class __$$BaseThemeImplCopyWithImpl<$Res>
     Object? darkLowContrastScheme = freezed,
     Object? darkMediumContrastScheme = freezed,
     Object? darkHighContrastScheme = freezed,
+    Object? info = freezed,
   }) {
     return _then(_$BaseThemeImpl(
       name: null == name
@@ -212,6 +221,10 @@ class __$$BaseThemeImplCopyWithImpl<$Res>
           ? _value.darkHighContrastScheme
           : darkHighContrastScheme // ignore: cast_nullable_to_non_nullable
               as ColorScheme?,
+      info: freezed == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as ThemeInfo?,
     ));
   }
 }
@@ -229,7 +242,8 @@ class _$BaseThemeImpl extends _BaseTheme {
       required this.darkScheme,
       this.darkLowContrastScheme,
       this.darkMediumContrastScheme,
-      this.darkHighContrastScheme})
+      this.darkHighContrastScheme,
+      this.info})
       : super._();
 
   @override
@@ -252,10 +266,12 @@ class _$BaseThemeImpl extends _BaseTheme {
   final ColorScheme? darkMediumContrastScheme;
   @override
   final ColorScheme? darkHighContrastScheme;
+  @override
+  final ThemeInfo? info;
 
   @override
   String toString() {
-    return 'BaseTheme(name: $name, category: $category, lightScheme: $lightScheme, lightLowContrastScheme: $lightLowContrastScheme, lightMediumContrastScheme: $lightMediumContrastScheme, lightHighContrastScheme: $lightHighContrastScheme, darkScheme: $darkScheme, darkLowContrastScheme: $darkLowContrastScheme, darkMediumContrastScheme: $darkMediumContrastScheme, darkHighContrastScheme: $darkHighContrastScheme)';
+    return 'BaseTheme(name: $name, category: $category, lightScheme: $lightScheme, lightLowContrastScheme: $lightLowContrastScheme, lightMediumContrastScheme: $lightMediumContrastScheme, lightHighContrastScheme: $lightHighContrastScheme, darkScheme: $darkScheme, darkLowContrastScheme: $darkLowContrastScheme, darkMediumContrastScheme: $darkMediumContrastScheme, darkHighContrastScheme: $darkHighContrastScheme, info: $info)';
   }
 
   @override
@@ -284,7 +300,8 @@ class _$BaseThemeImpl extends _BaseTheme {
                     other.darkMediumContrastScheme, darkMediumContrastScheme) ||
                 other.darkMediumContrastScheme == darkMediumContrastScheme) &&
             (identical(other.darkHighContrastScheme, darkHighContrastScheme) ||
-                other.darkHighContrastScheme == darkHighContrastScheme));
+                other.darkHighContrastScheme == darkHighContrastScheme) &&
+            (identical(other.info, info) || other.info == info));
   }
 
   @override
@@ -299,7 +316,8 @@ class _$BaseThemeImpl extends _BaseTheme {
       darkScheme,
       darkLowContrastScheme,
       darkMediumContrastScheme,
-      darkHighContrastScheme);
+      darkHighContrastScheme,
+      info);
 
   /// Create a copy of BaseTheme
   /// with the given fields replaced by the non-null parameter values.
@@ -321,7 +339,8 @@ abstract class _BaseTheme extends BaseTheme {
       required final ColorScheme darkScheme,
       final ColorScheme? darkLowContrastScheme,
       final ColorScheme? darkMediumContrastScheme,
-      final ColorScheme? darkHighContrastScheme}) = _$BaseThemeImpl;
+      final ColorScheme? darkHighContrastScheme,
+      final ThemeInfo? info}) = _$BaseThemeImpl;
   const _BaseTheme._() : super._();
 
   @override
@@ -344,6 +363,8 @@ abstract class _BaseTheme extends BaseTheme {
   ColorScheme? get darkMediumContrastScheme;
   @override
   ColorScheme? get darkHighContrastScheme;
+  @override
+  ThemeInfo? get info;
 
   /// Create a copy of BaseTheme
   /// with the given fields replaced by the non-null parameter values.

@@ -149,9 +149,11 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
             statusBarColor:
                 trueTransparent, // Manually set opacity just above 0 to get true transparency
             statusBarIconBrightness: iconBrightness,
+            systemStatusBarContrastEnforced: true,
             systemNavigationBarColor:
                 trueTransparent, // Manually set opacity just above 0 to get true transparency
             systemNavigationBarIconBrightness: iconBrightness,
+            systemNavigationBarContrastEnforced: true,
           ),
         );
 
