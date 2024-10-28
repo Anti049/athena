@@ -6,7 +6,7 @@ abstract class Preference<T> {
   void delete();
   T defaultValue();
   void getAndSet(T Function(T) block) => set(block(get()));
-  // Stream<T> changes();
+  Stream<T> changes();
 
   /// A preference that should not be exposed in places like backups without user consent.
   static bool isPrivate(String key) => key.startsWith(_privatePrefix);

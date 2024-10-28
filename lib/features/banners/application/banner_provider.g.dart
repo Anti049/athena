@@ -6,19 +6,19 @@ part of 'banner_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bannerDataHash() => r'1003511275270f550b64d17835db8694d1173f2c';
+String _$bannerHash() => r'99b2b598ff6d932ce8d48eb34bffce7cd373d4dc';
 
-/// See also [bannerData].
-@ProviderFor(bannerData)
-final bannerDataProvider = AutoDisposeProvider<BannerData>.internal(
-  bannerData,
-  name: r'bannerDataProvider',
+/// See also [Banner].
+@ProviderFor(Banner)
+final bannerProvider = AutoDisposeNotifierProvider<Banner, BannerData>.internal(
+  Banner.new,
+  name: r'bannerProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$bannerDataHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$bannerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef BannerDataRef = AutoDisposeProviderRef<BannerData>;
+typedef _$Banner = AutoDisposeNotifier<BannerData>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

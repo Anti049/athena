@@ -26,5 +26,14 @@ class BannerData {
 }
 
 @riverpod
-BannerData bannerData(BannerDataRef ref) =>
-    BannerData(ref.watch(basePreferencesProvider));
+class Banner extends _$Banner {
+  @override
+  BannerData build() {
+    return BannerData(ref.watch(basePreferencesProvider));
+  }
+
+  void setWarning(bool value, String? label) {
+    state.setWarning(value, label);
+    state = state; // Notify listeners
+  }
+}
