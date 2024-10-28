@@ -18,6 +18,8 @@ class WorkRepositoryImpl implements WorkRepository {
   @override
   Future<List<LibraryWork>> getWorks() {
     // TODO: implement getWorks
+    // For now, return empty list
+    return Future.value([]);
     throw UnimplementedError();
   }
 

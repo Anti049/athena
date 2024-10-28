@@ -1,5 +1,5 @@
 import 'package:athena/features/banners/application/banner_provider.dart'
-    show bannerDataProvider;
+    show bannerProvider;
 import 'package:athena/features/banners/presentation/banner.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
 import 'package:athena/localization/translations.dart';
@@ -38,7 +38,7 @@ class BannerScaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Get preferences
-    final data = ref.watch(bannerDataProvider);
+    final data = ref.watch(bannerProvider);
 
     final banners = [
       BannerData(

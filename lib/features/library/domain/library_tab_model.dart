@@ -1,6 +1,8 @@
 import 'package:athena/features/category/domain/category.dart';
 import 'package:athena/features/library/application/library_preferences.dart';
 import 'package:athena/features/library/domain/library_item.dart';
+import 'package:athena/features/library/domain/library_work.dart';
+import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:athena/features/works/application/get_library_works.dart';
 import 'package:dartx/dartx.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -34,14 +36,28 @@ class LibraryTabModel extends _$LibraryTabModel {
       final searchQuery = e.first as String?;
       final library = e.second as LibraryMap;
 
+      final queriedLibrary = library;
+      queriedLibrary.forEach((k, v) async {
+        if (searchQuery != null) {
+          // Filter the items based on the search query
+          final libraryItems = <LibraryItem>[];
+          for (final item in v) {
+            if (await item.matches(searchQuery)) {
+              libraryItems.add(item);
+            }
+          }
+          queriedLibrary[k] = libraryItems;
+        }
+      });
+
       return LibraryTabState(
-        library: library,
+        library: queriedLibrary,
         searchQuery: searchQuery,
-        selection: [],
-        hasActiveFilters: libraryPreferences.anyFiltersActive(),
-        showCategoryTabs: library.isNotEmpty,
-        showWorkCount: library.isNotEmpty,
-        showWorkContinueButton: library.isNotEmpty,
+        // selection: [],
+        // hasActiveFilters: libraryPreferences.anyFiltersActive(),
+        // showCategoryTabs: queriedLibrary.isNotEmpty,
+        // showWorkCount: queriedLibrary.isNotEmpty,
+        // showWorkContinueButton: queriedLibrary.isNotEmpty,
       );
     });
 
@@ -53,24 +69,25 @@ class LibraryTabModel extends _$LibraryTabModel {
 
     final libraryWorksStream = Rx.combineLatestList([
       getLibraryWorks.subscribe(),
+      _getLibraryItemPreferencesStream(),
     ]).asyncMap((e) async {
-      final libraryWorkList = e.first;
+      final libraryWorkList = e.first as List<LibraryWork>;
       final prefs = e.second as _ItemPreferences;
       final libraryItems = <LibraryItem>[];
 
       for (final libraryWork in libraryWorkList) {
         libraryItems.add(
           LibraryItem(
-            work: libraryWork,
+            libraryWork: libraryWork,
             downloadCount: prefs.downloadBadge ? -1 : 0,
             unreadCount: libraryWork.unreadCount,
-            // isLocal: prefs.localBadge ? libraryWork.work.isLocal() : false,
+            isLocal: prefs.localBadge ? true : false,
             source: '',
             ref: ref,
           ),
         );
       }
-      return libraryItems.groupBy((it) => it.work.category);
+      return libraryItems.groupBy((it) => it.libraryWork.category);
     });
 
     return Rx.combineLatest2(
@@ -99,6 +116,41 @@ class LibraryTabModel extends _$LibraryTabModel {
   // Refresh library
   Future<LibraryTabState> refresh() async {
     return ref.refresh(libraryTabModelProvider.future);
+  }
+
+  Stream<_ItemPreferences> _getLibraryItemPreferencesStream() {
+    final preferences = ref.watch(basePreferencesProvider);
+    final libraryPreferences = ref.watch(libraryPreferencesProvider);
+
+    return Rx.combineLatest(
+      [
+        libraryPreferences.downloadBadge().changes(),
+        libraryPreferences.localBadge().changes(),
+        libraryPreferences.languageBadge().changes(),
+        libraryPreferences.skipOutsideReleasePeriod().changes(),
+        preferences.downloadedOnly().changes(),
+        libraryPreferences.globalFilterDownloaded().changes(),
+        libraryPreferences.filterDownloaded().changes(),
+        libraryPreferences.filterUnread().changes(),
+        libraryPreferences.filterStarted().changes(),
+        libraryPreferences.filterBookmarked().changes(),
+        libraryPreferences.filterCompleted().changes(),
+        // libraryPreferences.filterIntervalCustom().changes(),
+      ],
+      (it) => _ItemPreferences(
+        downloadBadge: it[0] as bool,
+        localBadge: it[1] as bool,
+        languageBadge: it[2] as bool,
+        skipOutsideReleasePeriod: false,
+        globalFilterDownloaded: it[4] as bool,
+        filterDownloaded: it[5] as bool?,
+        filterUnread: it[6] as bool?,
+        filterStarted: it[7] as bool?,
+        filterBookmarked: it[8] as bool?,
+        filterCompleted: it[9] as bool?,
+        filterIntervalCustom: false,
+      ),
+    );
   }
 }
 

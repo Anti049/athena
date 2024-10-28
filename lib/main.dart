@@ -5,6 +5,8 @@ import 'package:athena/features/theme/data/prebuilt_themes.dart';
 import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:athena/features/theme/domain/custom_colors.dart';
 import 'package:athena/features/theme/domain/theme_pair.dart';
+import 'package:athena/features/works/data/work_repository.dart';
+import 'package:athena/features/works/data/work_repository_impl.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.dart';
 import 'package:athena/utils/responsive_layout.dart';
@@ -20,6 +22,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:system_theme/system_theme.dart';
+import 'package:upgrader/upgrader.dart';
 
 void main() async {
   // Ensure plugin services are initialized
@@ -43,9 +46,13 @@ void main() async {
 
   // Run the app
   runApp(
-    const ProviderScope(
+    ProviderScope(
+      overrides: [
+        workRepositoryProvider
+            .overrideWith((ref) => ref.watch(workRepositoryImplProvider)),
+      ],
       // App
-      child: AthenaApp(),
+      child: const AthenaApp(),
     ),
   );
 }
@@ -179,8 +186,10 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
           // Responsive layout builder
           builder: (context, child) {
             return ResponsiveBreakpoints.builder(
-              child: BannerScaffold(
-                child: child!,
+              child: UpgradeAlert(
+                child: BannerScaffold(
+                  child: child!,
+                ),
               ),
               breakpoints: [
                 const Breakpoint(start: 0, end: 600, name: COMPACT),

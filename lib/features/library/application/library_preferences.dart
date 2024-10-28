@@ -100,6 +100,32 @@ class LibraryPreferences {
         2,
       );
 
+  // Badges
+  Preference<bool> downloadBadge() => preferenceStore.getBool(
+        Preference.appStateKey("displayDownloadBadge"),
+        true,
+      );
+
+  Preference<bool> localBadge() => preferenceStore.getBool(
+        Preference.appStateKey("displayLocalBadge"),
+        true,
+      );
+
+  Preference<bool> languageBadge() => preferenceStore.getBool(
+        Preference.appStateKey("displayLanguageBadge"),
+        true,
+      );
+
+  Preference<bool> skipOutsideReleasePeriod() => preferenceStore.getBool(
+        Preference.appStateKey("skipOutsideReleasePeriod"),
+        false,
+      );
+
+  Preference<bool> globalFilterDownloaded() => preferenceStore.getBool(
+        Preference.appStateKey("globalFilterDownloaded"),
+        false,
+      );
+
   int activeTab = 0;
 }
 

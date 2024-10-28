@@ -36,10 +36,9 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
   final MenuController _menuController = MenuController();
   final bool _selectionActive = false;
 
-  bool _onRefresh() {
+  Future<void> _onRefresh() async {
     final model = ref.watch(libraryTabModelProvider.notifier);
     model.refresh();
-    return true;
   }
 
   @override
@@ -49,7 +48,8 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
     final preferences = ref.watch(libraryPreferencesProvider);
     final state = ref.watch(libraryTabModelProvider);
     final model = ref.watch(libraryTabModelProvider.notifier);
-    final bannerData = ref.watch(bannerDataProvider);
+    final bannerData = ref.watch(bannerProvider);
+    final bannerNotifier = ref.watch(bannerProvider.notifier);
 
     return PopScope(
       canPop: !_searchActive,
@@ -164,25 +164,40 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
               label: error.toString(),
               stackTrace: stackTrace,
             );
-            bannerData.setWarning(
-              true,
-              error.toString(),
-            );
-            return const Empty(
-              message: 'An error has occurred!',
+            return RefreshIndicator(
+              key: indicator,
+              onRefresh: _onRefresh,
+              child: ListView(
+                children: const [
+                  Empty(
+                    message: 'An error has occurred!',
+                  ),
+                ],
+              ),
             );
           },
           data: (data) {
-            if (data.searchQuery.isNullOrEmpty &&
-                !data.hasActiveFilters &&
-                data.library.isEmpty) {
-              return const Empty(
-                message: 'No Works Found',
-              );
-            }
-            return const Empty(
-              message: 'Library Not Yet Implemented',
+            return RefreshIndicator(
+              key: indicator,
+              onRefresh: _onRefresh,
+              child: data.library.isNotEmpty
+                  ? const Empty(
+                      message: 'Library Not Yet Implemented',
+                    )
+                  : const Empty(
+                      message: 'No Works Found',
+                    ),
             );
+            // if (data.searchQuery.isNullOrEmpty &&
+            //     !data.hasActiveFilters &&
+            //     data.library.isEmpty) {
+            //   return const Empty(
+            //     message: 'No Works Found',
+            //   );
+            // }
+            // return const Empty(
+            //   message: 'Library Not Yet Implemented',
+            // );
           },
         ),
         bottomNavigationBar: SelectionBar(

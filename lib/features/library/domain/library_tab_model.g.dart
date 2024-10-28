@@ -6,7 +6,7 @@ part of 'library_tab_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$libraryTabModelHash() => r'7cd29f55519ae1541fda0b4b789af52a59921276';
+String _$libraryTabModelHash() => r'a628dae76a570612099dec7b2b640c2faf14de78';
 
 /// See also [LibraryTabModel].
 @ProviderFor(LibraryTabModel)
