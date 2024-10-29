@@ -40,6 +40,7 @@ class Translations implements i69n.I69nMessageBundle {
       "Athena is an all-in-one application for downloading, reading, and listening to fanfiction.";
   String get appChannel => "Pre-Alpha";
   String get appVersion => "0.1.0";
+  FlavorsTranslations get flavors => FlavorsTranslations(this);
   String get test => "Hello, World!";
   String get labelLibrary => "Library";
   String get labelUpdates => "Updates";
@@ -84,6 +85,8 @@ class Translations implements i69n.I69nMessageBundle {
   String get preferenceHeaderTheme => "Theming";
   PreferenceModeTranslations get preferenceMode =>
       PreferenceModeTranslations(this);
+  PreferenceContrastTranslations get preferenceContrast =>
+      PreferenceContrastTranslations(this);
   PreferenceThemeTranslations get preferenceTheme =>
       PreferenceThemeTranslations(this);
   PreferenceAmoledDarkTranslations get preferenceAmoledDark =>
@@ -143,6 +146,8 @@ class Translations implements i69n.I69nMessageBundle {
         return appChannel;
       case 'appVersion':
         return appVersion;
+      case 'flavors':
+        return flavors;
       case 'test':
         return test;
       case 'labelLibrary':
@@ -211,6 +216,8 @@ class Translations implements i69n.I69nMessageBundle {
         return preferenceHeaderTheme;
       case 'preferenceMode':
         return preferenceMode;
+      case 'preferenceContrast':
+        return preferenceContrast;
       case 'preferenceTheme':
         return preferenceTheme;
       case 'preferenceAmoledDark':
@@ -263,6 +270,28 @@ class Translations implements i69n.I69nMessageBundle {
         return errorTryAgain;
       case 'errorRouteNotFound':
         return errorRouteNotFound;
+      default:
+        return key;
+    }
+  }
+}
+
+class FlavorsTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const FlavorsTranslations(this._parent);
+  String get development => "Development";
+  String get production => "Production";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'development':
+        return development;
+      case 'production':
+        return production;
       default:
         return key;
     }
@@ -672,6 +701,28 @@ class PreferenceModeTranslations implements i69n.I69nMessageBundle {
         return dark;
       case 'light':
         return light;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceContrastTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceContrastTranslations(this._parent);
+  String get header => "Contrast";
+  String get summary => "Adjust contrast for better readability";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
       default:
         return key;
     }

@@ -4,6 +4,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'base_theme.freezed.dart';
 
+const CONTRAST_MIN = -1.0;
+const CONTRAST_MAX = 1.0;
+const CONTRAST_STEP = 0.5;
+
 enum ContrastLevel {
   low(-1.0),
   normal(0.0),
@@ -76,14 +80,10 @@ class BaseTheme with _$BaseTheme {
   const factory BaseTheme({
     required String name,
     required ThemeCategory category,
-    required ColorScheme lightScheme,
-    ColorScheme? lightLowContrastScheme,
-    ColorScheme? lightMediumContrastScheme,
-    ColorScheme? lightHighContrastScheme,
-    required ColorScheme darkScheme,
-    ColorScheme? darkLowContrastScheme,
-    ColorScheme? darkMediumContrastScheme,
-    ColorScheme? darkHighContrastScheme,
+    ColorScheme? lightScheme,
+    ColorScheme? darkScheme,
+    Map<double, ColorScheme>? lightSchemes,
+    Map<double, ColorScheme>? darkSchemes,
     ThemeInfo? info,
   }) = _BaseTheme;
 
@@ -99,18 +99,6 @@ class BaseTheme with _$BaseTheme {
     );
   }
 
-  factory BaseTheme.fromDynamic({
-    required ColorScheme lightDynamicScheme,
-    required ColorScheme darkDynamicScheme,
-  }) {
-    return BaseTheme(
-      name: 'dynamic',
-      category: ThemeCategory.base,
-      lightScheme: lightDynamicScheme,
-      darkScheme: darkDynamicScheme,
-    );
-  }
-
   factory BaseTheme.fromColors(
     String name,
     ThemeCategory category,
@@ -122,16 +110,6 @@ class BaseTheme with _$BaseTheme {
     ThemeInfo? info,
   }) {
     // Light
-    // - Low Contrast
-    ColorScheme lightLowContrastScheme = SeedColorScheme.fromSeeds(
-      brightness: Brightness.light,
-      primaryKey: primary,
-      secondaryKey: secondary,
-      tertiaryKey: tertiary,
-      neutralKey: neutral,
-      contrastLevel: ContrastLevel.low.value,
-      variant: variant,
-    );
     // - Normal Contrast
     ColorScheme lightScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.light,
@@ -139,41 +117,11 @@ class BaseTheme with _$BaseTheme {
       secondaryKey: secondary,
       tertiaryKey: tertiary,
       neutralKey: neutral,
-      contrastLevel: ContrastLevel.normal.value,
-      variant: variant,
-    );
-    // - Medium Contrast
-    ColorScheme lightMediumContrastScheme = SeedColorScheme.fromSeeds(
-      brightness: Brightness.light,
-      primaryKey: primary,
-      secondaryKey: secondary,
-      tertiaryKey: tertiary,
-      neutralKey: neutral,
-      contrastLevel: ContrastLevel.medium.value,
-      variant: variant,
-    );
-    // - High Contrast
-    ColorScheme lightHighContrastScheme = SeedColorScheme.fromSeeds(
-      brightness: Brightness.light,
-      primaryKey: primary,
-      secondaryKey: secondary,
-      tertiaryKey: tertiary,
-      neutralKey: neutral,
-      contrastLevel: ContrastLevel.high.value,
+      contrastLevel: 0.0,
       variant: variant,
     );
 
     // Dark
-    // - Low Contrast
-    ColorScheme darkLowContrastScheme = SeedColorScheme.fromSeeds(
-      brightness: Brightness.dark,
-      primaryKey: primary,
-      secondaryKey: secondary,
-      tertiaryKey: tertiary,
-      neutralKey: neutral,
-      contrastLevel: ContrastLevel.low.value,
-      variant: variant,
-    );
     // - Normal Contrast
     ColorScheme darkScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.dark,
@@ -181,61 +129,59 @@ class BaseTheme with _$BaseTheme {
       secondaryKey: secondary,
       tertiaryKey: tertiary,
       neutralKey: neutral,
-      contrastLevel: ContrastLevel.normal.value,
+      contrastLevel: 0.0,
       variant: variant,
     );
-    // - Medium Contrast
-    ColorScheme darkMediumContrastScheme = SeedColorScheme.fromSeeds(
-      brightness: Brightness.dark,
-      primaryKey: primary,
-      secondaryKey: secondary,
-      tertiaryKey: tertiary,
-      neutralKey: neutral,
-      contrastLevel: ContrastLevel.medium.value,
-      variant: variant,
-    );
-    // - High Contrast
-    ColorScheme darkHighContrastScheme = SeedColorScheme.fromSeeds(
-      brightness: Brightness.dark,
-      primaryKey: primary,
-      secondaryKey: secondary,
-      tertiaryKey: tertiary,
-      neutralKey: neutral,
-      contrastLevel: ContrastLevel.high.value,
-      variant: variant,
-    );
+
+    // Calculate themes
+    Map<double, ColorScheme> lightSchemes = {};
+    Map<double, ColorScheme> darkSchemes = {};
+    for (var contrast = CONTRAST_MIN;
+        contrast <= CONTRAST_MAX;
+        contrast += CONTRAST_STEP) {
+      lightSchemes.putIfAbsent(
+          contrast,
+          () => SeedColorScheme.fromSeeds(
+                brightness: Brightness.light,
+                primaryKey: primary,
+                secondaryKey: secondary,
+                tertiaryKey: tertiary,
+                neutralKey: neutral,
+                contrastLevel: contrast,
+                variant: variant,
+              ));
+      darkSchemes.putIfAbsent(
+          contrast,
+          () => SeedColorScheme.fromSeeds(
+                brightness: Brightness.dark,
+                primaryKey: primary,
+                secondaryKey: secondary,
+                tertiaryKey: tertiary,
+                neutralKey: neutral,
+                contrastLevel: contrast,
+                variant: variant,
+              ));
+    }
 
     return BaseTheme(
       name: name,
       category: category,
       lightScheme: lightScheme,
-      lightLowContrastScheme: lightLowContrastScheme,
-      lightMediumContrastScheme: lightMediumContrastScheme,
-      lightHighContrastScheme: lightHighContrastScheme,
+      lightSchemes: lightSchemes,
       darkScheme: darkScheme,
-      darkLowContrastScheme: darkLowContrastScheme,
-      darkMediumContrastScheme: darkMediumContrastScheme,
-      darkHighContrastScheme: darkHighContrastScheme,
+      darkSchemes: darkSchemes,
     );
   }
 
   ColorScheme getColorScheme(
     Brightness brightness, {
-    ContrastLevel contrast = ContrastLevel.normal,
+    double contrast = 0.0,
   }) {
     return switch (brightness) {
-      Brightness.light => switch (contrast) {
-          ContrastLevel.low => lightLowContrastScheme ?? lightScheme,
-          ContrastLevel.medium => lightMediumContrastScheme ?? lightScheme,
-          ContrastLevel.high => lightHighContrastScheme ?? lightScheme,
-          _ => lightScheme,
-        },
-      Brightness.dark => switch (contrast) {
-          ContrastLevel.low => darkLowContrastScheme ?? darkScheme,
-          ContrastLevel.medium => darkMediumContrastScheme ?? darkScheme,
-          ContrastLevel.high => darkHighContrastScheme ?? darkScheme,
-          _ => darkScheme,
-        },
+      Brightness.light =>
+        lightSchemes?[contrast] ?? lightScheme ?? const ColorScheme.light(),
+      Brightness.dark =>
+        darkSchemes?[contrast] ?? darkScheme ?? const ColorScheme.dark(),
     };
   }
 }

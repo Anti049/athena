@@ -55,6 +55,14 @@ class SettingsAppearanceScreen extends ConsumerWidget {
               ],
             ),
           ),
+          SliderPreference(
+            title: context.locale.preferenceContrast.header,
+            subtitle: context.locale.preferenceContrast.summary,
+            pref: preferences.contrastLevel(),
+            min: -1.0,
+            max: 1.0,
+            step: 0.5,
+          ),
           TextPreference(
             title: context.locale.preferenceTheme.header,
             subtitle: context.locale.preferenceTheme.subheader(

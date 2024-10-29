@@ -39,10 +39,9 @@ class AppearancePreferences {
         false,
       );
 
-  Preference<ContrastLevel> contrastLevel() => preferenceStore.getEnum(
+  Preference<double> contrastLevel() => preferenceStore.getDouble(
         Preference.appStateKey("contrastLevel"),
-        ContrastLevel.normal,
-        ContrastLevel.values,
+        0.0,
       );
 
   Preference<Locale> appLanguage() => preferenceStore.getObject(

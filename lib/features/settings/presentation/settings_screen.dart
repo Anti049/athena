@@ -5,9 +5,11 @@ import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:change_case/change_case.dart';
 
 @RoutePage()
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -30,7 +32,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       (packageInfo) {
         setState(() {
           appName = packageInfo.appName;
-          channel = 'Stable';
+          channel = appFlavor?.toCapitalCase() ??
+              'Unknown'; // Use appFlavor from flavors.dart
           version = packageInfo.version;
         });
       },

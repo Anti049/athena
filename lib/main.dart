@@ -24,7 +24,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:upgrader/upgrader.dart';
 
-void main() async {
+Future<void> main() async {
   // Ensure plugin services are initialized
   WidgetsFlutterBinding.ensureInitialized();
   // Initialize Hive

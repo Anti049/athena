@@ -3,6 +3,10 @@ appDescription: Athena is an all-in-one application for downloading, reading, an
 appChannel: Pre-Alpha
 appVersion: 0.1.0
 
+flavors:
+    development: Development
+    production: Production
+
 test: Hello, World!
 
 # Home Navigation
@@ -113,6 +117,9 @@ preferenceMode:
     system: System
     dark: Dark
     light: Light
+preferenceContrast:
+    header: Contrast
+    summary: Adjust contrast for better readability
 preferenceTheme:
     header: Theme
     subheader(String themeName): 'Active Theme: $themeName'

@@ -1,0 +1,20 @@
+flavors:
+  development:
+    app:
+      name: Athena (Dev)
+    android:
+      applicationId: dev.nploetz.athena.dev
+    ios:
+      bundleId: dev.nploetz.athena.dev
+    macos:
+      bundleId: dev.nploetz.athena.dev
+
+  production:
+    app:
+      name: Athena
+    android:
+      applicationId: dev.nploetz.athena
+    ios:
+      bundleId: dev.nploetz.athena
+    macos:
+      bundleId: dev.nploetz.athena
