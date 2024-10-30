@@ -105,6 +105,7 @@ class BaseTheme with _$BaseTheme {
     Color primary, {
     Color? secondary,
     Color? tertiary,
+    Color? error,
     Color? neutral,
     FlexSchemeVariant variant = FlexSchemeVariant.material,
     ThemeInfo? info,
@@ -116,6 +117,7 @@ class BaseTheme with _$BaseTheme {
       primaryKey: primary,
       secondaryKey: secondary,
       tertiaryKey: tertiary,
+      errorKey: error,
       neutralKey: neutral,
       contrastLevel: 0.0,
       variant: variant,
@@ -128,6 +130,7 @@ class BaseTheme with _$BaseTheme {
       primaryKey: primary,
       secondaryKey: secondary,
       tertiaryKey: tertiary,
+      errorKey: error,
       neutralKey: neutral,
       contrastLevel: 0.0,
       variant: variant,
@@ -147,6 +150,7 @@ class BaseTheme with _$BaseTheme {
                 secondaryKey: secondary,
                 tertiaryKey: tertiary,
                 neutralKey: neutral,
+                errorKey: error,
                 contrastLevel: contrast,
                 variant: variant,
               ));
@@ -158,6 +162,7 @@ class BaseTheme with _$BaseTheme {
                 secondaryKey: secondary,
                 tertiaryKey: tertiary,
                 neutralKey: neutral,
+                errorKey: error,
                 contrastLevel: contrast,
                 variant: variant,
               ));

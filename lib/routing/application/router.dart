@@ -56,7 +56,13 @@ class AppRouter extends RootStackRouter {
           title: (context, data) =>
               context.locale.preferenceCategoryAppearance.header,
           path: '/settings/appearance',
-          page: SettingsAppearanceRoute.page,
+          page: AppearanceSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.preferenceCategoryLibrary.header,
+          path: '/settings/library',
+          page: LibrarySettingsRoute.page,
         ),
         AutoRoute(
           title: (context, data) => context.locale.preferenceTheme.header,

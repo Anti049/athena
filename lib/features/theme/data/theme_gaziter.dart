@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 /// Primary #48F7BD
 /// Secondary #C193FF
 /// Tertiary #54A5B6
+/// Error #FF5555
 /// Neutral #04485F
 final gaziterTheme = BaseTheme.fromColors(
   'gaziter',
@@ -18,6 +19,7 @@ final gaziterTheme = BaseTheme.fromColors(
   const Color(0xFF48F7BD),
   secondary: const Color(0xFFC193FF),
   tertiary: const Color(0xFF54A5B6),
+  error: const Color(0xFFFF5555),
   neutral: const Color(0xFF04485F),
   variant: FlexSchemeVariant.vibrant,
 );

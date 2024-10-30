@@ -56,6 +56,7 @@ class Translations implements i69n.I69nMessageBundle {
   String get actionEdit => "Edit";
   String get actionSearch => "Search";
   String get librarySearchHint => "Search...";
+  String get libraryEmpty => "No works found";
   String get libraryCategoryDefault => "Default";
   LibraryOptionsFilterTranslations get libraryOptionsFilter =>
       LibraryOptionsFilterTranslations(this);
@@ -103,6 +104,24 @@ class Translations implements i69n.I69nMessageBundle {
   String get preferenceSectionCategories => "Categories";
   PreferenceCategoriesTranslations get preferenceCategories =>
       PreferenceCategoriesTranslations(this);
+  PreferenceDefaultCategoryTranslations get preferenceDefaultCategory =>
+      PreferenceDefaultCategoryTranslations(this);
+  String get preferencePerCategorySort => "Per-category settings for sort";
+  String get preferenceSectionUpdate => "Global Update";
+  PreferenceAutomaticUpdateTranslations get preferenceAutomaticUpdate =>
+      PreferenceAutomaticUpdateTranslations(this);
+  PreferenceUpdateCategoriesTranslations get preferenceUpdateCategories =>
+      PreferenceUpdateCategoriesTranslations(this);
+  PreferenceAutoRefreshMetadataTranslations get preferenceAutoRefreshMetadata =>
+      PreferenceAutoRefreshMetadataTranslations(this);
+  PreferenceSmartUpdateTranslations get preferenceSmartUpdate =>
+      PreferenceSmartUpdateTranslations(this);
+  String get preferenceShowUnreadCount => "Show unread count on Updates icon";
+  String get preferenceSectionSwipe => "Chapter Swipe";
+  String get preferenceSwipeLeft => "Swipe Left Action";
+  String get preferenceSwipeRight => "Swipe Right Action";
+  PreferenceSwipeActionsTranslations get preferenceSwipeActions =>
+      PreferenceSwipeActionsTranslations(this);
   PreferenceCategoryReaderTranslations get preferenceCategoryReader =>
       PreferenceCategoryReaderTranslations(this);
   PreferenceCategoryDownloadsTranslations get preferenceCategoryDownloads =>
@@ -178,6 +197,8 @@ class Translations implements i69n.I69nMessageBundle {
         return actionSearch;
       case 'librarySearchHint':
         return librarySearchHint;
+      case 'libraryEmpty':
+        return libraryEmpty;
       case 'libraryCategoryDefault':
         return libraryCategoryDefault;
       case 'libraryOptionsFilter':
@@ -236,6 +257,30 @@ class Translations implements i69n.I69nMessageBundle {
         return preferenceSectionCategories;
       case 'preferenceCategories':
         return preferenceCategories;
+      case 'preferenceDefaultCategory':
+        return preferenceDefaultCategory;
+      case 'preferencePerCategorySort':
+        return preferencePerCategorySort;
+      case 'preferenceSectionUpdate':
+        return preferenceSectionUpdate;
+      case 'preferenceAutomaticUpdate':
+        return preferenceAutomaticUpdate;
+      case 'preferenceUpdateCategories':
+        return preferenceUpdateCategories;
+      case 'preferenceAutoRefreshMetadata':
+        return preferenceAutoRefreshMetadata;
+      case 'preferenceSmartUpdate':
+        return preferenceSmartUpdate;
+      case 'preferenceShowUnreadCount':
+        return preferenceShowUnreadCount;
+      case 'preferenceSectionSwipe':
+        return preferenceSectionSwipe;
+      case 'preferenceSwipeLeft':
+        return preferenceSwipeLeft;
+      case 'preferenceSwipeRight':
+        return preferenceSwipeRight;
+      case 'preferenceSwipeActions':
+        return preferenceSwipeActions;
       case 'preferenceCategoryReader':
         return preferenceCategoryReader;
       case 'preferenceCategoryDownloads':
@@ -280,6 +325,7 @@ class FlavorsTranslations implements i69n.I69nMessageBundle {
   final Translations _parent;
   const FlavorsTranslations(this._parent);
   String get development => "Development";
+  String get testing => "Testing";
   String get production => "Production";
   Object operator [](String key) {
     var index = key.indexOf('.');
@@ -290,6 +336,8 @@ class FlavorsTranslations implements i69n.I69nMessageBundle {
     switch (key) {
       case 'development':
         return development;
+      case 'testing':
+        return testing;
       case 'production':
         return production;
       default:
@@ -931,6 +979,173 @@ class PreferenceCategoriesTranslations implements i69n.I69nMessageBundle {
         return header;
       case 'summary':
         return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceDefaultCategoryTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceDefaultCategoryTranslations(this._parent);
+  String get header => "Default Category";
+  String get alwaysAsk => "Always ask";
+  String get defaultOption => "Default";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'alwaysAsk':
+        return alwaysAsk;
+      case 'defaultOption':
+        return defaultOption;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceAutomaticUpdateTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceAutomaticUpdateTranslations(this._parent);
+  String get header => "Automatic Updates";
+  String get off => "Off";
+  String get every12Hours => "Every 12 Hours";
+  String get daily => "Daily";
+  String get every2Days => "Every 2 Days";
+  String get every3Days => "Every 3 Days";
+  String get weekly => "Weekly";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'off':
+        return off;
+      case 'every12Hours':
+        return every12Hours;
+      case 'daily':
+        return daily;
+      case 'every2Days':
+        return every2Days;
+      case 'every3Days':
+        return every3Days;
+      case 'weekly':
+        return weekly;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceUpdateCategoriesTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceUpdateCategoriesTranslations(this._parent);
+  String get header => "Update Categories";
+  String include(String value) => "Include: $value";
+  String exclude(String value) => "Exclude: $value";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'include':
+        return include;
+      case 'exclude':
+        return exclude;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceAutoRefreshMetadataTranslations
+    implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceAutoRefreshMetadataTranslations(this._parent);
+  String get header => "Auto Refresh Metadata";
+  String get summary =>
+      "Automatically refresh metadata for downloaded works when updating library";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceSmartUpdateTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceSmartUpdateTranslations(this._parent);
+  String get header => "Smart Update";
+  String summary(List<String> categories) => "'${categories.join(', ')}'\n";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceSwipeActionsTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceSwipeActionsTranslations(this._parent);
+  String get disabled => "Disabled";
+  String get readUnread => "Mark as Read/Unread";
+  String get bookmark => "Bookmark Chapter";
+  String get download => "Download Chapter";
+  String get delete => "Delete Chapter";
+  String get flag => "Flag Chapter";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'disabled':
+        return disabled;
+      case 'readUnread':
+        return readUnread;
+      case 'bookmark':
+        return bookmark;
+      case 'download':
+        return download;
+      case 'delete':
+        return delete;
+      case 'flag':
+        return flag;
       default:
         return key;
     }

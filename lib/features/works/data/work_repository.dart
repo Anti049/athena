@@ -1,5 +1,5 @@
 import 'package:athena/features/library/domain/library_work.dart';
-import 'package:athena/features/works/domain/works.drift.dart';
+import 'package:athena/features/works/domain/work.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'work_repository.g.dart';

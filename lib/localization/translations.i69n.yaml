@@ -5,6 +5,7 @@ appVersion: 0.1.0
 
 flavors:
     development: Development
+    testing: Testing
     production: Production
 
 test: Hello, World!
@@ -28,6 +29,7 @@ actionSearch: Search
 
 # Library
 librarySearchHint: Search...
+libraryEmpty: No works found
 libraryCategoryDefault: Default
 libraryOptionsFilter:
     header: Filter
@@ -161,6 +163,42 @@ preferenceSectionCategories: Categories
 preferenceCategories:
     header: Edit Categories
     summary(int num): "${_plural(num, zero: '', one: '$num category', other: '$num categories')}"
+preferenceDefaultCategory:
+    header: Default Category
+    alwaysAsk: Always ask
+    defaultOption: Default
+preferencePerCategorySort: Per-category settings for sort
+preferenceSectionUpdate: Global Update
+preferenceAutomaticUpdate:
+    header: Automatic Updates
+    off: Off
+    every12Hours: Every 12 Hours
+    daily: Daily
+    every2Days: Every 2 Days
+    every3Days: Every 3 Days
+    weekly: Weekly
+preferenceUpdateCategories:
+    header: Update Categories
+    include(String value): 'Include: $value'
+    exclude(String value): 'Exclude: $value'
+preferenceAutoRefreshMetadata:
+    header: Auto Refresh Metadata
+    summary: Automatically refresh metadata for downloaded works when updating library
+preferenceSmartUpdate:
+    header: Smart Update
+    summary(List<String> categories): >
+        '${categories.join(', ')}'
+preferenceShowUnreadCount: Show unread count on Updates icon
+preferenceSectionSwipe: Chapter Swipe
+preferenceSwipeLeft: Swipe Left Action
+preferenceSwipeRight: Swipe Right Action
+preferenceSwipeActions:
+    disabled: Disabled
+    readUnread: Mark as Read/Unread
+    bookmark: Bookmark Chapter
+    download: Download Chapter
+    delete: Delete Chapter
+    flag: Flag Chapter
 # - Reader
 preferenceCategoryReader:
     header: Reader

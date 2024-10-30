@@ -167,6 +167,7 @@ class _ThemeSelectionScreenState extends ConsumerState<ThemeSelectionScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: context.scheme.surfaceContainerLow,
         child: Row(
           children: [
             IconButton(

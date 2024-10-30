@@ -94,7 +94,7 @@ class SegmentPreference extends PreferenceItem<String> {
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
     super.pref,
-    required this.value,
+    this.value,
     required this.options,
   });
 
@@ -102,6 +102,15 @@ class SegmentPreference extends PreferenceItem<String> {
   final List<dynamic> options;
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
+}
+class Segment {
+  Segment({
+    required this.value,
+    required this.label,
+  });
+
+  final dynamic value;
+  final String label;
 }
 
 /// A [PreferenceItem] that displays a list of entries as a dialog.

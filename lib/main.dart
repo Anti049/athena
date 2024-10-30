@@ -6,7 +6,7 @@ import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:athena/features/theme/domain/custom_colors.dart';
 import 'package:athena/features/theme/domain/theme_pair.dart';
 import 'package:athena/features/works/data/work_repository.dart';
-import 'package:athena/features/works/data/work_repository_impl.dart';
+import 'package:athena/features/works/data/work_repository_local.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.dart';
 import 'package:athena/utils/responsive_layout.dart';
@@ -49,7 +49,7 @@ Future<void> main() async {
     ProviderScope(
       overrides: [
         workRepositoryProvider
-            .overrideWith((ref) => ref.watch(workRepositoryImplProvider)),
+            .overrideWith((ref) => ref.watch(workRepositoryLocalProvider)),
       ],
       // App
       child: const AthenaApp(),
