@@ -50,33 +50,34 @@ jobs:
         
       #6 Build for Android
       - name: Build APK
-        run: flutter build apk --flavor release_candidate --release
+        run: flutter build apk --flavor development --release
 
       #7 Building App Bundle (aab)
-      # - name: Build appBundle
-      #   run: flutter build appbundle
+      - name: Build appBundle
+        run: flutter build appbundle --flavor development --release
 
       #8 Build IPA ( IOS Build )
-      # - name: Build IPA
-      #   run: flutter build ipa --no-codesign
+      - name: Build IPA
+        run: flutter build ipa --no-codesign --flavor development --release
 
       #9 Build for Windows
       - name: Build EXE
         run: flutter build windows --release
 
-      # - name: Compress Archives and IPAs
-      #   run: |
-      #     cd build
-      #     tar -czf ios_build.tar.gz ios
+      #10 Compress Archives and IPAs
+      - name: Compress Archives and IPAs
+        run: |
+          cd build
+          tar -czf ios_build.tar.gz ios
 
-      #9 Upload Artifacts
+      #11 Upload Artifacts
       # - name: Upload Artifacts
       #   uses: actions/upload-artifact@v4
       #   with:
       #     name: Releases
       #     path: |
-      #       build/app/outputs/flutter-apk/app-release_candidate.apk
-      #       build/app/outputs/bundle/release/app-release_candidate.aab
+      #       build/app/outputs/flutter-apk/app-development.apk
+      #       build/app/outputs/bundle/release/app-development.aab
       #       build/ios_build.tar.gz
       #       build/windows/Release/*.exe
       - name: Upload Artifacts
@@ -84,7 +85,9 @@ jobs:
         with:
           name: Releases
           path: |
-            build/app/outputs/flutter-apk/app-release_candidate.apk
+            build/app/outputs/flutter-apk/app-development.apk
+            build/app/outputs/bundle/release/app-development.aab
+            build/ios_build.tar.gz
             build/windows/x64/runner/Release/*.exe
 
       #10 Extract Version
@@ -116,7 +119,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          # artifacts: "build/app/outputs/flutter-apk/app-release_candidate.apk,build/app/outputs/bundle/release/app-release_candidate.aab,build/ios_build.tar.gz,build/windows/Release/*.exe"
-          artifacts: "build/app/outputs/flutter-apk/app-release_candidate.apk,build/windows/x64/runner/Release/*.exe"
+          artifacts: "build/app/outputs/flutter-apk/app-development.apk,build/app/outputs/bundle/release/app-development.aab,build/ios_build.tar.gz,build/windows/Release/*.exe"
+          # artifacts: "build/app/outputs/flutter-apk/app-development.apk,build/windows/x64/runner/Release/*.exe"
           tag: v${{ env.VERSION }}
           token: ${{ secrets.TOKEN }}
