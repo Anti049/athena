@@ -146,10 +146,11 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
         // Handle brightness for system icons
         final appBrightness =
             calculateBrightness(context, appearance.themeMode().get());
-        final iconBrightness = appBrightness.invert;
+        final iconBrightness = appBrightness;
         SystemChrome.setEnabledSystemUIMode(
           SystemUiMode.edgeToEdge,
         );
+
         Color trueTransparent = Colors.transparent.withOpacity(0.002);
         SystemChrome.setSystemUIOverlayStyle(
           SystemUiOverlayStyle(
