@@ -8,10 +8,10 @@ on:
     branches:
       - dev
 
-jobs:  
-  build:      
-    name: Build & Release 
-    runs-on: macos-latest 
+jobs:
+  setup:
+    name: Setup
+    runs-on: macos-latest
 
     steps:
       #1 Checkout Repository
@@ -36,50 +36,89 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      #5 Setup Keystore
-      # - name: Decode Keystore
-      #   run: |
-      #     echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
-          
-      # - name: Create key.properties
-      #   run: |
-      #     echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
-      #     echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
-      #     echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
-      #     echo "storeFile=keystore.jks" >> android/key.properties
-        
-      #6 Build for Android
+  build-android:
+    name: Build Android
+    runs-on: macos-latest
+    needs: setup
+
+    steps:
+      #1 Build APK
       - name: Build APK
         run: flutter build apk --flavor development --release
 
-      #7 Building App Bundle (aab)
+      #2 Building App Bundle (aab)
       - name: Build appBundle
         run: flutter build appbundle --flavor development --release
+      
+  build-ios:
+    name: Build IOS
+    runs-on: macos-latest
+    needs: setup
 
-      #8 Build IPA ( IOS Build )
+    steps:
+      #1 Build IPA
       - name: Build IPA
         run: flutter build ipa --no-codesign --flavor development --release
 
-      #9 Build for Windows
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    needs: setup
+
+    steps:
+      #1 Build EXE
       - name: Build EXE
         run: flutter build windows --release
 
-      #10 Compress Archives and IPAs
+  build-macos:
+    name: Build MacOS
+    runs-on: macos-latest
+    needs: setup
+
+    steps:
+      #1 Build DMG
+      - name: Build DMG
+        run: flutter build macos --release
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      #1 Build Linux
+      - name: Build Linux
+        run: flutter build linux --release
+
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      #1 Build Web
+      - name: Build Web
+        run: flutter build web --release
+
+  compress:
+    name: Compress
+    runs-on: ubuntu-latest
+    needs: [build-android, build-ios, build-windows, build-macos, build-linux, build-web]
+
+    steps:
+      #1 Compress Archives and IPAs
       - name: Compress Archives and IPAs
         run: |
           cd build
           tar -czf ios_build.tar.gz ios
 
-      #11 Upload Artifacts
-      # - name: Upload Artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Releases
-      #     path: |
-      #       build/app/outputs/flutter-apk/app-development.apk
-      #       build/app/outputs/bundle/release/app-development.aab
-      #       build/ios_build.tar.gz
-      #       build/windows/Release/*.exe
+  upload:
+    name: Upload
+    runs-on: ubuntu-latest
+    needs: compress
+
+    steps:
+      #1 Upload Artifacts
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -89,15 +128,18 @@ jobs:
             build/app/outputs/bundle/release/app-development.aab
             build/ios_build.tar.gz
             build/windows/x64/runner/Release/*.exe
+            build/macos/Build/Products/Release/*.dmg
+            build/linux/release/bundle
+            build/web
 
-      #10 Extract Version
+      #2 Extract Version
       - name: Extract version from pubspec.yaml
         id: extract_version
         run: |
           version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
           echo "VERSION=$version" >> $GITHUB_ENV
 
-      #11 Check if Tag Exists
+      #3 Check if Tag Exists
       - name: Check if Tag Exists
         id: check_tag
         run: |
@@ -107,19 +149,25 @@ jobs:
             echo "TAG_EXISTS=false" >> $GITHUB_ENV
           fi
 
-      #12 Modify Tag if it Exists
+      #4 Modify Tag if it Exists
       - name: Modify Tag
         if: env.TAG_EXISTS == 'true'
         id: modify_tag
         run: |
           new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
           echo "VERSION=$new_version" >> $GITHUB_ENV
-        
-      #13 Create Release
+      
+      #5 Create Release
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-development.apk,build/app/outputs/bundle/release/app-development.aab,build/ios_build.tar.gz,build/windows/Release/*.exe"
-          # artifacts: "build/app/outputs/flutter-apk/app-development.apk,build/windows/x64/runner/Release/*.exe"
+          artifacts: |
+            build/app/outputs/flutter-apk/app-development.apk
+            build/app/outputs/bundle/release/app-development.aab
+            build/ios_build.tar.gz
+            build/windows/x64/runner/Release/*.exe
+            build/macos/Build/Products/Release/*.dmg
+            build/linux/release/bundle
+            build/web
           tag: v${{ env.VERSION }}
           token: ${{ secrets.TOKEN }}
