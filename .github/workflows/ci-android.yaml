@@ -35,9 +35,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check Lines of Code
-        run: tokei -e .
-
       # Additional Dependencies
       - name: Setup Java
         uses: actions/setup-java@v3.12.0
