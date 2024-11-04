@@ -1,4 +1,4 @@
-name: Build Android (Development)
+name: Build Windows (Development)
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-    name: Android Build
-    runs-on: ubuntu-latest
+    name: Windows Build
+    runs-on: windows-latest
     permissions:
       contents: write
     steps:
@@ -20,27 +20,23 @@ jobs:
         run: echo $SHELL
 
       - name: Check Number of Cores
-        run: nproc
+        run: wmic cpu get NumberOfCores
 
       - name: Check Directory
-        run: echo $(pwd)
+        run: |
+          Write-Host "Current Directory: $PWD"
 
       - name: Check OS Version
-        run: cat /etc/os-release
+        run: |
+          $versionInfo = Get-ComputerInfo | Select-Object OSVersion
+          Write-Host "Operating System Version: $versionInfo.OSVersion"
 
       - name: Check Architecture
-        run: uname -a
+        run: systeminfo | findstr /i "System Type"
 
       # Checkout the code
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Additional Dependencies
-      - name: Setup Java
-        uses: actions/setup-java@v3.12.0
-        with:
-          distribution: 'oracle'
-          java-version: '17'
 
       # Main Dependencies
       - name: Setup Flutter
@@ -68,10 +64,8 @@ jobs:
         run: dart fix --dry-run
 
       # Build
-      - name: Build APK, ABI, and Google Play Bundle
-        run: |
-          flutter build apk --flavor development --release
-          flutter build appbundle --flavor development --target-platform android-arm,android-arm64,android-x64 --release
+      - name: Build Windows
+        run: flutter build windows --release
 
       # Release
       - name: Extract Version
@@ -100,7 +94,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: |
-            build/app/outputs/flutter-apk/*.apk
-            build/app/outputs/bundle/release/*.aab
+            build/windows/runner/release/*.exe
           tag: v${{ env.VERSION }}
           token: ${{ secrets.TOKEN }}
