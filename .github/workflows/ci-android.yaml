@@ -70,7 +70,6 @@ jobs:
       # Build
       - name: Build APK, ABI, and Google Play Bundle
         run: |
-          flutter precache --release
           flutter build apk --flavor development --release
           flutter build apk --flavor development --release --split-per-abi
           flutter build appbundle --flavor development --target-platform android-arm,android-arm64,android-x64 --release
