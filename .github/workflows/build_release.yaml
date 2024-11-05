@@ -211,20 +211,7 @@ jobs:
                     echo "TAG_EXISTS=false" >> $GITHUB_ENV
                   fi
 
-            # Step 3: Create Tag (if it doesn't exist)
-            - name: Create Tag
-              if: env.TAG_EXISTS == 'false'
-              uses: actions/github-script@v5
-              with:
-                  script: |
-                      github.rest.git.createRef({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        ref: 'refs/tags/v${{ env.VERSION }}',
-                        sha: context.sha
-                      })
-
-            # Step 4: Create Release
+            # Step 3: Create Release
             - name: Create Release
               if: env.TAG_EXISTS == 'false'
               id: create_release
@@ -237,7 +224,7 @@ jobs:
                   tag: v${{ env.VERSION }}
                   token: ${{ secrets.TOKEN }}
 
-            # Step 4.5: Check if Release was Created
+            # Step 3.5: Check if Release was Created
             - name: Check Release Creation
               if: env.TAG_EXISTS == 'false'
               run: |
@@ -246,7 +233,7 @@ jobs:
                     exit 1
                   fi
 
-            # Step 5: Upload Release Notes
+            # Step 4: Upload Release Notes
             - name: Upload Release Notes
               if: env.TAG_EXISTS == 'false'
               uses: actions/upload-release-asset@v1
