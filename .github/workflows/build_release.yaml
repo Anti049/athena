@@ -1,0 +1,93 @@
+name: Build & Release
+
+# Run when a new version tag is pushed (v0.1.0 -> v0.1.1)
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+
+jobs:
+    build-android:
+        name: Build Android
+        runs-on: ubuntu-latest
+        steps:
+            # Step 1: Checkout Repository
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            # Step 2: Setup Flutter
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                  channel: stable
+
+            # Step 2.5: Setup Java
+            - name: Setup Java
+              uses: actions/setup-java@v3.12.0
+              with:
+                distribution: 'oracle'
+                java-version: '17'
+
+            # Step 3: Verify Flutter
+            - name: Verify Flutter
+              run: |
+                  flutter --version
+                  flutter doctor --verbose
+
+            # Step 3.5: Disable Analytics
+            - name: Disable Analytics
+              run: flutter config --no-analytics
+
+            # Step 4: Install Dependencies
+            - name: Install Dependencies
+              run: flutter pub get
+
+            # Step 4.5: Generate Intermediates
+            - name: Generate Intermediates
+              run: dart run build_runner build --delete-conflicting-outputs
+
+            # Step 5: Run Tests
+            - name: Run Tests
+              run: flutter analyze
+
+            # Step 6.1: Build App Bundle
+            - name: Build App Bundle
+              run: flutter build appbundle --flavor production -t lib/main_production.dart --release
+
+            # Step 6.2: Build APK
+            - name: Build APK
+              run: flutter build apk --flavor production -t lib/main_production.dart --release
+
+            # Step 7: Upload Artifacts
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: Releases
+                  path: |
+                      build/app/outputs/bundle/release/*.aab
+                      build/app/outputs/flutter-apk/*.apk
+
+            # Step 8.1: Extract Version from pubspec.yaml
+            - name: Extract Version from pubspec.yaml
+              id: extract_version
+              run: |
+                version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
+                echo "VERSION=$version" >> $GITHUB_ENV
+
+            # Step 8.2: Check if Tag Exists
+            - name: Check if Tag Exists
+              id: check_tag
+              run: |
+                if git rev-parse "v${{ env.VERSION }}" >/dev/null 2>&1; then
+                  echo "TAG_EXISTS=true" >> $GITHUB_ENV
+                else
+                  echo "TAG_EXISTS=false" >> $GITHUB_ENV
+                fi
+
+            # Step 8.3: Modify Tag if it Exists
+            - name: Modify Tag if it Exists
+              if: env.TAG_EXISTS == 'true'
+              id: modify_tag
+              run: |
+                new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
+                echo "VERSION=$new_version" >> $GITHUB_ENV
