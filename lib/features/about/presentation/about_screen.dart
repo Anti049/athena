@@ -3,6 +3,7 @@ import 'package:athena/features/settings/application/appearance_preferences.dart
 import 'package:athena/features/settings/domain/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/localization/translations.dart';
+import 'package:athena/utils/platform.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:change_case/change_case.dart';
@@ -78,18 +79,23 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                 .format(DateTime.now()),
           );
           // Copy version to clipboard
-          FlutterClipboard.copy(fullVersion)
-              .then((value) => ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: context.scheme.surfaceContainerHighest,
-                      content: Text(
-                        'Version copied to clipboard',
-                        style: TextStyle(
-                          color: context.scheme.onSurface,
-                        ),
+          FlutterClipboard.copy(fullVersion).then(
+            (value) {
+              if (context.mounted && !context.isMobile) {
+                return ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: context.scheme.surfaceContainerHighest,
+                    content: Text(
+                      'Version copied to clipboard',
+                      style: TextStyle(
+                        color: context.scheme.onSurface,
                       ),
                     ),
-                  ));
+                  ),
+                );
+              }
+            },
+          );
         },
       ),
       TextPreference(title: context.locale.preferenceCheckForUpdates),
