@@ -214,7 +214,15 @@ jobs:
             # Step 3: Create Tag (if it doesn't exist)
             - name: Create Tag
               if: env.TAG_EXISTS == 'false'
-              run: git tag "v${{ env.VERSION }}" -m "Release v${{ env.VERSION }}"
+              uses: actions/github-script@v5
+              with:
+                  script: |
+                      github.rest.git.createRef({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        ref: 'refs/tags/v${{ env.VERSION }}',
+                        sha: context.sha
+                      })
 
             # Step 4: Create Release
             - name: Create Release
