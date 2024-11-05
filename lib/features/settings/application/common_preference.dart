@@ -38,7 +38,8 @@ sealed class CommonPreference<T> extends base.Preference<T> {
   @override
   T defaultValue() => defaultValue_;
 
-  Stream<T> _watch();
+  Stream<T> _watch() =>
+      Stream.value(preferences.get(key_, defaultValue: defaultValue_));
 
   @override
   Stream<T> changes() => _watch();
@@ -57,10 +58,6 @@ class StringPrimitive extends CommonPreference<String> {
 
   @override
   Future<void> write(String key, String value) => preferences.put(key, value);
-
-  @override
-  Stream<String> _watch() =>
-      preferences.watch(key: key_).map((event) => event.value as String);
 }
 
 class IntPrimitive extends CommonPreference<int> {
@@ -76,10 +73,6 @@ class IntPrimitive extends CommonPreference<int> {
 
   @override
   Future<void> write(String key, int value) => preferences.put(key, value);
-
-  @override
-  Stream<int> _watch() =>
-      preferences.watch(key: key_).map((event) => event.value as int);
 }
 
 class DoublePrimitive extends CommonPreference<double> {
@@ -95,10 +88,6 @@ class DoublePrimitive extends CommonPreference<double> {
 
   @override
   Future<void> write(String key, double value) => preferences.put(key, value);
-
-  @override
-  Stream<double> _watch() =>
-      preferences.watch(key: key_).map((event) => event.value as double);
 }
 
 class BoolPrimitive extends CommonPreference<bool> {
@@ -114,10 +103,6 @@ class BoolPrimitive extends CommonPreference<bool> {
 
   @override
   Future<void> write(String key, bool value) => preferences.put(key, value);
-
-  @override
-  Stream<bool> _watch() =>
-      preferences.watch(key: key_).map((event) => event.value as bool);
 }
 
 class StringSetPrimitive extends CommonPreference<Set<String>> {
@@ -134,12 +119,6 @@ class StringSetPrimitive extends CommonPreference<Set<String>> {
   @override
   Future<void> write(String key, Set<String> value) =>
       preferences.put(key, value.toList());
-
-  @override
-  Stream<Set<String>> _watch() => preferences
-      .watch(key: key_)
-      .map((event) => event.value as List<String>)
-      .map((list) => list.toSet());
 }
 
 class ObjectPrimitive<T> extends CommonPreference<T> {
@@ -169,9 +148,4 @@ class ObjectPrimitive<T> extends CommonPreference<T> {
     final pref = serializer(value);
     return preferences.put(key, pref);
   }
-
-  @override
-  Stream<T> _watch() => preferences
-      .watch(key: key_)
-      .map((event) => deserializer(event.value as String));
 }

@@ -18,17 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BaseTheme {
   String get name => throw _privateConstructorUsedError;
   ThemeCategory get category => throw _privateConstructorUsedError;
-  ColorScheme get lightScheme => throw _privateConstructorUsedError;
-  ColorScheme? get lightLowContrastScheme => throw _privateConstructorUsedError;
-  ColorScheme? get lightMediumContrastScheme =>
+  ColorScheme? get lightScheme => throw _privateConstructorUsedError;
+  ColorScheme? get darkScheme => throw _privateConstructorUsedError;
+  Map<double, ColorScheme>? get lightSchemes =>
       throw _privateConstructorUsedError;
-  ColorScheme? get lightHighContrastScheme =>
+  Map<double, ColorScheme>? get darkSchemes =>
       throw _privateConstructorUsedError;
-  ColorScheme get darkScheme => throw _privateConstructorUsedError;
-  ColorScheme? get darkLowContrastScheme => throw _privateConstructorUsedError;
-  ColorScheme? get darkMediumContrastScheme =>
-      throw _privateConstructorUsedError;
-  ColorScheme? get darkHighContrastScheme => throw _privateConstructorUsedError;
   ThemeInfo? get info => throw _privateConstructorUsedError;
 
   /// Create a copy of BaseTheme
@@ -46,14 +41,10 @@ abstract class $BaseThemeCopyWith<$Res> {
   $Res call(
       {String name,
       ThemeCategory category,
-      ColorScheme lightScheme,
-      ColorScheme? lightLowContrastScheme,
-      ColorScheme? lightMediumContrastScheme,
-      ColorScheme? lightHighContrastScheme,
-      ColorScheme darkScheme,
-      ColorScheme? darkLowContrastScheme,
-      ColorScheme? darkMediumContrastScheme,
-      ColorScheme? darkHighContrastScheme,
+      ColorScheme? lightScheme,
+      ColorScheme? darkScheme,
+      Map<double, ColorScheme>? lightSchemes,
+      Map<double, ColorScheme>? darkSchemes,
       ThemeInfo? info});
 }
 
@@ -74,14 +65,10 @@ class _$BaseThemeCopyWithImpl<$Res, $Val extends BaseTheme>
   $Res call({
     Object? name = null,
     Object? category = null,
-    Object? lightScheme = null,
-    Object? lightLowContrastScheme = freezed,
-    Object? lightMediumContrastScheme = freezed,
-    Object? lightHighContrastScheme = freezed,
-    Object? darkScheme = null,
-    Object? darkLowContrastScheme = freezed,
-    Object? darkMediumContrastScheme = freezed,
-    Object? darkHighContrastScheme = freezed,
+    Object? lightScheme = freezed,
+    Object? darkScheme = freezed,
+    Object? lightSchemes = freezed,
+    Object? darkSchemes = freezed,
     Object? info = freezed,
   }) {
     return _then(_value.copyWith(
@@ -93,38 +80,22 @@ class _$BaseThemeCopyWithImpl<$Res, $Val extends BaseTheme>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as ThemeCategory,
-      lightScheme: null == lightScheme
+      lightScheme: freezed == lightScheme
           ? _value.lightScheme
           : lightScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme,
-      lightLowContrastScheme: freezed == lightLowContrastScheme
-          ? _value.lightLowContrastScheme
-          : lightLowContrastScheme // ignore: cast_nullable_to_non_nullable
               as ColorScheme?,
-      lightMediumContrastScheme: freezed == lightMediumContrastScheme
-          ? _value.lightMediumContrastScheme
-          : lightMediumContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
-      lightHighContrastScheme: freezed == lightHighContrastScheme
-          ? _value.lightHighContrastScheme
-          : lightHighContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
-      darkScheme: null == darkScheme
+      darkScheme: freezed == darkScheme
           ? _value.darkScheme
           : darkScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme,
-      darkLowContrastScheme: freezed == darkLowContrastScheme
-          ? _value.darkLowContrastScheme
-          : darkLowContrastScheme // ignore: cast_nullable_to_non_nullable
               as ColorScheme?,
-      darkMediumContrastScheme: freezed == darkMediumContrastScheme
-          ? _value.darkMediumContrastScheme
-          : darkMediumContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
-      darkHighContrastScheme: freezed == darkHighContrastScheme
-          ? _value.darkHighContrastScheme
-          : darkHighContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
+      lightSchemes: freezed == lightSchemes
+          ? _value.lightSchemes
+          : lightSchemes // ignore: cast_nullable_to_non_nullable
+              as Map<double, ColorScheme>?,
+      darkSchemes: freezed == darkSchemes
+          ? _value.darkSchemes
+          : darkSchemes // ignore: cast_nullable_to_non_nullable
+              as Map<double, ColorScheme>?,
       info: freezed == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
@@ -144,14 +115,10 @@ abstract class _$$BaseThemeImplCopyWith<$Res>
   $Res call(
       {String name,
       ThemeCategory category,
-      ColorScheme lightScheme,
-      ColorScheme? lightLowContrastScheme,
-      ColorScheme? lightMediumContrastScheme,
-      ColorScheme? lightHighContrastScheme,
-      ColorScheme darkScheme,
-      ColorScheme? darkLowContrastScheme,
-      ColorScheme? darkMediumContrastScheme,
-      ColorScheme? darkHighContrastScheme,
+      ColorScheme? lightScheme,
+      ColorScheme? darkScheme,
+      Map<double, ColorScheme>? lightSchemes,
+      Map<double, ColorScheme>? darkSchemes,
       ThemeInfo? info});
 }
 
@@ -170,14 +137,10 @@ class __$$BaseThemeImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? category = null,
-    Object? lightScheme = null,
-    Object? lightLowContrastScheme = freezed,
-    Object? lightMediumContrastScheme = freezed,
-    Object? lightHighContrastScheme = freezed,
-    Object? darkScheme = null,
-    Object? darkLowContrastScheme = freezed,
-    Object? darkMediumContrastScheme = freezed,
-    Object? darkHighContrastScheme = freezed,
+    Object? lightScheme = freezed,
+    Object? darkScheme = freezed,
+    Object? lightSchemes = freezed,
+    Object? darkSchemes = freezed,
     Object? info = freezed,
   }) {
     return _then(_$BaseThemeImpl(
@@ -189,38 +152,22 @@ class __$$BaseThemeImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as ThemeCategory,
-      lightScheme: null == lightScheme
+      lightScheme: freezed == lightScheme
           ? _value.lightScheme
           : lightScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme,
-      lightLowContrastScheme: freezed == lightLowContrastScheme
-          ? _value.lightLowContrastScheme
-          : lightLowContrastScheme // ignore: cast_nullable_to_non_nullable
               as ColorScheme?,
-      lightMediumContrastScheme: freezed == lightMediumContrastScheme
-          ? _value.lightMediumContrastScheme
-          : lightMediumContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
-      lightHighContrastScheme: freezed == lightHighContrastScheme
-          ? _value.lightHighContrastScheme
-          : lightHighContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
-      darkScheme: null == darkScheme
+      darkScheme: freezed == darkScheme
           ? _value.darkScheme
           : darkScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme,
-      darkLowContrastScheme: freezed == darkLowContrastScheme
-          ? _value.darkLowContrastScheme
-          : darkLowContrastScheme // ignore: cast_nullable_to_non_nullable
               as ColorScheme?,
-      darkMediumContrastScheme: freezed == darkMediumContrastScheme
-          ? _value.darkMediumContrastScheme
-          : darkMediumContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
-      darkHighContrastScheme: freezed == darkHighContrastScheme
-          ? _value.darkHighContrastScheme
-          : darkHighContrastScheme // ignore: cast_nullable_to_non_nullable
-              as ColorScheme?,
+      lightSchemes: freezed == lightSchemes
+          ? _value._lightSchemes
+          : lightSchemes // ignore: cast_nullable_to_non_nullable
+              as Map<double, ColorScheme>?,
+      darkSchemes: freezed == darkSchemes
+          ? _value._darkSchemes
+          : darkSchemes // ignore: cast_nullable_to_non_nullable
+              as Map<double, ColorScheme>?,
       info: freezed == info
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
@@ -235,43 +182,49 @@ class _$BaseThemeImpl extends _BaseTheme {
   const _$BaseThemeImpl(
       {required this.name,
       required this.category,
-      required this.lightScheme,
-      this.lightLowContrastScheme,
-      this.lightMediumContrastScheme,
-      this.lightHighContrastScheme,
-      required this.darkScheme,
-      this.darkLowContrastScheme,
-      this.darkMediumContrastScheme,
-      this.darkHighContrastScheme,
+      this.lightScheme,
+      this.darkScheme,
+      final Map<double, ColorScheme>? lightSchemes,
+      final Map<double, ColorScheme>? darkSchemes,
       this.info})
-      : super._();
+      : _lightSchemes = lightSchemes,
+        _darkSchemes = darkSchemes,
+        super._();
 
   @override
   final String name;
   @override
   final ThemeCategory category;
   @override
-  final ColorScheme lightScheme;
+  final ColorScheme? lightScheme;
   @override
-  final ColorScheme? lightLowContrastScheme;
+  final ColorScheme? darkScheme;
+  final Map<double, ColorScheme>? _lightSchemes;
   @override
-  final ColorScheme? lightMediumContrastScheme;
+  Map<double, ColorScheme>? get lightSchemes {
+    final value = _lightSchemes;
+    if (value == null) return null;
+    if (_lightSchemes is EqualUnmodifiableMapView) return _lightSchemes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<double, ColorScheme>? _darkSchemes;
   @override
-  final ColorScheme? lightHighContrastScheme;
-  @override
-  final ColorScheme darkScheme;
-  @override
-  final ColorScheme? darkLowContrastScheme;
-  @override
-  final ColorScheme? darkMediumContrastScheme;
-  @override
-  final ColorScheme? darkHighContrastScheme;
+  Map<double, ColorScheme>? get darkSchemes {
+    final value = _darkSchemes;
+    if (value == null) return null;
+    if (_darkSchemes is EqualUnmodifiableMapView) return _darkSchemes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   final ThemeInfo? info;
 
   @override
   String toString() {
-    return 'BaseTheme(name: $name, category: $category, lightScheme: $lightScheme, lightLowContrastScheme: $lightLowContrastScheme, lightMediumContrastScheme: $lightMediumContrastScheme, lightHighContrastScheme: $lightHighContrastScheme, darkScheme: $darkScheme, darkLowContrastScheme: $darkLowContrastScheme, darkMediumContrastScheme: $darkMediumContrastScheme, darkHighContrastScheme: $darkHighContrastScheme, info: $info)';
+    return 'BaseTheme(name: $name, category: $category, lightScheme: $lightScheme, darkScheme: $darkScheme, lightSchemes: $lightSchemes, darkSchemes: $darkSchemes, info: $info)';
   }
 
   @override
@@ -284,23 +237,12 @@ class _$BaseThemeImpl extends _BaseTheme {
                 other.category == category) &&
             (identical(other.lightScheme, lightScheme) ||
                 other.lightScheme == lightScheme) &&
-            (identical(other.lightLowContrastScheme, lightLowContrastScheme) ||
-                other.lightLowContrastScheme == lightLowContrastScheme) &&
-            (identical(other.lightMediumContrastScheme,
-                    lightMediumContrastScheme) ||
-                other.lightMediumContrastScheme == lightMediumContrastScheme) &&
-            (identical(
-                    other.lightHighContrastScheme, lightHighContrastScheme) ||
-                other.lightHighContrastScheme == lightHighContrastScheme) &&
             (identical(other.darkScheme, darkScheme) ||
                 other.darkScheme == darkScheme) &&
-            (identical(other.darkLowContrastScheme, darkLowContrastScheme) ||
-                other.darkLowContrastScheme == darkLowContrastScheme) &&
-            (identical(
-                    other.darkMediumContrastScheme, darkMediumContrastScheme) ||
-                other.darkMediumContrastScheme == darkMediumContrastScheme) &&
-            (identical(other.darkHighContrastScheme, darkHighContrastScheme) ||
-                other.darkHighContrastScheme == darkHighContrastScheme) &&
+            const DeepCollectionEquality()
+                .equals(other._lightSchemes, _lightSchemes) &&
+            const DeepCollectionEquality()
+                .equals(other._darkSchemes, _darkSchemes) &&
             (identical(other.info, info) || other.info == info));
   }
 
@@ -310,13 +252,9 @@ class _$BaseThemeImpl extends _BaseTheme {
       name,
       category,
       lightScheme,
-      lightLowContrastScheme,
-      lightMediumContrastScheme,
-      lightHighContrastScheme,
       darkScheme,
-      darkLowContrastScheme,
-      darkMediumContrastScheme,
-      darkHighContrastScheme,
+      const DeepCollectionEquality().hash(_lightSchemes),
+      const DeepCollectionEquality().hash(_darkSchemes),
       info);
 
   /// Create a copy of BaseTheme
@@ -332,14 +270,10 @@ abstract class _BaseTheme extends BaseTheme {
   const factory _BaseTheme(
       {required final String name,
       required final ThemeCategory category,
-      required final ColorScheme lightScheme,
-      final ColorScheme? lightLowContrastScheme,
-      final ColorScheme? lightMediumContrastScheme,
-      final ColorScheme? lightHighContrastScheme,
-      required final ColorScheme darkScheme,
-      final ColorScheme? darkLowContrastScheme,
-      final ColorScheme? darkMediumContrastScheme,
-      final ColorScheme? darkHighContrastScheme,
+      final ColorScheme? lightScheme,
+      final ColorScheme? darkScheme,
+      final Map<double, ColorScheme>? lightSchemes,
+      final Map<double, ColorScheme>? darkSchemes,
       final ThemeInfo? info}) = _$BaseThemeImpl;
   const _BaseTheme._() : super._();
 
@@ -348,21 +282,13 @@ abstract class _BaseTheme extends BaseTheme {
   @override
   ThemeCategory get category;
   @override
-  ColorScheme get lightScheme;
+  ColorScheme? get lightScheme;
   @override
-  ColorScheme? get lightLowContrastScheme;
+  ColorScheme? get darkScheme;
   @override
-  ColorScheme? get lightMediumContrastScheme;
+  Map<double, ColorScheme>? get lightSchemes;
   @override
-  ColorScheme? get lightHighContrastScheme;
-  @override
-  ColorScheme get darkScheme;
-  @override
-  ColorScheme? get darkLowContrastScheme;
-  @override
-  ColorScheme? get darkMediumContrastScheme;
-  @override
-  ColorScheme? get darkHighContrastScheme;
+  Map<double, ColorScheme>? get darkSchemes;
   @override
   ThemeInfo? get info;
 

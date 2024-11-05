@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LibraryTabState {
-  Map<Category, List<LibraryItem>> get library =>
-      throw _privateConstructorUsedError;
+  Map<int, List<LibraryItem>> get library => throw _privateConstructorUsedError;
   String? get searchQuery => throw _privateConstructorUsedError;
   List<LibraryItem> get selection => throw _privateConstructorUsedError;
   bool get hasActiveFilters => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $LibraryTabStateCopyWith<$Res> {
       _$LibraryTabStateCopyWithImpl<$Res, LibraryTabState>;
   @useResult
   $Res call(
-      {Map<Category, List<LibraryItem>> library,
+      {Map<int, List<LibraryItem>> library,
       String? searchQuery,
       List<LibraryItem> selection,
       bool hasActiveFilters,
@@ -75,7 +74,7 @@ class _$LibraryTabStateCopyWithImpl<$Res, $Val extends LibraryTabState>
       library: null == library
           ? _value.library
           : library // ignore: cast_nullable_to_non_nullable
-              as Map<Category, List<LibraryItem>>,
+              as Map<int, List<LibraryItem>>,
       searchQuery: freezed == searchQuery
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -113,7 +112,7 @@ abstract class _$$LibraryTabStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<Category, List<LibraryItem>> library,
+      {Map<int, List<LibraryItem>> library,
       String? searchQuery,
       List<LibraryItem> selection,
       bool hasActiveFilters,
@@ -147,7 +146,7 @@ class __$$LibraryTabStateImplCopyWithImpl<$Res>
       library: null == library
           ? _value._library
           : library // ignore: cast_nullable_to_non_nullable
-              as Map<Category, List<LibraryItem>>,
+              as Map<int, List<LibraryItem>>,
       searchQuery: freezed == searchQuery
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -180,7 +179,7 @@ class __$$LibraryTabStateImplCopyWithImpl<$Res>
 
 class _$LibraryTabStateImpl implements _LibraryTabState {
   const _$LibraryTabStateImpl(
-      {final Map<Category, List<LibraryItem>> library = const {},
+      {final Map<int, List<LibraryItem>> library = const {},
       this.searchQuery,
       final List<LibraryItem> selection = const [],
       this.hasActiveFilters = false,
@@ -190,10 +189,10 @@ class _$LibraryTabStateImpl implements _LibraryTabState {
       : _library = library,
         _selection = selection;
 
-  final Map<Category, List<LibraryItem>> _library;
+  final Map<int, List<LibraryItem>> _library;
   @override
   @JsonKey()
-  Map<Category, List<LibraryItem>> get library {
+  Map<int, List<LibraryItem>> get library {
     if (_library is EqualUnmodifiableMapView) return _library;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_library);
@@ -271,7 +270,7 @@ class _$LibraryTabStateImpl implements _LibraryTabState {
 
 abstract class _LibraryTabState implements LibraryTabState {
   const factory _LibraryTabState(
-      {final Map<Category, List<LibraryItem>> library,
+      {final Map<int, List<LibraryItem>> library,
       final String? searchQuery,
       final List<LibraryItem> selection,
       final bool hasActiveFilters,
@@ -280,7 +279,7 @@ abstract class _LibraryTabState implements LibraryTabState {
       final bool showWorkContinueButton}) = _$LibraryTabStateImpl;
 
   @override
-  Map<Category, List<LibraryItem>> get library;
+  Map<int, List<LibraryItem>> get library;
   @override
   String? get searchQuery;
   @override

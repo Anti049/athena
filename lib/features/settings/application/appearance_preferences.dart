@@ -1,7 +1,6 @@
 import 'package:athena/features/settings/application/common_preference_store.dart';
 import 'package:athena/features/settings/application/preference.dart';
 import 'package:athena/features/settings/application/preference_store.dart';
-import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -12,6 +11,7 @@ enum DateFormats {
   ddMMyy('dd/MM/yy'),
   yyyyMMdd('yyyy-MM-dd'),
   ddMMMyyyy('dd/MMM/yyyy'),
+  // ignore: constant_identifier_names
   MMMddyyyy('MMM dd, yyyy');
 
   const DateFormats(this.format);
@@ -39,10 +39,9 @@ class AppearancePreferences {
         false,
       );
 
-  Preference<ContrastLevel> contrastLevel() => preferenceStore.getEnum(
+  Preference<double> contrastLevel() => preferenceStore.getDouble(
         Preference.appStateKey("contrastLevel"),
-        ContrastLevel.normal,
-        ContrastLevel.values,
+        0.0,
       );
 
   Preference<Locale> appLanguage() => preferenceStore.getObject(

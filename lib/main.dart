@@ -6,7 +6,7 @@ import 'package:athena/features/theme/domain/base_theme.dart';
 import 'package:athena/features/theme/domain/custom_colors.dart';
 import 'package:athena/features/theme/domain/theme_pair.dart';
 import 'package:athena/features/works/data/work_repository.dart';
-import 'package:athena/features/works/data/work_repository_impl.dart';
+import 'package:athena/features/works/data/work_repository_local.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.dart';
 import 'package:athena/utils/responsive_layout.dart';
@@ -24,7 +24,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:upgrader/upgrader.dart';
 
-void main() async {
+Future<void> main() async {
   // Ensure plugin services are initialized
   WidgetsFlutterBinding.ensureInitialized();
   // Initialize Hive
@@ -49,7 +49,7 @@ void main() async {
     ProviderScope(
       overrides: [
         workRepositoryProvider
-            .overrideWith((ref) => ref.watch(workRepositoryImplProvider)),
+            .overrideWith((ref) => ref.watch(workRepositoryLocalProvider)),
       ],
       // App
       child: const AthenaApp(),
@@ -146,10 +146,11 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
         // Handle brightness for system icons
         final appBrightness =
             calculateBrightness(context, appearance.themeMode().get());
-        final iconBrightness = appBrightness.invert;
+        final iconBrightness = appBrightness;
         SystemChrome.setEnabledSystemUIMode(
           SystemUiMode.edgeToEdge,
         );
+
         Color trueTransparent = Colors.transparent.withOpacity(0.002);
         SystemChrome.setSystemUIOverlayStyle(
           SystemUiOverlayStyle(

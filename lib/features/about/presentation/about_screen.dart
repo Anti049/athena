@@ -5,13 +5,15 @@ import 'package:athena/features/settings/presentation/components/preference_scaf
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:change_case/change_case.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
@@ -33,7 +35,8 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
       (packageInfo) {
         setState(() {
           appName = packageInfo.appName;
-          channel = 'Stable';
+          channel = appFlavor?.toCapitalCase() ??
+              'Unknown'; // Use appFlavor from flavors.dart
           version = packageInfo.version;
         });
       },

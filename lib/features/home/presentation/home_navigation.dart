@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:athena/utils/responsive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -91,7 +92,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
         },
         child: widget.child,
       ),
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: context.isCompact
+          ? NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: (index) {
           setState(() {
@@ -108,7 +110,8 @@ class _HomeNavigationState extends State<HomeNavigation> {
               ),
             )
             .toList(),
-      ),
+            )
+          : null,
     );
   }
 }

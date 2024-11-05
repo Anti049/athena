@@ -8,7 +8,7 @@
 PRODUCT_NAME = Athena
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = dev.nploetz049.athena
+PRODUCT_BUNDLE_IDENTIFIER = dev.nploetz.athena
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright ©️ 2024 nploetz049. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright ©️ 2024 nploetz. All rights reserved.

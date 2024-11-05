@@ -1,0 +1,22 @@
+flavors:
+    development:
+        app:
+            name: Athena (Dev)
+        android:
+            applicationId: dev.nploetz.athena.dev
+        ios:
+            bundleId: dev.nploetz.athena.dev
+            icon: assets/launcher/ios/icon-dev.png
+        macos:
+            bundleId: dev.nploetz.athena.dev
+
+    production:
+        app:
+            name: Athena
+        android:
+            applicationId: dev.nploetz.athena
+        ios:
+            bundleId: dev.nploetz.athena
+            icon: assets/launcher/ios/icon.png
+        macos:
+            bundleId: dev.nploetz.athena

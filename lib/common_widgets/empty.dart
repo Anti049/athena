@@ -79,6 +79,7 @@ class _EmptyState extends State<Empty> {
                 style: context.text.titleLarge?.copyWith(
                   color: context.scheme.secondary,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             if (widget.actions?.isNotEmpty ?? false)

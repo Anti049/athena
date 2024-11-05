@@ -1,4 +1,4 @@
-import 'package:athena/features/works/domain/works.drift.dart';
+import 'package:athena/features/works/domain/work.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'library_work.freezed.dart';

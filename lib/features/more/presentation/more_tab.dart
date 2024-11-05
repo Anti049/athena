@@ -1,5 +1,6 @@
 import 'package:athena/common_widgets/banner_scaffold.dart';
 import 'package:athena/common_widgets/logo_header.dart';
+// import 'package:athena/features/more/domain/more_tab_model.dart';
 import 'package:athena/features/settings/application/base_preferences.dart';
 import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
@@ -21,8 +22,18 @@ class MoreTab extends ConsumerWidget {
     final preferences = ref.watch(basePreferencesProvider);
     final router = AutoRouter.of(context);
 
+    // final state = ref.watch(moreTabModelProvider);
+
     return BannerScaffold(
-      body: ListView(
+      body: /*state.when(
+        loading: () => const LoadingScreen(),
+        error: (error, stackTrace) {
+          debugPrintStack(stackTrace: stackTrace);
+          return Center(child: Text(error.toString()));
+        },
+        data: (data) {
+          return*/
+          ListView(
         children: [
           const LogoHeader(),
           SwitchPreferenceWidget(
@@ -90,6 +101,8 @@ class MoreTab extends ConsumerWidget {
           ),
         ],
       ),
+      // },
+      // ),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/utils/responsive_layout.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -45,6 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final routes = [
+      const LibraryRoute(),
+      const UpdatesRoute(),
+      const HistoryRoute(),
+      const BrowseRoute(),
+      const MoreRoute(),
+    ];
     final navigationItems = [
       HomeNavigationItem(
         icon: Symbols.collections_bookmark,
@@ -72,24 +81,90 @@ class _HomeScreenState extends State<HomeScreen> {
         route: '/more',
       ),
     ];
-    return AutoTabsScaffold(
-      routes: const [
-        LibraryRoute(),
-        UpdatesRoute(),
-        HistoryRoute(),
-        BrowseRoute(),
-        MoreRoute(),
-      ],
-      bottomNavigationBuilder: (context, tabsRouter) {
-        return NavigationBar(
-          selectedIndex: tabsRouter.activeIndex,
-          onDestinationSelected: tabsRouter.setActiveIndex,
-          destinations: navigationItems
-              .map(
-                (item) =>
-                    item.toDestination(index: navigationItems.indexOf(item)),
-              )
-              .toList(),
+
+    return AutoTabsRouter(
+      routes: routes,
+      transitionBuilder: (context, child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      builder: (context, child) {
+        final tabsRouter = AutoTabsRouter.of(context);
+
+        return Scaffold(
+          body: Row(
+            children: [
+              if (context.atLeastMedium && !context.atLeastLarge)
+                NavigationRail(
+                  backgroundColor: context.scheme.surfaceContainer,
+                  labelType: NavigationRailLabelType.all,
+                  selectedIndex: tabsRouter.activeIndex,
+                  onDestinationSelected: tabsRouter.setActiveIndex,
+                  destinations: navigationItems
+                      .map(
+                        (item) => NavigationRailDestination(
+                          icon: Icon(item.icon),
+                          selectedIcon: Icon(item.icon, fill: 1.0),
+                          label: Text(item.label),
+                        ),
+                      )
+                      .toList(),
+                ),
+              if (context.atLeastLarge)
+                Container(
+                  color: context.scheme.surfaceContainerLow,
+                  child: NavigationDrawer(
+                    tilePadding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 4.0,
+                    ),
+                    selectedIndex: tabsRouter.activeIndex,
+                    onDestinationSelected: tabsRouter.setActiveIndex,
+                    children: [
+                      // Header
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          28.0,
+                          16.0,
+                          16.0,
+                          10.0,
+                        ),
+                        child: Text(
+                          context.locale.appTitle,
+                          style: context.text.titleSmall,
+                        ),
+                      ),
+                      // Destinations
+                      ...navigationItems.map(
+                        (item) => NavigationDrawerDestination(
+                          icon: Icon(item.icon),
+                          selectedIcon: Icon(item.icon, fill: 1.0),
+                          label: Text(item.label),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              Expanded(
+                child: child,
+              ),
+            ],
+          ),
+          bottomNavigationBar: context.isCompact
+              ? NavigationBar(
+                  selectedIndex: tabsRouter.activeIndex,
+                  onDestinationSelected: tabsRouter.setActiveIndex,
+                  destinations: navigationItems
+                      .map(
+                        (item) => item.toDestination(
+                          index: navigationItems.indexOf(item),
+                        ),
+                      )
+                      .toList(),
+                )
+              : null,
         );
       },
     );

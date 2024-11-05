@@ -1,6 +1,7 @@
 import 'package:athena/features/settings/application/preference.dart'
     as pref_data;
 import 'package:flutter/material.dart';
+import 'package:sprintf/sprintf.dart';
 
 sealed class Preference {
   Preference({
@@ -18,12 +19,14 @@ sealed class PreferenceItem<T> extends Preference {
     required super.enabled,
     this.subtitle,
     this.icon,
-    required this.onValueChanged,
+    this.onValueChanged,
+    this.pref,
   });
 
   final String? subtitle;
   final IconData? icon;
-  final Future<bool> Function(T newValue) onValueChanged;
+  final Future<bool> Function(T newValue)? onValueChanged;
+  final pref_data.Preference<dynamic>? pref;
 }
 
 /// A basic [PreferenceItem] that only displays texts.
@@ -34,6 +37,7 @@ class TextPreference extends PreferenceItem<String> {
     super.subtitle,
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
+    super.pref,
     this.onClick,
     this.trailing,
   });
@@ -52,30 +56,31 @@ class SwitchPreference extends PreferenceItem<bool> {
     super.subtitle,
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
-    required this.pref,
+    super.pref,
   });
-
-  final pref_data.Preference<bool> pref;
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
 }
 
 /// A [PreferenceItem] that provides a slider to select an integer number.
-class SliderPreference extends PreferenceItem<int> {
+class SliderPreference extends PreferenceItem<double> {
   SliderPreference({
     super.title = '',
     super.enabled = true,
     super.subtitle,
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
-    required this.value,
+    super.pref,
+    this.value,
     this.min = 0,
     required this.max,
+    this.step = 1,
   });
 
-  final int value;
-  final int min;
-  final int max;
+  final double? value;
+  final double min;
+  final double max;
+  final double step;
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
 }
@@ -88,7 +93,8 @@ class SegmentPreference extends PreferenceItem<String> {
     super.subtitle,
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
-    required this.value,
+    super.pref,
+    this.value,
     required this.options,
   });
 
@@ -97,37 +103,45 @@ class SegmentPreference extends PreferenceItem<String> {
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
 }
+class Segment {
+  Segment({
+    required this.value,
+    required this.label,
+  });
+
+  final dynamic value;
+  final String label;
+}
 
 /// A [PreferenceItem] that displays a list of entries as a dialog.
-// class ListPreference<T> extends PreferenceItem<T> {
-//   ListPreference({
-//     required super.title,
-//     super.enabled = true,
-//     super.subtitle = '%s',
-//     super.icon,
-//     super.onValueChanged = _defaultOnValueChanged,
-//     this.subtitleProvider = _defaultSubtitleProvider,
-//     required this.pref,
-//     required this.entries,
-//   });
+class ListPreference<T> extends PreferenceItem<T> {
+  ListPreference({
+    required super.title,
+    super.enabled = true,
+    super.subtitle = '%s',
+    super.icon,
+    super.onValueChanged = _defaultOnValueChanged,
+    super.pref,
+    this.subtitleProvider = _defaultSubtitleProvider,
+    required this.entries,
+  });
 
-//   final String? Function<T>(ListPreference c, T value, Map<T, String> entries)
-//       subtitleProvider;
-//   final pref_data.Preference<T> pref;
-//   final Map<T, String> entries;
+  final String? Function<T>(ListPreference c, T value, Map<T, String> entries)
+      subtitleProvider;
+  final Map<T, String> entries;
 
-//   static Future<bool> _defaultOnValueChanged(_) async => true;
-//   static String? _defaultSubtitleProvider<T>(c, v, e) =>
-//       c.subtitle != null ? sprintf(c.subtitle!, e[v]) : null;
+  static Future<bool> _defaultOnValueChanged(_) async => true;
+  static String? _defaultSubtitleProvider<T>(c, v, e) =>
+      c.subtitle != null ? sprintf(c.subtitle!, e[v]) : null;
 
-//   void internalSet(Object newValue) => pref.set(newValue as T);
-//   Future<bool> internalOnValueChanged(Object newValue) =>
-//       onValueChanged(newValue as T);
+  void internalSet(Object newValue) => pref?.set(newValue as T);
+  Future<bool> internalOnValueChanged(Object newValue) =>
+      onValueChanged!(newValue as T);
 
-//   String? internalSubtitleProvider(
-//           Object? value, Map<Object?, String> entries) =>
-//       subtitleProvider(this, value as T, entries as Map<T, String>);
-// }
+  String? internalSubtitleProvider(
+          Object? value, Map<Object?, String> entries) =>
+      subtitleProvider(this, value as T, entries as Map<T, String>);
+}
 
 /// [ListPreference] but with no connection to a Preference data.
 // class BasicListPreference extends PreferenceItem<String> {
@@ -195,10 +209,8 @@ class EditTextPreference extends PreferenceItem<String> {
     super.subtitle = '%s',
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
-    required this.pref,
+    super.pref,
   });
-
-  final pref_data.Preference<String> pref;
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
 }
@@ -230,6 +242,7 @@ class InfoPreference extends PreferenceItem<String> {
     super.subtitle,
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
+    super.pref,
   });
 
   static Future<bool> _defaultOnValueChanged(_) async => true;
@@ -242,6 +255,7 @@ class CustomPreference extends PreferenceItem<String> {
     super.subtitle,
     super.icon,
     super.onValueChanged = _defaultOnValueChanged,
+    super.pref,
     this.content,
   });
 

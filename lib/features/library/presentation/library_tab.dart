@@ -6,13 +6,14 @@ import 'package:athena/features/library/domain/library_tab_model.dart';
 import 'package:athena/features/library/presentation/components/library_options_sheet.dart';
 import 'package:athena/features/library/presentation/components/selection_bar.dart';
 import 'package:athena/localization/translations.dart';
+import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:dartx/dartx.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:dartx/dartx.dart';
 
 final indicator = GlobalKey<RefreshIndicatorState>();
 
@@ -37,7 +38,8 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
   final bool _selectionActive = false;
 
   Future<void> _onRefresh() async {
-    final model = ref.watch(libraryTabModelProvider.notifier);
+    await Future.delayed(const Duration(seconds: 1));
+    final model = ref.read(libraryTabModelProvider.notifier);
     model.refresh();
   }
 
@@ -49,7 +51,6 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
     final state = ref.watch(libraryTabModelProvider);
     final model = ref.watch(libraryTabModelProvider.notifier);
     final bannerData = ref.watch(bannerProvider);
-    final bannerNotifier = ref.watch(bannerProvider.notifier);
 
     return PopScope(
       canPop: !_searchActive,
@@ -115,14 +116,57 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                     : null,
               ),
               onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  clipBehavior: Clip.antiAlias,
-                  builder: (context) {
-                    return const LibraryOptionsSheet();
-                  },
-                );
+                if (context.isCompact) {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    clipBehavior: Clip.antiAlias,
+                    builder: (context) {
+                      return const LibraryOptionsSheet();
+                    },
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        constraints: BoxConstraints(
+                          maxWidth: context.atLeastLarge ? 640.0 : 480.0,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const LibraryOptionsSheet(),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 16.0,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      foregroundColor: context.scheme.error,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Close'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }
               },
             ),
             MenuAnchor(
@@ -132,15 +176,15 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                   onPressed: () {
                     _onRefresh();
                   },
-                  child: const Text('Update Library'),
+                  child: Text(context.locale.libraryMenu.updateLibrary),
                 ),
                 MenuItemButton(
                   onPressed: () {},
-                  child: const Text('Update Category'),
+                  child: Text(context.locale.libraryMenu.updateCategory),
                 ),
                 MenuItemButton(
                   onPressed: () {},
-                  child: const Text('Open Random Work'),
+                  child: Text(context.locale.libraryMenu.randomWork),
                 ),
               ],
               child: IconButton(
@@ -177,27 +221,46 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
             );
           },
           data: (data) {
-            return RefreshIndicator(
-              key: indicator,
-              onRefresh: _onRefresh,
-              child: data.library.isNotEmpty
-                  ? const Empty(
-                      message: 'Library Not Yet Implemented',
-                    )
-                  : const Empty(
-                      message: 'No Works Found',
-                    ),
+            return Column(
+              children: [
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return RefreshIndicator(
+                          key: indicator,
+                          onRefresh: _onRefresh,
+                          child: data.searchQuery.isNullOrEmpty &&
+                                  !data.hasActiveFilters &&
+                                  data.library.isEmpty
+                              ? SingleChildScrollView(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      minHeight: constraints.maxHeight,
+                                    ),
+                                    child: Empty(
+                                      message: context.locale.libraryEmpty,
+                                    ),
+                                  ),
+                                )
+                              : SingleChildScrollView(
+                                  physics:
+                                      const AlwaysScrollableScrollPhysics(),
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      minHeight: constraints.maxHeight,
+                                    ),
+                                    child: const Empty(
+                                      message: "Library Not Yet Implemented",
+                                    ),
+                                  ),
+                                ));
+                    },
+                  ),
+                ),
+              ],
             );
-            // if (data.searchQuery.isNullOrEmpty &&
-            //     !data.hasActiveFilters &&
-            //     data.library.isEmpty) {
-            //   return const Empty(
-            //     message: 'No Works Found',
-            //   );
-            // }
-            // return const Empty(
-            //   message: 'Library Not Yet Implemented',
-            // );
           },
         ),
         bottomNavigationBar: SelectionBar(
