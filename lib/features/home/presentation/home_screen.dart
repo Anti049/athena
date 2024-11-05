@@ -1,4 +1,3 @@
-import 'package:athena/features/home/presentation/home_navigation.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:athena/utils/responsive_layout.dart';
