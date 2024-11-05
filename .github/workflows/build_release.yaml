@@ -22,11 +22,13 @@ jobs:
               uses: actions/checkout@v4
 
             # Step 1.5: Get Version from pubspec.yaml
-            - name: Get Version from pubspec.yaml
-              id: get_version
-              run: |
-                  version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
-                  echo "VERSION=${{env.VERSION}}" >> $GITHUB_ENV
+            - name: Get flutter version
+              id: get_flutter_version
+              uses: its404/get-flutter-version@v1.0.0
+
+            # Step 1.6: Set Flutter Version
+            - name: Output flutter version
+              run: echo "VERSION=${{ steps.get_flutter_version.outputs.version_number }}" >> $GITHUB_ENV
 
             # Step 2: Setup Flutter
             - name: Setup Flutter
@@ -105,11 +107,13 @@ jobs:
               uses: actions/checkout@v4
 
             # Step 1.5: Get Version from pubspec.yaml
-            - name: Get Version from pubspec.yaml
-              id: get_version
-              run: |
-                  version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
-                  echo "VERSION=${{env.VERSION}}" >> $GITHUB_ENV
+            - name: Get flutter version
+              id: get_flutter_version
+              uses: its404/get-flutter-version@v1.0.0
+
+            # Step 1.6: Set Flutter Version
+            - name: Output flutter version
+              run: echo "VERSION=${{ steps.get_flutter_version.outputs.version_number }}" >> $GITHUB_ENV
 
             # Step 2: Setup Flutter
             - name: Setup Flutter
@@ -141,7 +145,7 @@ jobs:
 
             # Step 6: Build iOS
             - name: Build iOS
-              run: flutter build ipa --no-codesign
+              run: flutter build ipa --flavor production -t lib/main_production.dart --release --no-codesign
 
             # Step 7: Compress Archives and IPAs
             - name: Compress Archives and IPAs
