@@ -12,11 +12,5 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 
 ## [Unreleased]
 
-## [v0.1.0] - 2024-11-05
+## [v0.1.0] - 2024-11-06
 ### Added
-- Option 1
-- Option 2
-  - Sub-option 1
-  - Sub-option 2
-  - Sub-option 3
-- Option 3
