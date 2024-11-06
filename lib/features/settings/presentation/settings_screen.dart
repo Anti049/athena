@@ -138,7 +138,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: context.locale.preferenceCategoryNotifications.header,
         subtitle: context.locale.preferenceCategoryNotifications.summary,
         icon: Icons.notifications,
-        onClick: () => /*router.push(const SettingsNotificationsRoute())*/ {},
+        onClick: () => router.push(const NotificationSettingsRoute()),
       ),
       // Data & Storage
       TextPreference(

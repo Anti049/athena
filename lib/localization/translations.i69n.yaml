@@ -219,6 +219,19 @@ preferenceCategoryBrowse:
 preferenceCategoryNotifications:
     header: Notifications
     summary: Download complete, update available
+preferenceSectionBasicNotifications: Basic Notification Settings
+preferenceNotificationTest:
+    header: Test Notification
+    summary: Send a test notification
+preferenceNotificationsEnabled:
+    header: Notifications Enabled
+    summary: Enable or disable notifications
+preferenceNotificationsVibrate:
+    header: Vibrate
+    summary: Vibrate on notification
+preferenceNotificationsSound:
+    header: Sound
+    summary: Notification sound
 # - Data & Storage
 preferenceCategoryDataStorage:
     header: Data & Storage

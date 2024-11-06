@@ -127,12 +127,12 @@ jobs:
               run: |
                   set -e
 
-                  mv build/app/outputs/flutter-apk/${{env.REPO_NAME}}.apk athena-v${{env.VERSION_TAG}}.apk
-                  sha=`sha256sum athena-v${{env.VERSION_TAG}}.apk | awk '{print $1}'`
+                  mv build/app/outputs/flutter-apk/${{env.REPO_NAME}}.apk athena-${{env.VERSION_TAG}}.apk
+                  sha=`sha256sum athena-${{env.VERSION_TAG}}.apk | awk '{print $1}'`
                   echo "APK_UNIVERSAL_SHA=$sha" >> $GITHUB_ENV
 
-                  mv build/app/outputs/bundle/${{env.REPO_NAME}}.aab athena-v${{env.VERSION_TAG}}.aab
-                  sha=`sha256sum athena-v${{env.VERSION_TAG}}.aab | awk '{print $1}'`
+                  mv build/app/outputs/bundle/${{env.REPO_NAME}}.aab athena-${{env.VERSION_TAG}}.aab
+                  sha=`sha256sum athena-${{env.VERSION_TAG}}.aab | awk '{print $1}'`
                   echo "AAB_UNIVERSAL_SHA=$sha" >> $GITHUB_ENV
 
             # Step 10: Create Release
@@ -140,12 +140,12 @@ jobs:
               if: startsWith(github.ref, 'refs/tags/') && github.repository == 'Anti049/athena'
               uses: softprops/action-gh-release@v2.0.9
               with:
-                  name: Athena v${{env.VERSION_TAG}}
+                  name: Athena ${{env.VERSION_TAG}}
                   tag_name: ${{env.VERSION_TAG}}
                   token: ${{ secrets.TOKEN }}
                   files: |
-                      athena-v${{env.VERSION_TAG}}.apk
-                      athena-v${{env.VERSION_TAG}}.aab
+                      athena-${{env.VERSION_TAG}}.apk
+                      athena-${{env.VERSION_TAG}}.aab
                   body: |
                       ---
 
@@ -156,6 +156,6 @@ jobs:
                       | Universal (APK) | ${{env.APK_UNIVERSAL_SHA}} |
                       | Universal (AAB) | ${{env.AAB_UNIVERSAL_SHA}} |
 
-                      ## If you are unsure which version to use the go with athena-v${{env.VERSION_TAG}}.apk
+                      ## If you are unsure which version to use the go with athena-${{env.VERSION_TAG}}.apk
                   draft: true
                   prerelease: false

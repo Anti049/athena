@@ -1,5 +1,6 @@
 import 'package:athena/features/banners/presentation/banner_scaffold.dart';
 import 'package:athena/features/notifications/application/notification_controller.dart';
+import 'package:athena/features/notifications/application/notification_manager.dart';
 import 'package:athena/features/settings/application/appearance_preferences.dart';
 import 'package:athena/features/theme/data/prebuilt_themes.dart';
 import 'package:athena/features/theme/domain/base_theme.dart';
@@ -85,11 +86,10 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
   @override
   Widget build(BuildContext context) {
     // Get the preferences
-    // final preferencesNotifier = ref.watch(preferencesProvider.notifier);
     final appearance = ref.watch(appearancePreferencesProvider);
-    // final notifications = ref.watch(notificationCountProvider);
+    final notificationManager = ref.watch(notificationManagerProvider);
 
-    // notifications.initialize();
+    notificationManager.initialize();
 
     // Handle theming with system accent color
     return SystemThemeBuilder(

@@ -658,14 +658,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  fluttertoast:
-    dependency: transitive
-    description:
-      name: fluttertoast
-      sha256: "95f349437aeebe524ef7d6c9bde3e6b4772717cf46a0eb6a3ceaddc740b297cc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.2.8"
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -1042,14 +1034,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
-  nb_utils:
-    dependency: "direct main"
-    description:
-      name: nb_utils
-      sha256: "5e63a1a7ec93688e361761b7f177e64d0ce7ee4aade836002d00f8ca67f0f4ed"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.5"
   nm:
     dependency: transitive
     description:
@@ -1210,6 +1194,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  pubspec:
+    dependency: transitive
+    description:
+      name: pubspec
+      sha256: f534a50a2b4d48dc3bc0ec147c8bd7c304280fff23b153f3f11803c4d49d927e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  pubspec_dependency_sorter:
+    dependency: "direct dev"
+    description:
+      name: pubspec_dependency_sorter
+      sha256: d2114e92f003195de74a9ed3aeb9c59425ae9b7d637b802bb225b3fe3a4ba605
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   pubspec_parse:
     dependency: transitive
     description:
@@ -1551,6 +1551,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "11.3.0"
+  uri:
+    dependency: transitive
+    description:
+      name: uri
+      sha256: "889eea21e953187c6099802b7b4cf5219ba8f3518f604a1033064d45b1b8268a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   url_launcher:
     dependency: "direct main"
     description:
@@ -1751,6 +1759,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  yaml_writer:
+    dependency: transitive
+    description:
+      name: yaml_writer
+      sha256: "2ae2cd5f5a612a930ef2b1b40df540c819ab85e301f26dfaf0b6201b857db825"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
 sdks:
   dart: ">=3.5.2 <4.0.0"
   flutter: ">=3.24.0"

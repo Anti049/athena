@@ -35,6 +35,20 @@ extension PreferenceSet<T> on Preference<Set<T>> {
   }
 }
 
+extension PreferenceList<T> on Preference<List<T>> {
+  void add(T item) {
+    final myList = get();
+    myList.add(item);
+    set(myList);
+  }
+
+  void remove(T item) {
+    final myList = get();
+    myList.remove(item);
+    set(myList);
+  }
+}
+
 extension Toggle on Preference<bool> {
   bool toggle() {
     set(!get());

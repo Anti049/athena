@@ -38,9 +38,8 @@ class PreferenceItem extends ConsumerWidget {
           icon: dItem.icon,
           checked: value,
           onCheckedChanged: (newValue) async {
-            if (await dItem.onValueChanged!(newValue)) {
-              dItem.pref?.set(newValue);
-            }
+            dItem.pref?.set(newValue);
+            await dItem.onValueChanged!(newValue);
           },
         );
       case d.SegmentPreference():

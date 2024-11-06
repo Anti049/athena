@@ -38,8 +38,7 @@ sealed class CommonPreference<T> extends base.Preference<T> {
   @override
   T defaultValue() => defaultValue_;
 
-  Stream<T> _watch() =>
-      Stream.value(preferences.get(key_, defaultValue: defaultValue_));
+  Stream<T> _watch() => Stream.value(get());
 
   @override
   Stream<T> changes() => _watch();
@@ -147,5 +146,37 @@ class ObjectPrimitive<T> extends CommonPreference<T> {
   Future<void> write(String key, T value) {
     final pref = serializer(value);
     return preferences.put(key, pref);
+  }
+}
+
+class EnumPrimitive<Enum> extends CommonPreference<Enum> {
+  EnumPrimitive(
+    super.preferences,
+    super.key_,
+    super.defaultValue_,
+    this.values,
+  );
+
+  final Iterable<Enum> values;
+
+  @override
+  Enum read(Box preferences, String key, Enum defaultValue) {
+    try {
+      final pref = preferences.get(key, defaultValue: '');
+      return pref != ''
+          ? values.firstWhere((v) => v.toString() == pref)
+          : defaultValue;
+    } catch (e) {
+      return defaultValue;
+    }
+  }
+
+  @override
+  Future<void> write(String key, Enum value) =>
+      preferences.put(key, value.toString());
+
+  @override
+  Stream<Enum> _watch() {
+    return Stream.value(read(preferences, key_, defaultValue_));
   }
 }

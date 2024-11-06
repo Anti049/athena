@@ -1,6 +1,6 @@
 import 'package:animated_visibility/animated_visibility.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 // ignore: constant_identifier_names
 const BANNER_HEIGHT = 24.0;
@@ -93,7 +93,7 @@ class BannerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Banner variables
     final statusBarHeight = MediaQuery.of(context).viewPadding.top;
-    final labelStyle = textStyle ?? context.textTheme.labelMedium;
+    final labelStyle = textStyle ?? context.text.labelMedium;
     // Banner widget
     return GestureDetector(
       onTap: dismiss,
@@ -134,7 +134,7 @@ class BannerWidget extends StatelessWidget {
                         children: [
                           if (leftWidget != null) ...[
                             leftWidget!,
-                            16.width,
+                            const SizedBox(width: 16.0),
                           ],
                           Text(
                             label,
@@ -143,7 +143,7 @@ class BannerWidget extends StatelessWidget {
                             ),
                           ),
                           if (rightWidget != null) ...[
-                            16.width,
+                            const SizedBox(width: 16.0),
                             rightWidget!,
                           ],
                         ],
