@@ -14,3 +14,16 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 
 ## [v0.1.0] - 2024-11-06
 ### Added
+- Navigation between Home tab screens:
+  - Library
+  - Updates
+  - History
+  - Browse
+  - More
+- Added searchable Settings screen
+- Added Appearance screen
+  - Added support system/light/dark mode
+  - Added slider for contrast (ranges from -1.0 to 1.0, with 0.5 step increments)
+  - Added theme selection screen
+  - Added AMOLED true black background toggle
+  - Added language selection screen
