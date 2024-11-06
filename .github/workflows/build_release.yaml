@@ -1,34 +1,42 @@
 name: Build & Release
 
-# Run when a new version tag is pushed (v0.1.0 -> v0.1.1)
 on:
     push:
         branches:
             - main
+        tags:
+            - 'v*.*.*'
+    pull_request:
+        branches:
+            - main
+        tags:
+            - 'v*.*.*'
     workflow_dispatch:
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
-    build-android:
-        name: Build Android
-        runs-on: ubuntu-latest
+    build:
+        name: Build & Release
+        runs-on: macos-latest
         steps:
             # Step 0.1: Get Repository Name
             - name: Get Repository Name
               id: get_repo_name
               run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
 
+            # Step 0.2: Get Veersion from Tag
+            - name: Get Tag
+              if: startsWith(github.ref, 'refs/tags/') && github.repository == 'Anti049/athena'
+              run: |
+                  set -x
+                  echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+
             # Step 1: Checkout Repository
             - name: Checkout code
               uses: actions/checkout@v4
-
-            # Step 1.5: Get Version from pubspec.yaml
-            - name: Get flutter version
-              id: get_flutter_version
-              uses: its404/get-flutter-version@v1.0.0
-
-            # Step 1.6: Set Flutter Version
-            - name: Output flutter version
-              run: echo "VERSION=${{ steps.get_flutter_version.outputs.version_number }}" >> $GITHUB_ENV
 
             # Step 2: Setup Flutter
             - name: Setup Flutter
@@ -38,9 +46,9 @@ jobs:
 
             # Step 2.5: Setup Java
             - name: Setup Java
-              uses: actions/setup-java@v3.12.0
+              uses: actions/setup-java@v4.5.0
               with:
-                  distribution: 'oracle'
+                  distribution: 'adopt'
                   java-version: '17'
 
             # Step 3: Verify Flutter
@@ -59,186 +67,95 @@ jobs:
 
             # Step 4.5: Generate Intermediates
             - name: Generate Intermediates
-              run: dart run build_runner build --delete-conflicting-outputs
+              run: flutter pub run build_runner build --delete-conflicting-outputs
 
-            # Step 5: Run Tests
-            - name: Run Tests
-              run: flutter analyze
+            # Step 5.1: Decode Keystore
 
-            # Step 6.1: Build App Bundle
-            - name: Build App Bundle
-              run: flutter build appbundle --flavor production -t lib/main_production.dart --release
-
-            # Step 6.2: Build APK
-            - name: Build APK
+            # Step 5.2: Build Android (Single APK)
+            - name: Build Android (Single APK)
               run: flutter build apk --flavor production -t lib/main_production.dart --release
 
-            # Step 7: Rename APK and AAB Files
-            - name: Rename APK and AAB Files
+            # Step 5.3: Build Android (App Bundle)
+            - name: Build Android (App Bundle)
+              run: flutter build appbundle --flavor production -t lib/main_production.dart --release
+
+            # Step 5.4: Rename APK and App Bundle
+            - name: Rename APK and App Bundle
               run: |
-                  mv build/app/outputs/bundle/**/*.aab build/app/outputs/bundle/${{env.REPO_NAME}}-v${{env.VERSION}}.aab
-                  mv build/app/outputs/flutter-apk/*.apk build/app/outputs/flutter-apk/${{env.REPO_NAME}}-v${{env.VERSION}}.apk
+                  mv build/app/outputs/flutter-apk/*.apk build/app/outputs/flutter-apk/${{env.REPO_NAME}}.apk
+                  mv build/app/outputs/bundle/**/*.aab build/app/outputs/bundle/${{env.REPO_NAME}}.aab
 
-            # Step 8.1: Upload AAB File
-            - name: Upload AAB File
-              uses: actions/upload-artifact@v4
+            # Step 5.5: Upload APK and App Bundle
+            - name: Upload APK and App Bundle
+              uses: actions/upload-artifact@v4.4.3
               with:
-                  name: ${{env.REPO_NAME}}-v${{env.VERSION}}-aab
-                  path: build/app/outputs/bundle/${{env.REPO_NAME}}-v${{env.VERSION}}.aab
+                  name: ${{env.REPO_NAME}}
+                  path: |
+                      build/app/outputs/flutter-apk/${{env.REPO_NAME}}.apk
+                      build/app/outputs/bundle/${{env.REPO_NAME}}.aab
 
-            # Step 8.2: Upload APK File
-            - name: Upload APK File
-              uses: actions/upload-artifact@v4
-              with:
-                  name: ${{env.REPO_NAME}}-v${{env.VERSION}}-apk
-                  path: build/app/outputs/flutter-apk/${{env.REPO_NAME}}-v${{env.VERSION}}.apk
+            # Step 6.1: Build iOS
+            # - name: Build iOS
+            #   run: flutter build ipa --flavor production -t lib/main_production.dart --release --no-codesign
 
-    build-ios:
-        name: Build iOS
-        runs-on: macos-latest
-        steps:
-            # Step 0.1: Get Repository Name
-            - name: Get Repository Name
-              id: get_repo_name
-              run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+            # # Step 6.2: Compress Archives and IPAs
+            # - name: Compress Archives and IPAs
+            #   run: |
+            #       cd build
+            #       tar -czf ${{env.REPO_NAME}}-ios.tar.gz ios
 
-            # Step 1: Checkout Repository
-            - name: Checkout code
-              uses: actions/checkout@v4
+            # Step 7.1: Build Web
+            # - name: Build Web
+            #   run: flutter build web -t lib/main_production.dart --release
 
-            # Step 1.5: Get Version from pubspec.yaml
-            - name: Get flutter version
-              id: get_flutter_version
-              uses: its404/get-flutter-version@v1.0.0
+            # # Step 7.2: Compress Web
+            # - name: Compress Web
+            #   run: |
+            #       cd build/web
+            #       tar -czf ${{env.REPO_NAME}}-web.tar.gz .
 
-            # Step 1.6: Set Flutter Version
-            - name: Output flutter version
-              run: echo "VERSION=${{ steps.get_flutter_version.outputs.version_number }}" >> $GITHUB_ENV
-
-            # Step 2: Setup Flutter
-            - name: Setup Flutter
-              uses: subosito/flutter-action@v2
-              with:
-                  channel: stable
-
-            # Step 3: Verify Flutter
-            - name: Verify Flutter
+            # Step 8: Get Tag
+            - name: Get Tag
+              if: startsWith(github.ref, 'refs/tags/') && github.repository == 'Anti049/athena'
               run: |
-                  flutter --version
-                  flutter doctor --verbose
+                  set -x
+                  echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
-            # Step 3.5: Disable Analytics
-            - name: Disable Analytics
-              run: flutter config --no-analytics
-
-            # Step 4: Install Dependencies
-            - name: Install Dependencies
-              run: flutter pub get
-
-            # Step 4.5: Generate Intermediates
-            - name: Generate Intermediates
-              run: dart run build_runner build --delete-conflicting-outputs
-
-            # Step 5: Run Tests
-            - name: Run Tests
-              run: flutter analyze
-
-            # Step 6: Build iOS
-            - name: Build iOS
-              run: flutter build ipa --flavor production -t lib/main_production.dart --release --no-codesign
-
-            # Step 7: Compress Archives and IPAs
-            - name: Compress Archives and IPAs
+            # Step 9: Cleanup Artifacts
+            - name: Cleanup Artifacts
+              if: startsWith(github.ref, 'refs/tags/') && github.repository == 'Anti049/athena'
               run: |
-                  cd build
-                  tar -czf ${{env.REPO_NAME}}-v${{env.VERSION}}-ios.tar.gz ios
+                  set -e
 
-            # Step 8: Upload Archives and IPAs
-            - name: Upload Archives and IPAs
-              uses: actions/upload-artifact@v4
-              with:
-                  name: ${{env.REPO_NAME}}-v${{env.VERSION}}-ios
-                  path: build/${{env.REPO_NAME}}-v${{env.VERSION}}-ios.tar.gz
+                  mv build/app/outputs/flutter-apk/${{env.REPO_NAME}}.apk athena-v${{env.VERSION_TAG}}.apk
+                  sha=`sha256sum athena-v${{env.VERSION_TAG}}.apk | awk '{print $1}'`
+                  echo "APK_UNIVERSAL_SHA=$sha" >> $GITHUB_ENV
 
-    release:
-        name: Release
-        runs-on: ubuntu-latest
-        needs: [build-android, build-ios]
-        steps:
-            # Step 0.1: Get Repository Name
-            - name: Get Repository Name
-              id: get_repo_name
-              run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+                  mv build/app/outputs/bundle/${{env.REPO_NAME}}.aab athena-v${{env.VERSION_TAG}}.aab
+                  sha=`sha256sum athena-v${{env.VERSION_TAG}}.aab | awk '{print $1}'`
+                  echo "AAB_UNIVERSAL_SHA=$sha" >> $GITHUB_ENV
 
-            # Step 1: Checkout Repository
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            # Step 1.5: Get Version from pubspec.yaml
-            - name: Get flutter version
-              id: get_flutter_version
-              uses: its404/get-flutter-version@v1.0.0
-
-            # Step 1.6: Set Flutter Version
-            - name: Output flutter version
-              run: echo "VERSION=${{ steps.get_flutter_version.outputs.version_number }}" >> $GITHUB_ENV
-
-            # Step 1.1: Download AAB Artifact (Android)
-            - name: Download AAB Artifact
-              uses: actions/download-artifact@v4
-              with:
-                  name: ${{ env.REPO_NAME }}-v${{ env.VERSION }}-aab
-
-            # Step 1.2: Download APK Artifact (Android)
-            - name: Download APK Artifact
-              uses: actions/download-artifact@v4
-              with:
-                  name: ${{ env.REPO_NAME }}-v${{ env.VERSION }}-apk
-
-            # Step 1.3: Download Artifacts (iOS)
-            - name: Download Artifacts (iOS)
-              uses: actions/download-artifact@v4
-              with:
-                  name: ${{ env.REPO_NAME }}-v${{ env.VERSION }}-ios
-
-            # Step 2: Check if Tag Exists
-            - name: Check if Tag Exists
-              id: check_tag
-              run: |
-                  if git rev-parse "v${{ env.VERSION }}" >/dev/null 2>&1; then
-                    echo "TAG_EXISTS=true" >> $GITHUB_ENV
-                  else
-                    echo "TAG_EXISTS=false" >> $GITHUB_ENV
-                  fi
-
-            # Step 3: Create Release
+            # Step 10: Create Release
             - name: Create Release
-              if: env.TAG_EXISTS == 'false'
-              id: create_release
-              uses: ncipollo/release-action@v1
+              if: startsWith(github.ref, 'refs/tags/') && github.repository == 'Anti049/athena'
+              uses: softprops/action-gh-release@v2.0.9
               with:
-                  artifacts: |
-                      ${{ env.REPO_NAME }}-v${{ env.VERSION }}-aab
-                      ${{ env.REPO_NAME }}-v${{ env.VERSION }}-apk
-                      ${{ env.REPO_NAME }}-v${{ env.VERSION }}-ios
-                  tag: v${{ env.VERSION }}
+                  name: Athena v${{env.VERSION_TAG}}
+                  tag_name: ${{env.VERSION_TAG}}
                   token: ${{ secrets.TOKEN }}
+                  files: |
+                      athena-v${{env.VERSION_TAG}}.apk
+                      athena-v${{env.VERSION_TAG}}.aab
+                  body: |
+                      ---
 
-            # Step 3.5: Check if Release was Created
-            - name: Check Release Creation
-              if: env.TAG_EXISTS == 'false'
-              run: |
-                  if [ -z "${{ steps.create_release.outputs.upload_url }}" ]; then
-                    echo "Release creation failed."
-                    exit 1
-                  fi
+                      ### Checksums
 
-            # Step 4: Upload Release Notes
-            - name: Upload Release Notes
-              if: env.TAG_EXISTS == 'false'
-              uses: actions/upload-release-asset@v1
-              with:
-                  upload_url: ${{ steps.create_release.outputs.upload_url }}
-                  asset_path: CHANGELOG.md
-                  asset_name: CHANGELOG.md
-                  asset_content_type: text/markdown
+                      | Variant | SHA-256 |
+                      | ------- | ------- |
+                      | Universal (APK) | ${{env.APK_UNIVERSAL_SHA}} |
+                      | Universal (AAB) | ${{env.AAB_UNIVERSAL_SHA}} |
+
+                      ## If you are unsure which version to use the go with athena-v${{env.VERSION_TAG}}.apk
+                  draft: true
+                  prerelease: false
