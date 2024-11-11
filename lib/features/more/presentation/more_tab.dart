@@ -1,7 +1,7 @@
 import 'package:athena/common_widgets/banner_scaffold.dart';
 import 'package:athena/common_widgets/logo_header.dart';
 // import 'package:athena/features/more/domain/more_tab_model.dart';
-import 'package:athena/features/settings/application/base_preferences.dart';
+import 'package:athena/features/settings/providers/base_preferences.dart';
 import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
 import 'package:athena/localization/translations.dart';
@@ -77,7 +77,9 @@ class MoreTab extends ConsumerWidget {
           TextPreferenceWidget(
             title: context.locale.labelStorage,
             icon: Symbols.storage,
-            onPreferenceClick: () {},
+            onPreferenceClick: () {
+              router.push(const StorageSettingsRoute());
+            },
           ),
           const Divider(),
           TextPreferenceWidget(

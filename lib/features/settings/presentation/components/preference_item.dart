@@ -1,5 +1,5 @@
-import 'package:athena/features/settings/application/preference.dart';
-import 'package:athena/features/settings/domain/preference.dart' as d;
+import 'package:athena/features/settings/providers/preference.dart';
+import 'package:athena/features/settings/models/preference.dart' as d;
 import 'package:athena/features/settings/presentation/components/segmented_button_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/slider_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';
@@ -38,9 +38,8 @@ class PreferenceItem extends ConsumerWidget {
           icon: dItem.icon,
           checked: value,
           onCheckedChanged: (newValue) async {
-            if (await dItem.onValueChanged!(newValue)) {
-              dItem.pref?.set(newValue);
-            }
+            dItem.pref?.set(newValue);
+            await dItem.onValueChanged!(newValue);
           },
         );
       case d.SegmentPreference():

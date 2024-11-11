@@ -1,6 +1,6 @@
 import 'package:athena/common_widgets/logo_header.dart';
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/settings/domain/preference.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/platform.dart';

@@ -1,9 +1,9 @@
 import 'package:animated_visibility/animated_visibility.dart';
 import 'package:athena/common_widgets/banner_scaffold.dart';
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/settings/application/preference.dart';
-import 'package:athena/features/theme/data/prebuilt_themes.dart';
-import 'package:athena/features/theme/domain/base_theme.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/settings/providers/preference.dart';
+import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
+import 'package:athena/features/theme/models/base_theme.dart';
 import 'package:athena/features/theme/presentation/theme_section.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';

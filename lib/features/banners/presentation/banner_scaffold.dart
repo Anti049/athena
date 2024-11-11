@@ -1,7 +1,7 @@
-import 'package:athena/features/banners/application/banner_provider.dart'
+import 'package:athena/features/banners/providers/banner_provider.dart'
     show bannerProvider;
 import 'package:athena/features/banners/presentation/banner.dart';
-import 'package:athena/features/settings/application/appearance_preferences.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';

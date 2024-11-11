@@ -1,14 +1,14 @@
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/settings/domain/preference.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:change_case/change_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 @RoutePage()
 class LanguageSelectionScreen extends ConsumerWidget {
@@ -25,11 +25,11 @@ class LanguageSelectionScreen extends ConsumerWidget {
               .nameOf(
                 locale.languageCode,
               )
-              ?.capitalizeFirstLetter() ??
+              ?.toCapitalCase() ??
           locale.languageCode;
       final title = LocaleNamesLocalizationsDelegate
               .nativeLocaleNames[locale.languageCode]
-              ?.capitalizeFirstLetter() ??
+              ?.toCapitalCase() ??
           locale.languageCode;
 
       return TextPreference(

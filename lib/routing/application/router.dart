@@ -52,17 +52,12 @@ class AppRouter extends RootStackRouter {
           path: '/settings',
           page: SettingsRoute.page,
         ),
+        // More -> Settings - > Appearance
         AutoRoute(
           title: (context, data) =>
               context.locale.preferenceCategoryAppearance.header,
           path: '/settings/appearance',
           page: AppearanceSettingsRoute.page,
-        ),
-        AutoRoute(
-          title: (context, data) =>
-              context.locale.preferenceCategoryLibrary.header,
-          path: '/settings/library',
-          page: LibrarySettingsRoute.page,
         ),
         AutoRoute(
           title: (context, data) => context.locale.preferenceTheme.header,
@@ -74,6 +69,34 @@ class AppRouter extends RootStackRouter {
           path: '/settings/appearance/language',
           page: LanguageSelectionRoute.page,
         ),
+        // More -> Settings - > Library
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.preferenceCategoryLibrary.header,
+          path: '/settings/library',
+          page: LibrarySettingsRoute.page,
+        ),
+        // More -> Settings -> Reader
+        // More -> Settings -> Downloads
+        // More -> Settings -> Tracking
+        // More -> Settings -> Browse
+        // More -> Settings -> Notifications
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.preferenceCategoryNotifications.header,
+          path: '/settings/notifications',
+          page: NotificationSettingsRoute.page,
+        ),
+        // More -> Settings -> Data & Storage
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.preferenceCategoryDataStorage.header,
+          path: '/settings/storage',
+          page: StorageSettingsRoute.page,
+        ),
+        // More -> Settings -> Security & Privacy
+        // More -> Settings -> Advanced
+        // More -> About | More -> Settings -> About
         AutoRoute(
           title: (context, data) => context.locale.preferenceCategoryAbout,
           path: '/about',

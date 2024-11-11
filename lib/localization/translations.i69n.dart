@@ -133,8 +133,21 @@ class Translations implements i69n.I69nMessageBundle {
   PreferenceCategoryNotificationsTranslations
       get preferenceCategoryNotifications =>
           PreferenceCategoryNotificationsTranslations(this);
+  String get preferenceSectionBasicNotifications =>
+      "Basic Notification Settings";
+  PreferenceNotificationTestTranslations get preferenceNotificationTest =>
+      PreferenceNotificationTestTranslations(this);
+  PreferenceNotificationsEnabledTranslations
+      get preferenceNotificationsEnabled =>
+          PreferenceNotificationsEnabledTranslations(this);
+  PreferenceNotificationsVibrateTranslations
+      get preferenceNotificationsVibrate =>
+          PreferenceNotificationsVibrateTranslations(this);
+  PreferenceNotificationsSoundTranslations get preferenceNotificationsSound =>
+      PreferenceNotificationsSoundTranslations(this);
   PreferenceCategoryDataStorageTranslations get preferenceCategoryDataStorage =>
       PreferenceCategoryDataStorageTranslations(this);
+  String get preferenceStorageLocation => "Storage Location";
   PreferenceCategorySecurityPrivacyTranslations
       get preferenceCategorySecurityPrivacy =>
           PreferenceCategorySecurityPrivacyTranslations(this);
@@ -291,8 +304,20 @@ class Translations implements i69n.I69nMessageBundle {
         return preferenceCategoryBrowse;
       case 'preferenceCategoryNotifications':
         return preferenceCategoryNotifications;
+      case 'preferenceSectionBasicNotifications':
+        return preferenceSectionBasicNotifications;
+      case 'preferenceNotificationTest':
+        return preferenceNotificationTest;
+      case 'preferenceNotificationsEnabled':
+        return preferenceNotificationsEnabled;
+      case 'preferenceNotificationsVibrate':
+        return preferenceNotificationsVibrate;
+      case 'preferenceNotificationsSound':
+        return preferenceNotificationsSound;
       case 'preferenceCategoryDataStorage':
         return preferenceCategoryDataStorage;
+      case 'preferenceStorageLocation':
+        return preferenceStorageLocation;
       case 'preferenceCategorySecurityPrivacy':
         return preferenceCategorySecurityPrivacy;
       case 'preferenceCategoryAdvanced':
@@ -1247,6 +1272,97 @@ class PreferenceCategoryNotificationsTranslations
   const PreferenceCategoryNotificationsTranslations(this._parent);
   String get header => "Notifications";
   String get summary => "Download complete, update available";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceNotificationTestTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceNotificationTestTranslations(this._parent);
+  String get header => "Test Notification";
+  String get summary => "Send a test notification";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceNotificationsEnabledTranslations
+    implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceNotificationsEnabledTranslations(this._parent);
+  String get header => "Notifications Enabled";
+  String get summary => "Enable or disable notifications";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceNotificationsVibrateTranslations
+    implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceNotificationsVibrateTranslations(this._parent);
+  String get header => "Vibrate";
+  String get summary => "Vibrate on notification";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'header':
+        return header;
+      case 'summary':
+        return summary;
+      default:
+        return key;
+    }
+  }
+}
+
+class PreferenceNotificationsSoundTranslations
+    implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const PreferenceNotificationsSoundTranslations(this._parent);
+  String get header => "Sound";
+  String get summary => "Notification sound";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {

@@ -1,5 +1,5 @@
-import 'package:athena/features/settings/application/preference.dart';
-import 'package:athena/features/settings/application/tri_state.dart';
+import 'package:athena/features/settings/providers/preference.dart';
+import 'package:athena/features/settings/providers/tri_state.dart';
 import 'package:athena/features/settings/presentation/components/base_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
 import 'package:flutter/material.dart';

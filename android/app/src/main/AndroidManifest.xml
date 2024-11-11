@@ -1,44 +1,70 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <!-- Permissions -->
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-  <uses-permission android:name="android.permission.VIBRATE"/>
-  <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+  <!-- Permissions options for the `manage external storage` group -->
+  <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+  <!-- Permissions options for the `storage` group -->
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!-- Read storage permission for Android 12 and lower -->
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <!--
+      Granular media permissions for Android 13 and newer.
+      See https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions
+      for more information.
+    -->
+  <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+  <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+  <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
   <!-- NOTE: the example app requests USE_EXACT_ALARM to make it easier to run the app.
         Developers will need to check if their own app needs to use SCHEDULE_EXACT_ALARM instead -->
-  <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
-  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <!-- NOTE: Special use was selected as it's the closest match for this example app.
         apps should specify the appropriate permission for their use cases. -->
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
   <!-- Application -->
-  <application android:label="@string/app_name" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
-    <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:taskAffinity="" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
-      <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme"/>
+  <application android:label="@string/app_name" android:name="${applicationName}"
+    android:icon="@mipmap/ic_launcher">
+    <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop"
+      android:taskAffinity="" android:theme="@style/LaunchTheme"
+      android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+      android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
+      <meta-data android:name="io.flutter.embedding.android.NormalTheme"
+        android:resource="@style/NormalTheme" />
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <!-- Notification icon -->
-    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon"/>
+    <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+      android:resource="@drawable/notification_icon" />
     <!-- Don't delete the meta-data below. This is used by the Flutter tool to generate
     GeneratedPluginRegistrant.java -->
-    <meta-data android:name="flutterEmbedding" android:value="2"/>
+    <meta-data android:name="flutterEmbedding" android:value="2" />
     <!-- If you want your foreground service to be stopped if your app is stopped, set
     android:stopWithTask to true. See
     https://developer.android.com/reference/android/R.attr#stopWithTask -->
-    <service android:name="com.dexterous.flutterlocalnotifications.ForegroundService" android:exported="false" android:stopWithTask="false" android:foregroundServiceType="specialUse">
-      <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="To demonstrate how to use foreground services to show notifications"/>
+    <service android:name="com.dexterous.flutterlocalnotifications.ForegroundService"
+      android:exported="false" android:stopWithTask="false"
+      android:foregroundServiceType="specialUse">
+      <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+        android:value="To demonstrate how to use foreground services to show notifications" />
     </service>
-    <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"/>
-    <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"/>
-    <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+    <receiver android:exported="false"
+      android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+    <receiver android:exported="false"
+      android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+    <receiver android:exported="false"
+      android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
       <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
-        <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
-        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+        <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+        <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
       </intent-filter>
     </receiver>
   </application>
@@ -48,8 +74,8 @@
   In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
   <queries>
     <intent>
-      <action android:name="android.intent.action.PROCESS_TEXT"/>
-      <data android:mimeType="text/plain"/>
+      <action android:name="android.intent.action.PROCESS_TEXT" />
+      <data android:mimeType="text/plain" />
     </intent>
   </queries>
 </manifest>

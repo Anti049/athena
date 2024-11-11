@@ -155,6 +155,7 @@ preferenceDateFormat:
 preferenceRelativeTimestamps:
     header: Relative Timestamps
     summary(String date): '\"Today\" instead of \"$date\"'
+
 # - Library
 preferenceCategoryLibrary:
     header: Library
@@ -199,38 +200,61 @@ preferenceSwipeActions:
     download: Download Chapter
     delete: Delete Chapter
     flag: Flag Chapter
+
 # - Reader
 preferenceCategoryReader:
     header: Reader
     summary: Reading mode, display, navigation
+
 # - Downloads
 preferenceCategoryDownloads:
     header: Downloads
     summary: Automatic download, download ahead
+
 # - Tracking
 preferenceCategoryTracking:
     header: Tracking
     summary: Progress sync, enhanced sync
+
 # - Browse
 preferenceCategoryBrowse:
     header: Browse
     summary: Sources, extensions, global search
+
 # - Notifications
 preferenceCategoryNotifications:
     header: Notifications
     summary: Download complete, update available
+preferenceSectionBasicNotifications: Basic Notification Settings
+preferenceNotificationTest:
+    header: Test Notification
+    summary: Send a test notification
+preferenceNotificationsEnabled:
+    header: Notifications Enabled
+    summary: Enable or disable notifications
+preferenceNotificationsVibrate:
+    header: Vibrate
+    summary: Vibrate on notification
+preferenceNotificationsSound:
+    header: Sound
+    summary: Notification sound
+
 # - Data & Storage
 preferenceCategoryDataStorage:
     header: Data & Storage
     summary: Backups, storage space
+preferenceStorageLocation: Storage Location
+
 # - Security & Privacy
 preferenceCategorySecurityPrivacy:
     header: Security & Privacy
     summary: App lock, secure screen
+
 # - Advanced
 preferenceCategoryAdvanced:
     header: Advanced
     summary: Developer options, experimental features
+
 # - About
 preferenceCategoryAbout: About
 preferenceVersion:
