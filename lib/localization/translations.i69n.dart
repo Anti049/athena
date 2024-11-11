@@ -147,6 +147,7 @@ class Translations implements i69n.I69nMessageBundle {
       PreferenceNotificationsSoundTranslations(this);
   PreferenceCategoryDataStorageTranslations get preferenceCategoryDataStorage =>
       PreferenceCategoryDataStorageTranslations(this);
+  String get preferenceStorageLocation => "Storage Location";
   PreferenceCategorySecurityPrivacyTranslations
       get preferenceCategorySecurityPrivacy =>
           PreferenceCategorySecurityPrivacyTranslations(this);
@@ -315,6 +316,8 @@ class Translations implements i69n.I69nMessageBundle {
         return preferenceNotificationsSound;
       case 'preferenceCategoryDataStorage':
         return preferenceCategoryDataStorage;
+      case 'preferenceStorageLocation':
+        return preferenceStorageLocation;
       case 'preferenceCategorySecurityPrivacy':
         return preferenceCategorySecurityPrivacy;
       case 'preferenceCategoryAdvanced':

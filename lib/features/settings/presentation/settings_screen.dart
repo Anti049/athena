@@ -1,6 +1,6 @@
 import 'package:athena/common_widgets/empty.dart';
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/settings/domain/preference.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/features/settings/presentation/screens/settings_appearance.dart';
 import 'package:athena/features/settings/presentation/screens/settings_library.dart';
@@ -145,7 +145,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: context.locale.preferenceCategoryDataStorage.header,
         subtitle: context.locale.preferenceCategoryDataStorage.summary,
         icon: Icons.storage,
-        onClick: () => /*router.push(const SettingsDataStorageRoute())*/ {},
+        onClick: () => router.push(const StorageSettingsRoute()),
       ),
       // Security & Privacy
       TextPreference(

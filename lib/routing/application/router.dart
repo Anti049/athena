@@ -76,6 +76,10 @@ class AppRouter extends RootStackRouter {
           path: '/settings/library',
           page: LibrarySettingsRoute.page,
         ),
+        // More -> Settings -> Reader
+        // More -> Settings -> Downloads
+        // More -> Settings -> Tracking
+        // More -> Settings -> Browse
         // More -> Settings -> Notifications
         AutoRoute(
           title: (context, data) =>
@@ -83,6 +87,15 @@ class AppRouter extends RootStackRouter {
           path: '/settings/notifications',
           page: NotificationSettingsRoute.page,
         ),
+        // More -> Settings -> Data & Storage
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.preferenceCategoryDataStorage.header,
+          path: '/settings/storage',
+          page: StorageSettingsRoute.page,
+        ),
+        // More -> Settings -> Security & Privacy
+        // More -> Settings -> Advanced
         // More -> About | More -> Settings -> About
         AutoRoute(
           title: (context, data) => context.locale.preferenceCategoryAbout,

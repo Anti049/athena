@@ -1,6 +1,6 @@
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/theme/data/prebuilt_themes.dart';
-import 'package:athena/features/theme/domain/base_theme.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
+import 'package:athena/features/theme/models/base_theme.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:flutter/material.dart';

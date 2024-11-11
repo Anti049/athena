@@ -1,4 +1,4 @@
-import 'package:athena/features/settings/domain/preference.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_group_header.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

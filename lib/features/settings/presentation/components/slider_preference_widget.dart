@@ -1,4 +1,4 @@
-import 'package:athena/features/settings/application/preference.dart';
+import 'package:athena/features/settings/providers/preference.dart';
 import 'package:athena/features/settings/presentation/components/base_preference_widget.dart';
 import 'package:flutter/material.dart';
 

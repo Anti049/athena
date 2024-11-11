@@ -156,6 +156,6 @@ jobs:
                       | Universal (APK) | ${{env.APK_UNIVERSAL_SHA}} |
                       | Universal (AAB) | ${{env.AAB_UNIVERSAL_SHA}} |
 
-                      ## If you are unsure which version to use the go with athena-${{env.VERSION_TAG}}.apk
+                      ## If you are unsure which version to use then go with athena-${{env.VERSION_TAG}}.apk
                   draft: true
                   prerelease: false

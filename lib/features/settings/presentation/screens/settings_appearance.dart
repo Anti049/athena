@@ -1,7 +1,7 @@
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/settings/domain/preference.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/searchable_settings.dart';
-import 'package:athena/features/theme/data/prebuilt_themes.dart';
+import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
 import 'package:athena/routing/application/router.gr.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:athena/utils/theming.dart';

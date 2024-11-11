@@ -1,13 +1,15 @@
 import 'package:athena/features/banners/presentation/banner_scaffold.dart';
-import 'package:athena/features/notifications/application/notification_controller.dart';
-import 'package:athena/features/notifications/application/notification_manager.dart';
-import 'package:athena/features/settings/application/appearance_preferences.dart';
-import 'package:athena/features/theme/data/prebuilt_themes.dart';
-import 'package:athena/features/theme/domain/base_theme.dart';
-import 'package:athena/features/theme/domain/custom_colors.dart';
-import 'package:athena/features/theme/domain/theme_pair.dart';
-import 'package:athena/features/works/data/work_repository.dart';
-import 'package:athena/features/works/data/work_repository_local.dart';
+import 'package:athena/features/category/repositories/category_repository.dart';
+import 'package:athena/features/category/repositories/category_repository_impl.dart';
+import 'package:athena/features/notifications/controllers/notification_controller.dart';
+import 'package:athena/features/notifications/providers/notification_manager.dart';
+import 'package:athena/features/settings/providers/appearance_preferences.dart';
+import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
+import 'package:athena/features/theme/models/base_theme.dart';
+import 'package:athena/features/theme/models/custom_colors.dart';
+import 'package:athena/features/theme/models/theme_pair.dart';
+import 'package:athena/features/works/repositories/work_repository.dart';
+import 'package:athena/features/works/repositories/work_repository_local.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/routing/application/router.dart';
 import 'package:athena/utils/responsive_layout.dart';
@@ -51,6 +53,8 @@ Future<void> main() async {
       overrides: [
         workRepositoryProvider
             .overrideWith((ref) => ref.watch(workRepositoryLocalProvider)),
+        categoryRepositoryProvider
+            .overrideWith((ref) => ref.watch(categoryRepositoryImplProvider)),
       ],
       // App
       child: const AthenaApp(),

@@ -1,4 +1,4 @@
-import 'package:athena/features/theme/domain/custom_colors.dart';
+import 'package:athena/features/theme/models/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 // Custom colors

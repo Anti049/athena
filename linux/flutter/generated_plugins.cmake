@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
   dynamic_color
   file_selector_linux
-  sqlite3_flutter_libs
   system_theme
   url_launcher_linux
 )

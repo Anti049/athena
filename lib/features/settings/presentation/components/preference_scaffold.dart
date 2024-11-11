@@ -1,5 +1,5 @@
 import 'package:athena/common_widgets/banner_scaffold.dart';
-import 'package:athena/features/settings/domain/preference.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_screen.dart';
 import 'package:flutter/material.dart';
 

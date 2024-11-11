@@ -1,4 +1,4 @@
-import 'package:athena/features/settings/application/base_preferences.dart';
+import 'package:athena/features/settings/providers/base_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

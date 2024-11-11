@@ -1,5 +1,5 @@
-import 'package:athena/features/settings/application/preference.dart';
-import 'package:athena/features/settings/domain/preference.dart' as d;
+import 'package:athena/features/settings/providers/preference.dart';
+import 'package:athena/features/settings/models/preference.dart' as d;
 import 'package:athena/features/settings/presentation/components/segmented_button_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/slider_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';

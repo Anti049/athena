@@ -1,4 +1,4 @@
-import 'package:athena/features/theme/domain/base_theme.dart';
+import 'package:athena/features/theme/models/base_theme.dart';
 import 'package:athena/features/theme/presentation/components/theme_preview.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';

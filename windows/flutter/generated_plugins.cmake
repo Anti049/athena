@@ -7,7 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   dynamic_color
   file_selector_windows
-  sqlite3_flutter_libs
+  permission_handler_windows
   system_theme
   url_launcher_windows
 )
