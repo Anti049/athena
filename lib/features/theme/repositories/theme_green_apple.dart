@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #D33131
 /// Neutral #5D5F5B
 final greenAppleTheme = BaseTheme.fromColors(
-  'green_apple',
+  'greenApple',
   ThemeCategory.tachiyomi,
   const Color(0xFF188140),
   secondary: const Color(0xFF188140),

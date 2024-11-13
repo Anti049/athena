@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 final yinYangTheme = BaseTheme.fromPrebuilt(
   category: ThemeCategory.tachiyomi,
   BasePrebuiltTheme(
-    'yin_yang',
+    'yinYang',
     lightColorScheme: const ColorScheme.light(
       primary: Color(0xFF000000),
       onPrimary: Color(0xFFFFFFFF),

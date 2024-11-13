@@ -35,33 +35,6 @@ final Map<String, BaseTheme?> prebuiltThemes = {
 };
 
 String getThemeName(BuildContext context, String themeID) {
-  return switch (themeID) {
-    'dynamic' =>
-      context.locale.settings.appearance.theming.theme.themes.dynamic,
-    'green_apple' =>
-      context.locale.settings.appearance.theming.theme.themes.greenApple,
-    'lavender' =>
-      context.locale.settings.appearance.theming.theme.themes.lavender,
-    'midnight_dusk' =>
-      context.locale.settings.appearance.theming.theme.themes.midnightDusk,
-    'nord' => context.locale.settings.appearance.theming.theme.themes.nord,
-    'strawberry' =>
-      context.locale.settings.appearance.theming.theme.themes.strawberry,
-    'tako' => context.locale.settings.appearance.theming.theme.themes.tako,
-    'teal_and_turquoise' =>
-      context.locale.settings.appearance.theming.theme.themes.tealTurquoise,
-    'tidal_wave' =>
-      context.locale.settings.appearance.theming.theme.themes.tidalWave,
-    'yin_yang' =>
-      context.locale.settings.appearance.theming.theme.themes.yinYang,
-    'yotsuba' =>
-      context.locale.settings.appearance.theming.theme.themes.yotsuba,
-    'silver_wolf' =>
-      context.locale.settings.appearance.theming.theme.themes.silverWolf,
-    'dracula_pro' =>
-      context.locale.settings.appearance.theming.theme.themes.dracula,
-    'gaziter' =>
-      context.locale.settings.appearance.theming.theme.themes.gaziter,
-    _ => context.locale.settings.appearance.theming.theme.themes.system,
-  };
+  return context.locale.settings.appearance.theming.theme.themes[themeID]
+      .toString();
 }

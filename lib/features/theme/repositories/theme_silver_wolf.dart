@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #E96AB8
 /// Neutral #3E3550
 final silverWolfTheme = BaseTheme.fromColors(
-  "silver_wolf",
+  "silverWolf",
   ThemeCategory.hsr,
   const Color(0xFFBE8FF6),
   secondary: const Color(0xFF99B2F4),

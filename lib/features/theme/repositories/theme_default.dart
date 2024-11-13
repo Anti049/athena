@@ -3,7 +3,7 @@ import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/services.dart';
 
 final defaultTheme = BaseTheme.fromColors(
-  'default',
+  'system',
   ThemeCategory.base,
   Color(
     switch (appFlavor) {

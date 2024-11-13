@@ -4,10 +4,10 @@ import 'package:athena/features/category/repositories/category_repository_impl.d
 import 'package:athena/features/notifications/controllers/notification_controller.dart';
 import 'package:athena/features/notifications/providers/notification_manager.dart';
 import 'package:athena/features/settings/providers/appearance_preferences.dart';
-import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
 import 'package:athena/features/theme/models/base_theme.dart';
 import 'package:athena/features/theme/models/custom_colors.dart';
 import 'package:athena/features/theme/models/theme_pair.dart';
+import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
 import 'package:athena/features/works/repositories/work_repository.dart';
 import 'package:athena/features/works/repositories/work_repository_local.dart';
 import 'package:athena/localization/translations.dart';
@@ -26,7 +26,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:upgrader/upgrader.dart';
-import 'package:weblate_sdk/weblate_sdk.dart';
 
 Future<void> main() async {
   // Ensure plugin services are initialized

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 /// Tertiary #7A5733
 /// Neutral #16151D
 final midnightDuskTheme = BaseTheme.fromColors(
-  'midnight_dusk',
+  'midnightDusk',
   ThemeCategory.tachiyomi,
   const Color(0xFFF02475),
   secondary: const Color(0xFFF02475),

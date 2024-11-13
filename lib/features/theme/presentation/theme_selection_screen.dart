@@ -34,21 +34,35 @@ class _ThemeSelectionScreenState extends ConsumerState<ThemeSelectionScreen> {
     }
   }
 
-  List<BaseTheme?> getThemesByCategory(ThemeCategory category) {
+  List<BaseTheme?> getThemesByCategory(
+    BuildContext context,
+    ThemeCategory category,
+  ) {
     // Filter out null themes and group by category
     final themes = prebuiltThemes.values
         .where((theme) => theme != null && theme.category == category)
         .toList();
     // Sort themes by name
-    themes.sort((a, b) => a!.name.compareTo(b!.name));
+    themes.sort((a, b) {
+      final first = context
+          .locale.settings.appearance.theming.theme.themes[a!.name]
+          .toString();
+      final second = context
+          .locale.settings.appearance.theming.theme.themes[b!.name]
+          .toString();
+
+      return first.compareTo(second);
+    });
     // Return the sorted themes
     return themes;
   }
 
-  Map<ThemeCategory, List<BaseTheme?>> getThemesByCategoryMap() {
+  Map<ThemeCategory, List<BaseTheme?>> getThemesByCategoryMap(
+    BuildContext context,
+  ) {
     final themesByCategory = <ThemeCategory, List<BaseTheme?>>{};
     for (final category in ThemeCategory.values) {
-      themesByCategory[category] = getThemesByCategory(category);
+      themesByCategory[category] = getThemesByCategory(context, category);
     }
     return themesByCategory;
   }
@@ -78,7 +92,7 @@ class _ThemeSelectionScreenState extends ConsumerState<ThemeSelectionScreen> {
   Widget build(BuildContext context) {
     final themeMode = ref.watch(appearancePreferencesProvider).themeMode();
     final themeName = ref.watch(appearancePreferencesProvider).themeName();
-    final categorizedThemes = getThemesByCategoryMap();
+    final categorizedThemes = getThemesByCategoryMap(context);
 
     return BannerScaffold(
       appBar: AppBar(
