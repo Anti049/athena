@@ -15,21 +15,32 @@ class HomeNavigationItem {
 
   final IconData icon;
   final String label;
-  final String route;
+  final PageRouteInfo route;
 
-  NavigationDestination toDestination({
-    required int index,
-  }) {
+  Icon get unselectedIcon => Icon(icon, fill: 0.0);
+  Icon get selectedIcon => Icon(icon, fill: 1.0);
+
+  NavigationDestination toBarDestination() {
     return NavigationDestination(
-      icon: Icon(
-        icon,
-        fill: 0.0,
-      ),
-      selectedIcon: Icon(
-        icon,
-        fill: 1.0,
-      ),
+      icon: unselectedIcon,
+      selectedIcon: selectedIcon,
       label: label,
+    );
+  }
+
+  NavigationRailDestination toRailDestination() {
+    return NavigationRailDestination(
+      icon: unselectedIcon,
+      selectedIcon: selectedIcon,
+      label: Text(label),
+    );
+  }
+
+  NavigationDrawerDestination toDrawerDestination() {
+    return NavigationDrawerDestination(
+      icon: unselectedIcon,
+      selectedIcon: selectedIcon,
+      label: Text(label),
     );
   }
 }
@@ -47,43 +58,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final routes = [
-      const LibraryRoute(),
-      const UpdatesRoute(),
-      const HistoryRoute(),
-      const BrowseRoute(),
-      const MoreRoute(),
-    ];
     final navigationItems = [
       HomeNavigationItem(
         icon: Symbols.collections_bookmark,
         label: context.locale.page.library.title,
-        route: '/library',
+        route: const LibraryRoute(),
       ),
       HomeNavigationItem(
         icon: Symbols.release_alert,
         label: context.locale.page.updates.title,
-        route: '/updates',
+        route: const UpdatesRoute(),
       ),
       HomeNavigationItem(
         icon: Symbols.history,
         label: context.locale.page.history.title,
-        route: '/history',
+        route: const HistoryRoute(),
       ),
       HomeNavigationItem(
         icon: Symbols.explore,
         label: context.locale.page.browse.title,
-        route: '/browse',
+        route: const BrowseRoute(),
       ),
       HomeNavigationItem(
         icon: Symbols.more_horiz,
         label: context.locale.page.more.title,
-        route: '/more',
+        route: const MoreRoute(),
       ),
     ];
 
     return AutoTabsRouter(
-      routes: routes,
+      routes: navigationItems.map((item) => item.route).toList(),
       transitionBuilder: (context, child, animation) {
         return FadeTransition(
           opacity: animation,
@@ -102,15 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   labelType: NavigationRailLabelType.all,
                   selectedIndex: tabsRouter.activeIndex,
                   onDestinationSelected: tabsRouter.setActiveIndex,
-                  destinations: navigationItems
-                      .map(
-                        (item) => NavigationRailDestination(
-                          icon: Icon(item.icon),
-                          selectedIcon: Icon(item.icon, fill: 1.0),
-                          label: Text(item.label),
-                        ),
-                      )
-                      .toList(),
+                  destinations: [
+                    ...navigationItems.map((item) => item.toRailDestination()),
+                  ],
                 ),
               if (context.atLeastLarge)
                 Container(
@@ -138,11 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // Destinations
                       ...navigationItems.map(
-                        (item) => NavigationDrawerDestination(
-                          icon: Icon(item.icon),
-                          selectedIcon: Icon(item.icon, fill: 1.0),
-                          label: Text(item.label),
-                        ),
+                        (item) => item.toDrawerDestination(),
                       ),
                     ],
                   ),
@@ -156,13 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ? NavigationBar(
                   selectedIndex: tabsRouter.activeIndex,
                   onDestinationSelected: tabsRouter.setActiveIndex,
-                  destinations: navigationItems
-                      .map(
-                        (item) => item.toDestination(
-                          index: navigationItems.indexOf(item),
-                        ),
-                      )
-                      .toList(),
+                  destinations: [
+                    ...navigationItems.map((item) => item.toBarDestination()),
+                  ],
                 )
               : null,
         );
