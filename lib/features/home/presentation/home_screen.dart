@@ -57,27 +57,27 @@ class _HomeScreenState extends State<HomeScreen> {
     final navigationItems = [
       HomeNavigationItem(
         icon: Symbols.collections_bookmark,
-        label: context.locale.labelLibrary,
+        label: context.locale.page.library.title,
         route: '/library',
       ),
       HomeNavigationItem(
         icon: Symbols.release_alert,
-        label: context.locale.labelUpdates,
+        label: context.locale.page.updates.title,
         route: '/updates',
       ),
       HomeNavigationItem(
         icon: Symbols.history,
-        label: context.locale.labelHistory,
+        label: context.locale.page.history.title,
         route: '/history',
       ),
       HomeNavigationItem(
         icon: Symbols.explore,
-        label: context.locale.labelBrowse,
+        label: context.locale.page.browse.title,
         route: '/browse',
       ),
       HomeNavigationItem(
         icon: Symbols.more_horiz,
-        label: context.locale.labelMore,
+        label: context.locale.page.more.title,
         route: '/more',
       ),
     ];

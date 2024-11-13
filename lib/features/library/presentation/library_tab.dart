@@ -37,52 +37,19 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
 
   bool _searchActive = false;
   final MenuController _menuController = MenuController();
-  bool _selectionActive = false;
-  Map<int, bool> _selectedItems = {};
-  int _lastSelected = -1;
+
+  @override
+  void initState() {
+    // Start scheduled task to refresh every minute
+    // final model = ref.read(libraryTabModelProvider.notifier);
+    // model.refresh();
+
+    super.initState();
+  }
 
   Future<void> _onRefresh() async {
     final model = ref.read(libraryTabModelProvider.notifier);
     model.refresh();
-  }
-
-  void _setSelection(
-    int index, {
-    bool range = false,
-  }) {
-    setState(
-      () {
-        // If none are selected, select the item
-        if (_lastSelected == -1) {
-          _selectedItems[index] = true;
-        } else {
-          if (range) {
-            final start = _lastSelected;
-            final end = index;
-            final range = start < end ? start.to(end) : end.to(start);
-            for (final i in range) {
-              _selectedItems[i] = true;
-            }
-          } else {
-            // If the item is already selected, deselect it
-            if (_selectedItems[index] ?? false) {
-              _selectedItems[index] = false;
-            } else {
-              // If the item is not selected, select it
-              _selectedItems[index] = true;
-            }
-          }
-        }
-
-        // Check if any items are selected
-        _selectionActive = _selectedItems.values.any((element) => element);
-        if (!_selectionActive) {
-          _lastSelected = -1;
-        } else {
-          _lastSelected = index;
-        }
-      },
-    );
   }
 
   void showOptions(BuildContext context) {
@@ -111,14 +78,27 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
               mainAxisSize: MainAxisSize.min,
               children: [
                 const LibraryOptionsSheet(),
+                const Divider(height: 0.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 8.0,
-                    horizontal: 16.0,
+                    horizontal: 8.0,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      const Spacer(),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: context.scheme.secondary,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          context.locale.action.reset,
+                        ),
+                      ),
+                      const SizedBox(width: 8.0),
                       TextButton(
                         style: TextButton.styleFrom(
                           foregroundColor: context.scheme.error,
@@ -126,7 +106,9 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Close'),
+                        child: Text(
+                          context.locale.action.close,
+                        ),
                       ),
                     ],
                   ),
@@ -182,21 +164,21 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(context.locale.libraryMenu.updateLibrary),
+                    child: Text(context.locale.library.menu.updateLibrary),
                   ),
                 ),
                 MenuItemButton(
                   onPressed: () {},
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(context.locale.libraryMenu.updateCategory),
+                    child: Text(context.locale.library.menu.updateCategory),
                   ),
                 ),
                 MenuItemButton(
                   onPressed: () {},
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(context.locale.libraryMenu.randomWork),
+                    child: Text(context.locale.library.menu.randomWork),
                   ),
                 ),
               ],
@@ -303,7 +285,7 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                                     minHeight: constraints.maxHeight,
                                   ),
                                   child: Empty(
-                                    message: context.locale.libraryEmpty,
+                                    message: context.locale.library.empty,
                                   ),
                                 ),
                               )
@@ -370,7 +352,10 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child: Text('Close'),
+                                                        child: Text(context
+                                                            .locale
+                                                            .action
+                                                            .close),
                                                       ),
                                                     ],
                                                   );

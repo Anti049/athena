@@ -18,6 +18,7 @@ import path_provider_foundation
 import shared_preferences_foundation
 import system_theme
 import url_launcher_macos
+import weblate_sdk
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AudioSessionPlugin.register(with: registry.registrar(forPlugin: "AudioSessionPlugin"))
@@ -33,4 +34,5 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
   SystemThemePlugin.register(with: registry.registrar(forPlugin: "SystemThemePlugin"))
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
+  WeblateSdkPlugin.register(with: registry.registrar(forPlugin: "WeblateSdkPlugin"))
 }

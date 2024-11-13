@@ -84,8 +84,8 @@ class LibraryTabModel extends _$LibraryTabModel {
         prefs.filterBookmarked,
         prefs.filterCompleted,
         prefs.filterIntervalCustom,
-        ...trackFilter.values,
-      ]).any((it) => it != null),
+        // ...trackFilter.values,
+      ]).any((it) => it != null && it),
     ).distinct().map(
           (it) => LibraryTabState(
             hasActiveFilters: it,

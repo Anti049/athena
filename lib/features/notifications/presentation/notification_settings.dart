@@ -13,7 +13,7 @@ class INotificationSettings extends ISearchableSettings {
 
   @override
   String getTitle(BuildContext context) {
-    return context.locale.preferenceCategoryNotifications.header;
+    return context.locale.page.settings.notifications;
   }
 
   @override
@@ -29,8 +29,8 @@ class INotificationSettings extends ISearchableSettings {
 
     return [
       TextPreference(
-        title: context.locale.preferenceNotificationTest.header,
-        subtitle: context.locale.preferenceNotificationTest.summary,
+        title: context.locale.settings.notifications.test.title,
+        subtitle: context.locale.settings.notifications.test.subtitle,
         onClick: () {
           notificationManager.sendNotification(
               title: 'Test', body: 'Test notification');
@@ -46,23 +46,25 @@ class INotificationSettings extends ISearchableSettings {
     NotificationManager notificationManager,
   ) {
     return PreferenceGroup(
-      title: context.locale.preferenceSectionBasicNotifications,
+      title: context.locale.settings.notifications.basic.title,
       preferenceItems: [
         SwitchPreference(
-          title: context.locale.preferenceNotificationsEnabled.header,
-          subtitle: context.locale.preferenceNotificationsEnabled.summary,
+          title: context.locale.settings.notifications.basic.enabled.title,
+          subtitle:
+              context.locale.settings.notifications.basic.enabled.subtitle,
           icon: Icons.notifications,
           pref: notificationPreferences.notificationsEnabled(),
         ),
         SwitchPreference(
-          title: context.locale.preferenceNotificationsVibrate.header,
-          subtitle: context.locale.preferenceNotificationsVibrate.summary,
+          title: context.locale.settings.notifications.basic.vibrate.title,
+          subtitle:
+              context.locale.settings.notifications.basic.vibrate.subtitle,
           icon: Icons.vibration,
           pref: notificationPreferences.notificationsVibrate(),
         ),
         SwitchPreference(
-          title: context.locale.preferenceNotificationsSound.header,
-          subtitle: context.locale.preferenceNotificationsSound.summary,
+          title: context.locale.settings.notifications.basic.sound.title,
+          subtitle: context.locale.settings.notifications.basic.sound.subtitle,
           icon: Icons.volume_up,
           pref: notificationPreferences.notificationsSound(),
         ),

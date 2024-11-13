@@ -21,58 +21,59 @@ class AppRouter extends RootStackRouter {
           page: HomeRoute.page,
           children: [
             AutoRoute(
-              title: (context, data) => context.locale.labelLibrary,
+              title: (context, data) => context.locale.page.library.title,
               path: 'library',
               page: LibraryRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.labelUpdates,
+              title: (context, data) => context.locale.page.updates.title,
               path: 'updates',
               page: UpdatesRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.labelHistory,
+              title: (context, data) => context.locale.page.history.title,
               path: 'history',
               page: HistoryRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.labelBrowse,
+              title: (context, data) => context.locale.page.browse.title,
               path: 'browse',
               page: BrowseRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.labelMore,
+              title: (context, data) => context.locale.page.more.title,
               path: 'more',
               page: MoreRoute.page,
             ),
           ],
         ),
         AutoRoute(
-          title: (context, data) => context.locale.labelSettings,
+          title: (context, data) => context.locale.page.settings.title,
           path: '/settings',
           page: SettingsRoute.page,
         ),
         // More -> Settings - > Appearance
         AutoRoute(
           title: (context, data) =>
-              context.locale.preferenceCategoryAppearance.header,
+              context.locale.page.settings.appearance.title,
           path: '/settings/appearance',
           page: AppearanceSettingsRoute.page,
         ),
         AutoRoute(
-          title: (context, data) => context.locale.preferenceTheme.header,
+          title: (context, data) =>
+              context.locale.page.settings.appearance.theme,
           path: '/settings/appearance/theme',
           page: ThemeSelectionRoute.page,
         ),
         AutoRoute(
-          title: (context, data) => context.locale.preferenceLanguage.header,
+          title: (context, data) =>
+              context.locale.page.settings.appearance.language,
           path: '/settings/appearance/language',
           page: LanguageSelectionRoute.page,
         ),
         // More -> Settings - > Library
         AutoRoute(
-          title: (context, data) =>
-              context.locale.preferenceCategoryLibrary.header,
+          title: (context, data) => context.locale.page.library.title,
           path: '/settings/library',
           page: LibrarySettingsRoute.page,
         ),
@@ -82,15 +83,13 @@ class AppRouter extends RootStackRouter {
         // More -> Settings -> Browse
         // More -> Settings -> Notifications
         AutoRoute(
-          title: (context, data) =>
-              context.locale.preferenceCategoryNotifications.header,
+          title: (context, data) => context.locale.page.settings.notifications,
           path: '/settings/notifications',
           page: NotificationSettingsRoute.page,
         ),
         // More -> Settings -> Data & Storage
         AutoRoute(
-          title: (context, data) =>
-              context.locale.preferenceCategoryDataStorage.header,
+          title: (context, data) => context.locale.page.settings.dataStorage,
           path: '/settings/storage',
           page: StorageSettingsRoute.page,
         ),
@@ -98,7 +97,7 @@ class AppRouter extends RootStackRouter {
         // More -> Settings -> Advanced
         // More -> About | More -> Settings -> About
         AutoRoute(
-          title: (context, data) => context.locale.preferenceCategoryAbout,
+          title: (context, data) => context.locale.more.about,
           path: '/about',
           page: AboutRoute.page,
         ),

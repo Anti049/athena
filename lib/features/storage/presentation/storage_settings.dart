@@ -1,4 +1,5 @@
 import 'package:athena/features/storage/providers/storage_preferences.dart';
+import 'package:athena/utils/platform.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +18,7 @@ class IStorageSettings extends ISearchableSettings {
 
   @override
   String getTitle(BuildContext context) {
-    return context.locale.preferenceCategoryDataStorage.header;
+    return context.locale.page.settings.dataStorage;
   }
 
   @override
@@ -33,11 +34,13 @@ class IStorageSettings extends ISearchableSettings {
     }
   }
 
-  Future<Permission> getPermission() async {
+  Future<Permission> getPermission(BuildContext context) async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    if (androidInfo.version.sdkInt >= 33) {
-      return Permission.manageExternalStorage;
+    if (context.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        return Permission.manageExternalStorage;
+      }
     }
     return Permission.storage;
   }
@@ -48,13 +51,14 @@ class IStorageSettings extends ISearchableSettings {
 
     return [
       TextPreference(
-        title: context.locale.preferenceStorageLocation,
-        subtitle: storagePreferences.storageLocation().get(),
+        title: context.locale.settings.dataStorage.storageLocation.title,
+        subtitle: context.locale.settings.dataStorage.storageLocation
+            .subtitle(storagePreferences.storageLocation().get()),
         icon: Icons.storage,
         pref: storagePreferences.storageLocation(),
         onClick: () async {
           // First, check for permission
-          final permission = await getPermission();
+          final permission = await getPermission(context);
           var status = await permission.status;
           if (!status.isGranted) {
             status = await permission.request();

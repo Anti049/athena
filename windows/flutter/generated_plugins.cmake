@@ -10,6 +10,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   permission_handler_windows
   system_theme
   url_launcher_windows
+  weblate_sdk
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

@@ -36,20 +36,32 @@ final Map<String, BaseTheme?> prebuiltThemes = {
 
 String getThemeName(BuildContext context, String themeID) {
   return switch (themeID) {
-    'dynamic' => context.locale.preferenceTheme.dynamic,
-    'green_apple' => context.locale.preferenceTheme.greenApple,
-    'lavender' => context.locale.preferenceTheme.lavender,
-    'midnight_dusk' => context.locale.preferenceTheme.midnightDusk,
-    'nord' => context.locale.preferenceTheme.nord,
-    'strawberry' => context.locale.preferenceTheme.strawberry,
-    'tako' => context.locale.preferenceTheme.tako,
-    'teal_and_turquoise' => context.locale.preferenceTheme.tealTurquoise,
-    'tidal_wave' => context.locale.preferenceTheme.tidalWave,
-    'yin_yang' => context.locale.preferenceTheme.yinYang,
-    'yotsuba' => context.locale.preferenceTheme.yotsuba,
-    'silver_wolf' => context.locale.preferenceTheme.silverWolf,
-    'dracula_pro' => context.locale.preferenceTheme.dracula,
-    'gaziter' => context.locale.preferenceTheme.gaziter,
-    _ => context.locale.preferenceTheme.base,
+    'dynamic' =>
+      context.locale.settings.appearance.theming.theme.themes.dynamic,
+    'green_apple' =>
+      context.locale.settings.appearance.theming.theme.themes.greenApple,
+    'lavender' =>
+      context.locale.settings.appearance.theming.theme.themes.lavender,
+    'midnight_dusk' =>
+      context.locale.settings.appearance.theming.theme.themes.midnightDusk,
+    'nord' => context.locale.settings.appearance.theming.theme.themes.nord,
+    'strawberry' =>
+      context.locale.settings.appearance.theming.theme.themes.strawberry,
+    'tako' => context.locale.settings.appearance.theming.theme.themes.tako,
+    'teal_and_turquoise' =>
+      context.locale.settings.appearance.theming.theme.themes.tealTurquoise,
+    'tidal_wave' =>
+      context.locale.settings.appearance.theming.theme.themes.tidalWave,
+    'yin_yang' =>
+      context.locale.settings.appearance.theming.theme.themes.yinYang,
+    'yotsuba' =>
+      context.locale.settings.appearance.theming.theme.themes.yotsuba,
+    'silver_wolf' =>
+      context.locale.settings.appearance.theming.theme.themes.silverWolf,
+    'dracula_pro' =>
+      context.locale.settings.appearance.theming.theme.themes.dracula,
+    'gaziter' =>
+      context.locale.settings.appearance.theming.theme.themes.gaziter,
+    _ => context.locale.settings.appearance.theming.theme.themes.system,
   };
 }

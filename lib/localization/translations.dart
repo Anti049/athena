@@ -1,9 +1,7 @@
 import 'package:athena/localization/translations.i69n.dart';
-import 'package:athena/localization/translations_es.i69n.dart';
-import 'package:athena/localization/translations_fr.i69n.dart';
 import 'package:flutter/material.dart';
 
-const _supportedLocales = ['en', 'es', 'fr'];
+const _supportedLocales = ['en'];
 
 class AthenaLocalization {
   const AthenaLocalization(this.translations);
@@ -12,8 +10,6 @@ class AthenaLocalization {
 
   static final _translations = <String, Translations Function()>{
     'en': () => const Translations(),
-    'es': () => const Translations_es(),
-    'fr': () => const Translations_fr(),
   };
 
   static const LocalizationsDelegate<AthenaLocalization> delegate =

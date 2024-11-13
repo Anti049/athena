@@ -54,7 +54,7 @@ class ResponsiveAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ? TextField(
               autofocus: true,
               decoration: InputDecoration(
-                hintText: context.locale.librarySearchHint,
+                hintText: context.locale.library.searchHint,
                 border: InputBorder.none,
                 hintStyle: context.text.bodyLarge?.copyWith(
                   color: context.scheme.onSurfaceVariant,
@@ -69,7 +69,7 @@ class ResponsiveAppBar extends ConsumerWidget implements PreferredSizeWidget {
               ? Text(
                   selectedCount.toString(),
                 )
-              : Text(context.locale.labelLibrary),
+              : Text(context.locale.page.library.title),
       actions: [
         if (!searchActive && !selectionActive)
           IconButton(

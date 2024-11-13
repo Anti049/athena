@@ -11,7 +11,7 @@ class ILibrarySettings extends ISearchableSettings {
 
   @override
   String getTitle(BuildContext context) {
-    return context.locale.preferenceCategoryLibrary.header;
+    return context.locale.page.library.title;
   }
 
   @override
@@ -32,20 +32,24 @@ class ILibrarySettings extends ISearchableSettings {
 
   PreferenceGroup _getCategoryGroup(BuildContext context) {
     return PreferenceGroup(
-      title: context.locale.preferenceSectionCategories,
+      title: context.locale.settings.library.categories.title,
       preferenceItems: [
         TextPreference(
-          title: context.locale.preferenceCategories.header,
-          subtitle: context.locale.preferenceCategories.summary(2),
+          title:
+              context.locale.settings.library.categories.editCategories.title,
+          subtitle: context.locale.settings.library.categories.editCategories
+              .subtitle(2),
           onClick: () {},
         ),
         TextPreference(
-          title: context.locale.preferenceDefaultCategory.header,
-          subtitle: context.locale.preferenceDefaultCategory.alwaysAsk,
+          title:
+              context.locale.settings.library.categories.defaultCategory.title,
+          subtitle: context
+              .locale.settings.library.categories.defaultCategory.alwaysAsk,
           onClick: () {},
         ),
         SwitchPreference(
-          title: context.locale.preferencePerCategorySort,
+          title: context.locale.settings.library.categories.perCategorySort,
         ),
       ],
     );
@@ -53,7 +57,7 @@ class ILibrarySettings extends ISearchableSettings {
 
   PreferenceGroup _getUpdateGroup(BuildContext context) {
     return PreferenceGroup(
-      title: context.locale.preferenceSectionUpdate,
+      title: context.locale.settings.library.globalUpdates.title,
       preferenceItems: [
         // Add update preferences here
       ],
@@ -62,16 +66,18 @@ class ILibrarySettings extends ISearchableSettings {
 
   PreferenceGroup _getSwipeGroup(BuildContext context) {
     return PreferenceGroup(
-      title: context.locale.preferenceSectionSwipe,
+      title: context.locale.settings.library.chapterSwipe.title,
       preferenceItems: [
         TextPreference(
-          title: context.locale.preferenceSwipeLeft,
-          subtitle: context.locale.preferenceSwipeActions.download,
+          title: context.locale.settings.library.chapterSwipe.left,
+          subtitle:
+              context.locale.settings.library.chapterSwipe.options.download,
           onClick: () {},
         ),
         TextPreference(
-          title: context.locale.preferenceSwipeRight,
-          subtitle: context.locale.preferenceSwipeActions.readUnread,
+          title: context.locale.settings.library.chapterSwipe.right,
+          subtitle: context
+              .locale.settings.library.chapterSwipe.options.markReadUnread,
           onClick: () {},
         ),
       ],

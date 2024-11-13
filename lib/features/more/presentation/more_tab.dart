@@ -37,10 +37,9 @@ class MoreTab extends ConsumerWidget {
         children: [
           const LogoHeader(),
           SwitchPreferenceWidget(
-            title: context.locale.preferenceDownloadedOnly.title,
-            subtitle: kIsWeb
-                ? context.locale.preferenceDownloadedOnly.disabledWeb
-                : context.locale.preferenceDownloadedOnly.summary,
+            title: context.locale.more.downloadedOnly.title,
+            subtitle:
+                context.locale.more.downloadedOnly.subtitle(isWeb: kIsWeb),
             icon: Symbols.cloud_off,
             checked: preferences.downloadedOnly().get(),
             onCheckedChanged: (checked) {
@@ -48,8 +47,8 @@ class MoreTab extends ConsumerWidget {
             },
           ),
           SwitchPreferenceWidget(
-            title: context.locale.preferenceIncognitoMode.title,
-            subtitle: context.locale.preferenceIncognitoMode.summary,
+            title: context.locale.more.incognitoMode.title,
+            subtitle: context.locale.more.incognitoMode.subtitle,
             icon: CupertinoIcons.eyeglasses,
             checked: preferences.incognitoMode().get(),
             onCheckedChanged: (checked) {
@@ -58,24 +57,23 @@ class MoreTab extends ConsumerWidget {
           ),
           const Divider(),
           TextPreferenceWidget(
-            title: context.locale.labelDownloadQueue.title,
-            subtitle:
-                context.locale.labelDownloadQueue.downloading('Paused', 69),
+            title: context.locale.more.downloadQueue.title,
+            subtitle: context.locale.more.downloadQueue.subtitle('Paused', 69),
             icon: Symbols.download,
             onPreferenceClick: () {},
           ),
           TextPreferenceWidget(
-            title: context.locale.labelCategories,
+            title: context.locale.more.categories,
             icon: Symbols.label,
             onPreferenceClick: () {},
           ),
           TextPreferenceWidget(
-            title: context.locale.labelStatistics,
+            title: context.locale.more.statistics,
             icon: Symbols.query_stats,
             onPreferenceClick: () {},
           ),
           TextPreferenceWidget(
-            title: context.locale.labelStorage,
+            title: context.locale.page.settings.dataStorage,
             icon: Symbols.storage,
             onPreferenceClick: () {
               router.push(const StorageSettingsRoute());
@@ -83,21 +81,21 @@ class MoreTab extends ConsumerWidget {
           ),
           const Divider(),
           TextPreferenceWidget(
-            title: context.locale.labelSettings,
+            title: context.locale.page.settings.title,
             icon: Symbols.settings,
             onPreferenceClick: () {
               router.push(const SettingsRoute());
             },
           ),
           TextPreferenceWidget(
-            title: context.locale.labelAbout,
+            title: context.locale.page.settings.about,
             icon: Symbols.info,
             onPreferenceClick: () {
               router.push(const AboutRoute());
             },
           ),
           TextPreferenceWidget(
-            title: context.locale.labelHelp,
+            title: context.locale.page.settings.help,
             icon: Symbols.help,
             onPreferenceClick: () {},
           ),

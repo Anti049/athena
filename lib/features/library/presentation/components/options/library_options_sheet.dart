@@ -1,7 +1,7 @@
 import 'package:athena/features/library/presentation/components/options/library_display_tab.dart';
 import 'package:athena/features/library/presentation/components/options/library_filter_tab.dart';
 import 'package:athena/features/library/presentation/components/options/library_sort_tab.dart';
-import 'package:athena/features/library/presentation/shrink_wrapping_tab_bar_view.dart';
+import 'package:athena/features/library/presentation/components/options/animated_tab_controller.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,9 +61,9 @@ class _LibraryOptionsSheetState extends ConsumerState<LibraryOptionsSheet>
   // Have to do this workaround since locale can't be accessed in initState
   Map<String, String> getTabHeaders(BuildContext context) {
     return {
-      'filter': context.locale.libraryOptionsFilter.header,
-      'sort': context.locale.libraryOptionsSort.header,
-      'display': context.locale.libraryOptionsDisplay.header,
+      'filter': context.locale.library.options.filter.title,
+      'sort': context.locale.library.options.sort.title,
+      'display': context.locale.library.options.display.title,
     };
   }
 
@@ -71,17 +71,51 @@ class _LibraryOptionsSheetState extends ConsumerState<LibraryOptionsSheet>
   Widget build(BuildContext context) {
     final headers = getTabHeaders(context);
 
+    final headerChildren =
+        _tabs.map((tab) => Tab(text: headers[tab.header])).toList();
+    final bodyChildren = _tabs.map((tab) => tab.body).toList();
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         TabBar(
           controller: _tabController,
-          tabs: _tabs.map((tab) => Tab(text: headers[tab.header])).toList(),
+          tabs: headerChildren,
         ),
-        ShrinkWrappingTabBarView(
-          tabController: _tabController,
-          children: _tabs.map((tab) => tab.body).toList(),
-        ),
+        Stack(
+          children: [
+            Opacity(
+              opacity: 0.0,
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeOutExpo,
+                child: SizedBox(
+                  width: double.infinity, // always fill horizontally
+                  child: AnimatedTabController(
+                    tabController: _tabController,
+                    children: bodyChildren,
+                  ),
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child: TabBarView(
+                controller: _tabController,
+                children: bodyChildren
+                    .map(
+                      (e) => OverflowBox(
+                        alignment: Alignment.topCenter,
+                        // avoid shrinkwrapping to animated height
+                        minHeight: 0,
+                        maxHeight: double.infinity,
+                        child: e,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

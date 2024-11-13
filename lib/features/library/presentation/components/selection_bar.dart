@@ -48,7 +48,7 @@ class SelectionBar extends StatelessWidget {
                 color: context.scheme.onSurface,
               ),
               hoverColor: context.scheme.surfaceContainer,
-              tooltip: context.locale.librarySelectionMenu.categorizeSelected,
+              tooltip: context.locale.library.selection.categorizeSelected,
               onPressed: onCategorizeSelected ?? () {},
             ),
             IconButton(
@@ -56,7 +56,7 @@ class SelectionBar extends StatelessWidget {
                 Symbols.done_all,
                 color: context.scheme.onSurface,
               ),
-              tooltip: context.locale.librarySelectionMenu.markAsRead,
+              tooltip: context.locale.library.selection.markAsRead,
               onPressed: onMarkAsRead ?? () {},
             ),
             IconButton(
@@ -64,7 +64,7 @@ class SelectionBar extends StatelessWidget {
                 Symbols.remove_done,
                 color: context.scheme.onSurface,
               ),
-              tooltip: context.locale.librarySelectionMenu.markAsUnread,
+              tooltip: context.locale.library.selection.markAsUnread,
               onPressed: onMarkAsUnread ?? () {},
             ),
             IconButton(
@@ -72,7 +72,7 @@ class SelectionBar extends StatelessWidget {
                 Symbols.download,
                 color: context.scheme.onSurface,
               ),
-              tooltip: context.locale.librarySelectionMenu.downloadAll,
+              tooltip: context.locale.library.selection.downloadAll,
               onPressed: onDownloadAll ?? () {},
             ),
             IconButton(
@@ -80,7 +80,7 @@ class SelectionBar extends StatelessWidget {
                 Symbols.delete,
                 color: context.scheme.onSurface,
               ),
-              tooltip: context.locale.librarySelectionMenu.delete,
+              tooltip: context.locale.library.selection.delete,
               onPressed: onDelete ?? () {},
             ),
           ],

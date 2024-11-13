@@ -49,7 +49,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
     items.sort((a, b) => a.title.compareTo(b.title));
 
     return PreferenceScaffold(
-      title: context.locale.preferenceCategoryAppearance.header,
+      title: context.locale.page.settings.appearance.language,
       itemsProvider: () => items,
     );
   }

@@ -17,7 +17,7 @@ class ErrorScreen extends StatelessWidget {
         message: message,
         actions: [
           EmptyAction(
-            text: context.locale.errorTryAgain,
+            text: context.locale.error.tryAgain,
             icon: const Icon(Icons.refresh),
             onPressed: () {
               Navigator.of(context).pop();

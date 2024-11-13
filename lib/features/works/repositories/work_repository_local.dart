@@ -32,6 +32,10 @@ class WorkRepositoryLocal implements WorkRepository {
 
     // Here you would implement the logic to read files from the directory
     // and create LibraryWork objects from them.
+    if (directory.isEmpty) {
+      logger.w('Directory is empty');
+      return works;
+    }
     final Directory dir = Directory(directory);
     if (await dir.exists()) {
       final List<FileSystemEntity> files = dir.listSync(

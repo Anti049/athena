@@ -26,6 +26,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:weblate_sdk/weblate_sdk.dart';
 
 Future<void> main() async {
   // Ensure plugin services are initialized
@@ -36,6 +37,13 @@ Future<void> main() async {
   await Hive.openBox('preferences');
   // Initialize localization
   await EasyLocalization.ensureInitialized();
+  // await WebLateSdk.initialize(
+  //   token: 'wlp_GgAYLo8LrRR0v1fShNKgTvPFR05Om3hCYGeq',
+  //   host: 'https://translate.codeberg.org/api/',
+  //   projectName: 'Athena',
+  //   componentName: 'Translations',
+  //   defaultLanguage: 'en',
+  // );
   // Load system accent color
   final supported = defaultTargetPlatform.supportsAccentColor;
   if (supported) {

@@ -15,32 +15,32 @@ class LibraryFilterTab extends ConsumerWidget {
       shrinkWrap: true,
       children: [
         CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.downloaded,
+          title: context.locale.library.options.filter.downloaded,
           preference: preferences.filterDownloaded(),
           widgetLeading: true,
         ),
         CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.unread,
+          title: context.locale.library.options.filter.unread,
           preference: preferences.filterUnread(),
           widgetLeading: true,
         ),
         CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.started,
+          title: context.locale.library.options.filter.started,
           preference: preferences.filterStarted(),
           widgetLeading: true,
         ),
         CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.completed,
+          title: context.locale.library.options.filter.completed,
           preference: preferences.filterCompleted(),
           widgetLeading: true,
         ),
         CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.bookmarked,
+          title: context.locale.library.options.filter.bookmarked,
           preference: preferences.filterBookmarked(),
           widgetLeading: true,
         ),
         CheckboxPreferenceWidget(
-          title: context.locale.libraryOptionsFilter.updated,
+          title: context.locale.library.options.filter.updated,
           preference: preferences.filterUpdated(),
           widgetLeading: true,
         ),

@@ -7,16 +7,18 @@ import 'package:athena/utils/locale.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:change_case/change_case.dart';
 
 class IAppearanceSettings extends ISearchableSettings {
   const IAppearanceSettings();
 
   @override
   String getTitle(BuildContext context) {
-    return context.locale.preferenceCategoryAppearance.header;
+    return context.locale.page.settings.appearance.title;
   }
 
   @override
@@ -40,37 +42,36 @@ class IAppearanceSettings extends ISearchableSettings {
     final router = AutoRouter.of(context);
 
     return PreferenceGroup(
-      title: context.locale.preferenceHeaderTheme,
+      title: context.locale.settings.appearance.theming.title,
       preferenceItems: [
         SegmentPreference(
-          title: 'Mode',
+          title: context.locale.settings.appearance.theming.mode.title,
           pref: appearancePreferences.themeMode(),
           options: [
             Segment(
               value: ThemeMode.system,
-              label: context.locale.preferenceMode.system,
+              label: context.locale.settings.appearance.theming.mode.system,
             ),
             Segment(
               value: ThemeMode.light,
-              label: context.locale.preferenceMode.light,
+              label: context.locale.settings.appearance.theming.mode.light,
             ),
             Segment(
               value: ThemeMode.dark,
-              label: context.locale.preferenceMode.dark,
+              label: context.locale.settings.appearance.theming.mode.dark,
             ),
           ],
         ),
         SliderPreference(
-          title: context.locale.preferenceContrast.header,
-          subtitle: context.locale.preferenceContrast.summary,
+          title: context.locale.settings.appearance.theming.contrast,
           pref: appearancePreferences.contrastLevel(),
           min: -1.0,
           max: 1.0,
           step: 0.5,
         ),
         TextPreference(
-          title: context.locale.preferenceTheme.header,
-          subtitle: context.locale.preferenceTheme.subheader(
+          title: context.locale.settings.appearance.theming.theme.title,
+          subtitle: context.locale.settings.appearance.theming.theme.subtitle(
             getThemeName(
               context,
               appearancePreferences.themeName().get(),
@@ -80,8 +81,8 @@ class IAppearanceSettings extends ISearchableSettings {
           onClick: () => router.push(const ThemeSelectionRoute()),
         ),
         SwitchPreference(
-          title: context.locale.preferenceAmoledDark.header,
-          subtitle: context.locale.preferenceAmoledDark.summary,
+          title: context.locale.settings.appearance.theming.amoled.title,
+          subtitle: context.locale.settings.appearance.theming.amoled.subtitle,
           icon: Icons.brightness_3,
           pref: appearancePreferences.pureBlack(),
         ),
@@ -94,17 +95,24 @@ class IAppearanceSettings extends ISearchableSettings {
     final router = AutoRouter.of(context);
 
     return PreferenceGroup(
-      title: context.locale.preferenceHeaderDisplay,
+      title: context.locale.settings.appearance.display.title,
       preferenceItems: [
         TextPreference(
-          title: context.locale.preferenceLanguage.header,
-          subtitle: context.locale.preferenceLanguage.summary,
+          title: context.locale.settings.appearance.display.language.title,
+          subtitle:
+              context.locale.settings.appearance.display.language.subtitle(
+            LocaleNamesLocalizationsDelegate.nativeLocaleNames[
+                        appearancePreferences.appLanguage().get().languageCode]
+                    ?.toCapitalCase() ??
+                appearancePreferences.appLanguage().get().languageCode,
+          ),
           icon: Icons.language,
           onClick: () => router.push(const LanguageSelectionRoute()),
         ),
         TextPreference(
-          title: context.locale.preferenceDateFormat.header,
-          subtitle: context.locale.preferenceDateFormat.summary(
+          title: context.locale.settings.appearance.display.dateFormat.title,
+          subtitle:
+              context.locale.settings.appearance.display.dateFormat.subtitle(
             appearancePreferences.dateFormat().get() == DateFormats.base
                 ? 'Default'
                 : appearancePreferences.dateFormat().get().format,
@@ -131,7 +139,8 @@ class IAppearanceSettings extends ISearchableSettings {
                         color: context.scheme.primary,
                       ),
                       const SizedBox(width: 16.0),
-                      Text(context.locale.preferenceDateFormat.header),
+                      Text(context
+                          .locale.settings.appearance.display.dateFormat.title),
                     ],
                   ),
                   clipBehavior: Clip.antiAlias,
@@ -176,7 +185,7 @@ class IAppearanceSettings extends ISearchableSettings {
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Text(context.locale.actionCancel),
+                      child: Text(context.locale.action.cancel),
                     ),
                   ],
                 );
@@ -185,8 +194,11 @@ class IAppearanceSettings extends ISearchableSettings {
           },
         ),
         SwitchPreference(
-          title: context.locale.preferenceRelativeTimestamps.header,
-          subtitle: context.locale.preferenceRelativeTimestamps.summary(
+          title: context
+              .locale.settings.appearance.display.relativeTimestamps.title,
+          subtitle: context
+              .locale.settings.appearance.display.relativeTimestamps
+              .subtitle(
             DateFormat(appearancePreferences.dateFormat().get().format)
                 .format(DateTime.now()),
           ),

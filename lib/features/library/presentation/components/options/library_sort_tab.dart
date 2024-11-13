@@ -16,7 +16,7 @@ class LibrarySortTab extends ConsumerWidget {
       children: SortBy.values
           .map(
             (s) => TextPreferenceWidget(
-              title: context.locale.libraryOptionsSort[s.name].toString(),
+              title: context.locale.library.options.sort[s.name].toString(),
               icon: preferences.sortBy().get() == s
                   ? preferences.sortDirection().get()
                       ? Icons.arrow_downward

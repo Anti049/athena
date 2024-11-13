@@ -96,13 +96,13 @@ class BannerScaffold extends ConsumerWidget {
         ),
       ),
       BannerData(
-        label: context.locale.preferenceDownloadedOnly.title,
+        label: context.locale.more.downloadedOnly.title,
         backgroundColor: context.scheme.tertiary,
         textColor: context.scheme.onTertiary,
         visible: data.downloadedOnly,
       ),
       BannerData(
-        label: context.locale.preferenceIncognitoMode.title,
+        label: context.locale.more.incognitoMode.title,
         backgroundColor: context.scheme.primary,
         textColor: context.scheme.onPrimary,
         visible: data.incognitoMode,

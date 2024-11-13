@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'library_preferences.g.dart';
 
 enum SortBy {
-  title,
+  alphabetically,
   author,
   totalChapters,
   lastRead,
@@ -37,8 +37,8 @@ class LibraryPreferences {
         filterCompleted().get() != TriState.disabled ||
         filterBookmarked().get() != TriState.disabled ||
         filterUpdated().get() != TriState.disabled;
-    bool sortActive =
-        sortBy().get() != SortBy.title || sortDirection().get() != true;
+    bool sortActive = sortBy().get() != SortBy.alphabetically ||
+        sortDirection().get() != true;
     return filtersActive || sortActive;
   }
 
@@ -80,7 +80,7 @@ class LibraryPreferences {
 
   Preference<SortBy> sortBy() => preferenceStore.getEnum(
         Preference.appStateKey("sortBy"),
-        SortBy.title,
+        SortBy.alphabetically,
         SortBy.values,
       );
 

@@ -1,5 +1,4 @@
 import 'package:athena/common_widgets/logo_header.dart';
-import 'package:athena/features/settings/providers/appearance_preferences.dart';
 import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/localization/translations.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,29 +55,21 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final appearance = ref.watch(appearancePreferencesProvider);
+    final appVersion = context.locale.settings.about.version.subtitle(
+      channel,
+      version,
+    );
     final items = [
       CustomPreference(
         title: 'Logo',
         content: const LogoHeader(),
       ),
       TextPreference(
-        title: context.locale.preferenceVersion.header,
-        subtitle: context.locale.preferenceVersion.summary(
-          channel,
-          version,
-          DateFormat(appearance.dateFormat().get().format)
-              .format(DateTime.now()),
-        ),
+        title: context.locale.settings.about.version.title,
+        subtitle: appVersion,
         onClick: () {
-          final fullVersion = context.locale.preferenceVersion.summary(
-            channel,
-            version,
-            DateFormat(appearance.dateFormat().get().format)
-                .format(DateTime.now()),
-          );
           // Copy version to clipboard
-          FlutterClipboard.copy(fullVersion).then(
+          FlutterClipboard.copy(appVersion).then(
             (value) {
               if (context.mounted && !context.isMobile) {
                 return ScaffoldMessenger.of(context).showSnackBar(
@@ -98,10 +88,10 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
           );
         },
       ),
-      TextPreference(title: context.locale.preferenceCheckForUpdates),
-      TextPreference(title: context.locale.preferenceWhatsNew),
-      TextPreference(title: context.locale.preferenceLicenses),
-      TextPreference(title: context.locale.preferencePrivacyPolicy),
+      TextPreference(title: context.locale.settings.about.checkForUpdates),
+      TextPreference(title: context.locale.settings.about.whatsNew),
+      TextPreference(title: context.locale.settings.about.licenses),
+      TextPreference(title: context.locale.settings.about.privacyPolicy),
       CustomPreference(
         title: 'Links',
         content: Padding(
@@ -117,7 +107,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                   FontAwesomeIcons.globe,
                   color: context.scheme.primary,
                 ),
-                tooltip: 'Website',
+                tooltip: context.locale.settings.about.links.website,
                 onPressed: () {
                   openLink('https://nploetz.dev');
                 },
@@ -127,7 +117,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                   FontAwesomeIcons.solidEnvelope,
                   color: context.scheme.primary,
                 ),
-                tooltip: 'Email',
+                tooltip: context.locale.settings.about.links.email,
                 onPressed: () {
                   openLink('mailto:nploetz049@gmail.com');
                 },
@@ -137,7 +127,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                   FontAwesomeIcons.discord,
                   color: context.scheme.primary,
                 ),
-                tooltip: 'Discord',
+                tooltip: context.locale.settings.about.links.discord,
                 onPressed: () {},
               ),
               IconButton(
@@ -145,7 +135,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                   FontAwesomeIcons.bug,
                   color: context.scheme.primary,
                 ),
-                tooltip: 'Report a bug',
+                tooltip: context.locale.settings.about.links.reportBug,
                 onPressed: () {},
               ),
               IconButton(
@@ -153,7 +143,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                   FontAwesomeIcons.github,
                   color: context.scheme.primary,
                 ),
-                tooltip: 'GitHub',
+                tooltip: context.locale.settings.about.links.github,
                 onPressed: () {
                   openLink('https://github.com/Anti049/athena');
                 },
@@ -166,7 +156,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
                     BlendMode.srcIn,
                   ),
                 ),
-                tooltip: 'Ko-fi',
+                tooltip: context.locale.settings.about.links.kofi,
                 onPressed: () {
                   openLink('https://ko-fi.com/nploetz049');
                 },
@@ -178,7 +168,7 @@ class _AboutScreenState extends ConsumerState<AboutScreen> {
     ];
 
     return PreferenceScaffold(
-      title: context.locale.preferenceCategoryAbout,
+      title: context.locale.page.settings.about,
       itemsProvider: () => items,
     );
   }

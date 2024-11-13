@@ -83,7 +83,7 @@ class _ThemeSelectionScreenState extends ConsumerState<ThemeSelectionScreen> {
     return BannerScaffold(
       appBar: AppBar(
         title: Text(
-          context.locale.preferenceTheme.header,
+          context.locale.page.settings.appearance.theme,
         ),
       ),
       body: Padding(
@@ -99,7 +99,7 @@ class _ThemeSelectionScreenState extends ConsumerState<ThemeSelectionScreen> {
                         category.name,
                       ),
                       subtitle: Text(
-                        context.locale.preferenceTheme.count(
+                        context.locale.settings.appearance.theming.theme.count(
                           categorizedThemes[category]!.length,
                         ),
                       ),

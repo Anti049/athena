@@ -1,5 +1,4 @@
 import 'package:athena/common_widgets/empty.dart';
-import 'package:athena/features/settings/providers/appearance_preferences.dart';
 import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/components/preference_scaffold.dart';
 import 'package:athena/features/settings/presentation/screens/settings_appearance.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -88,87 +86,84 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final appearance = ref.watch(appearancePreferencesProvider);
     final router = AutoRouter.of(context);
     final items = [
       // Appearance
       TextPreference(
-        title: context.locale.preferenceCategoryAppearance.header,
-        subtitle: context.locale.preferenceCategoryAppearance.summary,
+        title: context.locale.page.settings.appearance.title,
+        subtitle: context.locale.settings.appearance.subtitle,
         icon: Icons.palette,
         onClick: () => router.push(const AppearanceSettingsRoute()),
       ),
       // Library
       TextPreference(
-        title: context.locale.preferenceCategoryLibrary.header,
-        subtitle: context.locale.preferenceCategoryLibrary.summary,
+        title: context.locale.page.settings.library,
+        subtitle: context.locale.settings.library.subtitle,
         icon: Icons.book,
         onClick: () => router.push(const LibrarySettingsRoute()),
       ),
       // Reader
       TextPreference(
-        title: context.locale.preferenceCategoryReader.header,
-        subtitle: context.locale.preferenceCategoryReader.summary,
+        title: context.locale.page.settings.reader,
+        subtitle: context.locale.settings.reader.subtitle,
         icon: Icons.chrome_reader_mode,
         onClick: () => /*router.push(const SettingsReaderRoute())*/ {},
       ),
       // Downloads
       TextPreference(
-        title: context.locale.preferenceCategoryDownloads.header,
-        subtitle: context.locale.preferenceCategoryDownloads.summary,
+        title: context.locale.page.settings.downloads,
+        subtitle: context.locale.settings.downloads.subtitle,
         icon: Icons.file_download,
         onClick: () => /*router.push(const SettingsDownloadsRoute())*/ {},
       ),
       // Tracking
       TextPreference(
-        title: context.locale.preferenceCategoryTracking.header,
-        subtitle: context.locale.preferenceCategoryTracking.summary,
+        title: context.locale.page.settings.tracking,
+        subtitle: context.locale.settings.tracking.subtitle,
         icon: Icons.sync,
         onClick: () => /*router.push(const SettingsTrackingRoute())*/ {},
       ),
       // Browse
       TextPreference(
-        title: context.locale.preferenceCategoryBrowse.header,
-        subtitle: context.locale.preferenceCategoryBrowse.summary,
+        title: context.locale.page.settings.browse,
+        subtitle: context.locale.settings.browse.subtitle,
         icon: Icons.explore,
         onClick: () => /*router.push(const SettingsBrowseRoute())*/ {},
       ),
       // Notifications
       TextPreference(
-        title: context.locale.preferenceCategoryNotifications.header,
-        subtitle: context.locale.preferenceCategoryNotifications.summary,
+        title: context.locale.page.settings.notifications,
+        subtitle: context.locale.settings.notifications.subtitle,
         icon: Icons.notifications,
         onClick: () => router.push(const NotificationSettingsRoute()),
       ),
       // Data & Storage
       TextPreference(
-        title: context.locale.preferenceCategoryDataStorage.header,
-        subtitle: context.locale.preferenceCategoryDataStorage.summary,
+        title: context.locale.page.settings.dataStorage,
+        subtitle: context.locale.settings.dataStorage.subtitle,
         icon: Icons.storage,
         onClick: () => router.push(const StorageSettingsRoute()),
       ),
       // Security & Privacy
       TextPreference(
-        title: context.locale.preferenceCategorySecurityPrivacy.header,
-        subtitle: context.locale.preferenceCategorySecurityPrivacy.summary,
+        title: context.locale.page.settings.securityPrivacy,
+        subtitle: context.locale.settings.securityPrivacy.subtitle,
         icon: Icons.security,
         onClick: () => /*router.push(const SettingsSecurityPrivacyRoute())*/ {},
       ),
       // Advanced
       TextPreference(
-        title: context.locale.preferenceCategoryAdvanced.header,
-        subtitle: context.locale.preferenceCategoryAdvanced.summary,
+        title: context.locale.page.settings.advanced,
+        subtitle: context.locale.settings.advanced.subtitle,
         icon: Icons.settings,
         onClick: () => /*router.push(const SettingsAdvancedRoute())*/ {},
       ),
       // About
       TextPreference(
-        title: context.locale.preferenceCategoryAbout,
-        subtitle: context.locale.preferenceVersion.summary(
+        title: context.locale.page.settings.about,
+        subtitle: context.locale.settings.about.version.subtitle(
           channel,
           version,
-          DateFormat(appearance.dateFormat().get().format)
-              .format(DateTime.now()),
         ),
         icon: Icons.info,
         onClick: () => router.push(const AboutRoute()),
@@ -177,7 +172,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     return PreferenceScaffold(
       appBar: AppBar(
-        title: Text(context.locale.labelSettings),
+        title: Text(context.locale.page.settings.title),
         actions: [
           SearchAnchor(
             isFullScreen: true,
@@ -261,9 +256,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       .where((it) {
                     final (_, p) = it;
                     final inTitle = p.title.containsIgnoreCase(searchKey);
-                    final inSummary =
+                    final insubtitle =
                         p.subtitle?.containsIgnoreCase(searchKey) ?? false;
-                    return inTitle || inSummary;
+                    return inTitle || insubtitle;
                   }).map((it) {
                     final (categoryTitle, p) = it;
                     return SearchResultItem(
