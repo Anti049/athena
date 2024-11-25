@@ -1,6 +1,6 @@
 // Primary imports
 import 'package:athena/localization/translations.dart';
-import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/routing/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 

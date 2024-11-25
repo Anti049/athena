@@ -1,4 +1,5 @@
 import 'package:athena/features/library/models/library_work.dart';
+import 'package:athena/features/works/models/work.dart';
 import 'package:athena/features/works/repositories/work_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,9 +10,9 @@ class GetLibraryWorks {
 
   GetLibraryWorks(this._workRepository);
 
-  Future<List<LibraryWork>> await_() => _workRepository.getWorks();
+  Future<List<Work>> await_() => _workRepository.getWorks();
 
-  Stream<List<LibraryWork>> subscribe() => _workRepository.getWorksAsStream();
+  Stream<List<Work>> subscribe() => _workRepository.getWorksAsStream();
 }
 
 @riverpod

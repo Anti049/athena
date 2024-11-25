@@ -4,7 +4,7 @@ import 'package:athena/utils/locale.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/routing/router.gr.dart';
 
 class ILibrarySettings extends ISearchableSettings {
   const ILibrarySettings();

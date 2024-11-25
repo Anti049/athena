@@ -11,7 +11,7 @@ import 'package:athena/features/theme/repositories/prebuilt_themes.dart';
 import 'package:athena/features/works/repositories/work_repository.dart';
 import 'package:athena/features/works/repositories/work_repository_local.dart';
 import 'package:athena/localization/translations.dart';
-import 'package:athena/routing/application/router.dart';
+import 'package:athena/routing/router.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';

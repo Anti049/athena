@@ -1,6 +1,6 @@
+import 'package:athena/features/banners/domain/banner_model.dart';
 import 'package:athena/features/banners/providers/banner_provider.dart'
     show bannerProvider;
-import 'package:athena/features/banners/presentation/banner.dart';
 import 'package:athena/features/settings/providers/appearance_preferences.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/utils/theming.dart';
@@ -17,11 +17,11 @@ class BannerScaffold extends ConsumerWidget {
 
   final Widget child;
 
-  bool anyBannerVisible(List<BannerData> banners) {
+  bool anyBannerVisible(List<BannerModel> banners) {
     return banners.any((b) => b.visible);
   }
 
-  bool isTopBanner(List<BannerData> banners, BannerData bannerData) {
+  bool isTopBanner(List<BannerModel> banners, BannerModel bannerData) {
     final visibleBanners = banners.where((b) => b.visible).toList();
     if (visibleBanners.isEmpty ||
         !bannerData.visible ||
@@ -31,7 +31,7 @@ class BannerScaffold extends ConsumerWidget {
     return visibleBanners.indexOf(bannerData) == 0;
   }
 
-  int getOrder(List<BannerData> banners, BannerData bannerData) {
+  int getOrder(List<BannerModel> banners, BannerModel bannerData) {
     return banners.indexOf(bannerData);
   }
 
@@ -41,8 +41,8 @@ class BannerScaffold extends ConsumerWidget {
     final data = ref.watch(bannerProvider);
 
     final banners = [
-      BannerData(
-        label: 'WARNING', // TODO: Figure this out
+      BannerModel(
+        label: 'WARNING', // TODO: Localize this
         backgroundColor: context.scheme.error,
         textColor: context.scheme.onError,
         visible: data.warning,
@@ -77,8 +77,8 @@ class BannerScaffold extends ConsumerWidget {
           data.setWarning(false, null);
         },
       ),
-      BannerData(
-        label: 'Indexing', // TODO: Figure this out
+      BannerModel(
+        label: 'Indexing', // TODO: Localize this
         backgroundColor: context.scheme.secondary,
         textColor: context.scheme.onSecondary,
         visible: data.indexing,
@@ -95,13 +95,13 @@ class BannerScaffold extends ConsumerWidget {
           ],
         ),
       ),
-      BannerData(
+      BannerModel(
         label: context.locale.more.downloadedOnly.title,
         backgroundColor: context.scheme.tertiary,
         textColor: context.scheme.onTertiary,
         visible: data.downloadedOnly,
       ),
-      BannerData(
+      BannerModel(
         label: context.locale.more.incognitoMode.title,
         backgroundColor: context.scheme.primary,
         textColor: context.scheme.onPrimary,

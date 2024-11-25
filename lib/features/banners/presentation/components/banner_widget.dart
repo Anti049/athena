@@ -12,53 +12,6 @@ enum WidgetLocation {
   right,
 }
 
-class BannerData {
-  final String label;
-  final Color backgroundColor;
-  final Color textColor;
-  final TextStyle? textStyle;
-  final bool visible;
-  final double height;
-  final Widget? topWidget;
-  final Widget? bottomWidget;
-  final Widget? leftWidget;
-  final Widget? rightWidget;
-  final void Function()? dismiss;
-
-  BannerData({
-    required this.label,
-    required this.backgroundColor,
-    required this.textColor,
-    this.textStyle,
-    required this.visible,
-    this.height = BANNER_HEIGHT,
-    this.topWidget,
-    this.bottomWidget,
-    this.leftWidget,
-    this.rightWidget,
-    this.dismiss,
-  });
-
-  BannerWidget toWidget({
-    bool top = false,
-  }) {
-    return BannerWidget(
-      label: label,
-      backgroundColor: backgroundColor,
-      textColor: textColor,
-      textStyle: textStyle,
-      top: top,
-      height: height,
-      visible: visible,
-      topWidget: topWidget,
-      bottomWidget: bottomWidget,
-      leftWidget: leftWidget,
-      rightWidget: rightWidget,
-      dismiss: dismiss,
-    );
-  }
-}
-
 class BannerWidget extends StatelessWidget {
   const BannerWidget({
     super.key,

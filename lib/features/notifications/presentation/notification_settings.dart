@@ -2,7 +2,7 @@ import 'package:athena/features/notifications/providers/notification_manager.dar
 import 'package:athena/features/notifications/providers/notification_preferences.dart';
 import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/searchable_settings.dart';
-import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/routing/router.gr.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';

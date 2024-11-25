@@ -1,5 +1,5 @@
 import 'package:athena/localization/translations.dart';
-import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/routing/router.gr.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';

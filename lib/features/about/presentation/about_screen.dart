@@ -9,21 +9,20 @@ import 'package:change_case/change_case.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
-class AboutScreen extends ConsumerStatefulWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
 
   @override
-  ConsumerState<AboutScreen> createState() => _AboutScreenState();
+  State<AboutScreen> createState() => _AboutScreenState();
 }
 
-class _AboutScreenState extends ConsumerState<AboutScreen> {
+class _AboutScreenState extends State<AboutScreen> {
   String appName = '';
   String channel = '';
   String version = '';

@@ -5,7 +5,7 @@ import 'package:athena/features/settings/providers/base_preferences.dart';
 import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';
 import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
 import 'package:athena/localization/translations.dart';
-import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/routing/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

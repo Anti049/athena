@@ -1,12 +1,12 @@
-import 'package:athena/features/library/models/library_work.dart';
 import 'package:athena/features/works/models/work.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'work_repository.g.dart';
 
 abstract interface class WorkRepository {
-  Future<List<LibraryWork>> getWorks();
-  Stream<List<LibraryWork>> getWorksAsStream();
+  Future<List<Work>> getWorks();
+  Stream<List<Work>> getWorksAsStream();
   Future<Work> getWorkById(int id);
   Stream<Work> getWorkByIdAsStream(int id);
   Future<Work?> getWorkByUrlAndSourceId(String url, int sourceId);
@@ -16,6 +16,6 @@ abstract interface class WorkRepository {
 
 // Override this in the main method
 @riverpod
-WorkRepository workRepository(WorkRepositoryRef ref) {
+WorkRepository workRepository(Ref ref) {
   throw UnimplementedError();
 }

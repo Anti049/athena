@@ -22,9 +22,9 @@ class WorkRepositoryLocal implements WorkRepository {
   final Logger logger;
 
   @override
-  Future<List<LibraryWork>> getWorks() async {
+  Future<List<Work>> getWorks() async {
     // Search for files in the directory with the specified extensions
-    final works = <LibraryWork>[];
+    final works = <Work>[];
 
     // Log the directory and extensions being used
     logger.i(
@@ -56,6 +56,8 @@ class WorkRepositoryLocal implements WorkRepository {
               author: book.metaData?.authors.join(', ') ?? '',
               description: book.metaData?.summary ?? '',
               coverURL: '',
+              chapters: 0,
+              words: 0,
             );
             final libraryWork = LibraryWork(
               work: work,
@@ -67,7 +69,7 @@ class WorkRepositoryLocal implements WorkRepository {
               chapterFetchedAt: DateTime.now(),
               lastRead: DateTime.now(),
             );
-            works.add(libraryWork);
+            works.add(work);
           } catch (error) {
             logger.e('Error reading file: $file');
           }
@@ -81,7 +83,7 @@ class WorkRepositoryLocal implements WorkRepository {
   }
 
   @override
-  Stream<List<LibraryWork>> getWorksAsStream() {
+  Stream<List<Work>> getWorksAsStream() {
     // Monitor directory for changes and return a stream of LibraryWork
     final stream = Stream.fromFuture(getWorks()).asBroadcastStream();
 

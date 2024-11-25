@@ -4,7 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:athena/routing/application/router.gr.dart';
+import 'package:athena/routing/router.gr.dart';
 import 'package:athena/features/settings/models/preference.dart';
 import 'package:athena/features/settings/presentation/searchable_settings.dart';
 import 'package:athena/utils/locale.dart';

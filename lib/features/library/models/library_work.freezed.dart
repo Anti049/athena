@@ -47,6 +47,8 @@ abstract class $LibraryWorkCopyWith<$Res> {
       DateTime latestUpload,
       DateTime chapterFetchedAt,
       DateTime lastRead});
+
+  $WorkCopyWith<$Res> get work;
 }
 
 /// @nodoc
@@ -108,6 +110,16 @@ class _$LibraryWorkCopyWithImpl<$Res, $Val extends LibraryWork>
               as DateTime,
     ) as $Val);
   }
+
+  /// Create a copy of LibraryWork
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WorkCopyWith<$Res> get work {
+    return $WorkCopyWith<$Res>(_value.work, (value) {
+      return _then(_value.copyWith(work: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -127,6 +139,9 @@ abstract class _$$LibraryWorkImplCopyWith<$Res>
       DateTime latestUpload,
       DateTime chapterFetchedAt,
       DateTime lastRead});
+
+  @override
+  $WorkCopyWith<$Res> get work;
 }
 
 /// @nodoc

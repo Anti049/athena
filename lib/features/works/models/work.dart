@@ -1,15 +1,17 @@
-class Work {
-  final int id;
-  final String title;
-  final String author;
-  final String description;
-  final String coverURL;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Work({
-    required this.id,
-    required this.title,
-    required this.author,
-    required this.description,
-    required this.coverURL,
-  });
+part 'work.freezed.dart';
+
+@freezed
+class Work with _$Work {
+  const Work._();
+  const factory Work({
+    required int id,
+    required String title,
+    required String author,
+    required String description,
+    required String coverURL,
+    required int chapters,
+    required int words,
+  }) = _Work;
 }
