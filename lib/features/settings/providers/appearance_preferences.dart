@@ -31,7 +31,7 @@ class AppearancePreferences {
 
   Preference<String> themeName() => preferenceStore.getString(
         Preference.appStateKey("themeName"),
-        'default',
+        'system',
       );
 
   Preference<bool> pureBlack() => preferenceStore.getBool(

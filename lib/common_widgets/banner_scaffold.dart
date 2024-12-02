@@ -58,7 +58,8 @@ class BannerScaffold extends ConsumerWidget {
   }
 
   List<Widget> _padActions(List<Widget> actions) {
-    final paddedActions = _validateActions(actions);
+    List<Widget> validatedActions = _validateActions(actions);
+    List<Widget> paddedActions = List.from(validatedActions);
     // If the last actions ISN'T a SizedBox, add a SizedBox to the end
     if (paddedActions.isEmpty || paddedActions.last is! SizedBox) {
       paddedActions.add(const SizedBox(width: 8.0));

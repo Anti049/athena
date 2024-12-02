@@ -132,10 +132,10 @@ class _AthenaAppState extends ConsumerState<AthenaApp> {
 
         // If not using dynamic, verify theme exists
         if (themeName != 'dynamic' && !prebuiltThemes.containsKey(themeName)) {
-          themeName = 'default';
+          themeName = 'system';
         }
         if (themeName == 'dynamic' && prebuiltThemes['dynamic'] == null) {
-          themeName = 'default';
+          themeName = 'system';
         }
 
         // Generate the theme pair
