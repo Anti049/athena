@@ -1,0 +1,6 @@
+{
+	"$schema": "./schemas/theme.schema.json",
+	"name": "System",
+	"source": "system",
+	"category": "System"
+}

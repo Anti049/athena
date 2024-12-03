@@ -1,0 +1,232 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://example.com/schemas/scheme.schema.json",
+	"type": "object",
+	"default": {},
+	"title": "ColorScheme Schema",
+	"definitions": {
+		"ColorScheme": {
+			"type": "object",
+			"title": "ColorScheme",
+			"description": "The color scheme of the theme.",
+			"required": ["primary"],
+			"properties": {
+				"primary": {
+					"type": "string",
+					"title": "Primary",
+					"description": "The primary color of the theme."
+				},
+				"onPrimary": {
+					"type": "string",
+					"title": "On Primary",
+					"description": "The color to use on top of the primary color."
+				},
+				"primaryContainer": {
+					"type": "string",
+					"title": "Primary Container",
+					"description": "The color to use as the background for the primary color."
+				},
+				"onPrimaryContainer": {
+					"type": "string",
+					"title": "On Primary Container",
+					"description": "The color to use on top of the primary container color."
+				},
+				"secondary": {
+					"type": "string",
+					"title": "Secondary",
+					"description": "The secondary color of the theme."
+				},
+				"onSecondary": {
+					"type": "string",
+					"title": "On Secondary",
+					"description": "The color to use on top of the secondary color."
+				},
+				"secondaryContainer": {
+					"type": "string",
+					"title": "Secondary Container",
+					"description": "The color to use as the background for the secondary color."
+				},
+				"onSecondaryContainer": {
+					"type": "string",
+					"title": "On Secondary Container",
+					"description": "The color to use on top of the secondary container color."
+				},
+				"tertiary": {
+					"type": "string",
+					"title": "Tertiary",
+					"description": "The tertiary color of the theme."
+				},
+				"onTertiary": {
+					"type": "string",
+					"title": "On Tertiary",
+					"description": "The color to use on top of the tertiary color."
+				},
+				"tertiaryContainer": {
+					"type": "string",
+					"title": "Tertiary Container",
+					"description": "The color to use as the background for the tertiary color."
+				},
+				"onTertiaryContainer": {
+					"type": "string",
+					"title": "On Tertiary Container",
+					"description": "The color to use on top of the tertiary container color."
+				},
+				"error": {
+					"type": "string",
+					"title": "Error",
+					"description": "The error color of the theme."
+				},
+				"onError": {
+					"type": "string",
+					"title": "On Error",
+					"description": "The color to use on top of the error color."
+				},
+				"errorContainer": {
+					"type": "string",
+					"title": "Error Container",
+					"description": "The color to use as the background for the error color."
+				},
+				"onErrorContainer": {
+					"type": "string",
+					"title": "On Error Container",
+					"description": "The color to use on top of the error container color."
+				},
+				"surface": {
+					"type": "string",
+					"title": "Surface",
+					"description": "The surface color of the theme."
+				},
+				"onSurface": {
+					"type": "string",
+					"title": "On Surface",
+					"description": "The color to use on top of the surface color."
+				},
+				"onSurfaceVariant": {
+					"type": "string",
+					"title": "On Surface Variant",
+					"description": "The color to use on top of the surface color, but with a different variant."
+				},
+				"surfaceContainerLowest": {
+					"type": "string",
+					"title": "Surface Container Lowest",
+					"description": "The color to use as the background for the lowest surface color."
+				},
+				"surfaceContainerLow": {
+					"type": "string",
+					"title": "Surface Container Low",
+					"description": "The color to use as the background for the low surface color."
+				},
+				"surfaceContainer": {
+					"type": "string",
+					"title": "Surface Container ",
+					"description": "The color to use as the background for the base surface color."
+				},
+				"surfaceContainerHigh": {
+					"type": "string",
+					"title": "Surface Container High",
+					"description": "The color to use as the background for the high surface color."
+				},
+				"surfaceContainerHighest": {
+					"type": "string",
+					"title": "Surface Container Highest",
+					"description": "The color to use as the background for the highest surface color."
+				},
+				"surfaceDim": {
+					"type": "string",
+					"title": "Surface Dim",
+					"description": "The color to use as a dimmed version of the surface color."
+				},
+				"surfaceBright": {
+					"type": "string",
+					"title": "Surface Bright",
+					"description": "The color to use as a brightened version of the surface color."
+				},
+				"outline": {
+					"type": "string",
+					"title": "Outline",
+					"description": "The outline color of the theme."
+				},
+				"outlineVariant": {
+					"type": "string",
+					"title": "Outline Variant",
+					"description": "The outline color of the theme, but with a different variant."
+				},
+				"surfaceTint": {
+					"type": "string",
+					"title": "Surface Tint",
+					"description": "The color to use as a tinted version of the surface color."
+				},
+				"inverseSurface": {
+					"type": "string",
+					"title": "Inverse Surface",
+					"description": "The color to use as the inverse of the surface color."
+				},
+				"inversePrimary": {
+					"type": "string",
+					"title": "Inverse Primary",
+					"description": "The color to use as the inverse of the primary color."
+				},
+				"primaryFixed": {
+					"type": "string",
+					"title": "Primary Fixed",
+					"description": "The color to use as a fixed version of the primary color."
+				},
+				"onPrimaryFixed": {
+					"type": "string",
+					"title": "On Primary Fixed",
+					"description": "The color to use on top of the fixed primary color."
+				},
+				"primaryFixedDim": {
+					"type": "string",
+					"title": "Primary Fixed Dim",
+					"description": "The color to use as a dimmed version of the fixed primary color."
+				},
+				"onPrimaryFixedVariant": {
+					"type": "string",
+					"title": "On Primary Fixed Variant",
+					"description": "The color to use on top of the fixed primary color, but with a different variant."
+				},
+				"secondaryFixed": {
+					"type": "string",
+					"title": "Secondary Fixed",
+					"description": "The color to use as a fixed version of the secondary color."
+				},
+				"onSecondaryFixed": {
+					"type": "string",
+					"title": "On Secondary Fixed",
+					"description": "The color to use on top of the fixed secondary color."
+				},
+				"secondaryFixedDim": {
+					"type": "string",
+					"title": "Secondary Fixed Dim",
+					"description": "The color to use as a dimmed version of the fixed secondary color."
+				},
+				"onSecondaryFixedVariant": {
+					"type": "string",
+					"title": "On Secondary Fixed Variant",
+					"description": "The color to use on top of the fixed secondary color, but with a different variant."
+				},
+				"tertiaryFixed": {
+					"type": "string",
+					"title": "Tertiary Fixed",
+					"description": "The color to use as a fixed version of the tertiary color."
+				},
+				"onTertiaryFixed": {
+					"type": "string",
+					"title": "On Tertiary Fixed",
+					"description": "The color to use on top of the fixed tertiary color."
+				},
+				"tertiaryFixedDim": {
+					"type": "string",
+					"title": "Tertiary Fixed Dim",
+					"description": "The color to use as a dimmed version of the fixed tertiary color."
+				},
+				"onTertiaryFixedVariant": {
+					"type": "string",
+					"title": "On Tertiary Fixed Variant",
+					"description": "The color to use on top of the fixed tertiary color, but with a different variant."
+				}
+			}
+		}
+	}
+}

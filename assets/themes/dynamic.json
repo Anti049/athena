@@ -1,0 +1,6 @@
+{
+	"$schema": "./schemas/theme.schema.json",
+	"name": "Dynamic",
+	"source": "dynamic",
+	"category": "System"
+}

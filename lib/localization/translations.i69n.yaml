@@ -3,276 +3,33 @@ appDescription: Athena is an all-in-one application for downloading, reading, an
 appChannel: Pre-Alpha
 appVersion: 0.1.0
 
-flavors:
-    development: Development
-    testing: Testing
-    production: Production
+# Pages
+library: Library
+updates: Updates
+history: History
+browse: Browse
+sources: Sources
+extensions: Extensions
+migrate: Migrate
+more: More
+settings: Settings
+appearance: Appearance
 
-test: Hello, World!
-
-# Navigation
-page:
-    library:
-        title: Library
-        categories:
-            base: Default
-    updates:
-        title: Updates
-    history:
-        title: History
-    browse:
-        title: Browse
-        sources: Sources
-        extensions: Extensions
-        web: Web
-    more:
-        title: More
-    settings:
-        title: Settings
-        appearance:
-            title: Appearance
-            theme: Theme
-            font: Font
-            language: Language
-        library: Library
-        reader: Reader
-        downloads: Downloads
-        tracking: Tracking
-        browse: Browse
-        notifications: Notifications
-        dataStorage: Data & Storage
-        securityPrivacy: Security & Privacy
-        advanced: Advanced
-        about: About
-        help: Help
-    work:
-        title(String title): '$title'
-        subtitle(List<String> authors): >
-            '${authors.join(', ')}'
-
-# Actions
-action:
-    open: Open
-    close: Close
-    cancel: Cancel
-    save: Save
-    delete: Delete
-    remove: Remove
-    edit: Edit
-    search: Search
-    reset: Reset
-
-# Library
-library:
-    searchHint: Search...
-    empty: No works found
-    categoryDefault: Default
-    options:
-        filter:
-            title: Filter
-            downloaded: Downloaded
-            unread: Unread
-            started: Started
-            completed: Completed
-            bookmarked: Bookmarked
-            updated: Updated
-        sort:
-            title: Sort
-            alphabetically: Alphabetically
-            author: Author
-            totalChapters: Total Chapters
-            lastRead: Last Read
-            lastChecked: Last Checked
-            lastUpdated: Last Updated
-            unreadChapters: Unread Chapters
-            latestChapter: Latest Chapter
-            dateFetched: Fetched Date
-            dateAdded: Added Date
-        display:
-            title: Display
-            mode:
-                title: Display Mode
-                compactGrid: Compact Grid
-                comfortableGrid: Comfortable Grid
-                coverOnlyGrid: Cover-Only Grid
-                list: List
-            gridSize(int size): "${_plural(size, zero: 'Default', other: '$size per row')}"
-            overlay:
-                title: Overlay
-                downloadedChapters: Downloaded Chapters
-                unreadChapters: Unread Chapters
-                localSource: Local Source
-                language: Language
-                continueReading: Continue Reading Button
-            tabs:
-                title: Tabs
-                category: Show Category Tabs
-                number: Show Number of Works
-    menu:
-        updateLibrary: Update Library
-        updateCategory: Update Category
-        randomWork: Open Random Work
-    selection:
-        categorizeSelected: Categorize Selected
-        markAsRead: Mark as Read
-        markAsUnread: Mark as Unread
-        downloadAll: Download All Chapters
-        delete: Remove Works
-
-# Updates
-updates:
-
-# History
-history:
-
-# Browse
-browse:
-
-# More
-more:
-    downloadedOnly:
-        title: Downloaded Only
-        subtitle({bool isWeb = false}): "${isWeb ? 'This feature is disabled when using the web reader' : 'Show only downloaded works'}"
-    incognitoMode:
-        title: Incognito Mode
-        subtitle: Don't save history or search queries
-    downloadQueue:
-        title: Download Queue
-        subtitle(String status, int count): '$status: $count remaining'
-    categories: Categories
-    statistics: Statistics
-    storage: Data and Storage
-    settings: Settings
-    about: About
-    help: Help
-
-# More -> Settings
-settings:
-    appearance:
-        subtitle: Theme, font, language, and more
-        theming:
-            title: Theming
-            mode:
-                title: Mode
-                system: System
-                light: Light
-                dark: Dark
-            contrast: Contrast
-            theme:
-                title: Theme
-                subtitle(String active): "${active.isEmpty ? 'Pick a theme' : active}"
-                count(int count): "${_plural(count, zero: 'No themes', one: '$count theme', other: '$count themes')}"
-                themes:
-                    system: Default
-                    dynamic: Dynamic
-                    greenApple: Green Apple
-                    lavender: Lavender
-                    midnightDusk: Midnight Dusk
-                    nord: Nord
-                    strawberry: Strawberry
-                    tako: Tako
-                    tealTurquoise: Teal & Turquoise
-                    tidalWave: Tidal Wave
-                    yinYang: Yin & Yang
-                    yotsuba: Yotsuba
-                    silverWolf: Silver Wolf
-                    dracula: Dracula PRO
-                    gaziter: Gaziter
-            amoled:
-                title: AMOLED
-                subtitle: Use AMOLED black backgrounds
-        display:
-            title: Display
-            font:
-                title: Font
-                subtitle(String font): "${font.isEmpty ? 'System font' : font}"
-            language:
-                title: Language
-                subtitle(String language): "${language.isEmpty ? 'System language' : language}"
-            dateFormat:
-                title: Date Format
-                subtitle(String name, String format): '$name: $format'
-            relativeTimestamps:
-                title: Relative Timestamps
-                subtitle(String date): "'Today' instead of '$date'"
-    library:
-        subtitle: Categories, global updates, chapter swipe
-        categories:
-            title: Categories
-            editCategories:
-                title: Edit Categories
-                subtitle(int count): "${_plural(count, zero: 'No categories', other: '$count categories')}"
-            defaultCategory:
-                title: Default Category
-                subtitle(String category): "${category.isEmpty ? 'Default' : category}"
-                alwaysAsk: Always Ask
-            perCategorySort: Per-Category Sort
-        globalUpdates:
-            title: Global Updates
-        chapterSwipe:
-            title: Chapter Swipe
-            options:
-                disabled: Disabled
-                bookmark: Bookmark Chapter
-                markReadUnread: Mark as Read/Unread
-                download: Download Chapter
-                flag: Flag Chapter
-                addToQueue: Add to Queue
-            left: Swipe Left Action
-            right: Swipe Right Action
-    reader:
-        subtitle: Reading mode, display, navigation
-    downloads:
-        subtitle: Download settings, queue, history
-    tracking:
-        subtitle: Tracking settings, history, statistics
-    browse:
-        subtitle: Browse settings, sources, extensions
-    notifications:
-        subtitle: Download complete, update available
-        test:
-            title: Test Notification
-            subtitle: Send a test notification
-        basic:
-            title: Basic Notification Settings
-            enabled:
-                title: Enable Notifications
-                subtitle: Receive notifications for updates and downloads
-            vibrate:
-                title: Vibrate
-                subtitle: Vibrate on notification
-            sound:
-                title: Sound
-                subtitle: Play a sound on notification
-    dataStorage:
-        subtitle: Clear cache, manage storage location
-        storageLocation:
-            title: Storage Location
-            subtitle(String location): "${location.isEmpty ? 'Pick a storage location' : '$location'}"
-    securityPrivacy:
-        subtitle: App lock, secure screen
-    advanced:
-        subtitle: Developer options, experimental features
-    about:
-        version:
-            title: Version
-            subtitle(String channel, String version): '$channel v$version'
-        checkForUpdates: Check for Updates
-        whatsNew: What's New
-        licenses: Open-Source Licenses
-        privacyPolicy: Privacy Policy
-        links:
-            website: Website
-            email: Email
-            discord: Discord
-            reportBug: Report a Bug
-            github: GitHub
-            kofi: Ko-fi
-
-# Error
-error:
-    generic: An error occurred
-    tryAgain: Try Again
-    routeNotFound: Route not found
-    workNotFound: Work not found
-    chapterNotFound: Chapter not found
+# Themes
+themes:
+    title: Themes
+    system: System
+    dynamic: Dynamic
+    greenApple: Green Apple
+    lavender: Lavender
+    midnightDusk: Midnight Dusk
+    nord: Nord
+    strawberry: Strawberry
+    tako: Tako
+    tealTurquoise: Teal & Turquoise
+    tidalWave: Tidal Wave
+    yinYang: Yin & Yang
+    yotsuba: Yotsuba
+    silverWolf: Silver Wolf
+    dracula: Dracula PRO
+    gaziter: Gaziter

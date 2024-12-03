@@ -1,15 +1,15 @@
-import 'package:athena/features/theme/models/custom_colors.dart';
+// import 'package:athena/features/theme/models/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 // Custom colors
-extension CustomColorExtension on ThemeData {
-  CustomColors get extended => extension<CustomColors>()!;
-}
+// extension CustomColorExtension on ThemeData {
+//   CustomColors get extended => extension<CustomColors>()!;
+// }
 
 // Theme data utilities
 extension ThemeDataExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
-  CustomColors get extended => theme.extended;
+  // CustomColors get extended => theme.extended;
   ColorScheme get scheme => theme.colorScheme;
   TextTheme get text => theme.textTheme;
 }

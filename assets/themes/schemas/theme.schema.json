@@ -1,0 +1,93 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://example.com/schemas/theme.schema.json",
+	"type": "object",
+	"default": {},
+	"title": "Theme Schema",
+	"required": ["name", "category"],
+	"oneOf": [
+		{
+			"required": ["source"]
+		},
+		{
+			"required": ["colors"]
+		},
+		{
+			"required": ["schemes"]
+		}
+	],
+	"properties": {
+		"name": {
+			"type": "string",
+			"title": "Name",
+			"description": "The name of the theme."
+		},
+		"source": {
+			"type": "string",
+			"title": "Source",
+			"description": "The source of the theme.",
+			"enum": ["system", "dynamic"]
+		},
+		"category": {
+			"type": "string",
+			"title": "Category",
+			"description": "The category of the theme."
+		},
+		"colors": {
+			"type": "object",
+			"title": "Colors",
+			"description": "The colors of the theme.",
+			"required": ["primary"],
+			"properties": {
+				"primary": {
+					"type": "string",
+					"title": "Primary",
+					"description": "The primary color of the theme."
+				},
+				"secondary": {
+					"type": "string",
+					"title": "Secondary",
+					"description": "The secondary color of the theme."
+				},
+				"tertiary": {
+					"type": "string",
+					"title": "Tertiary",
+					"description": "The tertiary color of the theme."
+				},
+				"error": {
+					"type": "string",
+					"title": "Error",
+					"description": "The error color of the theme."
+				},
+				"neutral": {
+					"type": "string",
+					"title": "Neutral",
+					"description": "The neutral color of the theme."
+				}
+			}
+		},
+		"variant": {
+			"type": "string",
+			"title": "Variant",
+			"description": "The variant of the theme."
+		},
+		"schemes": {
+			"type": "object",
+			"title": "Schemes",
+			"description": "The schemes of the theme.",
+			"required": ["light", "dark"],
+			"properties": {
+				"light": {
+					"$ref": "./scheme.schema.json",
+					"title": "Light Scheme",
+					"description": "The light scheme of the theme."
+				},
+				"dark": {
+					"$ref": "./scheme.schema.json",
+					"title": "Dark Scheme",
+					"description": "The dark scheme of the theme."
+				}
+			}
+		}
+	}
+}
