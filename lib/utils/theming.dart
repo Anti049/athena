@@ -1,5 +1,6 @@
 // import 'package:athena/features/theme/models/custom_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Custom colors
 // extension CustomColorExtension on ThemeData {
@@ -28,4 +29,18 @@ Brightness calculateBrightness(BuildContext context, ThemeMode themeMode) {
 extension Invert on Brightness {
   Brightness get invert =>
       this == Brightness.dark ? Brightness.light : Brightness.dark;
+}
+
+SystemUiOverlayStyle calculateOverlayStyle(
+  BuildContext context,
+  Brightness brightness,
+) {
+  final statusBarColor = context.scheme.surfaceTint.withOpacity(0.002);
+  final iconBrightness = brightness.invert;
+  return SystemUiOverlayStyle(
+    statusBarColor: statusBarColor,
+    statusBarIconBrightness: iconBrightness,
+    systemNavigationBarColor: statusBarColor,
+    systemNavigationBarIconBrightness: iconBrightness,
+  );
 }

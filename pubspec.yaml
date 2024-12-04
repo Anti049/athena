@@ -13,6 +13,7 @@ dependencies:
     animated_visibility: ^0.0.4
     auto_route: '^9.2.2'
     collection: ^1.18.0
+    cupertino_icons: ^1.0.8
     dartx: ^1.2.0
     flex_color_scheme: ^8.0.2
     flex_seed_scheme: ^3.4.1
@@ -27,6 +28,7 @@ dependencies:
     hive_ce_flutter: ^2.1.0
     i69n: '^3.0.0'
     json_annotation: '^4.9.0'
+    logger: ^2.5.0
     material_symbols_icons: ^4.2800.2
     path_provider: '^2.1.4'
     responsive_framework: ^1.5.1

@@ -3,17 +3,87 @@ appDescription: Athena is an all-in-one application for downloading, reading, an
 appChannel: Pre-Alpha
 appVersion: 0.1.0
 
+# Actions
+action:
+    ok: OK
+    cancel: Cancel
+    close: Close
+    save: Save
+    delete: Delete
+    clear: Clear
+    reset: Reset
+    add: Add
+    remove: Remove
+    edit: Edit
+    done: Done
+    select: Select
+    selectAll: Select All
+    deselectAll: Deselect All
+    invertSelection: Invert Selection
+    refresh: Refresh
+    retry: Retry
+    search: Search
+    filter: Filter
+    sort: Sort
+    share: Share
+
 # Pages
-library: Library
-updates: Updates
-history: History
-browse: Browse
-sources: Sources
-extensions: Extensions
-migrate: Migrate
-more: More
-settings: Settings
-appearance: Appearance
+pages:
+    library:
+        title: Library
+    updates:
+        title: Updates
+    history:
+        title: History
+    browse:
+        title: Browse
+        sources:
+            title: Sources
+        extensions:
+            title: Extensions
+        migrate:
+            title: Migrate
+    more:
+        title: More
+        downloadQueue:
+            title: Download Queue
+            subtitle(String status, int downloads): "${_plural(downloads, zero: '', one: '$status ($downloads download)', other: '$status ($downloads downloads)')}"
+        categories:
+            title: Categories
+        statistics:
+            title: Statistics
+        about:
+            title: About
+        help:
+            title: Help
+        feedback:
+            title: Feedback
+    settings:
+        title: Settings
+        appearance:
+            title: Appearance
+        library:
+            title: Library
+            editCategories:
+                title: Edit Categories
+        accounts:
+            title: Accounts
+        reader:
+            title: Reader
+        downloads:
+            title: Downloads
+        tracking:
+            title: Tracking
+        browse:
+            title: Browse
+        notifications:
+            title: Notifications
+        dataStorage:
+            title: Data Storage
+        securityPrivacy:
+            title: Security & Privacy
+        advanced:
+            title: Advanced
 
 # Themes
 themes:
@@ -33,3 +103,105 @@ themes:
     silverWolf: Silver Wolf
     dracula: Dracula PRO
     gaziter: Gaziter
+
+# More
+more:
+    downloadedOnly:
+        title: Downloaded Only
+        subtitle: Show only downloaded works
+    incognitoMode:
+        title: Incognito Mode
+        subtitle: Pause reading history
+    about:
+        subtitle(String channel, String version): 'Athena $channel $version'
+
+# Settings
+settings:
+    search:
+        hint: Search settings...
+        recent: Recent searches
+        noResults: No results found
+    appearance:
+        subtitle: Theme, font, language, and more
+        theme: Theme
+        mode:
+            system: System
+            light: Light
+            dark: Dark
+        blendLevel: Blend Level
+        themeSelection:
+            title: Theme Selection
+            count(int count): "${_plural(count, zero: 'No themes', one: '1 theme', other: '$count themes')}"
+        pureBlack:
+            title: Pure Black
+            subtitle: Use pure black background for dark theme
+    library:
+        subtitle: Categories, global updates, chapter swipe
+        categories:
+            title: Categories
+            editCategories:
+                title: Edit Categories
+                subtitle(int count): "${_plural(count, zero: 'No categories', other: '$count categories')}"
+            defaultCategory:
+                title: Default Category
+                subtitle(String category): "${category.isEmpty ? 'Default' : category}"
+                alwaysAsk: Always Ask
+            perCategorySort: Per-Category Sort
+        globalUpdates:
+            title: Global Updates
+            automaticUpdates:
+                title: Automatic Updates
+                subtitle(String selection): "${selection.isEmpty ? 'Disabled' : selection}"
+                choices:
+                    off: Off
+                    every12Hours: Every 12 Hours
+                    daily: Daily
+                    every2Days: Every 2 Days
+                    every3Days: Every 3 Days
+                    weekly: Weekly
+        chapterSwipe:
+            title: Chapter Swipe
+            options:
+                disabled: Disabled
+                bookmark: Bookmark Chapter
+                markReadUnread: Mark as Read/Unread
+                download: Download Chapter
+                flag: Flag Chapter
+                addToQueue: Add to Queue
+            left: Swipe Left Action
+            right: Swipe Right Action
+    accounts:
+        subtitle: Manage accounts, login, logout
+    reader:
+        subtitle: Reading mode, display, navigation
+    downloads:
+        subtitle: Download settings, queue, history
+    tracking:
+        subtitle: Tracking settings, history, statistics
+    browse:
+        subtitle: Browse settings, sources, extensions
+    notifications:
+        subtitle: Download complete, update available
+        test:
+            title: Test Notification
+            subtitle: Send a test notification
+        basic:
+            title: Basic Notification Settings
+            enabled:
+                title: Enable Notifications
+                subtitle: Receive notifications for updates and downloads
+            vibrate:
+                title: Vibrate
+                subtitle: Vibrate on notification
+            sound:
+                title: Sound
+                subtitle: Play a sound on notification
+    dataStorage:
+        subtitle: Clear cache, manage storage location
+        storageLocation:
+            title: Storage Location
+            subtitle(String location): "${location.isEmpty ? 'Pick a storage location' : '$location'}"
+    securityPrivacy:
+        subtitle: App lock, secure screen
+    advanced:
+        subtitle: Developer options, experimental features

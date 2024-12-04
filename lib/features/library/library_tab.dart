@@ -1,6 +1,6 @@
 import 'package:athena/common_widgets/empty.dart';
-import 'package:athena/features/more/settings/appearance/providers/appearance_provider.dart';
-import 'package:athena/features/more/settings/models/preference.dart';
+import 'package:athena/features/settings/screens/appearance/providers/appearance_provider.dart';
+import 'package:athena/features/settings/models/preference.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

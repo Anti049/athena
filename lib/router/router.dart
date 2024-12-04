@@ -15,56 +15,71 @@ class AthenaRouter extends RootStackRouter {
           page: MainRoute.page,
           children: [
             AutoRoute(
-              title: (context, data) => context.locale.library,
+              title: (context, data) => context.locale.pages.library.title,
               path: 'library',
               page: LibraryRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.updates,
+              title: (context, data) => context.locale.pages.updates.title,
               path: 'updates',
               page: UpdatesRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.history,
+              title: (context, data) => context.locale.pages.history.title,
               path: 'history',
               page: HistoryRoute.page,
             ),
             AutoRoute(
-              title: (context, data) => context.locale.browse,
+              title: (context, data) => context.locale.pages.browse.title,
               path: 'browse',
               page: BrowseRoute.page,
               children: [
                 AutoRoute(
-                  title: (context, data) => context.locale.sources,
+                  title: (context, data) =>
+                      context.locale.pages.browse.sources.title,
                   path: 'sources',
                   page: SourcesRoute.page,
                 ),
                 AutoRoute(
-                  title: (context, data) => context.locale.extensions,
+                  title: (context, data) =>
+                      context.locale.pages.browse.extensions.title,
                   path: 'extensions',
                   page: ExtensionsRoute.page,
                 ),
                 AutoRoute(
-                  title: (context, data) => context.locale.migrate,
+                  title: (context, data) =>
+                      context.locale.pages.browse.migrate.title,
                   path: 'migrate',
                   page: MigrateRoute.page,
                 )
               ],
             ),
             AutoRoute(
-              title: (context, data) => context.locale.more,
+              title: (context, data) => context.locale.pages.more.title,
               path: 'more',
               page: MoreRoute.page,
             ),
           ],
         ),
         AutoRoute(
-          title: (context, data) => context.locale.settings,
+          title: (context, data) =>
+              context.locale.pages.more.downloadQueue.title,
+          path: '/download-queue',
+          page: DownloadQueueRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.pages.more.statistics.title,
+          path: '/statistics',
+          page: StatisticsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.pages.settings.title,
           path: '/settings',
           page: SettingsRoute.page,
         ),
         AutoRoute(
-          title: (context, data) => context.locale.appearance,
+          title: (context, data) =>
+              context.locale.pages.settings.appearance.title,
           path: '/settings/appearance',
           page: AppearanceSettingsRoute.page,
         ),
@@ -72,6 +87,69 @@ class AthenaRouter extends RootStackRouter {
           title: (context, data) => context.locale.themes.title,
           path: '/settings/appearance/themes',
           page: ThemeSelectionRoute.page,
-        )
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.pages.settings.library.title,
+          path: '/settings/library',
+          page: LibrarySettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.library.editCategories.title,
+          path: '/settings/library/edit_categories',
+          page: EditCategoriesRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.accounts.title,
+          path: '/settings/accounts',
+          page: AccountsSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.pages.settings.reader.title,
+          path: '/settings/reader',
+          page: ReaderSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.downloads.title,
+          path: '/settings/downloads',
+          page: DownloadsSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.tracking.title,
+          path: '/settings/tracking',
+          page: TrackingSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) => context.locale.pages.settings.browse.title,
+          path: '/settings/browse',
+          page: BrowseSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.notifications.title,
+          path: '/settings/notifications',
+          page: NotificationsSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.dataStorage.title,
+          path: '/settings/dataStorage',
+          page: DataStorageSettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.securityPrivacy.title,
+          path: '/settings/securityPrivacy',
+          page: SecurityPrivacySettingsRoute.page,
+        ),
+        AutoRoute(
+          title: (context, data) =>
+              context.locale.pages.settings.advanced.title,
+          path: '/settings/advanced',
+          page: AdvancedSettingsRoute.page,
+        ),
       ];
 }

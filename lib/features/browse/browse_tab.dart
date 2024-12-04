@@ -1,3 +1,4 @@
+import 'package:athena/common_widgets/padded_app_bar.dart';
 import 'package:athena/features/browse/models/tab_item.dart';
 import 'package:athena/router/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
@@ -32,7 +33,7 @@ class BrowseTab extends StatelessWidget {
         final router = AutoTabsRouter.of(context);
 
         return Scaffold(
-          appBar: AppBar(
+          appBar: PaddedAppBar(
             title: Text(router.current.title(context)),
             bottom: TabBar(
               controller: controller,

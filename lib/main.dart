@@ -1,13 +1,15 @@
-import 'package:athena/features/more/settings/appearance/providers/appearance_provider.dart';
-import 'package:athena/features/more/settings/appearance/theme/data/prebuilt_themes.dart';
-import 'package:athena/features/more/settings/appearance/theme/model/theme.dart';
+import 'package:athena/features/settings/screens/appearance/providers/appearance_provider.dart';
+import 'package:athena/features/settings/screens/appearance/theme/data/prebuilt_themes.dart';
+import 'package:athena/features/settings/screens/appearance/theme/model/theme.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/router/router.dart';
 import 'package:athena/utils/enums.dart';
 import 'package:athena/utils/responsive_layout.dart';
+import 'package:athena/utils/theming.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
@@ -81,6 +83,42 @@ class MainApp extends ConsumerWidget {
 
         // Get blend level
         final blendLevel = preferences.blendLevel().get().ceil();
+
+        // Handle brightness for system icons
+        final appBrightness =
+            calculateBrightness(context, preferences.themeMode().get());
+        final iconBrightness = appBrightness.invert;
+        SystemChrome.setEnabledSystemUIMode(
+          SystemUiMode.edgeToEdge,
+          overlays: [
+            SystemUiOverlay.top,
+            SystemUiOverlay.bottom,
+          ],
+        );
+
+        final lightTheme = prebuiltThemes[themeName]!.light(
+          blendLevel: blendLevel,
+        );
+        final darkTheme = prebuiltThemes[themeName]!.dark(
+          pureBlack: preferences.pureBlack().get(),
+          blendLevel: preferences.pureBlack().get() ? 0 : blendLevel,
+        );
+
+        Color trueTransparent = iconBrightness == Brightness.light
+            ? lightTheme.colorScheme.surface.withOpacity(0.002)
+            : darkTheme.colorScheme.surface.withOpacity(0.002);
+        SystemChrome.setSystemUIOverlayStyle(
+          SystemUiOverlayStyle(
+            statusBarColor:
+                trueTransparent, // Manually set opacity just above 0 to get true transparency
+            statusBarIconBrightness: iconBrightness,
+            systemStatusBarContrastEnforced: true,
+            systemNavigationBarColor:
+                trueTransparent, // Manually set opacity just above 0 to get true transparency
+            systemNavigationBarIconBrightness: iconBrightness,
+            systemNavigationBarContrastEnforced: true,
+          ),
+        );
 
         // Return app
         return MaterialApp.router(
