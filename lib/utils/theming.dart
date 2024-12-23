@@ -1,16 +1,17 @@
 // import 'package:athena/features/theme/models/custom_colors.dart';
+import 'package:athena/features/settings/screens/appearance/theme/model/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Custom colors
-// extension CustomColorExtension on ThemeData {
-//   CustomColors get extended => extension<CustomColors>()!;
-// }
+extension CustomColorExtension on ThemeData {
+  CustomColors get extended => extension<CustomColors>()!;
+}
 
 // Theme data utilities
 extension ThemeDataExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
-  // CustomColors get extended => theme.extended;
+  CustomColors get extended => theme.extended;
   ColorScheme get scheme => theme.colorScheme;
   TextTheme get text => theme.textTheme;
 }
@@ -34,12 +35,14 @@ extension Invert on Brightness {
 SystemUiOverlayStyle calculateOverlayStyle(
   BuildContext context,
   Brightness brightness,
+  bool bannersActive,
 ) {
   final statusBarColor = context.scheme.surfaceTint.withOpacity(0.002);
   final iconBrightness = brightness.invert;
   return SystemUiOverlayStyle(
     statusBarColor: statusBarColor,
-    statusBarIconBrightness: iconBrightness,
+    statusBarIconBrightness:
+        bannersActive ? iconBrightness.invert : iconBrightness,
     systemNavigationBarColor: statusBarColor,
     systemNavigationBarIconBrightness: iconBrightness,
   );

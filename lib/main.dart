@@ -1,12 +1,14 @@
+import 'package:athena/features/banners/presentation/banner_frame.dart';
+import 'package:athena/features/banners/providers/banners_provider.dart';
 import 'package:athena/features/settings/screens/appearance/providers/appearance_provider.dart';
 import 'package:athena/features/settings/screens/appearance/theme/data/prebuilt_themes.dart';
+import 'package:athena/features/settings/screens/appearance/theme/model/custom_colors.dart';
 import 'package:athena/features/settings/screens/appearance/theme/model/theme.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/router/router.dart';
 import 'package:athena/utils/enums.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,6 +54,19 @@ class MainApp extends ConsumerWidget {
 
     return SystemThemeBuilder(
       builder: (context, accent) {
+        CustomColors extendedLightColors = const CustomColors(
+          info: Color(0xFF006877),
+          success: Color(0xFF006e2b),
+          warning: Color(0xFF87520d),
+          alert: Color(0xFF5c6300),
+        );
+        CustomColors extendedDarkColors = const CustomColors(
+          info: Color(0xFF84e2f6),
+          success: Color(0xFF46f274),
+          warning: Color(0xFFfab468),
+          alert: Color(0xFFd3dc71),
+        );
+
         // Create/update dynamic theme for selection
         addTheme(
           AppTheme.fromColors(
@@ -62,16 +77,16 @@ class MainApp extends ConsumerWidget {
         );
 
         // Add flex color schemes
-        for (var scheme in FlexColor.schemesList) {
-          addTheme(
-            AppTheme.fromFlexScheme(
-              scheme.name,
-              ThemeCategory.flex,
-              light: scheme.light,
-              dark: scheme.dark,
-            ),
-          );
-        }
+        // for (var scheme in FlexColor.schemesList) {
+        //   addTheme(
+        //     AppTheme.fromFlexScheme(
+        //       scheme.name,
+        //       ThemeCategory.flex,
+        //       light: scheme.light,
+        //       dark: scheme.dark,
+        //     ),
+        //   );
+        // }
 
         // If active theme doesn't exist, switch to system theme
         if (!prebuiltThemes.containsKey(preferences.themeName().get())) {
@@ -87,36 +102,14 @@ class MainApp extends ConsumerWidget {
         // Handle brightness for system icons
         final appBrightness =
             calculateBrightness(context, preferences.themeMode().get());
-        final iconBrightness = appBrightness.invert;
         SystemChrome.setEnabledSystemUIMode(
           SystemUiMode.edgeToEdge,
-          overlays: [
-            SystemUiOverlay.top,
-            SystemUiOverlay.bottom,
-          ],
         );
-
-        final lightTheme = prebuiltThemes[themeName]!.light(
-          blendLevel: blendLevel,
-        );
-        final darkTheme = prebuiltThemes[themeName]!.dark(
-          pureBlack: preferences.pureBlack().get(),
-          blendLevel: preferences.pureBlack().get() ? 0 : blendLevel,
-        );
-
-        Color trueTransparent = iconBrightness == Brightness.light
-            ? lightTheme.colorScheme.surface.withOpacity(0.002)
-            : darkTheme.colorScheme.surface.withOpacity(0.002);
         SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
-            statusBarColor:
-                trueTransparent, // Manually set opacity just above 0 to get true transparency
-            statusBarIconBrightness: iconBrightness,
-            systemStatusBarContrastEnforced: true,
-            systemNavigationBarColor:
-                trueTransparent, // Manually set opacity just above 0 to get true transparency
-            systemNavigationBarIconBrightness: iconBrightness,
-            systemNavigationBarContrastEnforced: true,
+          calculateOverlayStyle(
+            context,
+            appBrightness,
+            ref.watch(bannersActiveProvider),
           ),
         );
 
@@ -129,10 +122,12 @@ class MainApp extends ConsumerWidget {
           themeMode: preferences.themeMode().get(),
           theme: prebuiltThemes[themeName]!.light(
             blendLevel: blendLevel,
+            customColors: extendedLightColors,
           ),
           darkTheme: prebuiltThemes[themeName]!.dark(
             pureBlack: preferences.pureBlack().get(),
             blendLevel: preferences.pureBlack().get() ? 0 : blendLevel,
+            customColors: extendedDarkColors,
           ),
           // Locale settings
           locale: preferences.appLanguage().get(),
@@ -144,7 +139,9 @@ class MainApp extends ConsumerWidget {
           // Responsive layout settings
           builder: (context, child) {
             return ResponsiveBreakpoints.builder(
-              child: child!,
+              child: BannerFrame(
+                child: child!,
+              ),
               breakpoints: [
                 const Breakpoint(start: 0, end: 600, name: COMPACT),
                 const Breakpoint(start: 600, end: 839, name: MEDIUM),

@@ -1,3 +1,4 @@
+import 'package:athena/features/settings/screens/appearance/theme/model/custom_colors.dart';
 import 'package:athena/utils/enums.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class AppTheme with _$AppTheme {
     Color? error,
     Color? neutral,
     FlexSchemeVariant variant = FlexSchemeVariant.material,
+    double contrast = 0.0,
   }) {
     final lightScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.light,
@@ -60,7 +62,7 @@ class AppTheme with _$AppTheme {
       errorKey: error,
       neutralKey: neutral,
       variant: variant,
-      contrastLevel: 0.0,
+      contrastLevel: contrast,
     );
     final darkScheme = SeedColorScheme.fromSeeds(
       brightness: Brightness.dark,
@@ -70,7 +72,7 @@ class AppTheme with _$AppTheme {
       errorKey: error,
       neutralKey: neutral,
       variant: variant,
-      contrastLevel: 0.0,
+      contrastLevel: contrast,
     );
 
     return AppTheme(
@@ -119,11 +121,17 @@ class AppTheme with _$AppTheme {
   ThemeData light({
     int blendLevel = 0,
     String? appFont,
+    CustomColors? customColors,
   }) {
+    final colors = schemes.getFlex(Brightness.light);
+    final colorScheme = schemes.getScheme(Brightness.light);
+    CustomColors? extended = customColors?.harmonized(
+      colorScheme != null ? colorScheme.primary : colors!.primary,
+    );
     return FlexThemeData.light(
       useMaterial3: true,
-      colors: schemes.getFlex(Brightness.light),
-      colorScheme: schemes.getScheme(Brightness.light),
+      colors: colors,
+      colorScheme: colorScheme,
       variant: variant,
       surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
       blendLevel: blendLevel,
@@ -134,10 +142,12 @@ class AppTheme with _$AppTheme {
         inputDecoratorRadius: 24.0,
         chipRadius: 24.0,
         dialogBackgroundSchemeColor: SchemeColor.surface,
+        checkboxSchemeColor: SchemeColor.onSurface,
       ),
       useMaterial3ErrorColors: true,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       fontFamily: appFont,
+      extensions: [if (extended != null) extended],
     );
   }
 
@@ -145,9 +155,13 @@ class AppTheme with _$AppTheme {
     int blendLevel = 0,
     String? appFont,
     bool pureBlack = false,
+    CustomColors? customColors,
   }) {
     final colors = schemes.getFlex(Brightness.dark);
     final colorScheme = schemes.getScheme(Brightness.dark);
+    CustomColors? extended = customColors?.harmonized(
+      colorScheme != null ? colorScheme.primary : colors!.primary,
+    );
 
     return FlexThemeData.dark(
       useMaterial3: true,
@@ -156,7 +170,7 @@ class AppTheme with _$AppTheme {
       variant: variant,
       surfaceMode: FlexSurfaceMode.level,
       blendLevel: blendLevel,
-      scaffoldBackground: pureBlack ? Colors.black : null,
+      darkIsTrueBlack: pureBlack,
       subThemesData: const FlexSubThemesData(
         blendOnLevel: 10,
         thinBorderWidth: 2.0,
@@ -164,10 +178,12 @@ class AppTheme with _$AppTheme {
         inputDecoratorRadius: 24.0,
         chipRadius: 24.0,
         dialogBackgroundSchemeColor: SchemeColor.surface,
+        checkboxSchemeColor: SchemeColor.onSurface,
       ),
       useMaterial3ErrorColors: true,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       fontFamily: appFont,
+      extensions: [if (extended != null) extended],
     );
   }
 

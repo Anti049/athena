@@ -61,6 +61,14 @@ class AthenaRouter extends RootStackRouter {
             ),
           ],
         ),
+        CustomRoute(
+          title: (context, data) => context.locale.pages.filters.title,
+          path: '/filters',
+          page: FiltersRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideRightWithFade,
+          durationInMilliseconds: 200,
+          reverseDurationInMilliseconds: 200,
+        ),
         AutoRoute(
           title: (context, data) =>
               context.locale.pages.more.downloadQueue.title,

@@ -43,6 +43,7 @@ class Translations implements i69n.I69nMessageBundle {
   ActionTranslations get action => ActionTranslations(this);
   PagesTranslations get pages => PagesTranslations(this);
   ThemesTranslations get themes => ThemesTranslations(this);
+  LibraryTranslations get library => LibraryTranslations(this);
   MoreTranslations get more => MoreTranslations(this);
   SettingsTranslations get settings => SettingsTranslations(this);
   Object operator [](String key) {
@@ -66,6 +67,8 @@ class Translations implements i69n.I69nMessageBundle {
         return pages;
       case 'themes':
         return themes;
+      case 'library':
+        return library;
       case 'more':
         return more;
       case 'settings':
@@ -159,6 +162,7 @@ class PagesTranslations implements i69n.I69nMessageBundle {
   final Translations _parent;
   const PagesTranslations(this._parent);
   LibraryPagesTranslations get library => LibraryPagesTranslations(this);
+  FiltersPagesTranslations get filters => FiltersPagesTranslations(this);
   UpdatesPagesTranslations get updates => UpdatesPagesTranslations(this);
   HistoryPagesTranslations get history => HistoryPagesTranslations(this);
   BrowsePagesTranslations get browse => BrowsePagesTranslations(this);
@@ -173,6 +177,8 @@ class PagesTranslations implements i69n.I69nMessageBundle {
     switch (key) {
       case 'library':
         return library;
+      case 'filters':
+        return filters;
       case 'updates':
         return updates;
       case 'history':
@@ -193,6 +199,25 @@ class LibraryPagesTranslations implements i69n.I69nMessageBundle {
   final PagesTranslations _parent;
   const LibraryPagesTranslations(this._parent);
   String get title => "Library";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      default:
+        return key;
+    }
+  }
+}
+
+class FiltersPagesTranslations implements i69n.I69nMessageBundle {
+  final PagesTranslations _parent;
+  const FiltersPagesTranslations(this._parent);
+  String get title => "Filters";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -848,6 +873,329 @@ class ThemesTranslations implements i69n.I69nMessageBundle {
         return dracula;
       case 'gaziter':
         return gaziter;
+      default:
+        return key;
+    }
+  }
+}
+
+class LibraryTranslations implements i69n.I69nMessageBundle {
+  final Translations _parent;
+  const LibraryTranslations(this._parent);
+  String get searchHint => "Search...";
+  String get empty => "No works found";
+  MenuLibraryTranslations get menu => MenuLibraryTranslations(this);
+  OptionsLibraryTranslations get options => OptionsLibraryTranslations(this);
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'searchHint':
+        return searchHint;
+      case 'empty':
+        return empty;
+      case 'menu':
+        return menu;
+      case 'options':
+        return options;
+      default:
+        return key;
+    }
+  }
+}
+
+class MenuLibraryTranslations implements i69n.I69nMessageBundle {
+  final LibraryTranslations _parent;
+  const MenuLibraryTranslations(this._parent);
+  String get updateLibrary => "Update Library";
+  String get updateCategory => "Update Category";
+  String get randomWork => "Open Random Work";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'updateLibrary':
+        return updateLibrary;
+      case 'updateCategory':
+        return updateCategory;
+      case 'randomWork':
+        return randomWork;
+      default:
+        return key;
+    }
+  }
+}
+
+class OptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final LibraryTranslations _parent;
+  const OptionsLibraryTranslations(this._parent);
+  FilterOptionsLibraryTranslations get filter =>
+      FilterOptionsLibraryTranslations(this);
+  SortOptionsLibraryTranslations get sort =>
+      SortOptionsLibraryTranslations(this);
+  DisplayOptionsLibraryTranslations get display =>
+      DisplayOptionsLibraryTranslations(this);
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'filter':
+        return filter;
+      case 'sort':
+        return sort;
+      case 'display':
+        return display;
+      default:
+        return key;
+    }
+  }
+}
+
+class FilterOptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final OptionsLibraryTranslations _parent;
+  const FilterOptionsLibraryTranslations(this._parent);
+  String get title => "Filter";
+  String get downloaded => "Downloaded";
+  String get unread => "Unread";
+  String get started => "Started";
+  String get completed => "Completed";
+  String get bookmarked => "Bookmarked";
+  String get updated => "Updated";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'downloaded':
+        return downloaded;
+      case 'unread':
+        return unread;
+      case 'started':
+        return started;
+      case 'completed':
+        return completed;
+      case 'bookmarked':
+        return bookmarked;
+      case 'updated':
+        return updated;
+      default:
+        return key;
+    }
+  }
+}
+
+class SortOptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final OptionsLibraryTranslations _parent;
+  const SortOptionsLibraryTranslations(this._parent);
+  String get title => "Sort";
+  String get alphabetically => "Alphabetically";
+  String get author => "Author";
+  String get totalChapters => "Total Chapters";
+  String get lastRead => "Last Read";
+  String get lastChecked => "Last Checked";
+  String get lastUpdated => "Last Updated";
+  String get unreadChapters => "Unread Chapters";
+  String get latestChapter => "Latest Chapter";
+  String get dateFetched => "Fetched Date";
+  String get dateAdded => "Added Date";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'alphabetically':
+        return alphabetically;
+      case 'author':
+        return author;
+      case 'totalChapters':
+        return totalChapters;
+      case 'lastRead':
+        return lastRead;
+      case 'lastChecked':
+        return lastChecked;
+      case 'lastUpdated':
+        return lastUpdated;
+      case 'unreadChapters':
+        return unreadChapters;
+      case 'latestChapter':
+        return latestChapter;
+      case 'dateFetched':
+        return dateFetched;
+      case 'dateAdded':
+        return dateAdded;
+      default:
+        return key;
+    }
+  }
+}
+
+class DisplayOptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final OptionsLibraryTranslations _parent;
+  const DisplayOptionsLibraryTranslations(this._parent);
+  String get title => "Display";
+  ModeDisplayOptionsLibraryTranslations get mode =>
+      ModeDisplayOptionsLibraryTranslations(this);
+  GridSizeDisplayOptionsLibraryTranslations get gridSize =>
+      GridSizeDisplayOptionsLibraryTranslations(this);
+  OverlayDisplayOptionsLibraryTranslations get overlay =>
+      OverlayDisplayOptionsLibraryTranslations(this);
+  TabsDisplayOptionsLibraryTranslations get tabs =>
+      TabsDisplayOptionsLibraryTranslations(this);
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'mode':
+        return mode;
+      case 'gridSize':
+        return gridSize;
+      case 'overlay':
+        return overlay;
+      case 'tabs':
+        return tabs;
+      default:
+        return key;
+    }
+  }
+}
+
+class ModeDisplayOptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final DisplayOptionsLibraryTranslations _parent;
+  const ModeDisplayOptionsLibraryTranslations(this._parent);
+  String get title => "Display Mode";
+  String get compactGrid => "Compact Grid";
+  String get comfortableGrid => "Comfortable Grid";
+  String get coverOnlyGrid => "Cover-Only Grid";
+  String get list => "List";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'compactGrid':
+        return compactGrid;
+      case 'comfortableGrid':
+        return comfortableGrid;
+      case 'coverOnlyGrid':
+        return coverOnlyGrid;
+      case 'list':
+        return list;
+      default:
+        return key;
+    }
+  }
+}
+
+class GridSizeDisplayOptionsLibraryTranslations
+    implements i69n.I69nMessageBundle {
+  final DisplayOptionsLibraryTranslations _parent;
+  const GridSizeDisplayOptionsLibraryTranslations(this._parent);
+  String get title => "Grid Size";
+  String subtitle(int size) =>
+      "${_plural(size, zero: 'Default', other: '$size per row')}";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'subtitle':
+        return subtitle;
+      default:
+        return key;
+    }
+  }
+}
+
+class OverlayDisplayOptionsLibraryTranslations
+    implements i69n.I69nMessageBundle {
+  final DisplayOptionsLibraryTranslations _parent;
+  const OverlayDisplayOptionsLibraryTranslations(this._parent);
+  String get title => "Overlay";
+  String get downloadedChapters => "Downloaded Chapters";
+  String get unreadChapters => "Unread Chapters";
+  String get localSource => "Local Source";
+  String get language => "Language";
+  String get source => "Source";
+  String get continueReading => "Continue Reading Button";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'downloadedChapters':
+        return downloadedChapters;
+      case 'unreadChapters':
+        return unreadChapters;
+      case 'localSource':
+        return localSource;
+      case 'language':
+        return language;
+      case 'source':
+        return source;
+      case 'continueReading':
+        return continueReading;
+      default:
+        return key;
+    }
+  }
+}
+
+class TabsDisplayOptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final DisplayOptionsLibraryTranslations _parent;
+  const TabsDisplayOptionsLibraryTranslations(this._parent);
+  String get title => "Tabs";
+  String get category => "Show Category Tabs";
+  String get genre => "Show Favorite Tabs";
+  String get number => "Show Number of Works";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'category':
+        return category;
+      case 'genre':
+        return genre;
+      case 'number':
+        return number;
       default:
         return key;
     }

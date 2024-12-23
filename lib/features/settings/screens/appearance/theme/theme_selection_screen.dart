@@ -1,4 +1,6 @@
 import 'package:animated_visibility/animated_visibility.dart';
+import 'package:athena/common_widgets/padded_app_bar.dart';
+import 'package:athena/features/banners/presentation/components/banner_scaffold.dart';
 import 'package:athena/features/settings/screens/appearance/providers/appearance_provider.dart';
 import 'package:athena/features/settings/screens/appearance/theme/data/prebuilt_themes.dart';
 import 'package:athena/features/settings/screens/appearance/theme/model/theme.dart';
@@ -105,8 +107,8 @@ class _ThemeSelectionScreenState extends ConsumerState<ThemeSelectionScreen> {
     final themeName = appearancePreferences.themeName();
     final categorizedThemes = getThemesByCategoryMap(context);
 
-    return Scaffold(
-      appBar: AppBar(
+    return BannerScaffold(
+      appBar: PaddedAppBar(
         title: Text(
           context.locale.settings.appearance.themeSelection.title,
         ),

@@ -21,26 +21,21 @@ class SegmentedSettingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseSettingWidget(
       title: title,
-      subcomponent: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 0.0, // TODO: prefsHorizontalPadding
-        ),
-        child: SegmentedButton(
-          segments: choices.map(
-            (e) {
-              return ButtonSegment(
-                value: e.value,
-                label: Text(e.label),
-              );
-            },
-          ).toList(),
-          selected: {
-            preference.get() ?? choices.first.value,
+      subcomponent: SegmentedButton(
+        segments: choices.map(
+          (e) {
+            return ButtonSegment(
+              value: e.value,
+              label: Text(e.label),
+            );
           },
-          onSelectionChanged: (newSelection) {
-            if (enabled) preference.set(newSelection.first);
-          },
-        ),
+        ).toList(),
+        selected: {
+          preference.get() ?? choices.first.value,
+        },
+        onSelectionChanged: (newSelection) {
+          if (enabled) preference.set(newSelection.first);
+        },
       ),
     );
   }

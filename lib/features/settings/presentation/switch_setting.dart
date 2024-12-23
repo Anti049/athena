@@ -1,7 +1,6 @@
 import 'package:athena/features/settings/presentation/base_setting.dart';
 import 'package:athena/features/settings/presentation/text_setting.dart';
 import 'package:athena/utils/theming.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SwitchSettingWidget extends StatelessWidget {

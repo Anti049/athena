@@ -10,6 +10,7 @@ class TabItem with _$TabItem {
   const factory TabItem({
     required String title,
     required PageRouteInfo route,
+    List<Widget>? actions,
   }) = _TabItem;
 
   Tab get tab => Tab(

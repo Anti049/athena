@@ -31,6 +31,8 @@ action:
 pages:
     library:
         title: Library
+    filters:
+        title: Filters
     updates:
         title: Updates
     history:
@@ -103,6 +105,60 @@ themes:
     silverWolf: Silver Wolf
     dracula: Dracula PRO
     gaziter: Gaziter
+
+# Library
+library:
+    searchHint: Search...
+    empty: No works found
+    menu:
+        updateLibrary: Update Library
+        updateCategory: Update Category
+        randomWork: Open Random Work
+    options:
+        filter:
+            title: Filter
+            downloaded: Downloaded
+            unread: Unread
+            started: Started
+            completed: Completed
+            bookmarked: Bookmarked
+            updated: Updated
+        sort:
+            title: Sort
+            alphabetically: Alphabetically
+            author: Author
+            totalChapters: Total Chapters
+            lastRead: Last Read
+            lastChecked: Last Checked
+            lastUpdated: Last Updated
+            unreadChapters: Unread Chapters
+            latestChapter: Latest Chapter
+            dateFetched: Fetched Date
+            dateAdded: Added Date
+        display:
+            title: Display
+            mode:
+                title: Display Mode
+                compactGrid: Compact Grid
+                comfortableGrid: Comfortable Grid
+                coverOnlyGrid: Cover-Only Grid
+                list: List
+            gridSize:
+                title: Grid Size
+                subtitle(int size): "${_plural(size, zero: 'Default', other: '$size per row')}"
+            overlay:
+                title: Overlay
+                downloadedChapters: Downloaded Chapters
+                unreadChapters: Unread Chapters
+                localSource: Local Source
+                language: Language
+                source: Source
+                continueReading: Continue Reading Button
+            tabs:
+                title: Tabs
+                category: Show Category Tabs
+                genre: Show Favorite Tabs
+                number: Show Number of Works
 
 # More
 more:

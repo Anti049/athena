@@ -12,6 +12,7 @@ class SliderSettingWidget extends StatelessWidget {
     this.max = 1.0,
     this.divisions = 100,
     this.enabled = true,
+    this.dense = false,
   });
 
   final String? title;
@@ -21,27 +22,24 @@ class SliderSettingWidget extends StatelessWidget {
   final double max;
   final int divisions;
   final bool enabled;
+  final bool dense;
 
   @override
   Widget build(BuildContext context) {
     return BaseSettingWidget(
       title: title,
-      subcomponent: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 0.0, // TODO: prefsHorizontalPadding
-        ),
-        child: Slider(
-          value: preference.get(),
-          label: preference.get().toString(),
-          onChanged: enabled
-              ? (newValue) {
-                  preference.set(newValue);
-                }
-              : null,
-          min: min,
-          max: max,
-          divisions: divisions,
-        ),
+      subtitle: dense ? subtitle : null,
+      subcomponent: Slider(
+        value: preference.get(),
+        label: preference.get().toString(),
+        onChanged: enabled
+            ? (newValue) {
+                preference.set(newValue);
+              }
+            : null,
+        min: min,
+        max: max,
+        divisions: divisions,
       ),
     );
   }

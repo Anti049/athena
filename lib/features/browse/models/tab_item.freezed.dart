@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TabItem {
   String get title => throw _privateConstructorUsedError;
   PageRouteInfo<dynamic> get route => throw _privateConstructorUsedError;
+  List<Widget>? get actions => throw _privateConstructorUsedError;
 
   /// Create a copy of TabItem
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +31,8 @@ abstract class $TabItemCopyWith<$Res> {
   factory $TabItemCopyWith(TabItem value, $Res Function(TabItem) then) =
       _$TabItemCopyWithImpl<$Res, TabItem>;
   @useResult
-  $Res call({String title, PageRouteInfo<dynamic> route});
+  $Res call(
+      {String title, PageRouteInfo<dynamic> route, List<Widget>? actions});
 }
 
 /// @nodoc
@@ -50,6 +52,7 @@ class _$TabItemCopyWithImpl<$Res, $Val extends TabItem>
   $Res call({
     Object? title = null,
     Object? route = null,
+    Object? actions = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -60,6 +63,10 @@ class _$TabItemCopyWithImpl<$Res, $Val extends TabItem>
           ? _value.route
           : route // ignore: cast_nullable_to_non_nullable
               as PageRouteInfo<dynamic>,
+      actions: freezed == actions
+          ? _value.actions
+          : actions // ignore: cast_nullable_to_non_nullable
+              as List<Widget>?,
     ) as $Val);
   }
 }
@@ -71,7 +78,8 @@ abstract class _$$TabItemImplCopyWith<$Res> implements $TabItemCopyWith<$Res> {
       __$$TabItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, PageRouteInfo<dynamic> route});
+  $Res call(
+      {String title, PageRouteInfo<dynamic> route, List<Widget>? actions});
 }
 
 /// @nodoc
@@ -89,6 +97,7 @@ class __$$TabItemImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? route = null,
+    Object? actions = freezed,
   }) {
     return _then(_$TabItemImpl(
       title: null == title
@@ -99,6 +108,10 @@ class __$$TabItemImplCopyWithImpl<$Res>
           ? _value.route
           : route // ignore: cast_nullable_to_non_nullable
               as PageRouteInfo<dynamic>,
+      actions: freezed == actions
+          ? _value._actions
+          : actions // ignore: cast_nullable_to_non_nullable
+              as List<Widget>?,
     ));
   }
 }
@@ -106,16 +119,28 @@ class __$$TabItemImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TabItemImpl extends _TabItem {
-  const _$TabItemImpl({required this.title, required this.route}) : super._();
+  const _$TabItemImpl(
+      {required this.title, required this.route, final List<Widget>? actions})
+      : _actions = actions,
+        super._();
 
   @override
   final String title;
   @override
   final PageRouteInfo<dynamic> route;
+  final List<Widget>? _actions;
+  @override
+  List<Widget>? get actions {
+    final value = _actions;
+    if (value == null) return null;
+    if (_actions is EqualUnmodifiableListView) return _actions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'TabItem(title: $title, route: $route)';
+    return 'TabItem(title: $title, route: $route, actions: $actions)';
   }
 
   @override
@@ -124,11 +149,13 @@ class _$TabItemImpl extends _TabItem {
         (other.runtimeType == runtimeType &&
             other is _$TabItemImpl &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.route, route) || other.route == route));
+            (identical(other.route, route) || other.route == route) &&
+            const DeepCollectionEquality().equals(other._actions, _actions));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, route);
+  int get hashCode => Object.hash(
+      runtimeType, title, route, const DeepCollectionEquality().hash(_actions));
 
   /// Create a copy of TabItem
   /// with the given fields replaced by the non-null parameter values.
@@ -142,13 +169,16 @@ class _$TabItemImpl extends _TabItem {
 abstract class _TabItem extends TabItem {
   const factory _TabItem(
       {required final String title,
-      required final PageRouteInfo<dynamic> route}) = _$TabItemImpl;
+      required final PageRouteInfo<dynamic> route,
+      final List<Widget>? actions}) = _$TabItemImpl;
   const _TabItem._() : super._();
 
   @override
   String get title;
   @override
   PageRouteInfo<dynamic> get route;
+  @override
+  List<Widget>? get actions;
 
   /// Create a copy of TabItem
   /// with the given fields replaced by the non-null parameter values.

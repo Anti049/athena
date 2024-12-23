@@ -1,4 +1,5 @@
 import 'package:athena/common_widgets/padded_app_bar.dart';
+import 'package:athena/features/banners/presentation/components/banner_scaffold.dart';
 import 'package:athena/features/settings/models/setting.dart';
 import 'package:athena/features/settings/presentation/group_header.dart';
 import 'package:collection/collection.dart';
@@ -16,7 +17,7 @@ class SettingScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BannerScaffold(
       appBar: appBar,
       body: ListView(
         children: settingsProvider()

@@ -57,6 +57,9 @@ class TextSettingWidget extends StatelessWidget {
           : null,
       onClick: onSettingClick,
       widget: widget,
+      widgetLeading: widgetLeading,
+      enabled: enabled,
+      dense: dense,
     );
   }
 }
