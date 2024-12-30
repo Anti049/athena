@@ -62,12 +62,36 @@ class AthenaRouter extends RootStackRouter {
           ],
         ),
         CustomRoute(
-          title: (context, data) => context.locale.pages.filters.title,
+          title: (context, data) => context.locale.pages.library.filters.title,
           path: '/filters',
-          page: FiltersRoute.page,
+          page: FilterSortRoute.page,
           transitionsBuilder: TransitionsBuilders.slideRightWithFade,
           durationInMilliseconds: 200,
           reverseDurationInMilliseconds: 200,
+          children: [
+            AutoRoute(
+              title: (context, data) => context.locale.pages.library.tags.title,
+              path: 'tags',
+              page: TagsRoute.page,
+            ),
+            AutoRoute(
+              title: (context, data) =>
+                  context.locale.pages.library.filters.title,
+              path: 'filters',
+              page: FiltersRoute.page,
+            ),
+            AutoRoute(
+              title: (context, data) => context.locale.pages.library.sort.title,
+              path: 'sort',
+              page: SortRoute.page,
+            ),
+            AutoRoute(
+              title: (context, data) =>
+                  context.locale.pages.library.display.title,
+              path: 'display',
+              page: DisplayRoute.page,
+            ),
+          ],
         ),
         AutoRoute(
           title: (context, data) =>
@@ -104,7 +128,7 @@ class AthenaRouter extends RootStackRouter {
         AutoRoute(
           title: (context, data) =>
               context.locale.pages.settings.library.editCategories.title,
-          path: '/settings/library/edit_categories',
+          path: '/settings/library/edit-categories',
           page: EditCategoriesRoute.page,
         ),
         AutoRoute(

@@ -1,5 +1,5 @@
 import 'package:athena/features/library/providers/library_preferences.dart';
-import 'package:athena/features/settings/presentation/checkbox_setting.dart';
+import 'package:athena/features/settings/presentation/components/checkbox_setting.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

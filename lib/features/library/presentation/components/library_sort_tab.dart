@@ -1,6 +1,6 @@
 import 'package:athena/features/library/data/enums.dart';
 import 'package:athena/features/library/providers/library_preferences.dart';
-import 'package:athena/features/settings/presentation/text_setting.dart';
+import 'package:athena/features/settings/presentation/components/text_setting.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

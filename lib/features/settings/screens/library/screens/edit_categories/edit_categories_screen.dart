@@ -1,5 +1,5 @@
-import 'package:athena/common_widgets/empty.dart';
-import 'package:athena/common_widgets/padded_app_bar.dart';
+import 'package:athena/common/presentation/empty.dart';
+import 'package:athena/common/presentation/padded_app_bar.dart';
 import 'package:athena/features/banners/presentation/components/banner_scaffold.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:auto_route/auto_route.dart';

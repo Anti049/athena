@@ -162,7 +162,6 @@ class PagesTranslations implements i69n.I69nMessageBundle {
   final Translations _parent;
   const PagesTranslations(this._parent);
   LibraryPagesTranslations get library => LibraryPagesTranslations(this);
-  FiltersPagesTranslations get filters => FiltersPagesTranslations(this);
   UpdatesPagesTranslations get updates => UpdatesPagesTranslations(this);
   HistoryPagesTranslations get history => HistoryPagesTranslations(this);
   BrowsePagesTranslations get browse => BrowsePagesTranslations(this);
@@ -177,8 +176,6 @@ class PagesTranslations implements i69n.I69nMessageBundle {
     switch (key) {
       case 'library':
         return library;
-      case 'filters':
-        return filters;
       case 'updates':
         return updates;
       case 'history':
@@ -199,6 +196,43 @@ class LibraryPagesTranslations implements i69n.I69nMessageBundle {
   final PagesTranslations _parent;
   const LibraryPagesTranslations(this._parent);
   String get title => "Library";
+  OptionsLibraryPagesTranslations get options =>
+      OptionsLibraryPagesTranslations(this);
+  TagsLibraryPagesTranslations get tags => TagsLibraryPagesTranslations(this);
+  FiltersLibraryPagesTranslations get filters =>
+      FiltersLibraryPagesTranslations(this);
+  SortLibraryPagesTranslations get sort => SortLibraryPagesTranslations(this);
+  DisplayLibraryPagesTranslations get display =>
+      DisplayLibraryPagesTranslations(this);
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'options':
+        return options;
+      case 'tags':
+        return tags;
+      case 'filters':
+        return filters;
+      case 'sort':
+        return sort;
+      case 'display':
+        return display;
+      default:
+        return key;
+    }
+  }
+}
+
+class OptionsLibraryPagesTranslations implements i69n.I69nMessageBundle {
+  final LibraryPagesTranslations _parent;
+  const OptionsLibraryPagesTranslations(this._parent);
+  String get title => "Options";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -214,10 +248,67 @@ class LibraryPagesTranslations implements i69n.I69nMessageBundle {
   }
 }
 
-class FiltersPagesTranslations implements i69n.I69nMessageBundle {
-  final PagesTranslations _parent;
-  const FiltersPagesTranslations(this._parent);
+class TagsLibraryPagesTranslations implements i69n.I69nMessageBundle {
+  final LibraryPagesTranslations _parent;
+  const TagsLibraryPagesTranslations(this._parent);
+  String get title => "Tags";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      default:
+        return key;
+    }
+  }
+}
+
+class FiltersLibraryPagesTranslations implements i69n.I69nMessageBundle {
+  final LibraryPagesTranslations _parent;
+  const FiltersLibraryPagesTranslations(this._parent);
   String get title => "Filters";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      default:
+        return key;
+    }
+  }
+}
+
+class SortLibraryPagesTranslations implements i69n.I69nMessageBundle {
+  final LibraryPagesTranslations _parent;
+  const SortLibraryPagesTranslations(this._parent);
+  String get title => "Sort";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      default:
+        return key;
+    }
+  }
+}
+
+class DisplayLibraryPagesTranslations implements i69n.I69nMessageBundle {
+  final LibraryPagesTranslations _parent;
+  const DisplayLibraryPagesTranslations(this._parent);
+  String get title => "Display";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -913,6 +1004,7 @@ class MenuLibraryTranslations implements i69n.I69nMessageBundle {
   String get updateLibrary => "Update Library";
   String get updateCategory => "Update Category";
   String get randomWork => "Open Random Work";
+  String get librarySettings => "Library Settings";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -926,6 +1018,8 @@ class MenuLibraryTranslations implements i69n.I69nMessageBundle {
         return updateCategory;
       case 'randomWork':
         return randomWork;
+      case 'librarySettings':
+        return librarySettings;
       default:
         return key;
     }
@@ -935,6 +1029,8 @@ class MenuLibraryTranslations implements i69n.I69nMessageBundle {
 class OptionsLibraryTranslations implements i69n.I69nMessageBundle {
   final LibraryTranslations _parent;
   const OptionsLibraryTranslations(this._parent);
+  TagsOptionsLibraryTranslations get tags =>
+      TagsOptionsLibraryTranslations(this);
   FilterOptionsLibraryTranslations get filter =>
       FilterOptionsLibraryTranslations(this);
   SortOptionsLibraryTranslations get sort =>
@@ -948,12 +1044,51 @@ class OptionsLibraryTranslations implements i69n.I69nMessageBundle {
           as i69n.I69nMessageBundle)[key.substring(index + 1)];
     }
     switch (key) {
+      case 'tags':
+        return tags;
       case 'filter':
         return filter;
       case 'sort':
         return sort;
       case 'display':
         return display;
+      default:
+        return key;
+    }
+  }
+}
+
+class TagsOptionsLibraryTranslations implements i69n.I69nMessageBundle {
+  final OptionsLibraryTranslations _parent;
+  const TagsOptionsLibraryTranslations(this._parent);
+  String get title => "Tags";
+  String get fandoms => "Fandoms";
+  String get characters => "Characters";
+  String get relationships => "Relationships";
+  String get ratings => "Ratings";
+  String get genres => "Genres";
+  String get additionalTags => "Additional Tags";
+  Object operator [](String key) {
+    var index = key.indexOf('.');
+    if (index > 0) {
+      return (this[key.substring(0, index)]
+          as i69n.I69nMessageBundle)[key.substring(index + 1)];
+    }
+    switch (key) {
+      case 'title':
+        return title;
+      case 'fandoms':
+        return fandoms;
+      case 'characters':
+        return characters;
+      case 'relationships':
+        return relationships;
+      case 'ratings':
+        return ratings;
+      case 'genres':
+        return genres;
+      case 'additionalTags':
+        return additionalTags;
       default:
         return key;
     }

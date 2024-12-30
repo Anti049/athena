@@ -1,10 +1,10 @@
 import 'package:athena/features/settings/models/preference.dart';
-import 'package:athena/features/settings/presentation/checkboxes_setting.dart';
-import 'package:athena/features/settings/presentation/segmented_setting.dart';
-import 'package:athena/features/settings/presentation/radio_setting.dart';
-import 'package:athena/features/settings/presentation/slider_setting.dart';
-import 'package:athena/features/settings/presentation/switch_setting.dart';
-import 'package:athena/features/settings/presentation/text_setting.dart';
+import 'package:athena/features/settings/presentation/components/checkboxes_setting.dart';
+import 'package:athena/features/settings/presentation/components/segmented_setting.dart';
+import 'package:athena/features/settings/presentation/components/radio_setting.dart';
+import 'package:athena/features/settings/presentation/components/slider_setting.dart';
+import 'package:athena/features/settings/presentation/components/switch_setting.dart';
+import 'package:athena/features/settings/presentation/components/text_setting.dart';
 import 'package:flutter/material.dart';
 
 sealed class ISetting {

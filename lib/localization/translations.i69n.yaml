@@ -31,8 +31,16 @@ action:
 pages:
     library:
         title: Library
-    filters:
-        title: Filters
+        options:
+            title: Options
+        tags:
+            title: Tags
+        filters:
+            title: Filters
+        sort:
+            title: Sort
+        display:
+            title: Display
     updates:
         title: Updates
     history:
@@ -114,7 +122,16 @@ library:
         updateLibrary: Update Library
         updateCategory: Update Category
         randomWork: Open Random Work
+        librarySettings: Library Settings
     options:
+        tags:
+            title: Tags
+            fandoms: Fandoms
+            characters: Characters
+            relationships: Relationships
+            ratings: Ratings
+            genres: Genres
+            additionalTags: Additional Tags
         filter:
             title: Filter
             downloaded: Downloaded

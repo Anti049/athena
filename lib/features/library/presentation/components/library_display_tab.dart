@@ -1,6 +1,6 @@
 import 'package:athena/features/library/data/enums.dart';
 import 'package:athena/features/library/providers/library_preferences.dart';
-import 'package:athena/features/settings/presentation/chip_setting.dart';
+import 'package:athena/features/settings/presentation/components/chip_setting.dart';
 import 'package:athena/utils/locale.dart';
 import 'package:athena/utils/string.dart';
 import 'package:athena/utils/theming.dart';

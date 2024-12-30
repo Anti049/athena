@@ -29,6 +29,11 @@ class _LibraryOptionsSheetState extends ConsumerState<LibraryOptionsSheet>
     // Initialize tabs
     _tabs = const [
       LibraryOptionsTab(
+        title: 'tags',
+        icon: Symbols.sell,
+        content: LibraryFilterTab(),
+      ),
+      LibraryOptionsTab(
         title: 'filter',
         icon: Symbols.filter_alt,
         content: LibraryFilterTab(),
@@ -55,6 +60,7 @@ class _LibraryOptionsSheetState extends ConsumerState<LibraryOptionsSheet>
   // Have to do this workaround since locale can't be accessed in initState
   Map<String, String> getTabHeaders(BuildContext context) {
     return {
+      'tags': context.locale.library.options.tags.title,
       'filter': context.locale.library.options.filter.title,
       'sort': context.locale.library.options.sort.title,
       'display': context.locale.library.options.display.title,

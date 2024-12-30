@@ -25,6 +25,15 @@ class LibraryPreferences {
   }
 
   // Filters
+  void resetFilters() {
+    filterDownloaded().set(TriState.disabled);
+    filterUnread().set(TriState.disabled);
+    filterStarted().set(TriState.disabled);
+    filterCompleted().set(TriState.disabled);
+    filterBookmarked().set(TriState.disabled);
+    filterUpdated().set(TriState.disabled);
+  }
+
   Preference<TriState> filterDownloaded() => preferenceStore.getEnum(
         "filterDownloaded",
         TriState.disabled,
@@ -57,6 +66,11 @@ class LibraryPreferences {
       );
 
   // Sort
+  void resetSort() {
+    sortBy().set(SortBy.alphabetically);
+    sortDirection().set(true);
+  }
+
   Preference<SortBy> sortBy() => preferenceStore.getEnum(
         "sortBy",
         SortBy.alphabetically,
@@ -68,6 +82,20 @@ class LibraryPreferences {
       );
 
   // Display
+  void resetDisplay() {
+    displayMode().set(DisplayMode.comfortableGrid);
+    gridSize().set(0.0);
+    downloadedBadge().set(true);
+    unreadBadge().set(true);
+    localBadge().set(true);
+    languageBadge().set(true);
+    sourceBadge().set(true);
+    continueReadingButton().set(true);
+    showCategoryTabs().set(true);
+    showFavoriteTabs().set(true);
+    showWorkCount().set(true);
+  }
+
   Preference<DisplayMode> displayMode() => preferenceStore.getEnum(
         "displayMode",
         DisplayMode.comfortableGrid,
