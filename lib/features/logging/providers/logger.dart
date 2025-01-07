@@ -1,14 +1,28 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io' as io;
 import 'package:logger/logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'logger.g.dart';
 
-@Riverpod(keepAlive: true)
-Logger logger(Ref ref) {
-  Logger.level = Level.debug;
-  return Logger(
-    filter: ProductionFilter(),
-    printer: SimplePrinter(),
-  );
+@riverpod
+class Logging extends _$Logging {
+  @override
+  Logger build() {
+    int lineLength = 120;
+    try {
+      lineLength = io.stdout.terminalColumns;
+    } catch (e) {
+      // ignore: avoid_print
+    }
+    return Logger(
+      printer: PrettyPrinter(
+        methodCount: 0,
+        errorMethodCount: 8,
+        lineLength: lineLength,
+        colors: io.stdout.supportsAnsiEscapes,
+        printEmojis: true,
+        dateTimeFormat: DateTimeFormat.dateAndTime,
+      ),
+    );
+  }
 }

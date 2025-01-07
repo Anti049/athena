@@ -1,5 +1,5 @@
-import 'package:athena/features/library/models/library_work.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:athena/features/story/models/story.dart';
+import 'package:athena/utils/string.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'library_item.freezed.dart';
@@ -7,22 +7,15 @@ part 'library_item.freezed.dart';
 @freezed
 class LibraryItem with _$LibraryItem {
   const LibraryItem._();
+
   const factory LibraryItem({
     required int itemID,
-    required LibraryWork libraryWork,
+    required Story story,
     @Default(-1) int downloadCount,
     @Default(-1) int unreadCount,
-    @Default(false) bool isLocal,
-    @Default('') String source,
-    Ref? ref,
   }) = _LibraryItem;
 
-  Future<bool> matches(String constraint) async {
-    return libraryWork.work.title.containsIgnoreCase(constraint);
+  bool matches(String constraint) {
+    return story.title.containsIgnoreCase(constraint);
   }
-}
-
-extension on String {
-  bool containsIgnoreCase(String string) =>
-      toLowerCase().contains(string.toLowerCase());
 }

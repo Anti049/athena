@@ -3,15 +3,13 @@ import 'dart:io';
 import 'package:athena/features/book/models/metadata.dart';
 
 class Book {
-  final File sourceFile;
-  MetaData? metaData;
+  final File file;
+  Metadata? metadata;
 
-  Book(
-    this.sourceFile, {
-    this.metaData,
+  Book({
+    required this.file,
+    this.metadata,
   });
 
-  set metadata(MetaData metaData) {
-    this.metaData = metaData;
-  }
+  get extension => file.path.split('.').last;
 }

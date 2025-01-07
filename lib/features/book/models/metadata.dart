@@ -1,59 +1,57 @@
+import 'package:athena/features/story/models/author.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'metadata.freezed.dart';
 
-typedef MetaDataMap = Map<String, dynamic>;
+typedef MetadataMap = Map<String, dynamic>;
 
 @freezed
-class MetaData with _$MetaData {
-  const MetaData._();
+class Metadata with _$Metadata {
+  const Metadata._();
 
-  const factory MetaData({
+  const factory Metadata({
     required String title,
-    required List<dynamic> authors,
-    required String summary,
-    @Default({}) MetaDataMap extraData,
-  }) = _MetaData;
+    required List<Author> authors,
+    required String description,
+    required MetadataMap metadata,
+  }) = _Metadata;
 
-  MetaDataMap getData({
-    List<String> keys = const [],
+  MetadataMap getData({
+    List<String> specificKeys = const [],
     List<String> excludeKeys = const [],
   }) {
-    // Get all data
+    // Get ALL the data
     final sourceMap = {
       'title': title,
-      'authors': authors,
-      'summary': summary,
-      ...extraData,
+      'authors': authors.map((author) => author.toJson()).toList(),
+      'description': description,
+      ...metadata,
     };
-    // Exclude unwanted keys
-    final excluded = <String, dynamic>{};
-    for (final key in sourceMap.keys) {
-      if (!excludeKeys.contains(key)) {
-        excluded[key] = sourceMap[key];
+    // Remove excluded keys
+    excludeKeys.forEach(sourceMap.remove);
+    // If specific keys are provided, only return those
+    if (specificKeys.isNotEmpty) {
+      final specificMap = <String, dynamic>{};
+      for (final key in specificKeys) {
+        if (sourceMap.containsKey(key)) {
+          specificMap[key] = sourceMap[key];
+        }
       }
+      return specificMap;
     }
-    // Get only wanted keys (if defined)
-    // If no keys are defined, return all data
-    if (keys.isEmpty) {
-      return excluded;
-    }
-    final data = <String, dynamic>{};
-    for (final key in keys) {
-      if (sourceMap.containsKey(key)) {
-        data[key] = sourceMap[key];
-      }
-    }
-    return data;
+    return sourceMap;
   }
 
   dynamic get(String key) {
-    final data = getData(keys: [key]);
-    return data[key];
+    final data = getData();
+    if (data.containsKey(key)) {
+      return data[key];
+    }
+    return null;
   }
 
   dynamic operator [](String key) => get(key);
   void operator []=(String key, dynamic value) {
-    extraData[key] = value;
+    metadata[key] = value;
   }
 }

@@ -17,12 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LibraryItem {
   int get itemID => throw _privateConstructorUsedError;
-  LibraryWork get libraryWork => throw _privateConstructorUsedError;
+  Story get story => throw _privateConstructorUsedError;
   int get downloadCount => throw _privateConstructorUsedError;
   int get unreadCount => throw _privateConstructorUsedError;
-  bool get isLocal => throw _privateConstructorUsedError;
-  String get source => throw _privateConstructorUsedError;
-  Ref<Object?>? get ref => throw _privateConstructorUsedError;
 
   /// Create a copy of LibraryItem
   /// with the given fields replaced by the non-null parameter values.
@@ -37,16 +34,9 @@ abstract class $LibraryItemCopyWith<$Res> {
           LibraryItem value, $Res Function(LibraryItem) then) =
       _$LibraryItemCopyWithImpl<$Res, LibraryItem>;
   @useResult
-  $Res call(
-      {int itemID,
-      LibraryWork libraryWork,
-      int downloadCount,
-      int unreadCount,
-      bool isLocal,
-      String source,
-      Ref<Object?>? ref});
+  $Res call({int itemID, Story story, int downloadCount, int unreadCount});
 
-  $LibraryWorkCopyWith<$Res> get libraryWork;
+  $StoryCopyWith<$Res> get story;
 }
 
 /// @nodoc
@@ -65,22 +55,19 @@ class _$LibraryItemCopyWithImpl<$Res, $Val extends LibraryItem>
   @override
   $Res call({
     Object? itemID = null,
-    Object? libraryWork = null,
+    Object? story = null,
     Object? downloadCount = null,
     Object? unreadCount = null,
-    Object? isLocal = null,
-    Object? source = null,
-    Object? ref = freezed,
   }) {
     return _then(_value.copyWith(
       itemID: null == itemID
           ? _value.itemID
           : itemID // ignore: cast_nullable_to_non_nullable
               as int,
-      libraryWork: null == libraryWork
-          ? _value.libraryWork
-          : libraryWork // ignore: cast_nullable_to_non_nullable
-              as LibraryWork,
+      story: null == story
+          ? _value.story
+          : story // ignore: cast_nullable_to_non_nullable
+              as Story,
       downloadCount: null == downloadCount
           ? _value.downloadCount
           : downloadCount // ignore: cast_nullable_to_non_nullable
@@ -89,18 +76,6 @@ class _$LibraryItemCopyWithImpl<$Res, $Val extends LibraryItem>
           ? _value.unreadCount
           : unreadCount // ignore: cast_nullable_to_non_nullable
               as int,
-      isLocal: null == isLocal
-          ? _value.isLocal
-          : isLocal // ignore: cast_nullable_to_non_nullable
-              as bool,
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
-              as String,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as Ref<Object?>?,
     ) as $Val);
   }
 
@@ -108,9 +83,9 @@ class _$LibraryItemCopyWithImpl<$Res, $Val extends LibraryItem>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $LibraryWorkCopyWith<$Res> get libraryWork {
-    return $LibraryWorkCopyWith<$Res>(_value.libraryWork, (value) {
-      return _then(_value.copyWith(libraryWork: value) as $Val);
+  $StoryCopyWith<$Res> get story {
+    return $StoryCopyWith<$Res>(_value.story, (value) {
+      return _then(_value.copyWith(story: value) as $Val);
     });
   }
 }
@@ -123,17 +98,10 @@ abstract class _$$LibraryItemImplCopyWith<$Res>
       __$$LibraryItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int itemID,
-      LibraryWork libraryWork,
-      int downloadCount,
-      int unreadCount,
-      bool isLocal,
-      String source,
-      Ref<Object?>? ref});
+  $Res call({int itemID, Story story, int downloadCount, int unreadCount});
 
   @override
-  $LibraryWorkCopyWith<$Res> get libraryWork;
+  $StoryCopyWith<$Res> get story;
 }
 
 /// @nodoc
@@ -150,22 +118,19 @@ class __$$LibraryItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? itemID = null,
-    Object? libraryWork = null,
+    Object? story = null,
     Object? downloadCount = null,
     Object? unreadCount = null,
-    Object? isLocal = null,
-    Object? source = null,
-    Object? ref = freezed,
   }) {
     return _then(_$LibraryItemImpl(
       itemID: null == itemID
           ? _value.itemID
           : itemID // ignore: cast_nullable_to_non_nullable
               as int,
-      libraryWork: null == libraryWork
-          ? _value.libraryWork
-          : libraryWork // ignore: cast_nullable_to_non_nullable
-              as LibraryWork,
+      story: null == story
+          ? _value.story
+          : story // ignore: cast_nullable_to_non_nullable
+              as Story,
       downloadCount: null == downloadCount
           ? _value.downloadCount
           : downloadCount // ignore: cast_nullable_to_non_nullable
@@ -174,18 +139,6 @@ class __$$LibraryItemImplCopyWithImpl<$Res>
           ? _value.unreadCount
           : unreadCount // ignore: cast_nullable_to_non_nullable
               as int,
-      isLocal: null == isLocal
-          ? _value.isLocal
-          : isLocal // ignore: cast_nullable_to_non_nullable
-              as bool,
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
-              as String,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as Ref<Object?>?,
     ));
   }
 }
@@ -195,36 +148,25 @@ class __$$LibraryItemImplCopyWithImpl<$Res>
 class _$LibraryItemImpl extends _LibraryItem {
   const _$LibraryItemImpl(
       {required this.itemID,
-      required this.libraryWork,
+      required this.story,
       this.downloadCount = -1,
-      this.unreadCount = -1,
-      this.isLocal = false,
-      this.source = '',
-      this.ref})
+      this.unreadCount = -1})
       : super._();
 
   @override
   final int itemID;
   @override
-  final LibraryWork libraryWork;
+  final Story story;
   @override
   @JsonKey()
   final int downloadCount;
   @override
   @JsonKey()
   final int unreadCount;
-  @override
-  @JsonKey()
-  final bool isLocal;
-  @override
-  @JsonKey()
-  final String source;
-  @override
-  final Ref<Object?>? ref;
 
   @override
   String toString() {
-    return 'LibraryItem(itemID: $itemID, libraryWork: $libraryWork, downloadCount: $downloadCount, unreadCount: $unreadCount, isLocal: $isLocal, source: $source, ref: $ref)';
+    return 'LibraryItem(itemID: $itemID, story: $story, downloadCount: $downloadCount, unreadCount: $unreadCount)';
   }
 
   @override
@@ -233,20 +175,16 @@ class _$LibraryItemImpl extends _LibraryItem {
         (other.runtimeType == runtimeType &&
             other is _$LibraryItemImpl &&
             (identical(other.itemID, itemID) || other.itemID == itemID) &&
-            (identical(other.libraryWork, libraryWork) ||
-                other.libraryWork == libraryWork) &&
+            (identical(other.story, story) || other.story == story) &&
             (identical(other.downloadCount, downloadCount) ||
                 other.downloadCount == downloadCount) &&
             (identical(other.unreadCount, unreadCount) ||
-                other.unreadCount == unreadCount) &&
-            (identical(other.isLocal, isLocal) || other.isLocal == isLocal) &&
-            (identical(other.source, source) || other.source == source) &&
-            (identical(other.ref, ref) || other.ref == ref));
+                other.unreadCount == unreadCount));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, itemID, libraryWork,
-      downloadCount, unreadCount, isLocal, source, ref);
+  int get hashCode =>
+      Object.hash(runtimeType, itemID, story, downloadCount, unreadCount);
 
   /// Create a copy of LibraryItem
   /// with the given fields replaced by the non-null parameter values.
@@ -260,28 +198,19 @@ class _$LibraryItemImpl extends _LibraryItem {
 abstract class _LibraryItem extends LibraryItem {
   const factory _LibraryItem(
       {required final int itemID,
-      required final LibraryWork libraryWork,
+      required final Story story,
       final int downloadCount,
-      final int unreadCount,
-      final bool isLocal,
-      final String source,
-      final Ref<Object?>? ref}) = _$LibraryItemImpl;
+      final int unreadCount}) = _$LibraryItemImpl;
   const _LibraryItem._() : super._();
 
   @override
   int get itemID;
   @override
-  LibraryWork get libraryWork;
+  Story get story;
   @override
   int get downloadCount;
   @override
   int get unreadCount;
-  @override
-  bool get isLocal;
-  @override
-  String get source;
-  @override
-  Ref<Object?>? get ref;
 
   /// Create a copy of LibraryItem
   /// with the given fields replaced by the non-null parameter values.

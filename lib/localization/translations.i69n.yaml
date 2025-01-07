@@ -3,71 +3,135 @@ appDescription: Athena is an all-in-one application for downloading, reading, an
 appChannel: Pre-Alpha
 appVersion: 0.1.0
 
-flavors:
-    development: Development
-    testing: Testing
-    production: Production
+# Actions
+action:
+    ok: OK
+    cancel: Cancel
+    close: Close
+    save: Save
+    delete: Delete
+    clear: Clear
+    reset: Reset
+    add: Add
+    remove: Remove
+    edit: Edit
+    done: Done
+    select: Select
+    selectAll: Select All
+    deselectAll: Deselect All
+    invertSelection: Invert Selection
+    refresh: Refresh
+    retry: Retry
+    search: Search
+    filter: Filter
+    sort: Sort
+    share: Share
 
-test: Hello, World!
-
-# Navigation
-page:
+# Pages
+pages:
     library:
         title: Library
-        categories:
-            base: Default
+        options:
+            title: Options
+        tags:
+            title: Tags
+        filters:
+            title: Filters
+        sort:
+            title: Sort
+        display:
+            title: Display
     updates:
         title: Updates
     history:
         title: History
     browse:
         title: Browse
-        sources: Sources
-        extensions: Extensions
-        web: Web
+        sources:
+            title: Sources
+        extensions:
+            title: Extensions
+        migrate:
+            title: Migrate
     more:
         title: More
+        downloadQueue:
+            title: Download Queue
+            subtitle(String status, int downloads): "${_plural(downloads, zero: '', one: '$status ($downloads download)', other: '$status ($downloads downloads)')}"
+        categories:
+            title: Categories
+        statistics:
+            title: Statistics
+        about:
+            title: About
+        help:
+            title: Help
+        feedback:
+            title: Feedback
     settings:
         title: Settings
         appearance:
             title: Appearance
-            theme: Theme
-            font: Font
-            language: Language
-        library: Library
-        reader: Reader
-        downloads: Downloads
-        tracking: Tracking
-        browse: Browse
-        notifications: Notifications
-        dataStorage: Data & Storage
-        securityPrivacy: Security & Privacy
-        advanced: Advanced
-        about: About
-        help: Help
-    work:
-        title(String title): '$title'
-        subtitle(List<String> authors): >
-            '${authors.join(', ')}'
+        library:
+            title: Library
+            editCategories:
+                title: Edit Categories
+        accounts:
+            title: Accounts
+        reader:
+            title: Reader
+        downloads:
+            title: Downloads
+        tracking:
+            title: Tracking
+        browse:
+            title: Browse
+        notifications:
+            title: Notifications
+        dataStorage:
+            title: Data Storage
+        securityPrivacy:
+            title: Security & Privacy
+        advanced:
+            title: Advanced
 
-# Actions
-action:
-    open: Open
-    close: Close
-    cancel: Cancel
-    save: Save
-    delete: Delete
-    remove: Remove
-    edit: Edit
-    search: Search
-    reset: Reset
+# Themes
+themes:
+    title: Themes
+    system: System
+    dynamic: Dynamic
+    greenApple: Green Apple
+    lavender: Lavender
+    midnightDusk: Midnight Dusk
+    nord: Nord
+    strawberry: Strawberry
+    tako: Tako
+    tealTurquoise: Teal & Turquoise
+    tidalWave: Tidal Wave
+    yinYang: Yin & Yang
+    yotsuba: Yotsuba
+    silverWolf: Silver Wolf
+    dracula: Dracula PRO
+    gaziter: Gaziter
 
 # Library
 library:
     searchHint: Search...
     empty: No works found
-    categoryDefault: Default
+    menu:
+        updateLibrary: Update Library
+        updateCategory: Update Category
+        randomWork: Open Random Work
+        librarySettings: Library Settings
     options:
+        tags:
+            title: Tags
+            fandoms: Fandoms
+            characters: Characters
+            relationships: Relationships
+            ratings: Ratings
+            genres: Genres
+            additionalTags: Additional Tags
         filter:
             title: Filter
             downloaded: Downloaded
@@ -96,105 +160,54 @@ library:
                 comfortableGrid: Comfortable Grid
                 coverOnlyGrid: Cover-Only Grid
                 list: List
-            gridSize(int size): "${_plural(size, zero: 'Default', other: '$size per row')}"
+            gridSize:
+                title: Grid Size
+                subtitle(int size): "${_plural(size, zero: 'Default', other: '$size per row')}"
             overlay:
                 title: Overlay
                 downloadedChapters: Downloaded Chapters
                 unreadChapters: Unread Chapters
                 localSource: Local Source
                 language: Language
+                source: Source
                 continueReading: Continue Reading Button
             tabs:
                 title: Tabs
                 category: Show Category Tabs
+                genre: Show Favorite Tabs
                 number: Show Number of Works
-    menu:
-        updateLibrary: Update Library
-        updateCategory: Update Category
-        randomWork: Open Random Work
-    selection:
-        categorizeSelected: Categorize Selected
-        markAsRead: Mark as Read
-        markAsUnread: Mark as Unread
-        downloadAll: Download All Chapters
-        delete: Remove Works
-
-# Updates
-updates:
-
-# History
-history:
-
-# Browse
-browse:
 
 # More
 more:
     downloadedOnly:
         title: Downloaded Only
-        subtitle({bool isWeb = false}): "${isWeb ? 'This feature is disabled when using the web reader' : 'Show only downloaded works'}"
+        subtitle: Show only downloaded works
     incognitoMode:
         title: Incognito Mode
-        subtitle: Don't save history or search queries
-    downloadQueue:
-        title: Download Queue
-        subtitle(String status, int count): '$status: $count remaining'
-    categories: Categories
-    statistics: Statistics
-    storage: Data and Storage
-    settings: Settings
-    about: About
-    help: Help
+        subtitle: Pause reading history
+    about:
+        subtitle(String channel, String version): 'Athena $channel $version'
 
-# More -> Settings
+# Settings
 settings:
+    search:
+        hint: Search settings...
+        recent: Recent searches
+        noResults: No results found
     appearance:
         subtitle: Theme, font, language, and more
-        theming:
-            title: Theming
-            mode:
-                title: Mode
-                system: System
-                light: Light
-                dark: Dark
-            contrast: Contrast
-            theme:
-                title: Theme
-                subtitle(String active): "${active.isEmpty ? 'Pick a theme' : active}"
-                count(int count): "${_plural(count, zero: 'No themes', one: '$count theme', other: '$count themes')}"
-                themes:
-                    system: Default
-                    dynamic: Dynamic
-                    greenApple: Green Apple
-                    lavender: Lavender
-                    midnightDusk: Midnight Dusk
-                    nord: Nord
-                    strawberry: Strawberry
-                    tako: Tako
-                    tealTurquoise: Teal & Turquoise
-                    tidalWave: Tidal Wave
-                    yinYang: Yin & Yang
-                    yotsuba: Yotsuba
-                    silverWolf: Silver Wolf
-                    dracula: Dracula PRO
-                    gaziter: Gaziter
-            amoled:
-                title: AMOLED
-                subtitle: Use AMOLED black backgrounds
-        display:
-            title: Display
-            font:
-                title: Font
-                subtitle(String font): "${font.isEmpty ? 'System font' : font}"
-            language:
-                title: Language
-                subtitle(String language): "${language.isEmpty ? 'System language' : language}"
-            dateFormat:
-                title: Date Format
-                subtitle(String name, String format): '$name: $format'
-            relativeTimestamps:
-                title: Relative Timestamps
-                subtitle(String date): "'Today' instead of '$date'"
+        theme: Theme
+        mode:
+            system: System
+            light: Light
+            dark: Dark
+        blendLevel: Blend Level
+        themeSelection:
+            title: Theme Selection
+            count(int count): "${_plural(count, zero: 'No themes', one: '1 theme', other: '$count themes')}"
+        pureBlack:
+            title: Pure Black
+            subtitle: Use pure black background for dark theme
     library:
         subtitle: Categories, global updates, chapter swipe
         categories:
@@ -209,6 +222,16 @@ settings:
             perCategorySort: Per-Category Sort
         globalUpdates:
             title: Global Updates
+            automaticUpdates:
+                title: Automatic Updates
+                subtitle(String selection): "${selection.isEmpty ? 'Disabled' : selection}"
+                choices:
+                    off: Off
+                    every12Hours: Every 12 Hours
+                    daily: Daily
+                    every2Days: Every 2 Days
+                    every3Days: Every 3 Days
+                    weekly: Weekly
         chapterSwipe:
             title: Chapter Swipe
             options:
@@ -220,6 +243,8 @@ settings:
                 addToQueue: Add to Queue
             left: Swipe Left Action
             right: Swipe Right Action
+    accounts:
+        subtitle: Manage accounts, login, logout
     reader:
         subtitle: Reading mode, display, navigation
     downloads:
@@ -253,26 +278,3 @@ settings:
         subtitle: App lock, secure screen
     advanced:
         subtitle: Developer options, experimental features
-    about:
-        version:
-            title: Version
-            subtitle(String channel, String version): '$channel v$version'
-        checkForUpdates: Check for Updates
-        whatsNew: What's New
-        licenses: Open-Source Licenses
-        privacyPolicy: Privacy Policy
-        links:
-            website: Website
-            email: Email
-            discord: Discord
-            reportBug: Report a Bug
-            github: GitHub
-            kofi: Ko-fi
-
-# Error
-error:
-    generic: An error occurred
-    tryAgain: Try Again
-    routeNotFound: Route not found
-    workNotFound: Work not found
-    chapterNotFound: Chapter not found

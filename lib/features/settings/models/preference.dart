@@ -1,276 +1,191 @@
-import 'package:athena/features/settings/providers/preference.dart'
-    as pref_data;
-import 'package:flutter/material.dart';
-import 'package:sprintf/sprintf.dart';
+import 'package:athena/utils/enums.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
-sealed class Preference {
-  Preference({
-    required this.title,
-    required this.enabled,
-  });
+sealed class Preference<T> {
+  final String _key;
+  final Box _preferences;
+  final T _defaultValue;
 
-  final String title;
-  final bool enabled;
+  Preference(this._key, this._preferences, this._defaultValue);
+
+  // Read/write
+  T read(String key, T defaultValue) =>
+      _preferences.get(key, defaultValue: defaultValue);
+  void write(String key, T value) => _preferences.put(key, value);
+
+  // Get/set
+  T get() {
+    try {
+      return read(_key, _defaultValue);
+    } catch (e) {
+      delete();
+      return _defaultValue;
+    }
+  }
+
+  void set(value) {
+    write(_key, value);
+  }
+
+  // Delete
+  void delete() async {
+    _preferences.delete(_key);
+  }
+
+  // Default value
+  T get defaultValue => _defaultValue;
+
+  // Changes
+  Stream<T> _watch() => Stream.value(get());
+  Stream<T> changes() => _watch();
 }
 
-sealed class PreferenceItem<T> extends Preference {
-  PreferenceItem({
-    required super.title,
-    required super.enabled,
-    this.subtitle,
-    this.icon,
-    this.onValueChanged,
-    this.pref,
-  });
+// Extensions
+extension PreferenceSet<T> on Preference<Set<T>> {
+  void add(T item) {
+    final mySet = get();
+    mySet.add(item);
+    set(mySet);
+  }
 
-  final String? subtitle;
-  final IconData? icon;
-  final Future<bool> Function(T newValue)? onValueChanged;
-  final pref_data.Preference<dynamic>? pref;
+  void remove(T item) {
+    final mySet = get();
+    mySet.remove(item);
+    set(mySet);
+  }
 }
 
-/// A basic [PreferenceItem] that only displays texts.
-class TextPreference extends PreferenceItem<String> {
-  TextPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle,
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-    this.onClick,
-    this.trailing,
-  });
+extension PreferenceList<T> on Preference<List<T>> {
+  void add(T item) {
+    final myList = get();
+    myList.add(item);
+    set(myList);
+  }
 
-  final VoidCallback? onClick;
-  final Widget? trailing;
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
+  void remove(T item) {
+    final myList = get();
+    myList.remove(item);
+    set(myList);
+  }
 }
 
-/// A [PreferenceItem] that provides a two-state toggleable option.
-class SwitchPreference extends PreferenceItem<bool> {
-  SwitchPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle,
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-  });
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
+extension Toggle on Preference<bool> {
+  bool toggle() {
+    set(!get());
+    return get();
+  }
 }
 
-/// A [PreferenceItem] that provides a slider to select an integer number.
-class SliderPreference extends PreferenceItem<double> {
-  SliderPreference({
-    super.title = '',
-    super.enabled = true,
-    super.subtitle,
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-    this.value,
-    this.min = 0,
-    required this.max,
-    this.step = 1,
-  });
-
-  final double? value;
-  final double min;
-  final double max;
-  final double step;
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
+extension CycleEnum<T> on Preference<T> {
+  T cycle(List<T> values) {
+    final current = get();
+    final next = values[(values.indexOf(current) + 1) % values.length];
+    set(next);
+    return get();
+  }
 }
 
-/// A [PreferenceItem] that provides a segmented button to select an option.
-class SegmentPreference extends PreferenceItem<String> {
-  SegmentPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle,
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-    this.value,
-    required this.options,
-  });
-
-  final dynamic value;
-  final List<dynamic> options;
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
+// Preference Types
+class StringPreference extends Preference<String> {
+  StringPreference(super.key, super.preferences, super.defaultValue);
 }
 
-class Segment {
-  Segment({
-    required this.value,
-    required this.label,
-  });
+class BoolPreference extends Preference<bool> {
+  BoolPreference(super.key, super.preferences, super.defaultValue);
+}
 
-  final dynamic value;
+class IntPreference extends Preference<int> {
+  IntPreference(super.key, super.preferences, super.defaultValue);
+}
+
+class DoublePreference extends Preference<double> {
+  DoublePreference(super.key, super.preferences, super.defaultValue);
+}
+
+class StringSetPreference extends Preference<Set<String>> {
+  StringSetPreference(super.key, super.preferences, super.defaultValue);
+
+  @override
+  Set<String> read(String key, Set<String> defaultValue) =>
+      _preferences.get(key, defaultValue: defaultValue.toList()).toSet();
+
+  @override
+  void write(String key, Set<String> value) =>
+      _preferences.put(key, value.toList());
+}
+
+class TriStateSetPreference extends Preference<Set<TriState>> {
+  TriStateSetPreference(super.key, super.preferences, super.defaultValue);
+
+  @override
+  Set<TriState> read(String key, Set<TriState> defaultValue) {
+    final value = _preferences.get(key,
+        defaultValue: defaultValue.map((e) => e.toString()).toList());
+    return value
+        .map((e) => TriState.values.firstWhere((v) => v.toString() == e))
+        .toSet();
+  }
+
+  @override
+  void write(String key, Set<TriState> value) {
+    _preferences.put(key, value.map((e) => e.toString()).toList());
+  }
+}
+
+class ObjectPreference<T> extends Preference<T> {
+  ObjectPreference(
+    super.key,
+    super.preferences,
+    super.defaultValue,
+    this.serializer,
+    this.deserializer,
+  );
+
+  final String Function(T) serializer;
+  final T Function(String) deserializer;
+
+  @override
+  T read(String key, T defaultValue) {
+    final value = _preferences.get(key, defaultValue: defaultValue);
+    return value == null
+        ? defaultValue
+        : deserializer(
+            value is String ? value : value.toString(),
+          );
+  }
+
+  @override
+  void write(String key, T value) {
+    _preferences.put(key, serializer(value));
+  }
+}
+
+class EnumPreference<Enum> extends Preference<Enum> {
+  EnumPreference(
+    super.key,
+    super.preferences,
+    super.defaultValue,
+    this.values,
+  );
+
+  final Iterable<Enum> values;
+
+  @override
+  Enum read(String key, Enum defaultValue) {
+    final value = _preferences.get(key, defaultValue: defaultValue.toString());
+    return values.firstWhere((e) => e.toString() == value,
+        orElse: () => defaultValue);
+  }
+
+  @override
+  void write(String key, Enum value) {
+    _preferences.put(key, value.toString());
+  }
+}
+
+class TriStateValue {
   final String label;
-}
+  final TriState value;
 
-/// A [PreferenceItem] that displays a list of entries as a dialog.
-class ListPreference<T> extends PreferenceItem<T> {
-  ListPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle = '%s',
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-    this.subtitleProvider = _defaultSubtitleProvider,
-    required this.entries,
-  });
-
-  final String? Function<T>(ListPreference c, T value, Map<T, String> entries)
-      subtitleProvider;
-  final Map<T, String> entries;
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
-  static String? _defaultSubtitleProvider<T>(c, v, e) =>
-      c.subtitle != null ? sprintf(c.subtitle!, e[v]) : null;
-
-  void internalSet(Object newValue) => pref?.set(newValue as T);
-  Future<bool> internalOnValueChanged(Object newValue) =>
-      onValueChanged!(newValue as T);
-
-  String? internalSubtitleProvider(
-          Object? value, Map<Object?, String> entries) =>
-      subtitleProvider(this, value as T, entries as Map<T, String>);
-}
-
-/// [ListPreference] but with no connection to a Preference data.
-// class BasicListPreference extends PreferenceItem<String> {
-//   BasicListPreference({
-//     required super.title,
-//     super.enabled = true,
-//     super.subtitle = '%s',
-//     super.icon,
-//     super.onValueChanged = _defaultOnValueChanged,
-//     this.subtitleProvider = _defaultSubtitleProvider,
-//     required this.entries,
-//     required this.value,
-//   });
-
-//   final String? Function(
-//     BasicListPreference c,
-//     String value,
-//     Map<String, String> entries,
-//   ) subtitleProvider;
-//   final Map<String, String> entries;
-//   final String value;
-
-//   static Future<bool> _defaultOnValueChanged(_) async => true;
-//   static String? _defaultSubtitleProvider(c, v, e) =>
-//       c.subtitle != null ? sprintf(c.subtitle!, e[v]) : null;
-// }
-
-/// A [PreferenceItem] that displays a list of entries as a dialog.
-/// Multiple entries can be selected at the same time.
-// class MultiSelectListPreference extends PreferenceItem<Set<String>> {
-//   MultiSelectListPreference({
-//     required super.title,
-//     super.enabled = true,
-//     super.subtitle = '%s',
-//     super.icon,
-//     super.onValueChanged = _defaultOnValueChanged,
-//     this.subtitleProvider = _defaultSubtitleProvider,
-//     required this.pref,
-//     required this.entries,
-//   });
-
-//   final String? Function(
-//     MultiSelectListPreference c,
-//     BuildContext context,
-//     Set<String> value,
-//     Map<String, String> entries,
-//   ) subtitleProvider;
-//   final pref_data.Preference<Set<String>> pref;
-//   final Map<String, String> entries;
-
-//   static Future<bool> _defaultOnValueChanged(Set<String> _) async => true;
-//   static String? _defaultSubtitleProvider(c, context, v, e) {
-//     final lang = AppLocalizations.of(context);
-//     final elements = v.map((it) => e[it]);
-//     final combined = elements.isNotEmpty ? elements.join() : lang.none;
-//     return c.subtitle != null ? sprintf(c.subtitle!, combined) : null;
-//   }
-// }
-
-/// A [PreferenceItem] that shows an EditText in the dialog.
-class EditTextPreference extends PreferenceItem<String> {
-  EditTextPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle = '%s',
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-  });
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
-}
-
-/// A [PreferenceItem] for an individual tracker.
-// class TrackerPreference extends PreferenceItem<String> {
-//   TrackerPreference({
-//     required super.title,
-//     super.enabled = true,
-//     super.subtitle,
-//     super.icon,
-//     super.onValueChanged = _defaultOnValueChanged,
-//     required this.tracker,
-//     required this.login,
-//     required this.logout,
-//   });
-
-//   final Tracker tracker;
-//   final VoidCallback login;
-//   final VoidCallback logout;
-
-//   static Future<bool> _defaultOnValueChanged(_) async => true;
-// }
-
-class InfoPreference extends PreferenceItem<String> {
-  InfoPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle,
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-  });
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
-}
-
-class CustomPreference extends PreferenceItem<String> {
-  CustomPreference({
-    required super.title,
-    super.enabled = true,
-    super.subtitle,
-    super.icon,
-    super.onValueChanged = _defaultOnValueChanged,
-    super.pref,
-    this.content,
-  });
-
-  final Widget? content;
-
-  static Future<bool> _defaultOnValueChanged(_) async => true;
-}
-
-class PreferenceGroup extends Preference {
-  PreferenceGroup({
-    required super.title,
-    super.enabled = true,
-    required this.preferenceItems,
-  });
-
-  final List<PreferenceItem> preferenceItems;
+  const TriStateValue(this.label, this.value);
 }

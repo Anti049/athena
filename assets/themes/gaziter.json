@@ -1,0 +1,13 @@
+{
+	"$schema": "./schemas/theme.schema.json",
+	"name": "Gaziter",
+	"category": "Custom",
+	"colors": {
+		"primary": "0xFF48F7BD",
+		"secondary": "0xFFC193FF",
+		"tertiary": "0xFF54A5B6",
+		"error": "0xFFFF5555",
+		"neutral": "0xFF04485F"
+	},
+	"variant": "vibrant"
+}

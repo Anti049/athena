@@ -1,24 +1,17 @@
-import 'package:athena/common_widgets/empty.dart';
-import 'package:athena/common_widgets/loading_screen.dart';
-import 'package:athena/features/banners/providers/banner_provider.dart';
+import 'package:athena/common/presentation/empty.dart';
+import 'package:athena/common/presentation/padded_app_bar.dart';
+import 'package:athena/features/banners/presentation/components/banner_scaffold.dart';
+import 'package:athena/features/library/presentation/components/library_options_sheet.dart';
+import 'package:athena/features/library/presentation/library_state.dart';
 import 'package:athena/features/library/providers/library_preferences.dart';
-import 'package:athena/features/library/models/library_tab_model.dart';
-import 'package:athena/features/library/presentation/components/app_bars/responsive_app_bar.dart';
-import 'package:athena/features/library/presentation/components/items/library_item_compact.dart';
-import 'package:athena/features/library/presentation/components/options/library_options_sheet.dart';
-import 'package:athena/features/library/presentation/components/selection_bar.dart';
-import 'package:athena/localization/translations.dart';
+import 'package:athena/router/router.gr.dart';
+import 'package:athena/utils/locale.dart';
 import 'package:athena/utils/responsive_layout.dart';
 import 'package:athena/utils/theming.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:dartx/dartx.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
-
-final indicator = GlobalKey<RefreshIndicatorState>();
 
 @RoutePage()
 class LibraryTab extends ConsumerStatefulWidget {
@@ -31,36 +24,125 @@ class LibraryTab extends ConsumerStatefulWidget {
 }
 
 class _LibraryTabState extends ConsumerState<LibraryTab>
-    with AutomaticKeepAliveClientMixin<LibraryTab> {
+    with
+        AutomaticKeepAliveClientMixin<LibraryTab>,
+        TickerProviderStateMixin<LibraryTab> {
   @override
   bool get wantKeepAlive => true;
 
   bool _searchActive = false;
-  final MenuController _menuController = MenuController();
+  bool _selectionActive = false;
+  late TabController _tabController;
+  bool showFilterDrawer = false;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    // Start scheduled task to refresh every minute
-    // final model = ref.read(libraryTabModelProvider.notifier);
-    // model.refresh();
-
     super.initState();
+
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+    );
   }
 
-  Future<void> _onRefresh() async {
-    final model = ref.read(libraryTabModelProvider.notifier);
-    model.refresh();
+  IconButton? _getLeading(BuildContext context) {
+    if (_searchActive) {
+      return IconButton(
+        icon: const Icon(Symbols.close),
+        onPressed: () {
+          setState(() {
+            _searchActive = false;
+          });
+        },
+      );
+    }
+
+    if (_selectionActive) {
+      return IconButton(
+        icon: const Icon(Symbols.close),
+        onPressed: () {
+          setState(() {
+            _selectionActive = false;
+          });
+        },
+      );
+    }
+
+    return null;
+  }
+
+  List<Widget> _getActions(BuildContext context) {
+    final router = AutoRouter.of(context);
+    final optionsActive = ref.watch(libraryPreferencesProvider).optionsActive;
+
+    if (_selectionActive) {
+      return [
+        // Select All
+        IconButton(
+          icon: const Icon(Symbols.select_all),
+          onPressed: () {},
+        ),
+        // Invert Selection
+        IconButton(
+          icon: const Icon(Symbols.flip_to_back),
+          onPressed: () {},
+        ),
+      ];
+    }
+    return [
+      if (!_searchActive)
+        IconButton(
+          icon: const Icon(Symbols.search),
+          onPressed: () {
+            setState(() {
+              _searchActive = true;
+            });
+          },
+        ),
+      IconButton(
+        icon: Icon(
+          Symbols.filter_alt,
+          color: optionsActive ? context.extended.warning : null,
+        ),
+        onPressed: () {
+          // showOptions(context);
+          router.push(const FilterSortRoute());
+        },
+      ),
+      const SizedBox(),
+      IconButton(
+        icon: const Icon(Symbols.refresh),
+        onPressed: () {},
+        tooltip: context.locale.library.menu.updateLibrary,
+      ),
+      IconButton(
+        icon: const Icon(Symbols.refresh),
+        onPressed: () {},
+        tooltip: context.locale.library.menu.updateCategory,
+      ),
+      IconButton(
+        icon: const Icon(Symbols.shuffle),
+        onPressed: () {},
+        tooltip: context.locale.library.menu.randomWork,
+      ),
+      const Divider(),
+      IconButton(
+        icon: const Icon(Symbols.settings),
+        onPressed: () {
+          router.push(const LibrarySettingsRoute());
+        },
+        tooltip: context.locale.library.menu.librarySettings,
+      ),
+    ];
   }
 
   void showOptions(BuildContext context) {
     if (context.isCompact) {
       showModalBottomSheet(
         context: context,
+        builder: (context) => const LibraryOptionsSheet(),
         isScrollControlled: true,
-        clipBehavior: Clip.antiAlias,
-        builder: (context) {
-          return const LibraryOptionsSheet();
-        },
       );
     } else {
       showDialog(
@@ -124,11 +206,16 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     // Get preferences
+    final libraryState = ref.watch(libraryStateProvider);
+    final libraryNotifier = ref.read(libraryStateProvider.notifier);
     final preferences = ref.watch(libraryPreferencesProvider);
-    final state = ref.watch(libraryTabModelProvider);
-    final model = ref.watch(libraryTabModelProvider.notifier);
-    final bannerData = ref.watch(bannerProvider);
+
+    // Handle actions
+    refreshAction() {
+      libraryNotifier.refresh();
+    }
 
     return PopScope(
       canPop: !_searchActive,
@@ -139,260 +226,85 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
           });
         }
       },
-      child: Scaffold(
-        extendBody: !_searchActive,
-        primary: !bannerData.active,
-        appBar: ResponsiveAppBar(
-          actions: [
-            IconButton(
-              icon: Icon(
-                Symbols.filter_list,
-                color: preferences.anyFiltersActive()
-                    ? context.extended.warning
-                    : null,
-              ),
-              onPressed: () {
-                showOptions(context);
-              },
-            ),
-            MenuAnchor(
-              controller: _menuController,
-              menuChildren: [
-                MenuItemButton(
-                  onPressed: () {
-                    _onRefresh();
+      child: BannerScaffold(
+        appBar: PaddedAppBar(
+          title: _searchActive
+              ? TextField(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    hintText: context.locale.library.searchHint,
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value) {
+                    libraryNotifier.search(value);
+                    libraryNotifier.refresh();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(context.locale.library.menu.updateLibrary),
-                  ),
-                ),
-                MenuItemButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(context.locale.library.menu.updateCategory),
-                  ),
-                ),
-                MenuItemButton(
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Text(context.locale.library.menu.randomWork),
-                  ),
-                ),
-              ],
-              child: IconButton(
-                onPressed: () {
-                  _menuController.isOpen
-                      ? _menuController.close()
-                      : _menuController.open();
-                },
-                icon: const Icon(Symbols.more_vert),
-              ),
-            ),
-          ],
-          searchActive: _searchActive,
-          onToggleSearch: () {
-            setState(() {
-              _searchActive = !_searchActive;
-            });
-          },
-          onCancelSearch: () {
-            setState(() {
-              _searchActive = false;
-            });
-          },
-          onSearch: (query) {
-            model.search(query);
-            model.refresh();
-          },
-          selectionActive: state.maybeWhen(
-            data: (data) => data.selectionMode,
-            orElse: () => false,
-          ),
-          selectedCount: state.maybeWhen(
-            data: (data) => data.selectionCount,
-            orElse: () => 0,
-          ),
-          onCancelSelection: () {
-            model.clearSelection();
-          },
-          onSelectAll: () {
-            model.selectAll(0);
-          },
-          onInvertSelection: () {
-            model.invertSelection(0);
-          },
+                )
+              : _selectionActive
+                  ? Text('1')
+                  : Row(
+                      children: [
+                        Text(context.locale.pages.library.title),
+                        const SizedBox(width: 8.0),
+                        if (preferences.showWorkCount().get())
+                          Chip(
+                            label: Text(
+                              libraryState.asData?.value.libraryItems.length
+                                      .toString() ??
+                                  '0',
+                            ), // TODO: Implement total count for library
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            backgroundColor:
+                                context.scheme.surfaceContainerHighest,
+                            labelStyle: context.text.labelLarge?.copyWith(
+                              color: context.scheme.onSurfaceVariant,
+                            ),
+                            side: const BorderSide(color: Colors.transparent),
+                            labelPadding: const EdgeInsets.symmetric(
+                              horizontal: 4.0,
+                              vertical: 0.0,
+                            ),
+                          ),
+                      ],
+                    ),
+          leading: _getLeading(context),
+          actions: _getActions(context),
+          bottom: preferences.showCategoryTabs().get()
+              ? TabBar(
+                  controller: _tabController,
+                  tabs: [
+                    Tab(text: 'Default'),
+                    Tab(text: 'Category 1'),
+                    Tab(text: 'Category 2'),
+                  ],
+                  // isScrollable: true,
+                  // tabAlignment: TabAlignment.start,
+                )
+              : null,
         ),
-        body: state.when(
-          loading: () {
-            return const LoadingScreen();
-          },
+        body: libraryState.when(
+          loading: () => const Empty(message: 'Loading...'),
           error: (error, stackTrace) {
             debugPrintStack(
               label: error.toString(),
               stackTrace: stackTrace,
             );
-            return RefreshIndicator(
-              key: indicator,
-              onRefresh: _onRefresh,
-              child: ListView(
-                children: const [
-                  Empty(
-                    message: 'An error has occurred!',
-                  ),
-                ],
-              ),
+            return Empty(
+              message: error.toString(),
             );
           },
-          data: (data) {
-            final numColumns = context.isCompact
-                ? 2
-                : context.atLeastLarge
-                    ? 4
-                    : 3;
-            final numRows =
-                ((data.library[0]?.length ?? 0) / numColumns).ceilToDouble();
-
-            final columnSizes = List.generate(
-              numColumns,
-              (index) => 1.fr,
-            );
-            final rowSizes = [
-              ...List.generate(
-                numRows.ceil(),
-                (index) => auto,
-              ),
-              1.fr,
-            ];
-
-            return Column(
-              children: [
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return RefreshIndicator(
-                        key: indicator,
-                        onRefresh: _onRefresh,
-                        child: data.searchQuery.isNullOrEmpty &&
-                                !data.hasActiveFilters &&
-                                data.library.isEmpty
-                            ? SingleChildScrollView(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                child: ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                    minHeight: constraints.maxHeight,
-                                  ),
-                                  child: Empty(
-                                    message: context.locale.library.empty,
-                                  ),
-                                ),
-                              )
-                            : SingleChildScrollView(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: LayoutGrid(
-                                    columnSizes: columnSizes,
-                                    rowSizes: rowSizes,
-                                    rowGap: 4.0,
-                                    columnGap: 4.0,
-                                    children: data.library[0]?.map((item) {
-                                          return LibraryItemCompact(
-                                            libraryItem: item,
-                                            selected: data.isSelected(
-                                              item.libraryWork,
-                                            ),
-                                            onTap: () {
-                                              if (data.selectionMode) {
-                                                model.toggleSelection(
-                                                  item.libraryWork,
-                                                );
-                                              }
-                                            },
-                                            onHold: () {
-                                              if (!data.selectionMode) {
-                                                model.toggleSelection(
-                                                  item.libraryWork,
-                                                );
-                                              } else {
-                                                model.toggleRangeSelection(
-                                                  item.libraryWork,
-                                                );
-                                              }
-                                            },
-                                            onSecondaryTap: () {
-                                              // Show info dialog
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: Text(
-                                                      item.libraryWork.work
-                                                          .title,
-                                                    ),
-                                                    content: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: [
-                                                        Text(
-                                                          item.libraryWork.work
-                                                              .author,
-                                                        ),
-                                                        Text(
-                                                          item.libraryWork.work
-                                                              .description,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Text(context
-                                                            .locale
-                                                            .action
-                                                            .close),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          );
-                                        }).toList() ??
-                                        [],
-                                  ),
-                                ),
-                              ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            );
+          data: (model) {
+            return model.isEmpty
+                ? Empty(message: 'No items found')
+                : Empty(
+                    message: (model.libraryItems.map((s) => s.story.title))
+                        .join('\n'),
+                  );
           },
-        ),
-        bottomNavigationBar: SelectionBar(
-          visible: state.maybeWhen(
-            data: (data) => data.selectionMode,
-            orElse: () => false,
-          ),
         ),
       ),
     );
-  }
-}
-
-extension Range on int {
-  List<int> to(int end) {
-    final list = <int>[];
-    for (var i = this; i <= end; i++) {
-      list.add(i);
-    }
-    return list;
   }
 }

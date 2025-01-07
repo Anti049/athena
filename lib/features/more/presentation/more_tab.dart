@@ -1,14 +1,11 @@
-import 'package:athena/common_widgets/banner_scaffold.dart';
-import 'package:athena/common_widgets/logo_header.dart';
-// import 'package:athena/features/more/domain/more_tab_model.dart';
-import 'package:athena/features/settings/providers/base_preferences.dart';
-import 'package:athena/features/settings/presentation/components/switch_preference_widget.dart';
-import 'package:athena/features/settings/presentation/components/text_preference_widget.dart';
-import 'package:athena/localization/translations.dart';
-import 'package:athena/routing/router.gr.dart';
+import 'package:athena/common/presentation/logo_header.dart';
+import 'package:athena/features/more/providers/more_preferences.dart';
+import 'package:athena/features/settings/models/setting.dart';
+import 'package:athena/features/settings/presentation/components/setting_scaffold.dart';
+import 'package:athena/router/router.gr.dart';
+import 'package:athena/utils/locale.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -17,92 +14,95 @@ import 'package:material_symbols_icons/symbols.dart';
 class MoreTab extends ConsumerWidget {
   const MoreTab({super.key});
 
+  static const String routeName = 'more';
+
+  List<Setting> getMoreSettings(BuildContext context, WidgetRef ref) {
+    final router = AutoRouter.of(context);
+    final preferences = ref.watch(morePreferencesProvider);
+
+    return [
+      CustomSetting(
+        title: 'Logo',
+        widget: const LogoHeader(),
+      ),
+      SwitchSetting(
+        title: context.locale.more.downloadedOnly.title,
+        subtitle: context.locale.more.downloadedOnly.subtitle,
+        icon: Symbols.cloud_off,
+        preference: preferences.downloadedOnly(),
+      ),
+      SwitchSetting(
+        title: context.locale.more.incognitoMode.title,
+        subtitle: context.locale.more.incognitoMode.subtitle,
+        icon: CupertinoIcons.eyeglasses,
+        preference: preferences.incognitoMode(),
+      ),
+      CustomSetting(
+        title: 'Divider',
+        widget: const Divider(),
+      ),
+      TextSetting(
+        title: context.locale.pages.more.downloadQueue.title,
+        subtitle:
+            context.locale.pages.more.downloadQueue.subtitle('No downloads', 0),
+        icon: Symbols.download,
+        onClick: () {
+          router.push(const DownloadQueueRoute());
+        },
+      ),
+      TextSetting(
+        title: context.locale.pages.more.categories.title,
+        icon: Symbols.label,
+        onClick: () {
+          router.push(const EditCategoriesRoute());
+        },
+      ),
+      TextSetting(
+        title: context.locale.pages.more.statistics.title,
+        icon: Symbols.query_stats,
+        onClick: () {
+          router.push(const StatisticsRoute());
+        },
+      ),
+      TextSetting(
+        title: context.locale.pages.settings.dataStorage.title,
+        icon: Symbols.storage,
+        onClick: () {
+          router.push(const DataStorageSettingsRoute());
+        },
+      ),
+      CustomSetting(
+        title: 'Divider',
+        widget: const Divider(),
+      ),
+      TextSetting(
+        title: context.locale.pages.settings.title,
+        icon: Symbols.settings,
+        onClick: () {
+          router.push(const SettingsRoute());
+        },
+      ),
+      TextSetting(
+        title: context.locale.pages.more.about.title,
+        icon: Symbols.info,
+        onClick: () {
+          router.push(const SettingsRoute());
+        },
+      ),
+      TextSetting(
+        title: context.locale.pages.more.help.title,
+        icon: Symbols.help,
+        onClick: () {
+          router.push(const SettingsRoute());
+        },
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preferences = ref.watch(basePreferencesProvider);
-    final router = AutoRouter.of(context);
-
-    // final state = ref.watch(moreTabModelProvider);
-
-    return BannerScaffold(
-      body: /*state.when(
-        loading: () => const LoadingScreen(),
-        error: (error, stackTrace) {
-          debugPrintStack(stackTrace: stackTrace);
-          return Center(child: Text(error.toString()));
-        },
-        data: (data) {
-          return*/
-          ListView(
-        children: [
-          const LogoHeader(),
-          SwitchPreferenceWidget(
-            title: context.locale.more.downloadedOnly.title,
-            subtitle:
-                context.locale.more.downloadedOnly.subtitle(isWeb: kIsWeb),
-            icon: Symbols.cloud_off,
-            checked: preferences.downloadedOnly().get(),
-            onCheckedChanged: (checked) {
-              preferences.downloadedOnly().set(checked);
-            },
-          ),
-          SwitchPreferenceWidget(
-            title: context.locale.more.incognitoMode.title,
-            subtitle: context.locale.more.incognitoMode.subtitle,
-            icon: CupertinoIcons.eyeglasses,
-            checked: preferences.incognitoMode().get(),
-            onCheckedChanged: (checked) {
-              preferences.incognitoMode().set(checked);
-            },
-          ),
-          const Divider(),
-          TextPreferenceWidget(
-            title: context.locale.more.downloadQueue.title,
-            subtitle: context.locale.more.downloadQueue.subtitle('Paused', 69),
-            icon: Symbols.download,
-            onPreferenceClick: () {},
-          ),
-          TextPreferenceWidget(
-            title: context.locale.more.categories,
-            icon: Symbols.label,
-            onPreferenceClick: () {},
-          ),
-          TextPreferenceWidget(
-            title: context.locale.more.statistics,
-            icon: Symbols.query_stats,
-            onPreferenceClick: () {},
-          ),
-          TextPreferenceWidget(
-            title: context.locale.page.settings.dataStorage,
-            icon: Symbols.storage,
-            onPreferenceClick: () {
-              router.push(const StorageSettingsRoute());
-            },
-          ),
-          const Divider(),
-          TextPreferenceWidget(
-            title: context.locale.page.settings.title,
-            icon: Symbols.settings,
-            onPreferenceClick: () {
-              router.push(const SettingsRoute());
-            },
-          ),
-          TextPreferenceWidget(
-            title: context.locale.page.settings.about,
-            icon: Symbols.info,
-            onPreferenceClick: () {
-              router.push(const AboutRoute());
-            },
-          ),
-          TextPreferenceWidget(
-            title: context.locale.page.settings.help,
-            icon: Symbols.help,
-            onPreferenceClick: () {},
-          ),
-        ],
-      ),
-      // },
-      // ),
+    return SettingScaffold(
+      settingsProvider: () => getMoreSettings(context, ref),
     );
   }
 }
