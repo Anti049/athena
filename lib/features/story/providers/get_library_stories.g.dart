@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'work_repository_folder.dart';
+part of 'get_library_stories.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$workRepositoryLocalHash() =>
-    r'cadef760745f64fa19be66ddf067886242d2d10b';
+String _$getLibraryStoriesHash() => r'f2a7dbd8589e68dd7922c54f52e16af582a702c1';
 
-/// See also [workRepositoryLocal].
-@ProviderFor(workRepositoryLocal)
-final workRepositoryLocalProvider =
-    AutoDisposeProvider<WorkRepository>.internal(
-  workRepositoryLocal,
-  name: r'workRepositoryLocalProvider',
+/// See also [getLibraryStories].
+@ProviderFor(getLibraryStories)
+final getLibraryStoriesProvider =
+    AutoDisposeProvider<GetLibraryStories>.internal(
+  getLibraryStories,
+  name: r'getLibraryStoriesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$workRepositoryLocalHash,
+      : _$getLibraryStoriesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef WorkRepositoryLocalRef = AutoDisposeProviderRef<WorkRepository>;
+typedef GetLibraryStoriesRef = AutoDisposeProviderRef<GetLibraryStories>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

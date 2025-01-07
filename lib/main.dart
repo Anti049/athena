@@ -4,6 +4,8 @@ import 'package:athena/features/settings/screens/appearance/providers/appearance
 import 'package:athena/features/settings/screens/appearance/theme/data/prebuilt_themes.dart';
 import 'package:athena/features/settings/screens/appearance/theme/model/custom_colors.dart';
 import 'package:athena/features/settings/screens/appearance/theme/model/theme.dart';
+import 'package:athena/features/story/repositories/local_story_repository.dart';
+import 'package:athena/features/story/repositories/story_repository.dart';
 import 'package:athena/localization/translations.dart';
 import 'package:athena/router/router.dart';
 import 'package:athena/utils/enums.dart';
@@ -38,6 +40,10 @@ Future<void> main() async {
 
   runApp(
     ProviderScope(
+      overrides: [
+        storyRepositoryProvider
+            .overrideWith((ref) => ref.watch(localStoryRepositoryProvider)),
+      ],
       child: MainApp(),
     ),
   );

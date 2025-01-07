@@ -1,4 +1,4 @@
-import 'package:athena/features/library/models/work.dart';
+import 'package:athena/features/story/models/story.dart';
 import 'package:athena/utils/string.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,12 +10,12 @@ class LibraryItem with _$LibraryItem {
 
   const factory LibraryItem({
     required int itemID,
-    required Work work,
+    required Story story,
     @Default(-1) int downloadCount,
     @Default(-1) int unreadCount,
   }) = _LibraryItem;
 
-  Future<bool> matches(String constraint) async {
-    return work.title.containsIgnoreCase(constraint);
+  bool matches(String constraint) {
+    return story.title.containsIgnoreCase(constraint);
   }
 }

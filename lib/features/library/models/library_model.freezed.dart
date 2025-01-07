@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LibraryModel {
-  Map<int, List<LibraryItem>> get libraryItems =>
-      throw _privateConstructorUsedError;
+  List<LibraryItem> get libraryItems => throw _privateConstructorUsedError;
   String? get searchQuery => throw _privateConstructorUsedError;
   List<LibraryItem> get selectedItems => throw _privateConstructorUsedError;
   bool get showCategoryTabs => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $LibraryModelCopyWith<$Res> {
       _$LibraryModelCopyWithImpl<$Res, LibraryModel>;
   @useResult
   $Res call(
-      {Map<int, List<LibraryItem>> libraryItems,
+      {List<LibraryItem> libraryItems,
       String? searchQuery,
       List<LibraryItem> selectedItems,
       bool showCategoryTabs,
@@ -75,7 +74,7 @@ class _$LibraryModelCopyWithImpl<$Res, $Val extends LibraryModel>
       libraryItems: null == libraryItems
           ? _value.libraryItems
           : libraryItems // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<LibraryItem>>,
+              as List<LibraryItem>,
       searchQuery: freezed == searchQuery
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -113,7 +112,7 @@ abstract class _$$LibraryModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<int, List<LibraryItem>> libraryItems,
+      {List<LibraryItem> libraryItems,
       String? searchQuery,
       List<LibraryItem> selectedItems,
       bool showCategoryTabs,
@@ -147,7 +146,7 @@ class __$$LibraryModelImplCopyWithImpl<$Res>
       libraryItems: null == libraryItems
           ? _value._libraryItems
           : libraryItems // ignore: cast_nullable_to_non_nullable
-              as Map<int, List<LibraryItem>>,
+              as List<LibraryItem>,
       searchQuery: freezed == searchQuery
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -180,7 +179,7 @@ class __$$LibraryModelImplCopyWithImpl<$Res>
 
 class _$LibraryModelImpl extends _LibraryModel {
   const _$LibraryModelImpl(
-      {final Map<int, List<LibraryItem>> libraryItems = const {},
+      {final List<LibraryItem> libraryItems = const [],
       this.searchQuery,
       final List<LibraryItem> selectedItems = const [],
       this.showCategoryTabs = false,
@@ -191,13 +190,13 @@ class _$LibraryModelImpl extends _LibraryModel {
         _selectedItems = selectedItems,
         super._();
 
-  final Map<int, List<LibraryItem>> _libraryItems;
+  final List<LibraryItem> _libraryItems;
   @override
   @JsonKey()
-  Map<int, List<LibraryItem>> get libraryItems {
-    if (_libraryItems is EqualUnmodifiableMapView) return _libraryItems;
+  List<LibraryItem> get libraryItems {
+    if (_libraryItems is EqualUnmodifiableListView) return _libraryItems;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_libraryItems);
+    return EqualUnmodifiableListView(_libraryItems);
   }
 
   @override
@@ -272,7 +271,7 @@ class _$LibraryModelImpl extends _LibraryModel {
 
 abstract class _LibraryModel extends LibraryModel {
   const factory _LibraryModel(
-      {final Map<int, List<LibraryItem>> libraryItems,
+      {final List<LibraryItem> libraryItems,
       final String? searchQuery,
       final List<LibraryItem> selectedItems,
       final bool showCategoryTabs,
@@ -282,7 +281,7 @@ abstract class _LibraryModel extends LibraryModel {
   const _LibraryModel._() : super._();
 
   @override
-  Map<int, List<LibraryItem>> get libraryItems;
+  List<LibraryItem> get libraryItems;
   @override
   String? get searchQuery;
   @override

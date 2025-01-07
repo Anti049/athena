@@ -2,6 +2,7 @@ import 'package:athena/common/presentation/empty.dart';
 import 'package:athena/common/presentation/padded_app_bar.dart';
 import 'package:athena/features/banners/presentation/components/banner_scaffold.dart';
 import 'package:athena/features/library/presentation/components/library_options_sheet.dart';
+import 'package:athena/features/library/presentation/library_state.dart';
 import 'package:athena/features/library/providers/library_preferences.dart';
 import 'package:athena/router/router.gr.dart';
 import 'package:athena/utils/locale.dart';
@@ -206,7 +207,15 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
   Widget build(BuildContext context) {
     super.build(context);
 
+    // Get preferences
+    final libraryState = ref.watch(libraryStateProvider);
+    final libraryNotifier = ref.read(libraryStateProvider.notifier);
     final preferences = ref.watch(libraryPreferencesProvider);
+
+    // Handle actions
+    refreshAction() {
+      libraryNotifier.refresh();
+    }
 
     return PopScope(
       canPop: !_searchActive,
@@ -226,7 +235,10 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                     hintText: context.locale.library.searchHint,
                     border: InputBorder.none,
                   ),
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    libraryNotifier.search(value);
+                    libraryNotifier.refresh();
+                  },
                 )
               : _selectionActive
                   ? Text('1')
@@ -237,7 +249,10 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                         if (preferences.showWorkCount().get())
                           Chip(
                             label: Text(
-                                '0'), // TODO: Implement total count for library
+                              libraryState.asData?.value.libraryItems.length
+                                      .toString() ??
+                                  '0',
+                            ), // TODO: Implement total count for library
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
@@ -269,8 +284,25 @@ class _LibraryTabState extends ConsumerState<LibraryTab>
                 )
               : null,
         ),
-        body: Empty(
-          message: 'Library Not Yet Implemented',
+        body: libraryState.when(
+          loading: () => const Empty(message: 'Loading...'),
+          error: (error, stackTrace) {
+            debugPrintStack(
+              label: error.toString(),
+              stackTrace: stackTrace,
+            );
+            return Empty(
+              message: error.toString(),
+            );
+          },
+          data: (model) {
+            return model.isEmpty
+                ? Empty(message: 'No items found')
+                : Empty(
+                    message: (model.libraryItems.map((s) => s.story.title))
+                        .join('\n'),
+                  );
+          },
         ),
       ),
     );

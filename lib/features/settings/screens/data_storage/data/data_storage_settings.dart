@@ -8,6 +8,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:athena/utils/platform.dart';
 
 class IDataStorageSettings extends ISearchableSettings {
   const IDataStorageSettings();
@@ -27,10 +31,43 @@ class IDataStorageSettings extends ISearchableSettings {
     return const DataStorageSettingsRoute();
   }
 
+  Future<Permission> getPermission(BuildContext context) async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (context.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        return Permission.manageExternalStorage;
+      }
+    }
+    return Permission.storage;
+  }
+
   @override
   List<ISetting> getSettings(BuildContext context, WidgetRef ref) {
     final preferences = ref.watch(dataStoragePreferencesProvider);
 
-    return [];
+    return [
+      TextSetting(
+        title: context.locale.settings.dataStorage.storageLocation.title,
+        subtitle: context.locale.settings.dataStorage.storageLocation.subtitle(
+          preferences.storageLocation().get(),
+        ),
+        preference: preferences.storageLocation(),
+        icon: Symbols.folder,
+        onClick: () async {
+          final permission = await getPermission(context);
+          var status = await permission.status;
+          if (!status.isGranted) {
+            status = await permission.request();
+          }
+          if (status.isGranted) {
+            final result = await FilePicker.platform.getDirectoryPath();
+            if (result != null) {
+              preferences.storageLocation().set(result);
+            }
+          }
+        },
+      ),
+    ];
   }
 }

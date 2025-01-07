@@ -12,7 +12,7 @@ class LibraryModel with _$LibraryModel {
   const LibraryModel._();
 
   const factory LibraryModel({
-    @Default({}) LibraryMap libraryItems,
+    @Default([]) List<LibraryItem> libraryItems,
     String? searchQuery,
     @Default([]) List<LibraryItem> selectedItems,
     @Default(false) bool showCategoryTabs,
@@ -23,6 +23,5 @@ class LibraryModel with _$LibraryModel {
 
   bool get isEmpty =>
       libraryItems.isEmpty && searchQuery.isNullOrEmpty && !hasActiveFilters;
-  int get itemCount =>
-      libraryItems.values.fold(0, (sum, items) => sum + items.length);
+  int get itemCount => libraryItems.length;
 }
