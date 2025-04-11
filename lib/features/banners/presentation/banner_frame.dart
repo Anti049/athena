@@ -15,7 +15,7 @@ class BannerFrame extends ConsumerWidget {
 
   int _getTopmost(List<Banner> banners) {
     final topmost = banners.indexWhere((element) => element.visible);
-    return topmost == -1 ? 0 : topmost;
+    return topmost;
   }
 
   List<Widget> _getBanners(
@@ -35,8 +35,8 @@ class BannerFrame extends ConsumerWidget {
       ),
       Banner(
         label: context.locale.more.incognitoMode.title,
-        backgroundColor: context.scheme.secondary,
-        textColor: context.scheme.onSecondary,
+        backgroundColor: context.scheme.primary,
+        textColor: context.scheme.onPrimary,
         visible: incognitoMode,
       ),
     ];
